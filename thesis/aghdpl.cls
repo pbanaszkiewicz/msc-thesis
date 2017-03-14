@@ -9,7 +9,7 @@
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\message{*** [aghdpl.cls] ---  (MSz, GJN, PK)  v3.0.0 <19.06.2015>  ***}       
+\message{*** [aghdpl.cls] ---  (MSz, GJN, PK)  v3.1.0 <16.02.2016>  ***}       
 
 \newif\ifpdflatex\pdflatexfalse
 \NeedsTeXFormat{LaTeX2e} % 
@@ -130,7 +130,7 @@ Supervisor: & {\itshape \@supervisor}\\
 
 {~~}\vspace{20mm}
 
-{\large\itshape Uprzedzony o odpowiedzialno\'sci karnej na podstawie art. 115 ust. 1 i 2 ustawy \mbox{z dnia 4 lutego 1994 r.} o prawie autorskim i prawach pokrewnych (t.j. Dz.U. z 2006 r. Nr 90, poz. 631 z p\'o\'zn. zm.): ,,Kto przyw\l{}aszcza sobie autorstwo albo wprowadza w b\l{}\k{a}d co do autorstwa ca\l{}o\'sci lub cz\k{e}\'sci cudzego utworu albo artystycznego wykonania, podlega grzywnie, karze ograniczenia wolno\'sci albo pozbawienia wolno\'sci do lat 3. Tej samej karze podlega, kto rozpowszechnia bez podania nazwiska lub pseudonimu tw\'orcy cudzy utw\'or w wersji oryginalnej albo w postaci opracowania, artystyczne wykonanie albo publicznie zniekszta\l{}ca taki utw\'or, artystyczne wykonanie, fonogram, wideogram lub nadanie.'', a tak\.ze uprzedzony o odpowiedzialno\'sci dyscyplinarnej na podstawie art. 211 ust. 1 ustawy z dnia 27 lipca 2005 r. Prawo oszkolnictwie wy\.zszym (t.j. Dz. U. z 2012 r. poz. 572, z p\'o\'zn. zm.): ,,Za naruszenie przepis\'ow obowi\k{a}zuj\k{a}cych w uczelni oraz za czyny uchybiaj\k{a}ce godno\'sci studenta student ponosi odpowiedzialno\'s\'c dyscyplinarn\k{a} przed komisj\k{a} dyscyplinarn\k{a} albo przed s\k{a}dem kole\.ze\'nskim samorz\k{a}du studenckiego'', o\'swiadczam, \.ze niniejsz\k{a} prac\k{e} dyplomow\k{a} wykona\l{}em osobi\'scie i samodzielnie i \.ze nie korzysta\l{}em ze \'zr\'ode\l{} innych ni\.z wymienione w pracy.}
+{\large\itshape Uprzedzony o~odpowiedzialno\'sci karnej na~podstawie art.~115 ust.~1~i~2 ustawy z~dnia 4~lutego 1994~r. o~prawie autorskim i~prawach pokrewnych (t.j. Dz.U. z~2006~r. Nr~90, poz.~631 z~p{\'o}{\'z}n. zm.): ,,Kto przyw\l{}aszcza sobie autorstwo albo~wprowadza w~b\l{}\k{a}d co~do~autorstwa ca\l{}o\'sci lub cz\k{e}\'sci cudzego utworu albo~artystycznego wykonania, podlega grzywnie, karze ograniczenia wolno\'sci albo~pozbawienia wolno\'sci do~lat~3. Tej~samej karze podlega, kto~rozpowszechnia bez~podania nazwiska lub~pseudonimu tw\'orcy cudzy utw\'or w~wersji oryginalnej albo~w~postaci opracowania, artystycznego wykonania albo~publicznie zniekszta\l{}ca taki utw\'or, artystyczne wykonanie, fonogram, wideogram lub nadanie.'', a~tak\.ze uprzedzony o~odpowiedzialno\'sci dyscyplinarnej na~podstawie art.~211 ust.~1 ustawy z~dnia 27~lipca 2005~r. Prawo o~szkolnictwie wy\.zszym (t.j. Dz.~U. z~2012~r. poz.~572, z~p\'o\'zn. zm.): ,,Za~naruszenie przepis\'ow obowi\k{a}zuj\k{a}cych w~uczelni oraz~za~czyny uchybiaj\k{a}ce godno\'sci studenta student ponosi odpowiedzialno\'s\'c dyscyplinarn\k{a} przed komisj\k{a} dyscyplinarn\k{a} albo~przed s\k{a}dem kole\.ze\'nskim samorz\k{a}du studenckiego, zwanym dalej <<s\k{a}dem kole\.ze\'nskim>>.'', o\'swiadczam, \.ze~niniejsz\k{a} prac\k{e} dyplomow\k{a} wykona\l{}em(-am) osobi\'scie i~samodzielnie i~\.ze~nie~korzysta\l{}em(-am) ze~\'zr\'ode\l{} innych ni\.z~wymienione w pracy. }
 
 
 \clearpage \titlepage

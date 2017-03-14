@@ -14,14 +14,4 @@ pdf :
 
 ## clean				: remove all non-essential LaTeX files
 clean :
-	@rm *.aux
-	@rm *.bbl
-	@rm *.bcf
-	@rm *.blg
-	@rm *.log
-	@rm *.out
-	@rm *.run.xml
-	@rm *.toc
-	@rm *.synctex.gz
-	@rm *.lof
-	@rm *.lot
+	@rm *.aux *.bbl *.bcf *.blg *.log *.out *.run.xml *.toc *.synctex.gz *.lof *.lot

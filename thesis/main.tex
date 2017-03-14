@@ -17,6 +17,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 
+% ------------------------
 % --- < bibliografia > ---
 
 \usepackage[
@@ -37,7 +38,8 @@ url=false,
 %
 % Ustawienia związane z polskimi normami dla bibliografii.
 maxbibnames=3,
-backend=biber,
+% Jeżeli używamy BibTeXa:
+backend=bibtex
 ]{biblatex}
 
 \usepackage{csquotes}
@@ -50,7 +52,7 @@ backend=biber,
 %\AtEveryBibitem{\clearfield{note}}
 
 
-% ------------------------
+% --------------------
 % --- < listingi > ---
 
 % Użyj czcionki kroju Courier.
@@ -88,7 +90,7 @@ backend=biber,
 	\renewcommand{\figurename}{Fig.}
 }
 
-% ------------------------
+% ------------------
 % --- < tabele > ---
 
 \usepackage{array}
@@ -97,20 +99,26 @@ backend=biber,
 \usepackage{booktabs}
 \usepackage{makecell}
 \usepackage[flushleft]{threeparttable}
-\usepackage[hidelinks, colorlinks=false]{hyperref}
-\usepackage{longtable}
+%\usepackage{longtable} %????
 
 % defines the X column to use m (\parbox[c]) instead of p (`parbox[t]`)
 \newcolumntype{C}[1]{>{\hsize=#1\hsize\centering\arraybackslash}X}
 
-% lepsze pozycjonowanie figur
-\usepackage{float}
+% ------------------------------
+% --- < linki i referencje > ---
 
-% liczby i ich symbole wg SI
+\usepackage[hidelinks, colorlinks=false]{hyperref}
+\usepackage{cleveref}
+
+% ------------------
+% --- < figury > ---
+
+\usepackage{float} % lepsze pozycjonowanie
+
+% ----------------------------
+% --- < liczby i symbole > ---
+
 \usepackage{siunitx}
-
-% listingi kodu
-\usepackage{listings}
 
 %---------------------------------------------------------------------------
 
@@ -125,14 +133,18 @@ backend=biber,
 \shorttitleEN{Synthesis of control and self tuning algorithms for a PLC controlling a nonlinear mechatronic ball and beam plant}
 
 \thesistype{Praca dyplomowa magisterska}
+%\thesistype{Master of Science Thesis}
 
 \supervisor{dr inż. Andrzej Tutaj}
+%\supervisor{Marcin Szpyrka PhD, DSc}
 
 \degreeprogramme{Automatyka i Robotyka}
+%\degreeprogramme{Computer Science}
 
 \date{2017}
 
 \department{Katedra Automatyki i Inżynierii Biomedycznej}
+%\department{Department of Applied Computer Science}
 
 \faculty{Wydział Elektrotechniki, Automatyki,\protect\\[-1mm] Informatyki i Inżynierii Biomedycznej}
 %\faculty{Faculty of Electrical Engineering, Automatics, Computer Science and Biomedical Engineering}
@@ -144,6 +156,7 @@ backend=biber,
 
 %---------------------------------------------------------------------------
 \setcounter{secnumdepth}{4}
+%\brokenpenalty=10000\relax  %?????
 
 \begin{document}
 
@@ -164,6 +177,21 @@ backend=biber,
 \clearpage
 
 \include{chapter1_introduction}
+\include{chapter2_control_plant}
+\include{chapter3_instrumentation_and_control}
+\include{chapter4_model}
+\include{chapter5_identification}
+\include{chapter6_simulation}
+\include{chapter7_control_alg}
+\include{chapter8_autotune_alg}
+\include{chapter9_experiments}
+\include{chapter10_conclusion}
+
+% itd.
+% \appendix
+% \include{dodatekA}
+% \include{dodatekB}
+% itd.
 
 \printbibliography
 \listoffigures
