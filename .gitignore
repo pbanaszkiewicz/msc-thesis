@@ -1,2 +1,3 @@
 *.skb
 thesis/main.pdf
+thesis/*.synctex.gz
