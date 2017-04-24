@@ -113,7 +113,16 @@ backend=bibtex
 % ------------------
 % --- < figury > ---
 
+% najprawdopodobniej jakaś paczka ładuje subcaption, a svg ładuje subfig, które
+% nie są kompatybilne; poniższe rozwiązanie wzięte z https://tex.stackexchange.com/a/213279
+\usepackage{subcaption}
+\expandafter\def\csname ver@subfig.sty\endcsname{}
+
+
+\usepackage{graphicx}
 \usepackage{float} % lepsze pozycjonowanie
+\usepackage{svg}
+\graphicspath{{graphics/}}  % obrazki i zdjęcia muszą być w podfolderze "graphics"
 
 % ----------------------------
 % --- < liczby i symbole > ---
@@ -129,8 +138,8 @@ backend=bibtex
 \titleEN{Synthesis of control and self tuning algorithms for a PLC controlling a nonlinear mechatronic ball and beam plant}
 
 
-\shorttitlePL{Dobór algorytmów regulacji oraz samostrojenia dla sterownika PLC współpracującego z nieliniowym obiektem mechatronicznym}
-\shorttitleEN{Synthesis of control and self tuning algorithms for a PLC controlling a nonlinear mechatronic ball and beam plant}
+\shorttitlePL{Dobór algorytmów regulacji oraz samostrojenia dla sterownika PLC współpracującego z~nieliniowym obiektem mechatronicznym}
+\shorttitleEN{Synthesis of control and self tuning algorithms for a PLC controlling a~nonlinear mechatronic ball and beam plant}
 
 \thesistype{Praca dyplomowa magisterska}
 %\thesistype{Master of Science Thesis}
