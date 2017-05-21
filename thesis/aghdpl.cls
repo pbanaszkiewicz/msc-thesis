@@ -110,7 +110,7 @@ Supervisor: & {\itshape \@supervisor}\\
 \vspace*{9mm}
 
 {\sffamily\Large\itshape \@titlePL}
-\vspace*{1mm}
+\vspace*{5mm}
 
 {\sffamily\Large\itshape \@titleEN}
 \vspace{\fill}

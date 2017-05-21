@@ -39,7 +39,8 @@ url=false,
 % Ustawienia związane z polskimi normami dla bibliografii.
 maxbibnames=3,
 % Jeżeli używamy BibTeXa:
-backend=bibtex
+% backend=bibtex
+backend=biber
 ]{biblatex}
 
 \usepackage{csquotes}
@@ -100,6 +101,7 @@ backend=bibtex
 \usepackage{makecell}
 \usepackage[flushleft]{threeparttable}
 %\usepackage{longtable} %????
+\usepackage{longtable}
 
 % defines the X column to use m (\parbox[c]) instead of p (`parbox[t]`)
 \newcolumntype{C}[1]{>{\hsize=#1\hsize\centering\arraybackslash}X}
@@ -129,13 +131,22 @@ backend=bibtex
 
 \usepackage{siunitx}
 
+\sisetup{
+    list-final-separator = { \translate{and} },
+    range-phrase = { -- },
+    mode = text,
+}
+
+% -------------------
+% --- < dodatki > ---
+%\usepackage[toc,page]{appendix}
 %---------------------------------------------------------------------------
 
 \author{inż. Piotr Banaszkiewicz}
 \shortauthor{P. Banaszkiewicz}
 
 \titlePL{Dobór algorytmów regulacji oraz samostrojenia dla sterownika PLC współpracującego z nieliniowym obiektem mechatronicznym}
-\titleEN{Synthesis of control and self tuning algorithms for a PLC controlling a nonlinear mechatronic ball and beam plant}
+\titleEN{Synthesis of control and self tuning algorithms for a~PLC controlling a~nonlinear mechatronic ball and beam plant}
 
 
 \shorttitlePL{Dobór algorytmów regulacji oraz samostrojenia dla sterownika PLC współpracującego z~nieliniowym obiektem mechatronicznym}
@@ -188,13 +199,14 @@ backend=bibtex
 \include{chapter1_introduction}
 \include{chapter2_control_plant}
 \include{chapter3_instrumentation_and_control}
-\include{chapter4_model}
-\include{chapter5_identification}
-\include{chapter6_simulation}
+\include{chapter4_simulation}
+\include{chapter5_model}
+\include{chapter6_identification}
 \include{chapter7_control_alg}
 \include{chapter8_autotune_alg}
 \include{chapter9_experiments}
 \include{chapter10_conclusion}
+\include{appendixA}
 
 % itd.
 % \appendix

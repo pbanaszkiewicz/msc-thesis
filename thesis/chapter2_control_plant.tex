@@ -6,8 +6,8 @@ Obiektem poddawanym regulacji był system typu kulka na belce, który został zb
 %%%%%%%%
 \section{Obiekty typu kulka na belce}
 
-Na system tego typu składają się długa, umieszczona horyzontalnie belka i silnik lub serwomechanizm, który umożliwia wychylanie się belki.
-Po belce swobodnie porusza się kulka.
+Na system tego typu składają się długa, umieszczona horyzontalnie belka, łożyskowana w sposób umożliwiający zmianę kąta nachylenia, i silnik lub serwomechanizm, który umożliwia wychylanie belki.
+Po belce swobodnie toczy się kulka.
 
 Podstawowym zadaniem regulacji w systemie tego typu jest stabilizacja położenia kulki w wybranym punkcie.
 Charakterystyczną cechą tego systemu jest prostota konstrukcji oraz niestabilność przy braku aktywnej regulacji.
@@ -17,33 +17,33 @@ Obiekty tego typu są często wykorzystywane w dydaktyce teorii sterowania. Skł
 \begin{itemize}
 	\item prostota budowy,
 	\item możliwość zastosowania różnych czujników położenia kulki,
-	\item możliwość zastosowania różnych silników i mechanizmów przeniesienia napędu.
+	\item możliwość zastosowania różnych silników i mechanizmów przeniesienia napędu,
+    \item możliwość zastosowania różnych struktur i algorytmów sterowania.
 \end{itemize}
 
-Uproszczony schemat systemu kulka i belka przedstawiony został poniżej:
+Uproszczony schemat systemu kulka i belka przedstawiony został na figurze \ref{fig:kulka_belka_schemat_uproszczony}:
 
 \begin{figure}[H]
 	\centering
-	\includesvg[width=0.7\textwidth,svgpath=./graphics/]{kulka_belka_schemat_uproszczony}
+    % TODO: przerobić rysunek w Inkscape
+    \includesvg[width=0.6\textwidth,svgpath=./graphics/]{kulka_belka_schemat_uproszczony}
 	\caption{Uproszczony schemat systemu typu kulka i belka.}
 	\label{fig:kulka_belka_schemat_uproszczony}
 \end{figure}
 
-% TODO: dodać źródła
-Prostota konstrukcji i inherentna niestabilność sprawiły, że powstało wiele implementacji tego systemu [1][2][3][4], również komercyjne, jak na przykład produkt firmy Quanser:
+Prostota konstrukcji i inherentna niestabilność sprawiły, że powstało wiele implementacji tego systemu (np. \cite{BABEX1}\cite{BABEX2}\cite{BABEX3}), również komercyjne, jak na przykład produkt firmy Quanser (\cref{fig:quanser_ball_beam}):
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{quanser_ball_beam}
-	\caption{Zdjęcie produktu \textit{Ball and Beam} firmy Quanser.}
+	\caption{Zdjęcie produktu \textit{Ball and Beam} firmy Quanser. Źródło: \url{http://www.quanser.com/Products/ball_beam}.}
 	\label{fig:quanser_ball_beam}
-% TODO: dodać źródło
 \end{figure}
 
 %%%%%%%%
 \section{Projekt mechaniczny}
 
-Przed przystąpieniem do budowy obiektu, zaprojektowano wstępny kształt w programie \textsc{CAD} \texttt{SketchUp Make} (\cref{fig:cad_render_1}). Wyszczególniono na nim:
+Przed przystąpieniem do budowy obiektu, zaprojektowano wstępny kształt w programie  \texttt{SketchUp Make} (\cref{fig:cad_render_1}). Wyszczególniono na nim:
 
 \begin{itemize}
 	\item prostokątną podstawę,
@@ -65,9 +65,9 @@ Ostateczna konstrukcja różni się względem projektu \textsc{CAD} o wysokość
 %%%%%%%%
 \section{Konstrukcja mechaniczna}
 
-Większość konstrukcji powstała z ocynkowanych elementów stalowych, tzw. ,,ceowników'' w przekroju kwadratowym o boku długości \SI[mode=text]{4}{cm}, pozwalających na łatwe skręcanie kilku elementów ze sobą. Rozwiązanie to jest bardzo tanie w porównaniu do przemysłowych profili aluminiowych lub spawanych profili stalowych, ale jednocześnie jest dość ciężkie i poprzez niedomknięcie profilu podatne na pewne momenty gnące.
+Większość konstrukcji powstała z ocynkowanych elementów stalowych, tzw. ceowników w przekroju kwadratowym o boku długości \SI{4}{cm}, pozwalających na łatwe łączenie kilku elementów przy pomocy śrub. Rozwiązanie to jest bardzo tanie w porównaniu do przemysłowych profili aluminiowych lub spawanych profili stalowych, ale jednocześnie jest dość ciężkie i poprzez niedomknięcie profilu podatne na pewne momenty gnące.
 
-Kąty proste pomiędzy elementami ustawionymi prostopadle zostały zapewnione poprzez skręcenie za pomocą wsporników stalowych.
+Kąty proste pomiędzy elementami ustawionymi prostopadle zostały zapewnione poprzez zastosowanie kątowych wsporników stalowych.
 
 \begin{figure}[H]
 	\centering
@@ -76,11 +76,9 @@ Kąty proste pomiędzy elementami ustawionymi prostopadle zostały zapewnione po
 	\label{fig:mechatronics_perspective_1}
 \end{figure}
 
-Na prostokątnej podstawie o wymiarach zewnętrznych \SI[mode=text]{60 x 23}{cm} wykonanej z ceowników ustawiono pionowo na środkach dłuższych boków słupy nośne, również wykonane z ceowników. Na słupach przyczepiono współosiowo łożyska maszynowe samonastawne typu UCFL 201 w obudowach odlewanych.
+Na prostokątnej podstawie o wymiarach zewnętrznych \SI{60 x 23}{cm} wykonanej z ceowników ustawiono pionowo na środkach dłuższych boków słupy nośne, również wykonane z ceowników. Słupy zostały usztywnione poprzez połączenie ich przęsłem podniesionym o \SI{11}{cm} względem podstawy.
 
-Słupy zostały usztywnione poprzez połączenie ich przęsłem podniesionym o \SI[mode=text]{11}{cm} względem podstawy.
-
-Przez łożyska poprowadzono pręt nierdzewny stalowy o średnicy \SI[mode=text]{12}{mm}; na pręt nałożono podpory wałka w kształcie litery \texttt{T}, a do nich przykręcono belkę.
+Na słupach przyczepiono współosiowo łożyska maszynowe samonastawne typu UCFL 201 w obudowach odlewanych. Przez łożyska poprowadzono pręt nierdzewny stalowy o średnicy \SI{12}{mm}; na pręt nałożono podpory wałka w kształcie litery \texttt{T}, a do nich przykręcono belkę.
 
 Silnik elektryczny, przymocowany do aluminiowego uchwytu, został umieszczony podłużnie na krótszym boku podstawy, na podwyższeniu wykonanym z dwóch elementów stalowych typu ceownik.
 
@@ -88,6 +86,7 @@ Silnik elektryczny, przymocowany do aluminiowego uchwytu, został umieszczony po
 
 %%%%%%%%
 \section{Przeniesienie napędu}
+\label{sec:ch2_przeniesienie_napedu}
 
 W obiekcie zastosowano przeniesienie napędu wykorzystujące mechanizm korbowy. Rozwiązanie to posiada kilka zalet:
 
@@ -97,36 +96,67 @@ W obiekcie zastosowano przeniesienie napędu wykorzystujące mechanizm korbowy. 
 	\item pozwala regulować zakres wychyleń belki w wyniku zmiany długości korby.
 \end{itemize}
 
-% TODO: napraw kolory w schemacie
-% TODO: dodaj opis (korba, korbowód)
+% TODO: "Strzałka pokazująca silnik powinna chyba kończyć się w przegubie. Może współśrodkowo z przegubem dorysować orkąd symbolizujący silnik?"
 \begin{figure}[H]
 	\centering
-	\includesvg[width=0.6\textwidth,svgpath=./graphics/]{schemat_korba}
+    % TODO: przerobić rysunek w Inkscape
+	% \includesvg[width=0.5\textwidth,svgpath=./graphics/]{schemat_korba}
+    \includegraphics[width=0.5\textwidth]{schemat_korba}
 	\caption{Schemat napędu opartego o mechanizm korbowy.}
 	\label{fig:schemat_korba}
 \end{figure}
 
+Parametry fizyczne mechanizmu korbowego:
+
+\begin{itemize}
+	\item długość korby: \SI{3}{cm},
+	\item długość korbowodu: \SI{16}{cm},
+	\item zastosowane przeguby kulowe między korbą i korbowodem oraz korbowodem i belką,
+    \item użyty silnik prądu stałego, komutatorowy, z magnesami trwałymi, sprzężony z zębatą przekładnią redukcyjną (więcej w rozdziale \ref{sec:ch3_uklad_napedowy}).
+\end{itemize}
+
 %%%%%%%%
+
 \section{Belka}
 
-Belka została stworzona poprzez trwałe sklejenie krawędzi kątownika aluminiowego o długości \SI[mode=text]{40}{cm} i boku \SI[mode=text]{3}{cm} oraz krawędzi ceownika aluminiowego o długości \SI[mode=text]{65}{cm} i boku \SI[mode=text]{4}{cm}. W przekroju przypomina to kształtem literę \texttt{M} domkniętą od spodu (\cref{fig:przekroj_belki}).
+Belka została stworzona poprzez trwałe sklejenie krawędzi kątownika aluminiowego o długości \SI{40}{cm} i boku \SI{3}{cm} oraz krawędzi ceownika aluminiowego o długości \SI{65}{cm} i boku \SI{4}{cm}. W przekroju przypomina to kształtem literę \texttt{M} domkniętą od spodu (\cref{fig:przekroj_belki}).
 
 \begin{figure}[H]
 	\centering
-	\includesvg[width=0.2\textwidth,svgpath=./graphics/]{beam_xsection}
+    % TODO: przerobić rysunek w Inkscape
+	% \includesvg[width=0.2\textwidth,svgpath=./graphics/]{beam_xsection}
+    \includegraphics[width=0.2\textwidth]{beam_xsection}
 	\caption{Schemat przekroju belki z zaznaczonymi ceownikiem aluminiowym i kątownikiem aluminiowym.}
 	\label{fig:przekroj_belki}
 \end{figure}
 
-Krótszy kątownik został umieszczony wzdłużnie na środku belki. W odległości około \SI[mode=text]{1}{cm} od jego końców zamontowano uchwyty na czujniki optyczne.
+Użyty kątownik jest nieco krótszy od ceownika. Zamocowano go symetrycznie, a w odległościach około \SI{1}{cm} od jego końców zamontowano uchwyty (\cref{fig:uchwyt_czujnika_odleglosci}) na czujniki optyczne (zob. rozdział \ref{sec:ch3_czujniki_odleglosci}).
 
 Uchwyty pozwalają na zmianę wysokości czujnika względem płaszczyzny belki, a także na pochylenie go w osi prostopadłej do płaszczyzny belki.
 
-% TODO: schemat / render bracketu na czujnik
+\begin{figure}[H]
+    \centering
+    % TODO: przerobić rysunek w Inkscape
+    \includesvg[width=0.4\textwidth,svgpath=./graphics/]{sensor_bracket}
+    \caption{Schemat uchwytu na czujnik odległości w rzucie od przodu i z boku. Zastosowanie mocowania na śrubie pozwala pochylać czujnik względem belki.}
+    \label{fig:uchwyt_czujnika_odleglosci}
+\end{figure}
 
 %%%%%%%%
 \section{Kulka}
 
-Do projektu dobrano lekką kulkę o masie \SI[mode=text]{20}{g} wykonaną z miękkiej gąbki; średnica kulki wynosi \SI[mode=text]{6}{cm}.
+Do projektu dobrano lekką kulkę o masie \SI{20}{g} wykonaną z miękkiej gąbki; średnica kulki wynosi \SI{6}{cm}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{ball}
+    \caption{Zdjęcie kulki.}
+    \label{fig:kulka}
+\end{figure}
+
+%%%%%%%%
+\section{Podsumowanie}
+
+W ninejszym rozdziale przedstawiono obiekt regulacji, cel regulacji oraz przedstawiono podobne konstrukcje, w tym jedno rozwiązanie komercyjne. Następnie opisano dokładnie budowę obiektu regulacji, poczynając od konstrukcji podstawy, poprzez umocowanie osi obrotu belki, umieszczenie silnika, przeniesienie napędu, a na budowie belki i doborze kulki kończąc.
 
 %---------------------------------------------------------------------------
