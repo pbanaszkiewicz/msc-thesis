@@ -26,7 +26,7 @@ S2.a(k) = 0;
 
 % similarly ensure ones are in the same places as they were in S1.A
 k = find(S1.a == 1);
-assert(all(abs(S2.a(k) - 1) < 1e-6));
+assert(all(abs(S2.a(k) - 1) < 1e-3));
 S2.a(k) = 1;
 G2 = tf(S2);
 clear k;
@@ -62,7 +62,7 @@ S4.b(k) = 0;
 
 % ensure specific state matrix elements are zero'd
 k = [2 14];
-assert(all(abs(S4.a(k)) < 1e-10));
+assert(all(abs(S4.a(k)) < 1e-3));
 S4.a(k) = 0;
 G4 = tf(S4);
 

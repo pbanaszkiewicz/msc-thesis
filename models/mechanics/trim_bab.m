@@ -28,24 +28,26 @@ opspec.States(2).Known = true;
 
 % State (3) - ball_and_beam_for_lin2/Ball and Beam/Ball/RJ
 % - Default model initial conditions are used to initialize optimization.
+opspec.States(3).Known = true;
 
 % State (4) - ball_and_beam_for_lin2/Ball and Beam/Ball/RJ
 % - Default model initial conditions are used to initialize optimization.
+opspec.States(4).Known = true;
 
 % State (5) - ball_and_beam_for_lin2/Ball and Beam/RJ1
-opspec.States(5).x = -0.030729;
+opspec.States(5).x = -0.028073;
 
 % State (6) - ball_and_beam_for_lin2/Ball and Beam/RJ1
 % - Default model initial conditions are used to initialize optimization.
 
 % State (7) - ball_and_beam_for_lin2/Ball and Beam/RJ2
-opspec.States(7).x = -1.6709;
+opspec.States(7).x = -1.7548;
 
 % State (8) - ball_and_beam_for_lin2/Ball and Beam/RJ2
 % - Default model initial conditions are used to initialize optimization.
 
 % State (9) - ball_and_beam_for_lin2/Ball and Beam/RJ3
-opspec.States(9).x = 1.6401;
+opspec.States(9).x = 1.7267;
 
 % State (10) - ball_and_beam_for_lin2/Ball and Beam/RJ3
 % - Default model initial conditions are used to initialize optimization.
@@ -72,7 +74,7 @@ opspec.States(14).Known = true;
 % Max = Inf.
 
 % Input (1) - ball_and_beam_for_lin2/In1
-opspec.Inputs(1).u = -0.8428;
+opspec.Inputs(1).u = -0.5600000000000001;
 
 %% Set the constraints on the outputs in the model.
 % - The defaults for all outputs are Known = false, Min = -Inf, and
@@ -94,6 +96,8 @@ opspec.Outputs(3).Known = true;
 % - Default model initial conditions are used to initialize optimization.
 opspec.Outputs(4).Known = true;
 
+% Output (5) - ball_and_beam_for_lin2/Out5
+% - Default model initial conditions are used to initialize optimization.
 
 %% Create the options
 opt = findopOptions('DisplayReport','iter');

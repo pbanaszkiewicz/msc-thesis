@@ -17,25 +17,27 @@ max_angle = max(beam_angle);
 amplitude = (max_angle - min_angle) / 2;
 ang_freq = 0.995;
 omega = -1.70;
+offset = (abs(max_angle) - abs(min_angle)) / 2;
+% offset = -0.0198 / 2;
 
-fun = @(x) sseval(x, amplitude, encoder_angle, beam_angle);
+fun = @(x) sseval(x, amplitude, offset, encoder_angle, beam_angle);
 options = optimset('Display', 'iter', 'MaxFunEvals', 400, 'MaxIter', 400, 'TolFun', 1e-6, 'TolX', 1e-6);
 bestx = fminsearch(fun, [ang_freq, omega], options);
 
 X = encoder_angle;
-approx_sin = characteristics(amplitude, bestx(1), bestx(2), X);
+approx_sin = characteristics(amplitude, offset, bestx(1), bestx(2), X);
 % approx_sin = characteristics(amplitude, ang_freq, omega, X);
 
 figure
 plot(encoder_angle, beam_angle, X, approx_sin);
 
-function Y = characteristics(A, omega, phi, X)
-    Y = A * sin(omega * X + phi);
+function Y = characteristics(A, offset, omega, phi, X)
+    Y = A * sin(omega * X + phi) + offset;
 end
 
-function sse = sseval(x, amplitude, tdata, ydata)
+function sse = sseval(x, amplitude, offset, tdata, ydata)
     A = amplitude;
     omega = x(1);
     phi = x(2);
-    sse = sum((ydata - characteristics(A, omega, phi, tdata)).^2);
+    sse = sum((ydata - characteristics(A, offset, omega, phi, tdata)).^2);
 end
