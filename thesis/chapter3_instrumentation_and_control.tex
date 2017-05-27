@@ -188,6 +188,16 @@ Mostek H przylutowano do płytki uniwersalnej. Połączenia elektryczne zrealizo
     \end{threeparttable}
 \end{table}
 
+% TODO: dodać odnośnik do wzoru?
+W układzie nie zastosowano czujnika położenia wału, do którego przymocowana jest belka; zamiast tego wykorzystano zależność geometryczną pomiędzy obrotem wału silnika a obrotem belki. W przypadku niewielkich odchyleń kąt belki $\theta$ powinien być liniowo związany z kątem obrotu wału silnika $\alpha$ w następujący sposób:
+
+\begin{equation}\label{eq:uproszczona_zaleznosc_kata_belki}
+    \theta = \frac{L}{d_r} \alpha
+\end{equation}
+gdzie: $L$ to odległość końca belki od osi obrotu, $d_r$ to długość korby.
+
+Niestety równanie (\ref{eq:uproszczona_zaleznosc_kata_belki}) jest poprawne tylko w niewielkich odchyleniach belki od poziomu oraz gdy linia łącząca punkt zaczepu mechanizmu korbowego i oś obrotu belki jest równoległa do korby. Faktyczna zależność $\theta(\alpha)$ została zidentyfikowana za pomocą modelu symulacyjnego (rozdział \ref{cha:ch5_model_matematyczny}).
+
 %%%%%%%%
 \section{Czujniki odległości}
 \label{sec:ch3_czujniki_odleglosci}
@@ -214,7 +224,6 @@ Czujniki optyczne pracujące w podczerwieni nie są jedynymi sensorami, które m
         
         \begin{tablenotes}
             \footnotesize
-            % TODO: dodaj manual SHARP do bibliografii
             \item[a] opracowanie własne na podstawie \cite{SHARP_MANUAL}.
         \end{tablenotes}
     \end{threeparttable}
@@ -226,7 +235,7 @@ Charakterystyka każdego z czujników jest mocno nieliniowa (zob. \cref{fig:char
 
 \begin{figure}[h]
     \centering
-    % \includesvg[width=0.8\textwidth,svgpath=./graphics/]{sensor_characteristics}
+    % \includesvg[width=0.8\textwidth,svgpath=./vector_graphics/]{sensor_characteristics}
     \includegraphics[width=1\textwidth]{sensor_characteristics}
     \caption{Charakterystyka czujników odległości.}
     \label{fig:charakterystyka_czujnikow}
@@ -238,12 +247,12 @@ Charakterystyka każdego z czujników jest mocno nieliniowa (zob. \cref{fig:char
         \caption{Funkcje aproksymujące charakterystyki czujników.}
         \label{tab:aproksymacja_czujnikow}
         
-        \begin{tabularx}{0.4\textwidth}{l | l}
+        \begin{tabularx}{0.65\textwidth}{l | l | l}
             \toprule
-            Czujnik & Funkcja aproksymująca \\
+            Czujnik & Funkcja aproksymująca & Wartość błędu \textit{RSME} \\
             \midrule
-            Lewy\tnote{a}  & $y = 9819 x ^ {-0.8229} - 2.651 $ \\
-            Prawy\tnote{a} & $y = 8166 x ^ {-0.8055} - 2.525 $ \\
+            Lewy\tnote{a}  & $y = 9819 x ^ {-0,8229} - {2,651} $ & \num{0,197} \\
+            Prawy\tnote{a} & $y = 8166 x ^ {-0,8055} - {2,525} $ & \num{0,2639} \\
             \bottomrule
         \end{tabularx}
         
@@ -256,13 +265,104 @@ Charakterystyka każdego z czujników jest mocno nieliniowa (zob. \cref{fig:char
 
 Wobec utrudnień spowodowanych złożonością obliczeniową zastosowano inne rozwiązanie w celu obliczenia pozycji kulki: aproksymację liniową pomiędzy punktami charakterystyki. W tym celu wprowadzono punkty charakterystyki każdego z czujników (pary: wartość z czujnika po przetworniku ADC, odległość do kulki) do dwóch tablic w sterowniku PLC.
 
-% TODO: opisz sposób liczenia położenia kulki
+Oba czujniki są równoodległe ($x_d = \SI{20}{\centi\meter}$) od środka belki, co oznacza, że aby uzyskać wychylenie środka kulki od środka belki, należy transformować układy odniesienia czujników, co ilustruje figura \ref{fig:polozenie_kulki}. Mając dwie odległości $d_l$ oraz $d_r$ od czujników do kulki, pozycja kulki $x_b$ obliczana jest w następujący sposób:
+\begin{equation}\label{eq:pozycja_kulki}
+d_b = \frac{d_l + 2\cdot d_c - d_r}{2} + d_c
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \includesvg[width=0.5\textwidth,svgpath=./vector_graphics/]{pozycja_kulki}
+    % \includegraphics[width=1\textwidth]{sensor_characteristics}
+    \caption{Położenie kulki względem środka belki i czujników.}
+    \label{fig:polozenie_kulki}
+\end{figure}
+
 
 %%%%%%%%
 \section{Czujnik bazowania}
 \label{sec:ch3_czujnik_bazowania}
 
-% TODO: transoptor szczelinowy, sposób montażu, schemat połączeń
+% TODO: uaktualnij odnośnik
+Z powodu wykorzystania enkodera inkrementalnego konieczne jest przeprowadzenie procedury bazowania (zob. rozdział \ref{cha:ch7_algorytmy_sterowania}) w celu określenia dokładnej pozycji kątowej wału silnika, a co za tym idzie: pozycji kątowej belki.
+
+Do wykrycia pozycji bazowania wykorzystano transoptor szczelinowy TCST1103 firmy Vishay Semiconductors połączony w układzie przedstawionym na figurze \ref{fig:uklad_transoptora}, natomiast podstawowe parametry transoptora zostały opisane w tabeli \ref{eq:pozycja_kulki}.
+
+\begin{figure}[H]
+    \centering
+    \includesvg[width=0.8\textwidth,svgpath=./vector_graphics/]{uklad_transoptora}
+    % \includegraphics[width=1\textwidth]{sensor_characteristics}
+    \caption{Schemat podłączenia układu transoptora.}
+    \label{fig:uklad_transoptora}
+\end{figure}
+
+\begin{table}[h]
+    \centering
+    \begin{threeparttable}
+        \caption{Podstawowe parametry transoptora szczelinowego\tnote{a}.}
+        \label{tab:parametry_transoptora}
+        
+        \begin{tabularx}{0.6\textwidth}{l | l}
+            \toprule
+            Parametr & Wartość \\
+            \midrule
+            Szerokość szczeliny & \SI{3}{\milli\meter} \\
+            Maks. natężenie przewodzenia diody & \SI{60}{\milli\ampere} \\
+            Maks. napięcie kolektor-emiter & \SI{70}{\volt} \\
+            Współczynnik wzmocnienia prądowego & \num{0,2} \\
+            \bottomrule
+        \end{tabularx}
+        
+        \begin{tablenotes}
+            \footnotesize
+            \item[a] opracowanie własne na podstawie \cite{TRANSOPTOR_MANUAL}.
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+
+Układ z figury \ref{fig:uklad_transoptora} przylutowano do płytki uniwersalnej. Elementy \texttt{J1} oraz \texttt{J2} reprezentują złącza ARK (raster \SI{2,54}{\milli\meter}), za pomocą których zrealizowano połączenia elektryczne z zasilaniem oraz sterownikiem PLC.
+
+% TODO: zweryfikuj ilość impulsów do bazowania
+Płytka z czujnikiem bazowania została przykręcona do układu kulki i belki poniżej silnika. Sztywny, lekki i nieprzezroczysty element przyczepiony został na końcu korby tak, aby przechodził przez szczelinę enkodera w momencie skierowania korby pionowo w dół. Przyjęto, że w chwili zasłonięcia szczeliny (przy ruchu zgodnie ze wskazówkami zegara) enkoder powinien otrzymać wartość 75.
+
+%%%%%%%%
+\section{Systemy napięć}
+\label{sec:ch3_systemy_napiec}
+
+Jak można zauważyć, elementy elektroniczne i elektromechaniczne użyte do zbudowania obiektu sterowania korzystają z poziomów logicznych na różnych napięciach. Wynika to z faktu połączenia obiektu typowo przemysłowego, jakim jest sterownik PLC Siemens S7-1211C, który wykorzystuje napięcie \SI{24}{\volt}, oraz elektroniki hobbystycznej (czujniki odległości, mostek H, enkoder), która wykorzystuje napięcia \SI{5}{\volt}. Dodatkowym utrudnieniem jest element wykonawczy, tj. silnik prądu stałego, o napięciu znamionowym 12V.
+
+\begin{table}[h]
+    \centering
+    \begin{threeparttable}
+        \caption{Podział elementów elektronicznych ze względu na wykorzystywany poziom napięcia.}
+        \label{tab:poziomy_napiec}
+        
+        \begin{tabularx}{0.6\textwidth}{l | l}
+            \toprule
+            Element & Napięcie \\
+            \midrule
+            Sterownik PLC & \SI{24}{\volt} \\
+            Płytka sygnałowa & \SI{5}{\volt} \\
+            Mostek H (logika) & \SI{5}{\volt} \\
+            Mostek H (zasilanie silnika)\tnote[a] & \SI{12}{\volt} \\
+            Enkoder & \SI{5}{\volt} \\
+            Czujniki odległości (zasilanie) & \SI{5}{\volt} \\
+            Czujniki odległości (wyjście analogowe) & \SIrange{0,25}{3,1}{\volt} \\
+            Sterownik PLC (wejścia analogowe) & \SIrange{0}{10}{\volt} \\
+            Czujnik bazowania & \SI{24}{\volt} \\
+            Przyciski & \SI{24}{\volt} \\
+            Dioda sygnalizacyjna & \SI{24}{\volt} \\
+            \bottomrule
+        \end{tabularx}
+        
+        \begin{tablenotes}
+            \footnotesize
+            \item[a] wartość napięcia znamionowego silnika, zob. tab. \ref{tab:parametry_silnika}.
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+
+Obecność trzech systemów napięcia poskutkowała użyciem trzech oddzielnych zasilaczy: \SI{24}{\volt} o~mocy \SI{60}{\watt}, \SI{12}{\volt} o~mocy \SI{15}{\watt}, \SI{5}{\volt} o~mocy \SI{12,5}{\watt}. Wszystkie zasilacze zostały połączone wspólną masą.
 
 %%%%%%%%
 \section{Okablowanie i zabezpieczenia}
@@ -270,14 +370,18 @@ Wobec utrudnień spowodowanych złożonością obliczeniową zastosowano inne ro
 
 % TODO: zdjęcie "szafy"
 
-%%%%%%%%
-\section{Systemy napięć}
-\label{sec:ch3_systemy_napiec}
+Połączenia elektryczne pomiędzy komponentami pracy zrealizowano za pomocą kabli o przekroju \SI{0,75}{\milli\meter\squared}. Za wyjątkiem złącza silnika i enkodera, wszystkie przewody zakończone są tulejami, co jest konieczne z powodu zastosowania złącz śrubowych.
 
-% TODO: 5V, 12V, 24V
+Zasilanie zostało zabezpieczone wyłącznikiem nadprądowym klasy B10.
+
+% TODO: dokup, dodaj opis gniazdka na szynę DIN
+Wyłącznik nadprądowy, zasilacz \SI{12}{\volt}, zasilacz \SI{24}{\volt} oraz sterownik PLC zostały przymocowane do wspólnej szyny DIN (TH \num{35}). Dodatkowo zamontowano na niej listwy zaciskowe dla każdego poziomu napięcia (zob. rozdział \ref{sec:ch3_systemy_napiec}): \SI{0}{\volt} (wspólna masa), \SI{5}{\volt}, \SI{25}{\volt}. Z napięcia \SI{12}{\volt} korzysta tylko silnik, więc to połączenie zostało zrealizowane bezpośrednio, bez użycia listwy zaciskowej.
 
 %%%%%%%%
 \section{Podsumowanie}
 
+W niniejszym rozdziale przedstawiono układy elektryczne, elektroniczne i elektromechaniczne wykorzystane do stworzenia obiektu typu kulka i belka. Następnie przystąpiono do opisania poszczególnych elementów: sterownika PLC, płytki sygnałowej, silnika, enkodera, mostku H i czujników odległości. Przedstawiono charakterystyki czujników, sposób ich implementacji w sterowniku oraz sposób obliczania pozycji kulki. Następnie przedstawiono czujnik wykorzystywany do bazowania.
+
+W kolejnych podrozdziałach poruszono kwestię różnych systemów napięć, zastosowanych zasilaczy, zabezpieczeń, okablowania i organizacji przewodów.
 
 %---------------------------------------------------------------------------
