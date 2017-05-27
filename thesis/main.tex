@@ -132,9 +132,11 @@ backend=biber
 \usepackage{siunitx}
 
 \sisetup{
+    group-digits = integer,
     list-final-separator = { \translate{and} },
     range-phrase = { -- },
     mode = text,
+    range-units = single,
 }
 
 % -------------------
@@ -206,13 +208,10 @@ backend=biber
 \include{chapter8_autotune_alg}
 \include{chapter9_experiments}
 \include{chapter10_conclusion}
-\include{appendixA}
 
-% itd.
-% \appendix
-% \include{dodatekA}
-% \include{dodatekB}
-% itd.
+\appendix
+\include{appendixA}
+\include{appendixB}
 
 \printbibliography
 \listoffigures
