@@ -1,0 +1,187 @@
+\documentclass[10pt,a4paper,onecolumn]{article}
+\usepackage[english,polish]{babel}
+
+% Użyj polskiego łamania wyrazów (zamiast domyślnego angielskiego).
+\usepackage{polski}
+
+\usepackage[utf8]{inputenc}
+
+% dodatkowe pakiety
+
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{csquotes}
+% Ponieważ `csquotes` nie posiada polskiego stylu, można skorzystać z mocno zbliżonego stylu chorwackiego.
+\DeclareQuoteAlias{croatian}{polish}
+
+\AtBeginDocument{
+	\renewcommand{\tablename}{Tabela}
+	\renewcommand{\figurename}{Fig.}
+}
+
+% ------------------
+% --- < tabele > ---
+
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage[flushleft]{threeparttable}
+%\usepackage{longtable} %????
+\usepackage{longtable}
+
+% defines the X column to use m (\parbox[c]) instead of p (`parbox[t]`)
+\newcolumntype{C}[1]{>{\hsize=#1\hsize\centering\arraybackslash}X}
+
+% ------------------------------
+% --- < linki i referencje > ---
+
+\usepackage[hidelinks, colorlinks=false]{hyperref}
+\usepackage{cleveref}
+
+% ------------------
+% --- < figury > ---
+
+% najprawdopodobniej jakaś paczka ładuje subcaption, a svg ładuje subfig, które
+% nie są kompatybilne; poniższe rozwiązanie wzięte z https://tex.stackexchange.com/a/213279
+\usepackage{subcaption}
+\expandafter\def\csname ver@subfig.sty\endcsname{}
+
+
+\usepackage{graphicx}
+\usepackage{float} % lepsze pozycjonowanie
+\usepackage{svg}
+\graphicspath{{graphics/}}  % obrazki i zdjęcia muszą być w podfolderze "graphics"
+
+% ----------------------------
+% --- < liczby i symbole > ---
+
+\usepackage{siunitx}
+
+\sisetup{
+    group-digits = integer,
+    list-final-separator = { \translate{and} },
+    range-phrase = { -- },
+    mode = text,
+}
+
+% defines the X column to use m (\parbox[c]) instead of p (`parbox[t]`)
+%\newcolumntype{C}[1]{>{\hsize=#1\hsize\centering\arraybackslash}X}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+\begin{document}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[h]
+    \centering
+    \begin{threeparttable}
+        \caption{Parametry fizyczne, elektryczne i mechaniczne silnika, enkodera i przekładni\tnote{a}.}
+        \label{tab:parametry_silnika}
+        
+        \begin{tabularx}{1\textwidth}{l | l}
+            \toprule
+            Średnica & \SI{37}{\milli\meter} \\
+            Długość & \SI{68}{\milli\meter} \\
+            Masa & \SI{215}{g} \\
+            Średnica wału & \SI{6}{\milli\meter} \\
+            \midrule
+            Przełożenie przekładni $f$ & \num{18,75}:\num{1} \\
+            \midrule
+            Napięcie znamionowe $u_N$ & \SI{12}{\volt} \\
+            Prędkość znamionowa $\omega_N$ & \SI{52,36}{\radian\per\second} \\
+            Prąd znamionowy $i_N$ & \SI{300}{\milli\ampere} \\
+            Prąd zatrzymania silnika $i_S$ & \SI{5000}{\milli\ampere} \\
+            Moment zatrzymania silnika $T_S$ & \SI{0,59}{\newton\meter} \\
+            \midrule
+            Rezystancja\tnote{b} $R$ & \SI{2,4}{\ohm} \\
+            Stała SEM rotacji\tnote{b} $K_e$ & \SI{0,2154}{\volt\per\radian\per\second} \\
+            Stała momentu\tnote{b} $K_t$ & \SI{0,2154}{\newton\meter\per\ampere} \\
+            Współczynnik tarcia wiskotycznego\tnote{b} $\beta$ & \num{0,00161} \\
+            Współczynnik tarcia suchego\tnote{b} $b$ & \num{0,019} \\
+            Moment bezwładności przekładni i wału\tnote{c} $J$ & \num{0,00123} \\
+            \bottomrule
+        \end{tabularx}
+        
+        \begin{tablenotes}
+            \footnotesize
+            \item[a] opracowanie własne na podstawie ...,
+            % TODO: zaktualizuj odnośniki
+            \item[b] zidentyfikowano analitycznie, szczegóły poniżej,
+            \item[b] zidentyfikowano eksperymentalnie, szczegóły poniżej.
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+
+Podstawowe równanie obwodu silnika (przyjęto zerową induktancję, $u_M = u \cdot u_N$ oraz $K = K_e = K_t$):
+\begin{equation}\label{eq1}
+u_M = R i + K \omega
+\end{equation}
+
+Podstawowe równanie momentu silnika:
+\begin{equation}\label{eq2}
+T = K_t i - J \dot{\omega} - \beta \omega - b \sgn \omega
+\end{equation}
+
+Rezystancja obwodów silnika została obliczona dla sytuacji zatrzymania silnika (równanie \ref{eq1}, $\omega = 0$), kiedy mamy:
+\begin{equation}\label{eq3}
+R = \frac{u \cdot u_N}{i_S} = 2,4 [\Omega]
+\end{equation}
+
+Z równania \ref{eq1} wynika, że przy prędkości jałowej:
+\begin{equation}\label{eq4}
+K = \frac{u \cdot u_N - R i_N}{\omega_N}
+\end{equation}
+co daje wartości $K_e = K_t = 0,2154$.
+
+
+Współczynniki $b$ oraz $\beta$ zostały obliczone ze wzoru \ref{eq2}, przy ustalonej wartości prędkości obrotowej wału ($J\dot{\omega} = 0$) oraz przy ominięciu składnika momentu ($T = 0$):
+\begin{equation}
+K i = \beta \omega + b \sgn \omega 
+\end{equation}
+\begin{equation}
+\frac{K}{R}(u \cdot u_N - K \omega) = \beta \omega + b \sgn \omega
+\end{equation}
+\begin{equation}
+\frac{K u_N}{R} u = (\frac{K^2}{R} + \beta) \omega + b \sgn \omega
+\end{equation}
+\begin{equation}
+\omega = \frac{K u_N}{R( \frac{K^2}{R} + \beta )}u - \frac{b}{\frac{K^2}{R} + \beta} \sgn \omega
+\end{equation}
+
+Stąd, wyznaczając współczynniki $K_1$, $K_2$ regresji liniowej $y = K_1 x + K_2$ możemy otrzymać wzory na $\beta$ oraz $b$:
+
+\begin{equation}
+\beta = \frac{K u_N - K_1 K^2}{K_1 R}
+\end{equation}
+\begin{equation}\label{eq10}
+b = K_2 (\frac{K^2}{R} + \beta)
+\end{equation}
+
+W równaniu \ref{eq10} pominięto kwestie znaku wynikające z użycia funkcji $\sgn$.
+
+Wartości współczynników $K_1$, $K_2$ odczytane z wykresów:
+
+\begin{table}[h]
+    \centering
+        \caption{Współczynniki regresji liniowej.}
+        \label{tab:wsp_regr_lin}
+        
+        \begin{tabularx}{1\textwidth}{l | l | l}
+            \toprule
+            Parametr & Ujemna prędkość obrotowa & Dodatnia prędkość obrotowa \\
+            \midrule
+            $K_1$ & \num{5,0591527273} & \num{1,0680286292} \\
+            $K_2$ & \num{5,068153533} & \num{-1,0789743494} \\
+            \bottomrule
+        \end{tabularx}
+\end{table}
+
+\end{document}
