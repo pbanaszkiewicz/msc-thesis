@@ -1,6 +1,148 @@
 \chapter{Model symulacyjny}
 \label{cha:ch4_model_symulacyjny}
 
-Lorem ipsum.
+Do zaprojektowania odpowiedniego układu regulacji systemem kulka i belka, a więc dobrania struktury regulatorów, konieczne jest posiadanie modelu tego systemu. Jest to jednak zadanie utrudnione, gdy system jest wybitnie nieliniowy -- a obiekt regulacji taki właśnie jest. Mamy tutaj do czynienia z~nieliniowościami wynikającymi z:
+\begin{itemize}
+    \item zastosowania silnika prądu stałego,
+    \item przeniesienia napędu poprzez przekładnię korbową,
+    \item czy z dynamiki kulki zależnej od ruchu obrotowego belki.
+\end{itemize}
+
+% TODO: uaktualinij odnośnik
+Wobec tego zdecydowano się nie przystępować do opisu matematycznego zachowania się układu w sposób klasyczny, np. poprzez równania Eulera--Lagrange'a czy funkcjonał Hamiltona. Zamiast tego, wykorzystując narzędzia pakietu \textsc{Matlab/Simulink}, zbudowano przestrzenną i fizyczną reprezentację obiektu regulacji, która następnie została wykorzystana do linearyzacji i dobrania regulatorów (rozdział \ref{cha:ch7_algorytmy_sterowania}).
+
+\section{Wykorzystanie przybornika \textsc{SimMechanics}}
+\label{sec:simmechanics}
+
+\textsc{SimMechanics}, znany również jako \textsc{Simscape Multibody}, pozwala na modelowanie fizycznych układów (ciał stałych o określonej geometrii, masie i/lub inercji) oraz zależności między nimi (transformacje i rotacje pozycji). Bardzo ważną cechą jest możliwość stosowania więzów pomiędzy kilkoma układami odniesienia. Więzy te mają zero lub więcej stopni swobody i nazywane są połączeniami lub złączami; do najbardziej charakterystycznych należą złącza pryzmatyczne, obrotowe czy sferyczne (zob. \cref{fig:simmechanics_bloki}). Jak można zauważyć, odpowiadają one fizycznym połączeniom ruchowym lub obrotowym spotykanym w układach mechanicznych.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[t]{0.15\textwidth}
+        \centering
+        \includegraphics[width=0.75\textwidth]{sm_solid}
+        \caption{Ciało stałe.}
+        \label{fig:sm_solid}
+    \end{subfigure}
+    ~ 
+    \begin{subfigure}[t]{0.15\textwidth}
+        \centering
+        \includegraphics[width=0.75\textwidth]{sm_rigid_transform}
+        \caption{Transformacja układu odniesienia.}
+        \label{fig:sm_rigid_transform}
+    \end{subfigure}
+    ~ 
+    \begin{subfigure}[t]{0.15\textwidth}
+        \centering
+        \includegraphics[width=0.75\textwidth]{sm_prismatic_joint}
+        \caption{Złącze pryzmatyczne.}
+        \label{fig:sm_prismatic_joint}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[t]{0.15\textwidth}
+        \centering
+        \includegraphics[width=0.75\textwidth]{sm_revolute_joint}
+        \caption{Złącze obrotowe.}
+        \label{fig:sm_revolute_joint}
+    \end{subfigure}
+    
+    \caption{Podstawowe bloki budujące schemat \textsc{SimMechanics}.}
+    \label{fig:simmechanics_bloki}
+\end{figure}
+
+Budowanie schematu z wykorzystaniem bloków \textsc{SimMechanics} polega na, w dużym uproszczeniu, przyłączaniu ciał stałych w centrach układów odniesienia, które przemieszczane są w przestrzeni za pomocą bloków \textit{Rigid Transform} (fig. \ref{fig:sm_rigid_transform}). Wspomniane bloki umożliwiają również rotację układów odniesienia, co jest często konieczne do poprawnego działania złącz o pewnej ilości stopni swobody. Przykładowo, złącze \textit{Revolute Joint} umożliwia obracanie układu odniesienia \texttt{F} (ang. \textit{Follower} -- następujący układ odniesienia) wokół osi Z~układu \texttt{B} (ang. \textit{Base} -- poprzedzający układ odniesienia)\footnote{W ustawieniach bloku \textit{Revolute Joint} możliwa jest zmiana na tryb odwrotny, tj. obrót układu \texttt{B} wokół układu \texttt{F}.}. Jednakże jeśli wał, który ma się obracać wokół swojej naturalnej osi obrotu, nie ma w swoim układzie osi Z~wzdłuż naturalnej osi obrotu, wtedy jego układ odniesienia musi zostać transformowany za pomocą \textit{Rigid Transform}.
+
+Bloki złącz wspierają informowanie o aktualnych wartościach pozycji, prędkości i przyspieszenia (w zależności od typu złącza odpowiednio liniowych lub obrotowych) oraz przyłożonego na złącze momentu. Dodatkowo możliwe jest załączenie wejścia momentu oddziałującego, co zostało wykorzystane przy implementacji silnika.
+
+Ostatnią wartą wspomnienia informacją jest możliwość ustawienia pewnej wartości wstępnej dla danego złącza. W przypadku złącza \textit{Revolute Joint} umożliwia to wymuszenie kąta obrotu pomiędzy układami odniesienia \texttt{B} oraz \texttt{F}, a w przypadku złącza \textit{Prismatic Joint} wymusza to odpowiednie przesunięcie.
+
+\section{Reprezentacja obiektu typu kulka i belka}
+\label{sec:reprezentacja_obiektu_kulka_i_belka}
+
+Bardzo dużą zaletą korzystania z \textsc{SimMechanics} jest automatyczne generowanie podglądu (zob. \cref{fig:uklad_simmechanics}) budowanego układu. Pozwala to przeprowadzać obserwację działania różnych algorytmów sterowania oraz łatwo znajdować błędy złożenia brył.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{simmechanics_ballandbeam}
+    \caption{Wizualizacja układu kulki i belki zamodelowanego przy pomocy \textsc{SimMechanics} (por. z obiektem rzeczywistym przedstawionym na \cref{fig:mechatronics_perspective_1}).}
+    \label{fig:uklad_simmechanics}
+\end{figure}
+
+Schemat użyty do wygenerowania modelu z \cref{fig:uklad_simmechanics} został przedstawiony na \cref{fig:uklad_simmechanics2}. Poczynając od lewej strony, możemy na nim wyróżnić kilka charakterystycznych elementów:
+
+\begin{itemize}
+    \item obiekty \textit{Base}, \textit{Tower1}, \textit{Tower2}, \textit{MotorBase}, \textit{Shaft Supports}, \textit{Motor}, \textit{Beam}, \textit{Pin2}, \textit{Ball} oraz \textit{CrankShaft},
+    \item subsystemy \textit{Shaft}, \textit{Electric Motor}, \textit{Crank} oraz \textit{Ball mechanics},
+    \item sporo bloków \textit{Rigid Transform} o nazwach \textit{RT}---\textit{RT19},
+    \item trzy bloki \textit{Revolute Joint},
+    \item wejścia \textit{voltage} oraz \textit{disturbance},
+    \item wyjścia \textit{ball\_position}, \textit{ball\_velocity}, \textit{beam\_angle} oraz \textit{beam\_angular\_velocity}.
+\end{itemize}
+
+Obiekt \textit{Base} reprezentuje podstawę, na której umieszczono całą mechanikę układu. Poprzez transformacje \textit{RT} oraz \textit{RT1} umieszczono na nim dwie wieże, na których zaczepione są łożyska i wał obrotowy belki (subsystem \textit{Shaft}, \cref{fig:sm_shaft}).
+
+Wał belki składa się z dwóch równoległych ścieżek, transformowanych z układu odniesienia świata poprzez bloki \textit{RT2} oraz \textit{RT3}. Za blokami umieszczono złącza obrotowe \textit{BallBearing1} oraz \textit{BallBearing2}, reprezentujące fizyczne łożyska kulkowe (zob. rozdział \ref{sec:konstrukcja_mechaniczna}). Złącze \textit{BallBearing2} zostało wykorzystane do pobrania z układu aktualnego kąta oraz prędkości kątowej obrotu belki.
+
+Idąc dalej, w odpowiednim przesunięciu od środka wału belki (\textit{RT6}) zamontowano podpory wału (\textit{Shaft Supports}) -- tutaj zamodelowane jako jeden obiekt. Na nich (\textit{RT7}) została przymocowana belka, której kształt w przekroju przypomina domkniętą i wypełnioną literę \texttt{M}.
+
+Na schemacie układu \ref{fig:uklad_simmechanics2} równolegle do ,,górnej'' części obiektu (wał belki, belka, kulka) poprowadzona jest ścieżka silnika i przekładni korbowej; obie ścieżki złączone są poprzez korbowód (\textit{Crankshaft}).
+
+\begin{sidewaysfigure}[p!]
+    \centering
+    \includegraphics[width=\textwidth]{simmechanics_ballandbeam2}
+    \caption{Schemat \textsc{SimMechanics} układu kulki i belki.}
+    \label{fig:uklad_simmechanics2}
+\end{sidewaysfigure}
+
+Obiekty \textit{MotorBase} oraz \textit{Motor} reprezentują bryły podstawy, na której osadzony jest silnik, oraz silnika. Elementy te nie biorą udziału w ogólnym zachowaniu belki pod wpływem momentu generowanego przez silnik, wobec czego nie nadano im skomplikowanych kształtów, jakie te elementy mają w rzeczywistości.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{simmechanics_shaft}
+    \caption{Schemat subsystemu \textit{Shaft} odpowiadającego za umocowanie wału obrotu belki w danym układzie odniesienia.}
+    \label{fig:sm_shaft}
+\end{figure}
+
+Sposób wykorzystania złącza obrotowego \textit{RJ3} został opisany w rozdziale \ref{sec:model_silnika}. Za wspomnianym złączem znajduje się subsystem \textit{Crank} (przedstawiony na \cref{fig:sm_shaft}), który składa się głównie z dwóch czarnych pinów (elementów mocujących o zerowej masie -- masa fizycznych przegubów włączona jest do masy korby bądź korbowodu) i korby (\textit{Crank}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{simmechanics_crank}
+    \caption{Schemat subsystemu \textit{Crank} odpowiadającego za umocowanie wału obrotu belki w danym układzie odniesienia.}
+    \label{fig:sm_crank}
+\end{figure}
+
+Ostatnim, nieopisanym dotąd subsystemem, jest \textit{Ball mechanics} -- subsystem połączony z belką (\cref{fig:sm_ball_mechanics}), którego zadaniem jest ,,przytwierdzenie'' kulki do belki; osiągnięto to za pomocą nieopisanego dotąd bloku \textit{Rack and pinion} (pol. \textit{przekładnia zębata współpracująca z kołem zębatym}).
+
+Blok \textit{Rack and pinion} jest specjalnym rodzajem złącza będącym połączeniem złącz pryzmatycznego i obrotowego. W efekcie pracuje on jako więzadło ruchu obrotowo-postępowego, z zerowym tarciem i z brakiem oderwania pod wpływem przyspieszeń pionowych, co dobrze przybliża zachowanie kulki w układzie kulki i belki.
+
+Połączenie równoległe bloków \textit{RPC1} i \textit{PJ}, \textit{RJ} przedstawione na \cref{fig:sm_ball_mechanics} spowodowane jest wymaganiami bloku \textit{Rack and pinion} co do osi przesuwu i osi obrotu; z tego powodu konieczne było użycie odpowiednich transformacji układów odniesienia \textit{RT12} oraz \textit{RT11}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{simmechanics_ball_mechanics}
+    \caption{Schemat subsystemu \textit{Ball mechanics} odpowiadającego za zachowanie kulki na belce.}
+    \label{fig:sm_ball_mechanics}
+\end{figure}
+
+W układzie \cref{fig:uklad_simmechanics2} jedno z wejść, oznaczone jako \textit{disturbance}, przeznaczone jest na symulowanie zewnętrznych zakłóceń wpływających bezpośrednio na kulkę; widoczne jest to w schemacie \textit{Ball mechanics} jako wejście \textit{ball\_pos\_dist}.
+
+Z subsystemu \textit{Ball mechanics} wychodzą również dwa wyjścia: \textit{ball\_position} oraz \textit{ball\_velocity}. Odczytywane są one ze złącza pryzmatycznego kulki \textit{PJ}.
+
+Sama kulka została dołączona do schematu poza subsystemem \textit{Ball mechanics}, jako ciało stałe \textit{Ball}. Równolegle dołączony blok \textit{BallFrame} odpowiada za wyświetlenie wersorów układu odniesienia środka kulki, co pomaga zobaczyć na wizualizacji faktyczny ruch obrotowy kulki po belce.
+
+\section{Model silnika}
+\label{sec:model_silnika}
+
+
+
+\section{Aproksymacja zależności kąta obrotu wału silnika i osi belki}
+\label{sec:zaleznosc_kata_silnika_i_kata_belki}
+
+
+
+\section{Podsumowanie}
+
+
 
 %---------------------------------------------------------------------------
