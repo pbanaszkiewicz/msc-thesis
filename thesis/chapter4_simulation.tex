@@ -94,7 +94,7 @@ Na schemacie układu \ref{fig:uklad_simmechanics2} równolegle do ,,górnej'' cz
     \label{fig:uklad_simmechanics2}
 \end{sidewaysfigure}
 
-Obiekty \textit{MotorBase} oraz \textit{Motor} reprezentują bryły podstawy, na której osadzony jest silnik, oraz silnika. Elementy te nie biorą udziału w ogólnym zachowaniu belki pod wpływem momentu generowanego przez silnik, wobec czego nie nadano im skomplikowanych kształtów, jakie te elementy mają w rzeczywistości.
+Obiekty \textit{MotorBase} oraz \textit{Motor} reprezentują bryły podstawy, na której osadzony jest silnik, oraz silnika. Elementy te nie biorą udziału w ogólnym zachowaniu belki pod wpływem momentu generowanego przez silnik, wobec czego nie nadano im skomplikowanych kształtów, jakie te elementy mają w~rzeczywistości.
 
 \begin{figure}[h]
     \centering
@@ -114,7 +114,7 @@ Sposób wykorzystania złącza obrotowego \textit{RJ3} został opisany w rozdzia
 
 Ostatnim, nieopisanym dotąd subsystemem, jest \textit{Ball mechanics} -- subsystem połączony z belką (\cref{fig:sm_ball_mechanics}), którego zadaniem jest ,,przytwierdzenie'' kulki do belki; osiągnięto to za pomocą nieopisanego dotąd bloku \textit{Rack and pinion} (pol. \textit{przekładnia zębata współpracująca z kołem zębatym}).
 
-Blok \textit{Rack and pinion} jest specjalnym rodzajem złącza będącym połączeniem złącz pryzmatycznego i obrotowego. W efekcie pracuje on jako więzadło ruchu obrotowo-postępowego, z zerowym tarciem i z brakiem oderwania pod wpływem przyspieszeń pionowych, co dobrze przybliża zachowanie kulki w układzie kulki i belki.
+Blok \textit{Rack and pinion} jest specjalnym rodzajem złącza będącym połączeniem złącz pryzmatycznego i obrotowego. W efekcie pracuje on jako więzadło ruchu obrotowo-postępowego, z zerowym tarciem i~z~brakiem oderwania pod wpływem przyspieszeń pionowych, co dobrze przybliża zachowanie kulki w~układzie kulki i belki.
 
 Połączenie równoległe bloków \textit{RPC1} i \textit{PJ}, \textit{RJ} przedstawione na \cref{fig:sm_ball_mechanics} spowodowane jest wymaganiami bloku \textit{Rack and pinion} co do osi przesuwu i osi obrotu; z tego powodu konieczne było użycie odpowiednich transformacji układów odniesienia \textit{RT12} oraz \textit{RT11}.
 
@@ -134,15 +134,75 @@ Sama kulka została dołączona do schematu poza subsystemem \textit{Ball mechan
 \section{Model silnika}
 \label{sec:model_silnika}
 
+Widoczny na \cref{fig:sm_electric_motor} model silnika prądu stałego odpowiada modelowi matematycznemu opartemu o równanie elektryczne obwodu silnika (\ref{eq:silnik_r_el}) i mechaniczne (\ref{eq:silnik_r_mech}):
 
+\begin{equation}\label{eq:silnik_r_el}
+    u - R i - L \deriv{i}{t} = K \omega 
+\end{equation}
+\begin{equation}\label{eq:silnik_r_mech}
+    T = K i - J \epsilon - \beta \omega - b \sgn \omega
+\end{equation}
+gdzie:
+\begin{itemize}
+    \item $u$ -- napięcie sterujące,
+    \item $R$ -- rezystancja silnika,
+    \item $i$ -- prąd w obwodzie twornika,
+    \item $K$ -- stała elektryczna bądź mechaniczna silnika (w jednostkach \si{\volt\second\per\radian} lub \si{\newton\meter\per\ampere}),
+    \item $L$ -- indukcyjność silnika (w modelu na \cref{fig:sm_electric_motor} przyjęta za zerową),
+    \item $T$ -- moment generowany przez silnik,
+    \item $J$ -- moment bezwładności wału silnika,
+    \item $\omega$ -- prędkość kątowa wału silnika,
+    \item $\epsilon = \deriv{\omega}{t}$ -- przyspieszenie kątowe wału silnika,
+    \item $\beta$ -- współczynnik tarcia wiskotycznego przekładni oraz silnika,
+    \item $b$ -- współczynnik tarcia suchego przekładni oraz silnika.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{simmechanics_electric_motor.png}
+    \caption{Schemat subsystemu \textit{Electric Motor} odpowiadającego za model silnika prądu stałego.}
+    \label{fig:sm_electric_motor}
+\end{figure}
+
+Warto zauważyć, że obliczanie kąta obrotu, prędkości kątowej oraz przyspieszenia kątowego odbywa się poza blokiem \textit{Electric Motor} -- wykonuje to \textsc{SimMechanics}, biorąc pod uwagę dynamikę reszty układu oraz moment, którym silnik działa na cały mechanizm.
+
+W modelu silnika pominięto indukcyjność, gdyż jej wartość w rzeczywistości jest bardzo niska. Dodatkowo, przeprowadzona identyfikacja tarcia (rozdział \ref{sec:identyfikacja_parametrow_silnika}) pokazała, że poza tarciem mokrym w~układzie występuje pewne tarcie suche. Z powodu pracy silnika w sposób powtarzalny, tarcie suche może mieć spory wpływ na odpowiedź silnika, dlatego zdecydowano się go nie pomijać.
 
 \section{Aproksymacja zależności kąta obrotu wału silnika i osi belki}
 \label{sec:zaleznosc_kata_silnika_i_kata_belki}
 
+W związku z brakiem czujnika obrotu wału belki, do odczytania jej położenia należy się posłużyć zależnością geometryczną od obrotu wału silnika. W rozdziale \ref{sec:ch3_uklad_napedowy} zasygnalizowano, że w pewnych niewielkich odchyleniach zależność ta może być opisana wzorem $\theta = \frac{L}{d_k} \alpha$.
 
+Model symulacyjny \textsc{SimMechanics} eliminuje ten problem, gdyż pozycja i prędkość wału belki odczytywane są bezpośrednio ze złącza obrotowego, w którym osadzony jest wspomniany wał. Niemniej jednak problem nadal występuje w rzeczywistym układzie sterowania, dlatego postanowiono zmierzyć zależność $\theta(\alpha)$ poprzez symulację zbudowanego modelu. W tym celu podano stałe sterowanie na silnik i zmierzono jednocześnie kąt obrotu wału silnika i wału belki.
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=\textwidth,svgpath=./vector_graphics/]{beam_angle_encoder_relation}
+    % \includegraphics[width=1\textwidth]{sensor_characteristics}
+    \caption{Zależność kąta obrotu wału belki od kąta obrotu wału silnika.}
+    \label{fig:zaleznosc_kata_belki_od_enkodera}
+\end{figure}
+
+Należy zauważyć, że brak dobranych poprawnie parametrów silnika lub kulki nie wpływa negatywnie na dokładność aproksymacji, gdyż elementy łączące belkę z silnikiem są sztywne, a pomiar nie dotyczył dynamiki (prędkość, przyspieszenie) lecz statyki (obrót).
+
+Obrót belki w funkcji obrotu wału silnika postanowiono aproksymować sinusoidą (\cref{fig:zaleznosc_kata_belki_od_enkodera}) o następującym wzorze:
+
+\begin{equation}\label{eq:aproksymacja_kata_walu}
+    \theta(\alpha) = A \sin (\omega \alpha + \phi) + B
+\end{equation}
+gdzie:
+\begin{itemize}
+    \item $A$ -- amplituda sinusoidy,
+    \item $\omega$ -- pulsacja,
+    \item $\phi$ -- przesunięcie fazowe,
+    \item $B$ -- wyraz wolny.
+\end{itemize}
+
+% TODO: zweryfikuj czy sinus jest stablicowany
+Po przeprowadzeniu aproksymacji numerycznej za pomocą funkcji \texttt{fminsearch} z programu \textsc{Matlab} otrzymano następujące wartości parametrów funkcji (\ref{eq:aproksymacja_kata_walu}): $A = \num{0.1181}$, $\omega = \num{0.9963}$, $\phi = \num{-1.7076}$, $B = \num{-0.0099}$; przybliżenie zostało przedstawione na \cref{fig:zaleznosc_kata_belki_od_enkodera}. Taka funkcja nie jest trudna do implementacji na sterowniku PLC, nie powinna również stanowić zbyt dużego wyzwania obliczeniowego\footnote{Funkcja sinus jest stablicowana w procesorze serii Siemens S7-1200.} dla wybranego procesora (por. tabelę \ref{tab:parametry_PLC_SB}).
 
 \section{Podsumowanie}
 
-
+W niniejszym rozdziale opisano sposób budowy modeli za pomocą przybornika narzędziowego \textsc{Simscape Multibody}, następnie przedstawiono i omówiono zbudowany w ten sposób model symulacyjny obiektu regulacji. W kolejnej części opisano model matematyczny silnika prądu stałego i jego implementację. Na końcu zaprezentowano wykorzystanie modelu obiektu do znalezienia zależności geometrycznej między kątem obrotu wału silnika i wału belki.
 
 %---------------------------------------------------------------------------

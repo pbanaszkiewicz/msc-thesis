@@ -17,6 +17,37 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 
+% operator '\sgn'
+\DeclareMathOperator{\sgn}{sgn}
+
+% polecenie \diff generujące \mathrm{d}
+\makeatletter
+\providecommand*{\diff}%
+{\@ifnextchar^{\DIfF}{\DIfF^{}}}
+\def\DIfF^#1{%
+    \mathop{\mathrm{\mathstrut d}}%
+    \nolimits^{#1}\gobblespace}
+\def\gobblespace{%
+    \futurelet\diffarg\opspace}
+\def\opspace{%
+    \let\DiffSpace\!%
+    \ifx\diffarg(%
+    \let\DiffSpace\relax
+    \else
+    \ifx\diffarg[%
+    \let\DiffSpace\relax
+    \else
+    \ifx\diffarg\{%
+    \let\DiffSpace\relax
+    \fi\fi\fi\DiffSpace}
+    
+% polecenie \deriv generujące operator różniczkujący \frac{\diff^{N}x}{\diff{t}^N}
+\providecommand*{\deriv}[3][]{%
+    \frac{\diff^{#1}#2}{\diff #3^{#1}}}
+
+% polecenie \pderiv generujące operator różniczkujący cząstkowy (przykład jw.)
+\providecommand*{\pderiv}[3][]{\frac{\partial^{#1}#2}{\partial #3^{#1}}}
+
 % ------------------------
 % --- < bibliografia > ---
 

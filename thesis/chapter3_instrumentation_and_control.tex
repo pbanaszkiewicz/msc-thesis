@@ -19,7 +19,7 @@ Do odczytywania danych z obiektu i sterowania nim wykorzystano opisany w tym roz
 
 Wykorzystany w pracy sterownik PLC to Siemens S7-1211C DC/DC/DC. Działa on na napięciu stałym \SI{24}{V}, posiada 6 wejść dyskretnych \SI{24}{V}, 4 tranzystorowe wyjścia dyskretne \SI{24}{V} i 2 napięciowe wejścia analogowe \SIrange{0}{10}{V}.
 
-W celu ułatwienia komunikacji między sterownikiem i elektroniką opartą o logikę \SI{5}{V} (więcej w podrozdziale \ref{sec:ch3_systemy_napiec}), został on rozszerzony o dodatkową płytkę sygnałową SB 1223 działającą na logice \SI{5}{V}; dodaje ona po 2 wejścia i~wyjścia dyskretne \SI{5}{V}.
+W celu ułatwienia komunikacji między sterownikiem i elektroniką opartą o logikę \SI{5}{V} (więcej w~rozdziale \ref{sec:ch3_systemy_napiec}), został on rozszerzony o dodatkową płytkę sygnałową SB 1223 działającą na logice \SI{5}{V}; dodaje ona po 2 wejścia i~wyjścia dyskretne \SI{5}{V}.
 
 Podstawowe parametry sterownika oraz płytki sygnałowej zostały zebrane w tabeli \ref{tab:parametry_PLC_SB}:
 
@@ -120,7 +120,7 @@ Producent silnika nie dostarcza pełnej dokumentacji, a jedynie kilka wybranych 
     \end{threeparttable}
 \end{table}
 
-Parametry niewymienione w tabeli \ref{tab:parametry_silnika}, takie jak rezystancja silnika, stała silnika, moment bezwładności wału czy współczynniki tarcia suchego i wiskotycznego, nie zostały podane przez producenta, dlatego została przeprowadzona ich identyfikacja opisana w rozdziale \ref{cha:ch6_identyfikacja}.
+Parametry niewymienione w tabeli \ref{tab:parametry_silnika}, takie jak rezystancja silnika, stała silnika, moment bezwładności wału czy współczynniki tarcia suchego i wiskotycznego, nie zostały podane przez producenta, dlatego została przeprowadzona ich identyfikacja opisana w rozdziale \ref{sec:identyfikacja_parametrow_silnika}.
 
 Silnik sterowany jest przez PLC za pomocą układu mostka H (Pololu BD65496MUV). Został on dobrany tak, by spełniać wymagania elektryczne silnika w pracy znamionowej. Sterowany jest sygnałem PWM o częstotliwości przenoszenia \SI{20}{\kilo\hertz}. Dodatkowym sygnałem jest binarny sygnał kierunku obrotu silnika. Najistotniejsze parametry wybranego mostka H przedstawiono w tabeli \ref{tab:parametry_mostka_H}.
 
@@ -189,14 +189,14 @@ Mostek H przylutowano do płytki uniwersalnej. Połączenia elektryczne zrealizo
 \end{table}
 
 % TODO: dodać odnośnik do wzoru?
-W układzie nie zastosowano czujnika położenia wału, do którego przymocowana jest belka; zamiast tego wykorzystano zależność geometryczną pomiędzy obrotem wału silnika a obrotem belki. W przypadku niewielkich odchyleń kąt belki $\theta$ powinien być liniowo związany z kątem obrotu wału silnika $\alpha$ w następujący sposób:
+W układzie nie zastosowano czujnika położenia wału, do którego przymocowana jest belka; zamiast tego wykorzystano zależność geometryczną pomiędzy obrotem wału silnika a obrotem belki. W przypadku niewielkich odchyleń kąt belki $\theta$ powinien być liniowo związany z kątem obrotu wału silnika $\alpha$~w~następujący sposób:
 
 \begin{equation}\label{eq:uproszczona_zaleznosc_kata_belki}
-    \theta = \frac{L}{d_r} \alpha
+    \theta = \frac{L}{d_k} \alpha
 \end{equation}
-gdzie: $L$ to odległość końca belki od osi obrotu, $d_r$ to długość korby.
+gdzie: $L$ to odległość końca belki od osi obrotu, $d_k$ to długość korby.
 
-Niestety równanie (\ref{eq:uproszczona_zaleznosc_kata_belki}) jest poprawne tylko w niewielkich odchyleniach belki od poziomu oraz gdy linia łącząca punkt zaczepu mechanizmu korbowego i oś obrotu belki jest równoległa do korby. Faktyczna zależność $\theta(\alpha)$ została zidentyfikowana za pomocą modelu symulacyjnego (rozdział \ref{cha:ch5_model_matematyczny}).
+Niestety równanie (\ref{eq:uproszczona_zaleznosc_kata_belki}) jest poprawne tylko w niewielkich odchyleniach belki od poziomu oraz gdy linia łącząca punkt zaczepu mechanizmu korbowego i oś obrotu belki jest równoległa do korby. Faktyczna zależność $\theta(\alpha)$ została zidentyfikowana za pomocą modelu symulacyjnego (rozdział \ref{sec:zaleznosc_kata_silnika_i_kata_belki}).
 
 %%%%%%%%
 \section{Czujniki odległości}
