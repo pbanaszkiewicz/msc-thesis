@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.91, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'schemat_korba.pdf' (pdf, eps, ps)
+%% Accompanies image file 'schemat_uproszczony.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{351.55274639bp}%
+    \setlength{\unitlength}{424.1174469bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,13 +48,10 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.34696017)%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{schemat_korba.pdf}}%
-    \put(-0.37082728,0.95154004){\makebox(0,0)[lb]{\smash{korbowód}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{schemat_korba.pdf}}%
-    \put(-0.37082728,0.95154004){\makebox(0,0)[lb]{\smash{korba}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{schemat_korba.pdf}}%
-    \put(-0.37082728,0.95154004){\makebox(0,0)[lb]{\smash{silnik}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=4]{schemat_korba.pdf}}%
+  \begin{picture}(1,0.36713057)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{schemat_uproszczony.pdf}}%
+    \put(0.51005143,0.28574438){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Pozycja kulki}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{schemat_uproszczony.pdf}}%
+    \put(0.82919845,0.20554005){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Obrót belki}}}%
   \end{picture}%
 \endgroup%

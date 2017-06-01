@@ -12,7 +12,7 @@ Do zaprojektowania odpowiedniego układu regulacji systemem kulka i belka, a wi�
 Wobec tego zdecydowano się nie przystępować do opisu matematycznego zachowania się układu w sposób klasyczny, np. poprzez równania Eulera--Lagrange'a czy funkcjonał Hamiltona. Zamiast tego, wykorzystując narzędzia pakietu \textsc{Matlab/Simulink}, zbudowano przestrzenną i fizyczną reprezentację obiektu regulacji, która następnie została wykorzystana do linearyzacji i dobrania regulatorów (rozdział \ref{cha:ch7_algorytmy_sterowania}).
 
 \section{Wykorzystanie przybornika \textsc{SimMechanics}}
-\label{sec:simmechanics}
+\label{sec:ch4_simmechanics}
 
 \textsc{SimMechanics}, znany również jako \textsc{Simscape Multibody}, pozwala na modelowanie fizycznych układów (ciał stałych o określonej geometrii, masie i/lub inercji) oraz zależności między nimi (transformacje i rotacje pozycji). Bardzo ważną cechą jest możliwość stosowania więzów pomiędzy kilkoma układami odniesienia. Więzy te mają zero lub więcej stopni swobody i nazywane są połączeniami lub złączami; do najbardziej charakterystycznych należą złącza pryzmatyczne, obrotowe czy sferyczne (zob. \cref{fig:simmechanics_bloki}). Jak można zauważyć, odpowiadają one fizycznym połączeniom ruchowym lub obrotowym spotykanym w układach mechanicznych.
 
@@ -57,14 +57,14 @@ Bloki złącz wspierają informowanie o aktualnych wartościach pozycji, prędko
 Ostatnią wartą wspomnienia informacją jest możliwość ustawienia pewnej wartości wstępnej dla danego złącza. W przypadku złącza \textit{Revolute Joint} umożliwia to wymuszenie kąta obrotu pomiędzy układami odniesienia \texttt{B} oraz \texttt{F}, a w przypadku złącza \textit{Prismatic Joint} wymusza to odpowiednie przesunięcie.
 
 \section{Reprezentacja obiektu typu kulka i belka}
-\label{sec:reprezentacja_obiektu_kulka_i_belka}
+\label{sec:ch4_reprezentacja_obiektu_kulka_i_belka}
 
 Bardzo dużą zaletą korzystania z \textsc{SimMechanics} jest automatyczne generowanie podglądu (zob. \cref{fig:uklad_simmechanics}) budowanego układu. Pozwala to przeprowadzać obserwację działania różnych algorytmów sterowania oraz łatwo znajdować błędy złożenia brył.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{simmechanics_ballandbeam}
-    \caption{Wizualizacja układu kulki i belki zamodelowanego przy pomocy \textsc{SimMechanics} (por. z obiektem rzeczywistym przedstawionym na \cref{fig:mechatronics_perspective_1}).}
+    \caption{Wizualizacja układu kulki i belki zamodelowanego przy pomocy \textsc{SimMechanics} (por. z obiektem rzeczywistym przedstawionym na \cref{fig:perspektywa}).}
     \label{fig:uklad_simmechanics}
 \end{figure}
 
@@ -81,7 +81,7 @@ Schemat użyty do wygenerowania modelu z \cref{fig:uklad_simmechanics} został p
 
 Obiekt \textit{Base} reprezentuje podstawę, na której umieszczono całą mechanikę układu. Poprzez transformacje \textit{RT} oraz \textit{RT1} umieszczono na nim dwie wieże, na których zaczepione są łożyska i wał obrotowy belki (subsystem \textit{Shaft}, \cref{fig:sm_shaft}).
 
-Wał belki składa się z dwóch równoległych ścieżek, transformowanych z układu odniesienia świata poprzez bloki \textit{RT2} oraz \textit{RT3}. Za blokami umieszczono złącza obrotowe \textit{BallBearing1} oraz \textit{BallBearing2}, reprezentujące fizyczne łożyska kulkowe (zob. rozdział \ref{sec:konstrukcja_mechaniczna}). Złącze \textit{BallBearing2} zostało wykorzystane do pobrania z układu aktualnego kąta oraz prędkości kątowej obrotu belki.
+Wał belki składa się z dwóch równoległych ścieżek, transformowanych z układu odniesienia świata poprzez bloki \textit{RT2} oraz \textit{RT3}. Za blokami umieszczono złącza obrotowe \textit{BallBearing1} oraz \textit{BallBearing2}, reprezentujące fizyczne łożyska kulkowe (zob. rozdział \ref{sec:ch2_konstrukcja_mechaniczna}). Złącze \textit{BallBearing2} zostało wykorzystane do pobrania z układu aktualnego kąta oraz prędkości kątowej obrotu belki.
 
 Idąc dalej, w odpowiednim przesunięciu od środka wału belki (\textit{RT6}) zamontowano podpory wału (\textit{Shaft Supports}) -- tutaj zamodelowane jako jeden obiekt. Na nich (\textit{RT7}) została przymocowana belka, której kształt w przekroju przypomina domkniętą i wypełnioną literę \texttt{M}.
 
@@ -103,7 +103,7 @@ Obiekty \textit{MotorBase} oraz \textit{Motor} reprezentują bryły podstawy, na
     \label{fig:sm_shaft}
 \end{figure}
 
-Sposób wykorzystania złącza obrotowego \textit{RJ3} został opisany w rozdziale \ref{sec:model_silnika}. Za wspomnianym złączem znajduje się subsystem \textit{Crank} (przedstawiony na \cref{fig:sm_shaft}), który składa się głównie z dwóch czarnych pinów (elementów mocujących o zerowej masie -- masa fizycznych przegubów włączona jest do masy korby bądź korbowodu) i korby (\textit{Crank}).
+Sposób wykorzystania złącza obrotowego \textit{RJ3} został opisany w rozdziale \ref{sec:ch4_model_silnika}. Za wspomnianym złączem znajduje się subsystem \textit{Crank} (przedstawiony na \cref{fig:sm_shaft}), który składa się głównie z dwóch czarnych pinów (elementów mocujących o zerowej masie -- masa fizycznych przegubów włączona jest do masy korby bądź korbowodu) i korby (\textit{Crank}).
 
 \begin{figure}[h]
     \centering
@@ -132,7 +132,7 @@ Z subsystemu \textit{Ball mechanics} wychodzą również dwa wyjścia: \textit{b
 Sama kulka została dołączona do schematu poza subsystemem \textit{Ball mechanics}, jako ciało stałe \textit{Ball}. Równolegle dołączony blok \textit{BallFrame} odpowiada za wyświetlenie wersorów układu odniesienia środka kulki, co pomaga zobaczyć na wizualizacji faktyczny ruch obrotowy kulki po belce.
 
 \section{Model silnika}
-\label{sec:model_silnika}
+\label{sec:ch4_model_silnika}
 
 Widoczny na \cref{fig:sm_electric_motor} model silnika prądu stałego odpowiada modelowi matematycznemu opartemu o równanie elektryczne obwodu silnika (\ref{eq:silnik_r_el}) i mechaniczne (\ref{eq:silnik_r_mech}):
 
@@ -166,10 +166,10 @@ gdzie:
 
 Warto zauważyć, że obliczanie kąta obrotu, prędkości kątowej oraz przyspieszenia kątowego odbywa się poza blokiem \textit{Electric Motor} -- wykonuje to \textsc{SimMechanics}, biorąc pod uwagę dynamikę reszty układu oraz moment, którym silnik działa na cały mechanizm.
 
-W modelu silnika pominięto indukcyjność, gdyż jej wartość w rzeczywistości jest bardzo niska. Dodatkowo, przeprowadzona identyfikacja tarcia (rozdział \ref{sec:identyfikacja_parametrow_silnika}) pokazała, że poza tarciem mokrym w~układzie występuje pewne tarcie suche. Z powodu pracy silnika w sposób powtarzalny, tarcie suche może mieć spory wpływ na odpowiedź silnika, dlatego zdecydowano się go nie pomijać.
+W modelu silnika pominięto indukcyjność, gdyż jej wartość w rzeczywistości jest bardzo niska. Dodatkowo, przeprowadzona identyfikacja tarcia (rozdział \ref{sec:ch6_identyfikacja_parametrow_silnika}) pokazała, że poza tarciem mokrym w~układzie występuje pewne tarcie suche. Z powodu pracy silnika w sposób powtarzalny, tarcie suche może mieć spory wpływ na odpowiedź silnika, dlatego zdecydowano się go nie pomijać.
 
 \section{Aproksymacja zależności kąta obrotu wału silnika i osi belki}
-\label{sec:zaleznosc_kata_silnika_i_kata_belki}
+\label{sec:ch4_zaleznosc_kata_silnika_i_kata_belki}
 
 W związku z brakiem czujnika obrotu wału belki, do odczytania jej położenia należy się posłużyć zależnością geometryczną od obrotu wału silnika. W rozdziale \ref{sec:ch3_uklad_napedowy} zasygnalizowano, że w pewnych niewielkich odchyleniach zależność ta może być opisana wzorem $\theta = \frac{L}{d_k} \alpha$.
 

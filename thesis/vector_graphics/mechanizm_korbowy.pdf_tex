@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.91, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'kulka_belka_schemat_uproszczony.pdf' (pdf, eps, ps)
+%% Accompanies image file 'mechanizm_korbowy.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{295.08192444bp}%
+    \setlength{\unitlength}{427.99895096bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,10 +48,13 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.48738031)%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{kulka_belka_schemat_uproszczony.pdf}}%
-    \put(0.12005944,0.44341025){\color[rgb]{0,0,0}\rotatebox{-15}{\makebox(0,0)[lb]{\smash{Pozycja kulki}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{kulka_belka_schemat_uproszczony.pdf}}%
-    \put(0.40204793,0.28050159){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Obrót belki}}}%
+  \begin{picture}(1,0.43585845)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{mechanizm_korbowy.pdf}}%
+    \put(0.8563805,0.3228769){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{korbowód}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{mechanizm_korbowy.pdf}}%
+    \put(0.91827082,0.18208545){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{korba}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{mechanizm_korbowy.pdf}}%
+    \put(0.53665548,0.15238491){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{silnik}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{mechanizm_korbowy.pdf}}%
   \end{picture}%
 \endgroup%

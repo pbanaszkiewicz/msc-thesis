@@ -21,14 +21,13 @@ Obiekty tego typu są często wykorzystywane w dydaktyce teorii sterowania. Skł
     \item możliwość zastosowania różnych struktur i algorytmów sterowania.
 \end{itemize}
 
-Uproszczony schemat systemu kulka i belka przedstawiony został na figurze \ref{fig:kulka_belka_schemat_uproszczony}:
+Uproszczony schemat systemu kulka i belka przedstawiony został na rysunku \ref{fig:schemat_uproszczony}:
 
 \begin{figure}[H]
 	\centering
-    % TODO: przerobić rysunek w Inkscape
-    \includesvg[width=0.6\textwidth,svgpath=./vector_graphics/]{kulka_belka_schemat_uproszczony}
+    \includesvg[width=0.6\textwidth,svgpath=./vector_graphics/]{schemat_uproszczony}
 	\caption{Uproszczony schemat systemu typu kulka i belka.}
-	\label{fig:kulka_belka_schemat_uproszczony}
+	\label{fig:schemat_uproszczony}
 \end{figure}
 
 Prostota konstrukcji i inherentna niestabilność sprawiły, że powstało wiele implementacji tego systemu (np. \cite{BABEX1}\cite{BABEX2}\cite{BABEX3}), również komercyjne, jak na przykład produkt firmy Quanser (\cref{fig:quanser_ball_beam}):
@@ -43,7 +42,7 @@ Prostota konstrukcji i inherentna niestabilność sprawiły, że powstało wiele
 %%%%%%%%
 \section{Projekt mechaniczny}
 
-Przed przystąpieniem do budowy obiektu, zaprojektowano wstępny kształt w programie  \texttt{SketchUp Make} (\cref{fig:cad_render_1}). Wyszczególniono na nim:
+Przed przystąpieniem do budowy obiektu, zaprojektowano wstępny kształt w programie  \texttt{SketchUp Make} (\cref{fig:cad_render}). Wyszczególniono na nim:
 
 \begin{itemize}
 	\item prostokątną podstawę,
@@ -55,26 +54,26 @@ Przed przystąpieniem do budowy obiektu, zaprojektowano wstępny kształt w prog
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.4\textwidth]{cad}
+	\includegraphics[width=0.3\textwidth]{cad}
 	\caption{Render projektu CAD.}
-	\label{fig:cad_render_1}
+	\label{fig:cad_render}
 \end{figure}
 
 Ostateczna konstrukcja różni się względem projektu \textsc{CAD} o wysokość słupów, i umiejscowienie łącznika między nimi. Dodatkowo zastosowano sztywne połączenie osi obrotu belki i samej belki wykorzystujące podpory wału.
 
 %%%%%%%%
 \section{Konstrukcja mechaniczna}
-\label{sec:konstrukcja_mechaniczna}
+\label{sec:ch2_konstrukcja_mechaniczna}
 
-Większość konstrukcji powstała z ocynkowanych elementów stalowych, tzw. ceowników w przekroju kwadratowym o boku długości \SI{4}{cm}, pozwalających na łatwe łączenie kilku elementów przy pomocy śrub. Rozwiązanie to jest bardzo tanie w porównaniu do przemysłowych profili aluminiowych lub spawanych profili stalowych, ale jednocześnie jest dość ciężkie i poprzez niedomknięcie profilu podatne na pewne momenty gnące.
+Większość konstrukcji (\cref{fig:perspektywa}) powstała z ocynkowanych elementów stalowych, tzw. ceowników w przekroju kwadratowym o boku długości \SI{4}{cm}, pozwalających na łatwe łączenie kilku elementów przy pomocy śrub. Rozwiązanie to jest bardzo tanie w porównaniu do przemysłowych profili aluminiowych lub spawanych profili stalowych, ale jednocześnie jest dość ciężkie i poprzez niedomknięcie profilu podatne na pewne momenty gnące.
 
 Kąty proste pomiędzy elementami ustawionymi prostopadle zostały zapewnione poprzez zastosowanie kątowych wsporników stalowych.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{mechatronics_perspective_1}
-	\caption{Zdjęcie obiektu regulacji w trakcie budowy.}
-	\label{fig:mechatronics_perspective_1}
+	\includegraphics[width=0.9\textwidth]{perspektywa}
+	\caption{Zdjęcie obiektu regulacji z zaznaczonymi poszczególnymi elementami konstrukcji; w środku obiektu opakowanie zapałek dla perspektywy.}
+	\label{fig:perspektywa}
 \end{figure}
 
 Na prostokątnej podstawie o wymiarach zewnętrznych \SI{60 x 23}{cm} wykonanej z ceowników ustawiono pionowo na środkach dłuższych boków słupy nośne, również wykonane z ceowników. Słupy zostały usztywnione poprzez połączenie ich przęsłem podniesionym o \SI{11}{cm} względem podstawy.
@@ -97,14 +96,11 @@ W obiekcie zastosowano przeniesienie napędu wykorzystujące mechanizm korbowy. 
 	\item pozwala regulować zakres wychyleń belki w wyniku zmiany długości korby.
 \end{itemize}
 
-% TODO: "Strzałka pokazująca silnik powinna chyba kończyć się w przegubie. Może współśrodkowo z przegubem dorysować orkąd symbolizujący silnik?"
 \begin{figure}[H]
 	\centering
-    % TODO: przerobić rysunek w Inkscape
-	% \includesvg[width=0.5\textwidth,svgpath=./vector_graphics/]{schemat_korba}
-    \includegraphics[width=0.5\textwidth]{schemat_korba}
+	\includesvg[width=0.6\textwidth,svgpath=./vector_graphics/]{mechanizm_korbowy}
 	\caption{Schemat napędu opartego o mechanizm korbowy.}
-	\label{fig:schemat_korba}
+	\label{fig:mechanizm_korbowy}
 \end{figure}
 
 Parametry fizyczne mechanizmu korbowego:
@@ -125,21 +121,19 @@ Belka została stworzona poprzez trwałe sklejenie krawędzi kątownika aluminio
 
 \begin{figure}[H]
 	\centering
-    % TODO: przerobić rysunek w Inkscape
-	% \includesvg[width=0.2\textwidth,svgpath=./vector_graphics/]{beam_xsection}
-    \includegraphics[width=0.2\textwidth]{beam_xsection}
-	\caption{Schemat przekroju belki z zaznaczonymi ceownikiem aluminiowym i kątownikiem aluminiowym.}
+	\includesvg[width=0.2\textwidth,svgpath=./vector_graphics/]{przekroj_belki}
+    % \includegraphics[width=0.2\textwidth]{beam_xsection}
+	\caption{Schemat przekroju belki z zaznaczonymi ceownikiem aluminiowym A) i~kątownikiem aluminiowym B).}
 	\label{fig:przekroj_belki}
 \end{figure}
 
-Użyty kątownik jest nieco krótszy od ceownika. Zamocowano go symetrycznie, a w odległościach około \SI{1}{cm} od jego końców zamontowano uchwyty (\cref{fig:uchwyt_czujnika_odleglosci}) na czujniki optyczne (zob. rozdział \ref{sec:ch3_czujniki_odleglosci}).
+Użyty kątownik jest nieco krótszy od ceownika. Zamocowano go symetrycznie, a w odległościach około \SI{1}{cm} od jego końców zamontowano wsporniki (\cref{fig:uchwyt_czujnika_odleglosci}) na czujniki optyczne (zob. rozdział \ref{sec:ch3_czujniki_odleglosci}).
 
-Uchwyty pozwalają na zmianę wysokości czujnika względem płaszczyzny belki, a także na pochylenie go w osi prostopadłej do płaszczyzny belki.
+Wsporniki pozwalają na zmianę wysokości czujnika względem płaszczyzny belki, a także na pochylenie go w osi prostopadłej do płaszczyzny belki.
 
 \begin{figure}[H]
     \centering
-    % TODO: przerobić rysunek w Inkscape
-    \includesvg[width=0.4\textwidth,svgpath=./vector_graphics/]{sensor_bracket}
+    \includesvg[width=0.4\textwidth,svgpath=./vector_graphics/]{wspornik_czujnika}
     \caption{Schemat uchwytu na czujnik odległości w rzucie od przodu i z boku. Zastosowanie mocowania na śrubie pozwala pochylać czujnik względem belki.}
     \label{fig:uchwyt_czujnika_odleglosci}
 \end{figure}

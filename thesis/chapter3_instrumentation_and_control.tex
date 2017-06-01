@@ -3,12 +3,10 @@
 
 Do odczytywania danych z obiektu i sterowania nim wykorzystano opisany w tym rozdziale układ sterowania i instrumentacji (\cref{fig:schemat_ukl_sterowania_instrumentacji}). W jego sercu znajduje się przemysłowy sterownik PLC, który odczytuje dane o położeniu kulki z dwóch czujników odległości oraz położenie kątowe wału silnika z~enkodera. Dodatkowo do sterownika podłączony został czujnik bazowania oraz przyciski: \texttt{START} (NO), \texttt{STOP} (NC). Na wyjścia sterownika podłączony został mostek H kontrolujący silnik oraz dioda sygnalizacyjna.
 
-% TODO: zweryfikować podłączenie przycisków
-
 \begin{figure}[H]
     \centering
-    % TODO: przerobić rysunek w Inkscape
-    \includegraphics[width=0.7\textwidth]{schemat_ukladu3}
+    \includesvg[width=\textwidth,svgpath=./vector_graphics/]{uklad_sterowania_i_instrumentacji}
+    % \includegraphics[width=0.7\textwidth]{schemat_ukladu3}
     \caption{Schemat układu sterowania i instrumentacji wraz z zaznaczonymi połączeniami.}
     \label{fig:schemat_ukl_sterowania_instrumentacji}
 \end{figure}
@@ -17,9 +15,9 @@ Do odczytywania danych z obiektu i sterowania nim wykorzystano opisany w tym roz
 \section{Sterownik PLC}
 \label{sec:ch3_PLC}
 
-Wykorzystany w pracy sterownik PLC to Siemens S7-1211C DC/DC/DC. Działa on na napięciu stałym \SI{24}{V}, posiada 6 wejść dyskretnych \SI{24}{V}, 4 tranzystorowe wyjścia dyskretne \SI{24}{V} i 2 napięciowe wejścia analogowe \SIrange{0}{10}{V}.
+Wykorzystany w pracy sterownik PLC to \textsc{Simatic S7-1211C DC/DC/DC} firmy Siemens. Działa on na napięciu stałym \SI{24}{V}, posiada 6 wejść dyskretnych \SI{24}{V}, 4 tranzystorowe wyjścia dyskretne \SI{24}{V} i 2 napięciowe wejścia analogowe \SIrange{0}{10}{V}.
 
-W celu ułatwienia komunikacji między sterownikiem i elektroniką opartą o logikę \SI{5}{V} (więcej w~rozdziale \ref{sec:ch3_systemy_napiec}), został on rozszerzony o dodatkową płytkę sygnałową SB 1223 działającą na logice \SI{5}{V}; dodaje ona po 2 wejścia i~wyjścia dyskretne \SI{5}{V}.
+W celu ułatwienia komunikacji między sterownikiem i elektroniką opartą o logikę \SI{5}{V} (więcej w~rozdziale \ref{sec:ch3_systemy_napiec}), został on rozszerzony o dodatkową płytkę sygnałową SB 1223 działającą na logice \SI{5}{V}; dodaje ona po 2 wejścia i~wyjścia dyskretne \SI{5}{V}. Sterownik z już zamontowaną płytką przedstawiono na \cref{fig:sterownik_plytka_sygn}.
 
 Podstawowe parametry sterownika oraz płytki sygnałowej zostały zebrane w tabeli \ref{tab:parametry_PLC_SB}:
 
@@ -35,10 +33,10 @@ Podstawowe parametry sterownika oraz płytki sygnałowej zostały zebrane w tabe
             \midrule
             Napięcie zasilania & \SI{24}{V} DC & \SI{5}{V} DC \\
             \midrule
-            Ilość wejść cyfrowych & 6 & 2 \\
-            Ilość wyjść cyfrowych & 4 & 2 \\
-            Ilość wejść analogowych & 2 & 0 \\
-            Ilość wyjść analogowych & 0 & 0 \\
+            Liczba wejść cyfrowych & 6 & 2 \\
+            Liczba wyjść cyfrowych & 4 & 2 \\
+            Liczba wejść analogowych & 2 & 0 \\
+            Liczba wyjść analogowych & 0 & 0 \\
             Typ wejść cyfrowych & \textit{sink-source} & \textit{source} \\
             Typ wyjść cyfrowych & półprzewodnikowe MOSFET \textit{source} & półprzewodnikowe MOSFET \textit{sink-source} \\
             Typ wejść analogowych & Napięciowe \SIrange{0}{10}{V} & n.d. \\
@@ -65,19 +63,31 @@ Podstawowe parametry sterownika oraz płytki sygnałowej zostały zebrane w tabe
     \end{threeparttable}
 \end{table}
 
-% TODO: dodaj zdjęcia
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{s71200_sb1223}
+    \caption{Zdjęcie użytego sterownika z zaznaczoną płytką sygnałową.}
+    \label{fig:sterownik_plytka_sygn}
+\end{figure}
 
 %%%%%%%%
 \section{Silnik z reduktorem i enkoderem}
 \label{sec:ch3_uklad_napedowy}
 
-Jak już zasygnalizowano w rozdziale \ref{sec:ch2_przeniesienie_napedu}, w pracy użyto silnika prądu stałego (komutatorowy, z~magnesami trwałymi). Silnik sprzężony jest z~zębatą przekładnią redukcyjną o przełożeniu \num{18,75}:\num{1}. Za silnikiem umieszczony jest enkoder inkrementalny kwadraturowy o~64 impulsach na obrót wału, co daje 1200 impulsów za przekładnią.
+Jak już zasygnalizowano w rozdziale \ref{sec:ch2_przeniesienie_napedu}, w pracy użyto silnik prądu stałego (komutatorowy, z~magnesami trwałymi). Silnik sprzężony jest z~zębatą przekładnią redukcyjną o przełożeniu \num{18,75}:\num{1}. Na wale silnika zamocowany jest enkoder inkrementalny kwadraturowy o~64 impulsach na obrót wału, co daje 1200 impulsów za przekładnią. Zdjęcie silnika przedstawiono na \cref{fig:silnik}.
 
 Wybrany silnik stanowi dobry kompromis między złożonością, wydajnością i ceną. Dyskusja na temat możliwości zastosowania innych typów napędów została przeprowadzona w dodatku \ref{appA_warianty_zespolu_napedowego}.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.55\textwidth]{silnik}
+    \caption{Zdjęcie silnika w rzucie od góry z zaznaczoną przekładnią oraz enkoderem.}
+    \label{fig:silnik}
+\end{figure}
+
 Producent silnika nie dostarcza pełnej dokumentacji, a jedynie kilka wybranych parametrów. Wymusiło to analityczne lub eksperymentalne wyznaczenie pozostałych wymaganych do zamodelowania silnika parametrów. Wszystkie parametry zostały przedstawione w tabeli \ref{tab:parametry_silnika} poniżej.
 
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \begin{threeparttable}
         \caption{Parametry producenta silnika, enkodera i przekładni\tnote{a}.}
@@ -95,36 +105,28 @@ Producent silnika nie dostarcza pełnej dokumentacji, a jedynie kilka wybranych 
             Przełożenie przekładni & \num{18,75}:\num{1} \\
             \midrule
             Napięcie znamionowe & \SI{12}{\volt} \\
-            Prędkość znamionowa & \SI{52,36}{\radian\per\second} \\
-            Prąd znamionowy & \SI{300}{\milli\ampere} \\
+            Prędkość biegu jałowego & \SI{52,36}{\radian\per\second} \\
+            Prąd biegu jałowego & \SI{300}{\milli\ampere} \\
             Prąd zatrzymania silnika & \SI{5000}{\milli\ampere} \\
             Moment zatrzymania silnika & \SI{0,59}{\newton\meter} \\
             \midrule
             Typ enkodera & Kwadraturowy, inkrementalny, bez pamięci \\
-            Ilość impulsów na obrót za przekładnią & \num{1200} (tryb kwadraturowy) \\
-%            Rezystancja\tnote{b} & \SI{2,4}{\ohm} \\
-%            Stała SEM rotacji\tnote{b} $K_e$ & \SI{0,2154}{\volt\per\radian\per\second} \\
-%            Stała momentu\tnote{b} $K_t$ & \SI{0,2154}{\newton\meter\per\ampere} \\
-%            Współczynnik tarcia wiskotycznego\tnote{b} $\beta$ & \num{0,00161} \\
-%            Współczynnik tarcia suchego\tnote{b} $b$ & \num{0,019} \\
-%            Moment bezwładności przekładni i wału\tnote{c} $J$ & \num{0,00123} \\
+            Liczba impulsów na obrót za przekładnią & \num{1200} (tryb kwadraturowy) \\
             \bottomrule
         \end{tabularx}
         
         \begin{tablenotes}
             \footnotesize
             \item[a] opracowanie własne na podstawie \cite{SILNIK_MANUAL}.
-%            \item[b] zidentyfikowano analitycznie, więcej w rozdziale \ref{cha:ch6_identyfikacja},
-%            \item[b] zidentyfikowano eksperymentalnie, więcej w rozdziale \ref{cha:ch6_identyfikacja}.
         \end{tablenotes}
     \end{threeparttable}
 \end{table}
 
-Parametry niewymienione w tabeli \ref{tab:parametry_silnika}, takie jak rezystancja silnika, stała silnika, moment bezwładności wału czy współczynniki tarcia suchego i wiskotycznego, nie zostały podane przez producenta, dlatego została przeprowadzona ich identyfikacja opisana w rozdziale \ref{sec:identyfikacja_parametrow_silnika}.
+Parametry niewymienione w tabeli \ref{tab:parametry_silnika}, takie jak rezystancja silnika, stała silnika, moment bezwładności wału czy współczynniki tarcia suchego i wiskotycznego, nie zostały podane przez producenta, dlatego została przeprowadzona ich identyfikacja opisana w rozdziale \ref{sec:ch6_identyfikacja_parametrow_silnika}.
 
-Silnik sterowany jest przez PLC za pomocą układu mostka H (Pololu BD65496MUV). Został on dobrany tak, by spełniać wymagania elektryczne silnika w pracy znamionowej. Sterowany jest sygnałem PWM o częstotliwości przenoszenia \SI{20}{\kilo\hertz}. Dodatkowym sygnałem jest binarny sygnał kierunku obrotu silnika. Najistotniejsze parametry wybranego mostka H przedstawiono w tabeli \ref{tab:parametry_mostka_H}.
+Silnik sterowany jest przez PLC za pomocą układu scalonego mostka H z~tranzystorami MOSFET (Pololu BD65496MUV). Został on dobrany tak, by spełniać wymagania elektryczne silnika przy pracy znamionowej. Sterowany jest sygnałem PWM o częstotliwości \SI{20}{\kilo\hertz}. Dodatkowym sygnałem jest binarny sygnał kierunku obrotu silnika. Najistotniejsze parametry wybranego mostka H przedstawiono w tabeli \ref{tab:parametry_mostka_H}.
 
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \begin{threeparttable}
         \caption{Najważniejsze parametry mostka H\tnote{a}.}
@@ -150,16 +152,16 @@ Silnik sterowany jest przez PLC za pomocą układu mostka H (Pololu BD65496MUV).
     \end{threeparttable}
 \end{table}
 
-Mostek H przylutowano do płytki uniwersalnej. Połączenia elektryczne zrealizowano za pomocą przylutowanych czterech podwójnych złączy ARK (raster \SI{2,54}{\milli\meter}). Zdjęcie modułu przedstawiono na figurze \ref{fig:zdjecie_mostka_H}, a opis złącz w tabeli \ref{tab:zlacza_mostka_H}.
+Wszystkie wymagane połączenia elektryczne wykonano na uniwersalnej płytce PCB, na której umieszczono niezbędne złącza i listwy zaciskowe. Do tej samej płytki wlutowano również wspomniany mostek H, którego zdjęcie przedstawiono na \cref{fig:zdjecie_mostka_H}, a opis złącz w tabeli \ref{tab:zlacza_mostka_H}. Zdjęcie płytki PCB przedstawiono na \cref{fig:mostek_H_PCB}.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.4\textwidth]{mostek_H}
     \caption{Zdjęcie układu mostka H (Pololu BD65496MUV). Źródło: \url{https://www.pololu.com/product/2960}.}
     \label{fig:zdjecie_mostka_H}
 \end{figure}
 
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \begin{threeparttable}
         \caption{Opis złącz mostka H\tnote{a}.}
@@ -196,13 +198,27 @@ W układzie nie zastosowano czujnika położenia wału, do którego przymocowana
 \end{equation}
 gdzie: $L$ to odległość końca belki od osi obrotu, $d_k$ to długość korby.
 
-Niestety równanie (\ref{eq:uproszczona_zaleznosc_kata_belki}) jest poprawne tylko w niewielkich odchyleniach belki od poziomu oraz gdy linia łącząca punkt zaczepu mechanizmu korbowego i oś obrotu belki jest równoległa do korby. Faktyczna zależność $\theta(\alpha)$ została zidentyfikowana za pomocą modelu symulacyjnego (rozdział \ref{sec:zaleznosc_kata_silnika_i_kata_belki}).
+Niestety, równanie (\ref{eq:uproszczona_zaleznosc_kata_belki}) jest poprawne tylko w niewielkich odchyleniach belki od poziomu oraz gdy linia łącząca punkt zaczepu mechanizmu korbowego i oś obrotu belki jest równoległa do korby. Faktyczna zależność $\theta(\alpha)$ została zidentyfikowana za pomocą modelu symulacyjnego (rozdział \ref{sec:ch4_zaleznosc_kata_silnika_i_kata_belki}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{mostek_H_PCB}
+    \caption{Zdjęcie płytki PCB z zamontowanym układem mostka H (Pololu BD65496MUV).}
+    \label{fig:mostek_H_PCB}
+\end{figure}
 
 %%%%%%%%
 \section{Czujniki odległości}
 \label{sec:ch3_czujniki_odleglosci}
 
-Do pomiaru położenia kulki wykorzystano parę analogowych czujników Sharp GP2Y0A41SK0F. Każdy z czujników składa się z nadajnika światła podczerwonego i odbiornika; obliczanie pozycji obiektu odbywa się na zasadzie triangulacji. Podstawowe parametry czujników opisano w tabeli \ref{tab:parametry_czujnikow_Sharp}.
+Do pomiaru położenia kulki wykorzystano parę analogowych czujników Sharp GP2Y0A41SK0F (\cref{fig:czujnik_sharp}). Każdy z czujników składa się z nadajnika światła podczerwonego i odbiornika; obliczanie pozycji obiektu odbywa się na zasadzie triangulacji. Podstawowe parametry czujników opisano w tabeli \ref{tab:parametry_czujnikow_Sharp}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{czujnik}
+    \caption{Zdjęcie czujnika Sharp GP2Y0A41SK0F.}
+    \label{fig:czujnik_sharp}
+\end{figure}
 
 Czujniki optyczne pracujące w podczerwieni nie są jedynymi sensorami, które można zastosować do badania położenia kulki w układach typu kulka i belka. Alternatywne sposoby zostały omówione w~dodatku \ref{appB_alternatywne_czujniki_pozycji_kulki}.
 
@@ -212,13 +228,13 @@ Czujniki optyczne pracujące w podczerwieni nie są jedynymi sensorami, które m
         \caption{Podstawowe parametry czujników pozycji kulki\tnote{a}.}
         \label{tab:parametry_czujnikow_Sharp}
         
-        \begin{tabularx}{0.55\textwidth}{l | l}
+        \begin{tabularx}{0.75\textwidth}{l | l}
             \toprule
             Parametr & Wartość \\
             \midrule
             Napięcie zasilania & \SIrange{4,5}{5,5}{\volt} \\
-            Zasięg & \SIrange{4}{30}{\centi\meter} \\
-            Typ sygnału & Analogowy około \SIrange{0,25}{3,1}{\volt} \\
+            Zakres pomiarowy & \SIrange{4}{30}{\centi\meter} \\
+            Typ sygnału wyjściowego & Analogowy napięciowy około \SIrange{0,25}{3,1}{\volt} \\
             \bottomrule
         \end{tabularx}
         
@@ -229,14 +245,15 @@ Czujniki optyczne pracujące w podczerwieni nie są jedynymi sensorami, które m
     \end{threeparttable}
 \end{table}
 
-Czujniki zostały zamontowane na uchwytach umożliwiających regulację wysokości oraz pochylenia względem belki (zob. rozdział \ref{sec:ch2_belka}). Odległość między czujnikami to \SI{40}{\centi\meter} (powyżej górnej granicy zakresu pracy), a ich wysokość nad belką to \SI{4}{\centi\meter}.
+Czujniki zostały zamontowane na wspornikach umożliwiających regulację wysokości oraz pochylenia względem belki (zob. rozdział \ref{sec:ch2_belka}). Odległość między czujnikami to \SI{40}{\centi\meter} (powyżej górnej granicy zakresu pracy), a ich wysokość nad belką to \SI{4}{\centi\meter}.
 
-Charakterystyka każdego z czujników jest mocno nieliniowa (zob. \cref{fig:charakterystyka_czujnikow}). Dobrą aproksymację charakterystyki można otrzymać (po odcięciu wartości poniżej \SI{3}{\centi\meter}) za pomocą funkcji postaci $y = a x ^ b + c$ (zob. tabela \ref{tab:aproksymacja_czujnikow})\footnote{Wzór właściwy dla odległości do kulki w funkcji wartości z czujnika, tj. po ,,zamianie'' osi wykresu z figury \ref{fig:charakterystyka_czujnikow}.}, jednakże z powodu dużej złożoności obliczeniowej liczenia potęg niecałkowitych zrezygnowano z implementacji takich aproksymacji w sterowniku PLC.
+Charakterystyka każdego z czujników jest mocno nieliniowa (zob. \cref{fig:charakterystyka_czujnikow}). Dobrą aproksymację charakterystyki można otrzymać (po odcięciu wartości poniżej \SI{3}{\centi\meter}) za pomocą funkcji postaci $y =\nobreak a x ^ b + c$ (zob. tabela \ref{tab:aproksymacja_czujnikow}), gdzie $x$ to wartość cyfrowa pomiaru z czujnika, a $y$ to odległość do przeszkody.
+
+Sposób zebrania charakterystyk czujników oraz wykonana aproksymacja zostały opisane w rozdziale \ref{sec:ch6_identyfikacja_charakterystyk_czujnikow}
 
 \begin{figure}[h]
     \centering
-    % \includesvg[width=0.8\textwidth,svgpath=./vector_graphics/]{sensor_characteristics}
-    \includegraphics[width=1\textwidth]{sensor_characteristics}
+    \includegraphics[width=1\textwidth]{charakterystyka_czujnikow}
     \caption{Charakterystyka czujników odległości.}
     \label{fig:charakterystyka_czujnikow}
 \end{figure}
@@ -263,17 +280,16 @@ Charakterystyka każdego z czujników jest mocno nieliniowa (zob. \cref{fig:char
     \end{threeparttable}
 \end{table}
 
-Wobec utrudnień spowodowanych złożonością obliczeniową zastosowano inne rozwiązanie w celu obliczenia pozycji kulki: aproksymację liniową pomiędzy punktami charakterystyki. W tym celu wprowadzono punkty charakterystyki każdego z czujników (pary: wartość z czujnika po przetworniku ADC, odległość do kulki) do dwóch tablic w sterowniku PLC.
+Z powodu dużej złożoności obliczeniowej liczenia potęg niecałkowitych zrezygnowano z implementacji takich aproksymacji w sterowniku PLC. Wobec tych utrudnień zastosowano inne rozwiązanie w celu obliczenia pozycji kulki: aproksymację liniową pomiędzy punktami charakterystyki. W tym celu wprowadzono punkty charakterystyki każdego z czujników (pary: wartość z czujnika po przetworniku ADC, odległość do kulki) do dwóch tablic w sterowniku PLC.
 
-Oba czujniki są równoodległe ($x_d = \SI{20}{\centi\meter}$) od środka belki, co oznacza, że aby uzyskać wychylenie środka kulki od środka belki, należy transformować układy odniesienia czujników, co ilustruje figura \ref{fig:polozenie_kulki}. Mając dwie odległości $d_l$ oraz $d_r$ od czujników do kulki, pozycja kulki $x_b$ obliczana jest w następujący sposób:
+Oba czujniki są równoodległe ($x_d = \SI{20}{\centi\meter}$) od środka belki, co oznacza, że aby uzyskać wychylenie środka kulki od środka belki, należy transformować układy odniesienia czujników, co ilustruje \cref{fig:polozenie_kulki}. Mając dwie odległości $d_l$ oraz $d_r$ od czujników do kulki, pozycję kulki $d_b$ oblicza się w~następujący sposób:
 \begin{equation}\label{eq:pozycja_kulki}
-d_b = \frac{d_l + 2\cdot d_c - d_r}{2} + d_c
+d_b = \frac{d_l + 2\cdot d_c - d_r}{2} - d_c
 \end{equation}
 
 \begin{figure}[H]
     \centering
     \includesvg[width=0.5\textwidth,svgpath=./vector_graphics/]{pozycja_kulki}
-    % \includegraphics[width=1\textwidth]{sensor_characteristics}
     \caption{Położenie kulki względem środka belki i czujników.}
     \label{fig:polozenie_kulki}
 \end{figure}
@@ -284,9 +300,9 @@ d_b = \frac{d_l + 2\cdot d_c - d_r}{2} + d_c
 \label{sec:ch3_czujnik_bazowania}
 
 % TODO: uaktualnij odnośnik
-Z powodu wykorzystania enkodera inkrementalnego konieczne jest przeprowadzenie procedury bazowania (zob. rozdział \ref{cha:ch7_algorytmy_sterowania}) w celu określenia dokładnej pozycji kątowej wału silnika, a co za tym idzie: pozycji kątowej belki.
+Z powodu wykorzystania enkodera inkrementalnego, po każdym uruchomieniu urządzenia konieczne jest przeprowadzenie procedury bazowania (zob. rozdział \ref{cha:ch7_algorytmy_sterowania}) w celu określenia dokładnej pozycji kątowej wału silnika, a co za tym idzie: pozycji kątowej belki.
 
-Do wykrycia pozycji bazowania wykorzystano transoptor szczelinowy TCST1103 firmy Vishay Semiconductors połączony w układzie przedstawionym na figurze \ref{fig:uklad_transoptora}, natomiast podstawowe parametry transoptora zostały opisane w tabeli \ref{eq:pozycja_kulki}.
+Do wykrycia pozycji bazowania wykorzystano transoptor szczelinowy TCST1103 firmy Vishay Semiconductors połączony w układzie przedstawionym na \cref{fig:uklad_transoptora}, natomiast podstawowe parametry transoptora zostały opisane w tabeli \ref{eq:pozycja_kulki}.
 
 \begin{figure}[H]
     \centering
@@ -320,21 +336,28 @@ Do wykrycia pozycji bazowania wykorzystano transoptor szczelinowy TCST1103 firmy
     \end{threeparttable}
 \end{table}
 
-Układ z figury \ref{fig:uklad_transoptora} przylutowano do płytki uniwersalnej. Elementy \texttt{J1} oraz \texttt{J2} reprezentują złącza ARK (raster \SI{2,54}{\milli\meter}), za pomocą których zrealizowano połączenia elektryczne z zasilaniem oraz sterownikiem PLC.
+Układ z \cref{fig:uklad_transoptora} przylutowano do płytki uniwersalnej (\cref{fig:czujnik_bazowania_PCB}). Elementy \texttt{J1} oraz \texttt{J2} reprezentują złącza zaciskowe, za pomocą których zrealizowano połączenia elektryczne z zasilaniem oraz sterownikiem PLC.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{czujnik_bazowania_PCB}
+    \caption{Zdjęcie płytki PCB z zamontowanym układem z \cref{fig:uklad_transoptora}.}
+    \label{fig:czujnik_bazowania_PCB}
+\end{figure}
 
 % TODO: zweryfikuj ilość impulsów do bazowania
-Płytka z czujnikiem bazowania została przykręcona do układu kulki i belki poniżej silnika. Sztywny, lekki i nieprzezroczysty element przyczepiony został na końcu korby tak, aby przechodził przez szczelinę enkodera w momencie skierowania korby pionowo w dół. Przyjęto, że w chwili zasłonięcia szczeliny (przy ruchu zgodnie ze wskazówkami zegara) enkoder powinien otrzymać wartość 75.
+Płytka z czujnikiem bazowania została przytwierdzona do układu kulki i belki poniżej silnika. Sztywny, lekki i nieprzezroczysty element przyczepiony został na końcu korby tak, aby przechodził przez szczelinę enkodera w momencie skierowania korby pionowo w dół. Przyjęto, że w chwili zasłonięcia szczeliny (przy ruchu zgodnie ze wskazówkami zegara) licznik enkodera powinien otrzymać wartość \num{75}; wówczas poziomemu położeniu belki odpowiada wartość \num{0}.
 
 %%%%%%%%
 \section{Systemy napięć}
 \label{sec:ch3_systemy_napiec}
 
-Jak można zauważyć, elementy elektroniczne i elektromechaniczne użyte do zbudowania obiektu sterowania korzystają z poziomów logicznych na różnych napięciach. Wynika to z faktu połączenia obiektu typowo przemysłowego, jakim jest sterownik PLC Siemens S7-1211C, który wykorzystuje napięcie \SI{24}{\volt}, oraz elektroniki hobbystycznej (czujniki odległości, mostek H, enkoder), która wykorzystuje napięcia \SI{5}{\volt}. Dodatkowym utrudnieniem jest element wykonawczy, tj. silnik prądu stałego, o napięciu znamionowym 12V.
+Jak można zauważyć, elementy elektroniczne i elektromechaniczne użyte do zbudowania obiektu sterowania korzystają z poziomów logicznych o różnych napięciach (\cref{tab:poziomy_napiec}). Wynika to z faktu połączenia obiektu typowo przemysłowego, jakim jest sterownik PLC Siemens S7-1211C, który wykorzystuje napięcie \SI{24}{\volt}, oraz elektroniki hobbystycznej (czujniki odległości, mostek H, enkoder), która wykorzystuje napięcia \SI{5}{\volt}. Dodatkowym utrudnieniem jest element wykonawczy, tj. silnik prądu stałego, o napięciu znamionowym 12V.
 
 \begin{table}[h]
     \centering
     \begin{threeparttable}
-        \caption{Podział elementów elektronicznych ze względu na wykorzystywany poziom napięcia.}
+        \caption{Podział modułów elektronicznych ze względu na wykorzystywany poziom napięcia.}
         \label{tab:poziomy_napiec}
         
         \begin{tabularx}{0.6\textwidth}{l | l}
@@ -368,19 +391,23 @@ Obecność trzech systemów napięcia poskutkowała użyciem trzech oddzielnych 
 \section{Okablowanie i zabezpieczenia}
 \label{sec:ch3_okablowanie_zabezpieczenia}
 
-% TODO: zdjęcie "szafy"
+% TODO: dodaj zdjęcie "szafy"
 
-Połączenia elektryczne pomiędzy komponentami pracy zrealizowano za pomocą kabli o przekroju \SI{0,75}{\milli\meter\squared}. Za wyjątkiem złącza silnika i enkodera, wszystkie przewody zakończone są tulejami, co jest konieczne z powodu zastosowania złącz śrubowych.
+Połączenia elektryczne pomiędzy komponentami pracy zrealizowano za pomocą przewodów o przekroju \SI{0,75}{\milli\meter\squared}. Za wyjątkiem złącza silnika i enkodera, wszystkie przewody zakończone są tulejami, co jest konieczne z powodu zastosowania złącz śrubowych.
 
-Zasilanie zostało zabezpieczone wyłącznikiem nadprądowym klasy B10.
+Zasilanie po stronie \SI{230}{\volt} AC, \SI{50}{\hertz} zostało zabezpieczone instalacyjnym wyłącznikiem nadprądowym klasy B10.
 
-% TODO: dokup, dodaj opis gniazdka na szynę DIN
-Wyłącznik nadprądowy, zasilacz \SI{12}{\volt}, zasilacz \SI{24}{\volt} oraz sterownik PLC zostały przymocowane do wspólnej szyny DIN (TH \num{35}). Dodatkowo zamontowano na niej listwy zaciskowe dla każdego poziomu napięcia (zob. rozdział \ref{sec:ch3_systemy_napiec}): \SI{0}{\volt} (wspólna masa), \SI{5}{\volt}, \SI{25}{\volt}. Z napięcia \SI{12}{\volt} korzysta tylko silnik, więc to połączenie zostało zrealizowane bezpośrednio, bez użycia listwy zaciskowej.
+% TODO: zweryfikuj ilość, rozłożenie szyn
+Wyłącznik nadprądowy, zasilacz \SI{12}{\volt}, zasilacz \SI{24}{\volt} oraz sterownik PLC zostały przymocowane do wspólnej szyny DIN (TH \num{35}). Dodatkowo zamontowano na niej listwy przyłączeniowe dla każdego poziomu napięcia (zob. rozdział \ref{sec:ch3_systemy_napiec}): \SI{0}{\volt} (wspólna masa), \SI{5}{\volt}, \SI{25}{\volt}. Z napięcia \SI{12}{\volt} korzysta tylko silnik, więc to połączenie zostało zrealizowane bezpośrednio, bez użycia listwy przyłączeniowej.
+
+Zasilacz \SI{5}{\volt} posiada jednofazową wtyczkę elektryczną bez uziemienia, dlatego na szynie DIN dodatkowo zamontowano gniazdko połączone szeregowo z wyłącznikiem nadprądowym.
+
+% TODO: dodaj ilustrację szyn
 
 %%%%%%%%
 \section{Podsumowanie}
 
-W niniejszym rozdziale przedstawiono układy elektryczne, elektroniczne i elektromechaniczne wykorzystane do stworzenia obiektu typu kulka i belka. Następnie przystąpiono do opisania poszczególnych elementów: sterownika PLC, płytki sygnałowej, silnika, enkodera, mostku H i czujników odległości. Przedstawiono charakterystyki czujników, sposób ich implementacji w sterowniku oraz sposób obliczania pozycji kulki. Następnie przedstawiono czujnik wykorzystywany do bazowania.
+W niniejszym rozdziale przedstawiono układy elektryczne, elektroniczne i elektromechaniczne wykorzystane do stworzenia obiektu typu kulka i belka. Następnie opisano poszczególnych elementów: sterownika PLC, płytki sygnałowej, silnika, enkodera, mostku H i czujników odległości. Przedstawiono charakterystyki czujników, sposób ich implementacji w sterowniku oraz sposób obliczania pozycji kulki. Następnie przedstawiono czujnik wykorzystywany do bazowania.
 
 W kolejnych podrozdziałach poruszono kwestię różnych systemów napięć, zastosowanych zasilaczy, zabezpieczeń, okablowania i organizacji przewodów.
 

@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.91, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'schemat_ukladu3.pdf' (pdf, eps, ps)
+%% Accompanies image file 'wspornik_czujnika.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{473.41414658bp}%
+    \setlength{\unitlength}{289.16221078bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,24 +48,7 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.80240704)%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{schemat_ukladu3.pdf}}%
-    \put(-0.14969164,0.90419735){\makebox(0,0)[lb]{\smash{PLC}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{schemat_ukladu3.pdf}}%
-    \put(-0.14969164,0.90419735){\makebox(0,0)[lb]{\smash{Czujniki optyczne odległości}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{schemat_ukladu3.pdf}}%
-    \put(0.2283784,0.92574318){\rotatebox{-58.4}{\makebox(0,0)[lb]{\smash{Czujnik bazowania}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=4]{schemat_ukladu3.pdf}}%
-    \put(-0.14969164,0.90419735){\makebox(0,0)[lb]{\smash{Enkoder A, B}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=5]{schemat_ukladu3.pdf}}%
-    \put(-0.14969164,0.90419735){\makebox(0,0)[lb]{\smash{Mostek H}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=6]{schemat_ukladu3.pdf}}%
-    \put(-0.14969164,0.90419735){\makebox(0,0)[lb]{\smash{PWM, dir}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=7]{schemat_ukladu3.pdf}}%
-    \put(-0.14969164,0.90419735){\makebox(0,0)[lb]{\smash{Wejścia analogowe0-10V}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=8]{schemat_ukladu3.pdf}}%
-    \put(-0.14969164,0.90419735){\makebox(0,0)[lb]{\smash{Wejścia dyskretne}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=9]{schemat_ukladu3.pdf}}%
-    \put(-0.14969164,0.90419735){\makebox(0,0)[lb]{\smash{Wyjście dyskretne}}}%
+  \begin{picture}(1,0.88236448)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{wspornik_czujnika.pdf}}%
   \end{picture}%
 \endgroup%

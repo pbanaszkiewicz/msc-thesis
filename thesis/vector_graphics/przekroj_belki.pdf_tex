@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.91, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'sensor_bracket.pdf' (pdf, eps, ps)
+%% Accompanies image file 'przekroj_belki.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{289.16221078bp}%
+    \setlength{\unitlength}{133.37423801bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,7 +48,10 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.88236448)%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{sensor_bracket.pdf}}%
+  \begin{picture}(1,0.97159395)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{przekroj_belki.pdf}}%
+    \put(0.47242885,0.69610004){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{B)}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{przekroj_belki.pdf}}%
+    \put(0.15205533,0.16476892){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{A)}}}%
   \end{picture}%
 \endgroup%

@@ -119,7 +119,7 @@ backend=biber
 
 \AtBeginDocument{
 	\renewcommand{\tablename}{Tabela}
-	\renewcommand{\figurename}{Fig.}
+	\renewcommand{\figurename}{Rys.}
 }
 
 % ------------------
@@ -131,7 +131,6 @@ backend=biber
 \usepackage{booktabs}
 \usepackage{makecell}
 \usepackage[flushleft]{threeparttable}
-%\usepackage{longtable} %????
 \usepackage{longtable}
 
 % defines the X column to use m (\parbox[c]) instead of p (`parbox[t]`)
@@ -142,6 +141,8 @@ backend=biber
 
 \usepackage[hidelinks, colorlinks=false]{hyperref}
 \usepackage{cleveref}
+
+\crefname{figure}{rys.}{rys.}
 
 % ------------------
 % --- < figury > ---

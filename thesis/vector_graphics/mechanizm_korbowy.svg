@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Wygenerowane w aplikacji Microsoft Visio 11.0, SVG Export, wersja 1.0. mechanizm_korbowy.svg Page-1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="5.94443in" height="2.59093in"
+		viewBox="0 0 427.999 186.547" xml:space="preserve" color-interpolation-filters="sRGB" class="st9">
+	<v:documentProperties v:langID="1045" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="msvNoAutoConnect" v:val="VT0(1):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#96afcf;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st2 {fill:#ffffff;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st3 {marker-end:url(#mrkr13-29);marker-start:url(#mrkr13-27);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st4 {fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:0.11764705882353}
+		.st5 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st6 {fill:#000000;font-family:Calibri;font-size:1.00001em}
+		.st7 {marker-end:url(#mrkr13-51);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.25}
+		.st8 {fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:0.090252707581227}
+		.st9 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<defs id="Markers">
+		<g id="lend13">
+			<path d="M 3 1 L 0 0 L 3 -1 L 3 1 " style="stroke:none"/>
+		</g>
+		<marker id="mrkr13-27" class="st4" v:arrowType="13" v:arrowSize="1" v:setback="25.245" refX="25.245" orient="auto"
+				markerUnits="strokeWidth" overflow="visible">
+			<use xlink:href="#lend13" transform="scale(8.5) "/>
+		</marker>
+		<marker id="mrkr13-29" class="st4" v:arrowType="13" v:arrowSize="1" v:setback="25.245" refX="-25.245" orient="auto"
+				markerUnits="strokeWidth" overflow="visible">
+			<use xlink:href="#lend13" transform="scale(-8.5,-8.5) "/>
+		</marker>
+		<marker id="mrkr13-51" class="st8" v:arrowType="13" v:arrowSize="2" v:setback="33.24" refX="-33.24" orient="auto"
+				markerUnits="strokeWidth" overflow="visible">
+			<use xlink:href="#lend13" transform="scale(-11.08,-11.08) "/>
+		</marker>
+	</defs>
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<v:custProps>
+			<v:cp v:nameU="AskOnDrop" v:lbl="Pytaj przy upuszczaniu" v:type="3" v:format="&#34;" v:langID="1045" v:cal="0"
+					v:val="VT0(0):5"/>
+		</v:custProps>
+		<v:userDefs>
+			<v:ud v:nameU="LPrec" v:val="VT0(2):26"/>
+			<v:ud v:nameU="LUnits" v:val="VT0(0):26"/>
+			<v:ud v:nameU="ShowUnits" v:val="VT0(0):26"/>
+			<v:ud v:nameU="APrec" v:val="VT0(1):26"/>
+			<v:ud v:nameU="AUnits" v:val="VT0(1):26"/>
+		</v:userDefs>
+		<title>Strona 1</title>
+		<v:pageProperties v:drawingScale="39.3701" v:pageScale="3.93701" v:drawingUnits="6" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<v:layer v:name="Pomiar" v:index="0" v:print="false"/>
+		<v:layer v:name="Wymiary" v:index="1"/>
+		<v:layer v:name="Kontener" v:index="2"/>
+		<v:layer v:name="Łącznik" v:index="3"/>
+		<g id="shape1-1" v:mID="1" v:groupContext="shape" transform="translate(146.111,-51.085)">
+			<title>Trójkąt — podstawa, wysokość</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<path d="M0 186.55 L56.69 186.55 L28.35 115.68 L0 186.55 Z" class="st1"/>
+		</g>
+		<g id="shape2-3" v:mID="2" v:groupContext="shape" transform="translate(-25.4312,-89.5832) rotate(-10)">
+			<title>Prostokąt</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<rect x="0" y="158.201" width="340.157" height="28.3465" class="st1"/>
+		</g>
+		<g id="shape3-5" v:mID="3" v:groupContext="shape" transform="translate(167.371,-114.865)">
+			<title>Okrąg, elipsa</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<path d="M0 179.46 A7.08661 7.08661 0 0 1 14.17 179.46 A7.08661 7.08661 0 1 1 0 179.46 Z" class="st2"/>
+		</g>
+		<g id="shape4-7" v:mID="4" v:groupContext="shape" transform="translate(304.977,-11.4)">
+			<title>Trójkąt — podstawa, wysokość.4</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<path d="M0 186.55 L56.69 186.55 L28.35 129.85 L0 186.55 Z" class="st1"/>
+		</g>
+		<g id="shape6-9" v:mID="6" v:groupContext="shape" transform="translate(203.36,-11.3912) rotate(-45)">
+			<title>Prostokąt.6</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<rect x="0" y="180.878" width="45.3543" height="5.66929" class="st1"/>
+		</g>
+		<g id="shape5-11" v:mID="5" v:groupContext="shape" transform="translate(326.237,-61.0063)">
+			<title>Okrąg, elipsa.5</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<path d="M0 179.46 A7.08661 7.08661 0 0 1 14.17 179.46 A7.08661 7.08661 0 1 1 0 179.46 Z" class="st2"/>
+		</g>
+		<g id="shape7-13" v:mID="7" v:groupContext="shape" transform="translate(492.423,-62.6934) rotate(60)">
+			<title>Prostokąt.7</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<rect x="0" y="180.878" width="68.0315" height="5.66929" class="st1"/>
+		</g>
+		<g id="shape9-15" v:mID="9" v:groupContext="shape" transform="translate(329.071,-153.132)">
+			<title>Okrąg, elipsa.9</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<path d="M0 181.59 A4.96063 4.96063 0 0 1 9.92 181.59 A4.96063 4.96063 0 1 1 0 181.59 Z" class="st2"/>
+		</g>
+		<g id="shape8-17" v:mID="8" v:groupContext="shape" transform="translate(361.67,-96.4394)">
+			<title>Okrąg, elipsa.8</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<path d="M0 181.59 A4.96063 4.96063 0 0 1 9.92 181.59 A4.96063 4.96063 0 1 1 0 181.59 Z" class="st2"/>
+		</g>
+		<g id="shape10-19" v:mID="10" v:groupContext="shape" transform="translate(328.363,-63.1323)">
+			<title>Okrąg, elipsa.10</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<path d="M0 181.59 A4.96063 4.96063 0 0 1 9.92 181.59 A4.96063 4.96063 0 1 1 0 181.59 Z" class="st2"/>
+		</g>
+		<g id="shape11-21" v:mID="11" v:groupContext="shape" transform="translate(174.457,-121.951)">
+			<title>Łuk — numerycznie</title>
+			<desc>29</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+			<v:textRect cx="0" cy="186.547" width="9.93" height="0"/>
+			<path d="M79.39 180.49 L79.39 180.43 A79.4961 116.22 -180 0 0 71.57 135.97 L71.55 135.91" class="st3"/>
+		</g>
+		<g id="shape12-30" v:mID="12" v:groupContext="shape" transform="translate(333.323,-68.0929)">
+			<title>Łuk — graficznie</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<path d="M21.86 180.54 L21.85 180.48 A22.6772 22.6772 -180 0 0 3.31 164.11 L3.25 164.11" class="st3"/>
+		</g>
+		<g id="shape13-37" v:mID="13" v:groupContext="shape" transform="translate(361.67,-136.124)">
+			<title>Arkusz.13</title>
+			<desc>korbowód</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="29.7638" cy="180.878" width="59.53" height="11.3386"/>
+			<rect x="0" y="175.208" width="59.5276" height="11.3386" class="st5"/>
+			<text x="4.86" y="184.48" class="st6" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>korbowód</text>		</g>
+		<g id="shape14-40" v:mID="14" v:groupContext="shape" transform="translate(388.599,-75.1354)">
+			<title>Arkusz.14</title>
+			<desc>korba</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="18.4252" cy="180.147" width="36.86" height="12.8"/>
+			<rect x="0" y="173.747" width="36.8504" height="12.8" class="st5"/>
+			<text x="4.42" y="183.75" class="st6" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>korba</text>		</g>
+		<g id="shape15-43" v:mID="15" v:groupContext="shape" transform="translate(224.478,-62.4236)">
+			<title>Arkusz.15</title>
+			<desc>silnik</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="17.5723" cy="180.147" width="35.15" height="12.8"/>
+			<rect x="0" y="173.747" width="35.1447" height="12.8" class="st5"/>
+			<text x="5.21" y="183.75" class="st6" v:langID="1045"><v:paragraph v:horizAlign="1"/><v:tabList/>silnik</text>		</g>
+		<g id="shape16-46" v:mID="16" v:groupContext="shape" v:layerMember="3" transform="translate(263.622,-60.9756)">
+			<title>Łącznik dynamiczny</title>
+			<path d="M0 179.49 L0 179.43 L54.3 179.43" class="st7"/>
+		</g>
+		<g id="shape17-52" v:mID="17" v:groupContext="shape" v:layerMember="3" transform="translate(390.016,-89.252)">
+			<title>Łącznik dynamiczny.17</title>
+			<path d="M0 193.53 L0 193.73 L-30.4 193.73" class="st7"/>
+		</g>
+		<g id="shape18-57" v:mID="18" v:groupContext="shape" v:layerMember="3" transform="translate(373.008,-139.82)">
+			<title>Łącznik dynamiczny.18</title>
+			<path d="M0 190.24 L0 197.02 L-11.91 197.02" class="st7"/>
+		</g>
+	</g>
+</svg>
