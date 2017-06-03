@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.91, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'beam_angle_encoder_relation.pdf' (pdf, eps, ps)
+%% Accompanies image file 'zaleznosc_kata.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -49,7 +49,7 @@
   \global\let\svgscale\undefined%
   \makeatother%
   \begin{picture}(1,0.54216867)%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{beam_angle_encoder_relation.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{zaleznosc_kata.pdf}}%
     \put(0.1246988,0.03815265){\makebox(0,0)[lb]{\smash{0}}}%
     \put(0.27963855,0.03815265){\makebox(0,0)[lb]{\smash{5}}}%
     \put(0.42975904,0.03815265){\makebox(0,0)[lb]{\smash{10}}}%
@@ -57,7 +57,7 @@
     \put(0.73963855,0.03815265){\makebox(0,0)[lb]{\smash{20}}}%
     \put(0.89457831,0.03815265){\makebox(0,0)[lb]{\smash{25}}}%
     \put(0.39939795,0.0148594){\makebox(0,0)[lb]{\smash{Kąt obrotu enkodera [rad]}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{beam_angle_encoder_relation.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{zaleznosc_kata.pdf}}%
     \put(0.08273096,0.05481928){\makebox(0,0)[lb]{\smash{-0.15}}}%
     \put(0.09236952,0.12730928){\makebox(0,0)[lb]{\smash{-0.1}}}%
     \put(0.08273096,0.19979916){\makebox(0,0)[lb]{\smash{-0.05}}}%
@@ -68,10 +68,10 @@
     \put(0.07309241,0.18012072){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Kąt obrotu belki [rad]}}}}%
     \put(0.3759041,0.52500916){\makebox(0,0)[lb]{\smash{\textbf{Zależność kąta obrotu belki}}}}%
     \put(0.39036193,0.50332241){\makebox(0,0)[lb]{\smash{\textbf{od kąta obrotu enkodera}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{beam_angle_encoder_relation.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{zaleznosc_kata.pdf}}%
     \put(0.68086747,0.47748386){\makebox(0,0)[lb]{\smash{Dane rzeczywiste}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=4]{beam_angle_encoder_relation.pdf}}%
-    \put(0.68086747,0.4574559){\makebox(0,0)[lb]{\smash{Przybliżenie funkcją sinus}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=5]{beam_angle_encoder_relation.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{zaleznosc_kata.pdf}}%
+    \put(0.68086747,0.4574559){\makebox(0,0)[lb]{\smash{Przybliżenie}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{zaleznosc_kata.pdf}}%
   \end{picture}%
 \endgroup%
