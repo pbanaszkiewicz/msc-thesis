@@ -1,7 +1,7 @@
 \chapter{Model symulacyjny}
 \label{cha:ch4_model_symulacyjny}
 
-Do zaprojektowania odpowiedniego układu regulacji systemem kulka i belka, a więc dobrania struktury regulatorów, konieczne jest posiadanie modelu tego systemu. Jest to jednak zadanie utrudnione, gdy system jest wybitnie nieliniowy -- a obiekt regulacji taki właśnie jest. Mamy tutaj do czynienia z~nieliniowościami wynikającymi z:
+Do zaprojektowania odpowiedniego układu regulacji systemem kulka i belka, a więc dobrania struktury regulatorów, konieczne jest posiadanie modelu tego systemu. Jest to jednak zadanie utrudnione, gdy system jest wybitnie nieliniowy --- a obiekt regulacji taki właśnie jest. Mamy tutaj do czynienia z~nieliniowościami wynikającymi z:
 \begin{itemize}
     \item zastosowania silnika prądu stałego,
     \item przeniesienia napędu poprzez przekładnię korbową,
@@ -50,7 +50,7 @@ Wobec tego zdecydowano się nie przystępować do opisu matematycznego zachowani
     \label{fig:simmechanics_bloki}
 \end{figure}
 
-Budowanie schematu z wykorzystaniem bloków \textsc{SimMechanics} polega na, w dużym uproszczeniu, przyłączaniu ciał stałych w centrach układów odniesienia, które przemieszczane są w przestrzeni za pomocą bloków \textit{Rigid Transform} (fig. \ref{fig:sm_rigid_transform}). Wspomniane bloki umożliwiają również rotację układów odniesienia, co jest często konieczne do poprawnego działania złącz o pewnej ilości stopni swobody. Przykładowo, złącze \textit{Revolute Joint} umożliwia obracanie układu odniesienia \texttt{F} (ang. \textit{Follower} -- następujący układ odniesienia) wokół osi Z~układu \texttt{B} (ang. \textit{Base} -- poprzedzający układ odniesienia)\footnote{W ustawieniach bloku \textit{Revolute Joint} możliwa jest zmiana na tryb odwrotny, tj. obrót układu \texttt{B} wokół układu \texttt{F}.}. Jednakże jeśli wał, który ma się obracać wokół swojej naturalnej osi obrotu, nie ma w swoim układzie osi Z~wzdłuż naturalnej osi obrotu, wtedy jego układ odniesienia musi zostać transformowany za pomocą \textit{Rigid Transform}.
+Budowanie schematu z wykorzystaniem bloków \textsc{SimMechanics} polega na, w dużym uproszczeniu, przyłączaniu ciał stałych w centrach układów odniesienia, które przemieszczane są w przestrzeni za pomocą bloków \textit{Rigid Transform} (fig. \ref{fig:sm_rigid_transform}). Wspomniane bloki umożliwiają również rotację układów odniesienia, co jest często konieczne do poprawnego działania złącz o pewnej ilości stopni swobody. Przykładowo, złącze \textit{Revolute Joint} umożliwia obracanie układu odniesienia \texttt{F} (ang. \textit{Follower} --- następujący układ odniesienia) wokół osi Z~układu \texttt{B} (ang. \textit{Base} --- poprzedzający układ odniesienia)\footnote{W ustawieniach bloku \textit{Revolute Joint} możliwa jest zmiana na tryb odwrotny, tj. obrót układu \texttt{B} wokół układu \texttt{F}.}. Jednakże jeśli wał, który ma się obracać wokół swojej naturalnej osi obrotu, nie ma w swoim układzie osi Z~wzdłuż naturalnej osi obrotu, wtedy jego układ odniesienia musi zostać transformowany za pomocą \textit{Rigid Transform}.
 
 Bloki złącz wspierają informowanie o aktualnych wartościach pozycji, prędkości i przyspieszenia (w zależności od typu złącza odpowiednio liniowych lub obrotowych) oraz przyłożonego na złącze momentu. Dodatkowo możliwe jest załączenie wejścia momentu oddziałującego, co zostało wykorzystane przy implementacji silnika.
 
@@ -83,7 +83,7 @@ Obiekt \textit{Base} reprezentuje podstawę, na której umieszczono całą mecha
 
 Wał belki składa się z dwóch równoległych ścieżek, transformowanych z układu odniesienia świata poprzez bloki \textit{RT2} oraz \textit{RT3}. Za blokami umieszczono złącza obrotowe \textit{BallBearing1} oraz \textit{BallBearing2}, reprezentujące fizyczne łożyska kulkowe (zob. rozdział \ref{sec:ch2_konstrukcja_mechaniczna}). Złącze \textit{BallBearing2} zostało wykorzystane do pobrania z układu aktualnego kąta oraz prędkości kątowej obrotu belki.
 
-Idąc dalej, w odpowiednim przesunięciu od środka wału belki (\textit{RT6}) zamontowano podpory wału (\textit{Shaft Supports}) -- tutaj zamodelowane jako jeden obiekt. Na nich (\textit{RT7}) została przymocowana belka, której kształt w przekroju przypomina domkniętą i wypełnioną literę \texttt{M}.
+Idąc dalej, w odpowiednim przesunięciu od środka wału belki (\textit{RT6}) zamontowano podpory wału (\textit{Shaft Supports}) --- tutaj zamodelowane jako jeden obiekt. Na nich (\textit{RT7}) została przymocowana belka, której kształt w przekroju przypomina domkniętą i wypełnioną literę \texttt{M}.
 
 Na schemacie układu \ref{fig:uklad_simmechanics2} równolegle do ,,górnej'' części obiektu (wał belki, belka, kulka) poprowadzona jest ścieżka silnika i przekładni korbowej; obie ścieżki złączone są poprzez korbowód (\textit{Crankshaft}).
 
@@ -103,7 +103,7 @@ Obiekty \textit{MotorBase} oraz \textit{Motor} reprezentują bryły podstawy, na
     \label{fig:sm_shaft}
 \end{figure}
 
-Sposób wykorzystania złącza obrotowego \textit{RJ3} został opisany w rozdziale \ref{sec:ch4_model_silnika}. Za wspomnianym złączem znajduje się subsystem \textit{Crank} (przedstawiony na \cref{fig:sm_shaft}), który składa się głównie z dwóch czarnych pinów (elementów mocujących o zerowej masie -- masa fizycznych przegubów włączona jest do masy korby bądź korbowodu) i korby (\textit{Crank}).
+Sposób wykorzystania złącza obrotowego \textit{RJ3} został opisany w rozdziale \ref{sec:ch4_model_silnika}. Za wspomnianym złączem znajduje się subsystem \textit{Crank} (przedstawiony na \cref{fig:sm_shaft}), który składa się głównie z dwóch czarnych pinów (elementów mocujących o zerowej masie --- masa fizycznych przegubów włączona jest do masy korby bądź korbowodu) i korby (\textit{Crank}).
 
 \begin{figure}[h]
     \centering
@@ -112,7 +112,7 @@ Sposób wykorzystania złącza obrotowego \textit{RJ3} został opisany w rozdzia
     \label{fig:sm_crank}
 \end{figure}
 
-Ostatnim, nieopisanym dotąd subsystemem, jest \textit{Ball mechanics} -- subsystem połączony z belką (\cref{fig:sm_ball_mechanics}), którego zadaniem jest ,,przytwierdzenie'' kulki do belki; osiągnięto to za pomocą nieopisanego dotąd bloku \textit{Rack and pinion} (pol. \textit{przekładnia zębata współpracująca z kołem zębatym}).
+Ostatnim, nieopisanym dotąd subsystemem, jest \textit{Ball mechanics} --- subsystem połączony z belką (\cref{fig:sm_ball_mechanics}), którego zadaniem jest ,,przytwierdzenie'' kulki do belki; osiągnięto to za pomocą nieopisanego dotąd bloku \textit{Rack and pinion} (pol. \textit{przekładnia zębata współpracująca z kołem zębatym}).
 
 Blok \textit{Rack and pinion} jest specjalnym rodzajem złącza będącym połączeniem złącz pryzmatycznego i obrotowego. W efekcie pracuje on jako więzadło ruchu obrotowo-postępowego, z zerowym tarciem i~z~brakiem oderwania pod wpływem przyspieszeń pionowych, co dobrze przybliża zachowanie kulki w~układzie kulki i belki.
 
@@ -144,17 +144,17 @@ Widoczny na \cref{fig:sm_electric_motor} model silnika prądu stałego odpowiada
 \end{equation}
 gdzie:
 \begin{itemize}
-    \item $u$ -- napięcie sterujące,
-    \item $R$ -- rezystancja silnika,
-    \item $i$ -- prąd w obwodzie twornika,
-    \item $K$ -- stała elektryczna bądź mechaniczna silnika (w jednostkach \si{\volt\second\per\radian} lub \si{\newton\meter\per\ampere}),
-    \item $L$ -- indukcyjność silnika (w modelu na \cref{fig:sm_electric_motor} przyjęta za zerową),
-    \item $T$ -- moment generowany przez silnik,
-    \item $J$ -- moment bezwładności wału silnika,
-    \item $\omega$ -- prędkość kątowa wału silnika,
-    \item $\epsilon = \deriv{\omega}{t}$ -- przyspieszenie kątowe wału silnika,
-    \item $\beta$ -- współczynnik tarcia wiskotycznego przekładni oraz silnika,
-    \item $b$ -- współczynnik tarcia suchego przekładni oraz silnika.
+    \item $u$ --- napięcie sterujące,
+    \item $R$ --- rezystancja silnika,
+    \item $i$ --- prąd w obwodzie twornika,
+    \item $K$ --- stała elektryczna bądź mechaniczna silnika (w jednostkach \si{\volt\second\per\radian} lub \si{\newton\meter\per\ampere}),
+    \item $L$ --- indukcyjność silnika (w modelu na \cref{fig:sm_electric_motor} przyjęta za zerową),
+    \item $T$ --- moment generowany przez silnik,
+    \item $J$ --- moment bezwładności wału silnika,
+    \item $\omega$ --- prędkość kątowa wału silnika,
+    \item $\epsilon = \deriv{\omega}{t}$ --- przyspieszenie kątowe wału silnika,
+    \item $\beta$ --- współczynnik tarcia wiskotycznego przekładni oraz silnika,
+    \item $b$ --- współczynnik tarcia suchego przekładni oraz silnika.
 \end{itemize}
 
 \begin{figure}[h]
@@ -164,7 +164,7 @@ gdzie:
     \label{fig:sm_electric_motor}
 \end{figure}
 
-Warto zauważyć, że obliczanie kąta obrotu, prędkości kątowej oraz przyspieszenia kątowego odbywa się poza blokiem \textit{Electric Motor} -- wykonuje to \textsc{SimMechanics}, biorąc pod uwagę dynamikę reszty układu oraz moment, którym silnik działa na cały mechanizm.
+Warto zauważyć, że obliczanie kąta obrotu, prędkości kątowej oraz przyspieszenia kątowego odbywa się poza blokiem \textit{Electric Motor} --- wykonuje to \textsc{SimMechanics}, biorąc pod uwagę dynamikę reszty układu oraz moment, którym silnik działa na cały mechanizm.
 
 W modelu silnika pominięto indukcyjność, gdyż jej wartość w rzeczywistości jest bardzo niska. Dodatkowo, przeprowadzona identyfikacja tarcia (rozdział \ref{sec:ch6_identyfikacja_parametrow_silnika}) pokazała, że poza tarciem mokrym w~układzie występuje pewne tarcie suche. Z powodu pracy silnika w sposób powtarzalny, tarcie suche może mieć spory wpływ na odpowiedź silnika, dlatego zdecydowano się go nie pomijać.
 
@@ -177,8 +177,7 @@ Model symulacyjny \textsc{SimMechanics} eliminuje ten problem, gdyż pozycja i p
 
 \begin{figure}[h]
     \centering
-    \includesvg[width=\textwidth,svgpath=./vector_graphics/]{beam_angle_encoder_relation}
-    % \includegraphics[width=1\textwidth]{sensor_characteristics}
+    \includesvg[width=\textwidth,svgpath=./vector_graphics/]{zaleznosc_kata}
     \caption{Zależność kąta obrotu wału belki od kąta obrotu wału silnika.}
     \label{fig:zaleznosc_kata_belki_od_enkodera}
 \end{figure}
@@ -192,14 +191,13 @@ Obrót belki w funkcji obrotu wału silnika postanowiono aproksymować sinusoid�
 \end{equation}
 gdzie:
 \begin{itemize}
-    \item $A$ -- amplituda sinusoidy,
-    \item $\omega$ -- pulsacja,
-    \item $\phi$ -- przesunięcie fazowe,
-    \item $B$ -- wyraz wolny.
+    \item $A$ --- amplituda sinusoidy,
+    \item $\omega$ --- pulsacja,
+    \item $\phi$ --- przesunięcie fazowe,
+    \item $B$ --- wyraz wolny.
 \end{itemize}
 
-% TODO: zweryfikuj czy sinus jest stablicowany
-Po przeprowadzeniu aproksymacji numerycznej za pomocą funkcji \texttt{fminsearch} z programu \textsc{Matlab} otrzymano następujące wartości parametrów funkcji (\ref{eq:aproksymacja_kata_walu}): $A = \num{0.1181}$, $\omega = \num{0.9963}$, $\phi = \num{-1.7076}$, $B = \num{-0.0099}$; przybliżenie zostało przedstawione na \cref{fig:zaleznosc_kata_belki_od_enkodera}. Taka funkcja nie jest trudna do implementacji na sterowniku PLC, nie powinna również stanowić zbyt dużego wyzwania obliczeniowego\footnote{Funkcja sinus jest stablicowana w procesorze serii Siemens S7-1200.} dla wybranego procesora (por. tabelę \ref{tab:parametry_PLC_SB}).
+Po przeprowadzeniu aproksymacji numerycznej za pomocą funkcji \texttt{fminsearch} z programu \textsc{Matlab} otrzymano następujące wartości parametrów funkcji (\ref{eq:aproksymacja_kata_walu}): $A = \num{0.1181}$, $\omega = \num{0.9963}$, $\phi = \num{-1.7076}$, $B = \num{-0.0099}$; przybliżenie zostało przedstawione na \cref{fig:zaleznosc_kata_belki_od_enkodera}. Taka funkcja nie jest trudna do implementacji na sterowniku PLC, nie powinna również stanowić zbyt dużego wyzwania obliczeniowego\footnote{Producent deklaruje min. \SI{18}{\micro\second} dla obliczeń zmiennoprzecinkowych.} dla wybranego procesora (zob. tabelę \ref{tab:parametry_PLC_SB}).
 
 \section{Podsumowanie}
 

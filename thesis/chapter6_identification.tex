@@ -1,16 +1,141 @@
 \chapter{Identyfikacja}
 \label{cha:ch6_identyfikacja}
 
-Lorem ipsum.
+Używany w projekcie silnik prądu stałego nie posiada w dokumentacji wszystkich parametrów, jakie konieczne są, aby go zamodelować prawidłowo, a te parametry, które zostały podane, mają niepoprawne wartości. Wymusiło to ponowną identyfikację silnika --- częściowo eksperymentalną, częściowo numeryczno--optymalizacyjną.
+
+Podobnie charakterystyki czujników odległości, chociaż podane przez producenta, wcale nie muszą odpowiadać wartościom rzeczywistym. Z racji wykorzystania w nich układów elektronicznych możliwa jest pewna wariancja w odpowiedziach --- nawet dla tych samych pobudzeń.
+
+W niniejszym rozdziale przeprowadzono identyfikację nieznanych parametrów, a także weryfikację tych podanych przez producenta.
 
 \section{Identyfikacja charakterystyk czujników odległości}
 \label{sec:ch6_identyfikacja_charakterystyk_czujnikow}
 
+W celu pobrania charakterystyk indywidualnych czujników przeprowadzono serię eksperymentów, w których zmierzono odpowiedzi czujników w zależności od pozycji przeszkody. Użytą przeszkodą była kulka (zob. rozdział \ref{sec:ch2_kulka}).
+
+Procedura pojedynczego eksperymentu przeprowadzana była następująco: kulkę zamieszczano tak, aby jej środek znajdował się na wybranej pozycji; następnie kulka była zabezpieczana taśmą, aby jej położenie nie uległo zmianie w trakcie eksperymentu. Próbki pobierane były z dwóch przetworników ADC co \SI{100}{\milli\second} przez kilkadziesiąt sekund (przynajmniej pół minuty). W efekcie dla każdego wyznaczonego położenia kulki do dalszej analizy dostępnych było kilkaset próbek.
+
+Pobieranie próbek odbywało się poprzez narzędzie \texttt{Traces} z programu \textsc{Siemens TIA Portal}, które umożliwia eksport wyników do formatu \texttt{.csv} w celu dalszej obróbki.
+
+% TODO: ilustracja pomiaru
+Z każdej serii próbek odpowiadającej jednej pozycji środka kulki wyliczono średnią arytmetyczną wartości z~obu przetworników. Przyjęto, że wartości te odpowiadają odpowiedziom czujników na odległość do bliższej im krawędzi kulki; to założenie jest słuszne dlatego, że do pomiaru środka kulki wykorzystana jest para czujników i~wartość średnia ich odczytów (por. rozdział \ref{sec:ch3_czujniki_odleglosci}, szczególnie wzór~(\ref{eq:pozycja_kulki})).
+
+Wykres uzyskanych danych pomiarowych został przedstawiony na \cref{fig:charakterystyka_czujnikow}, natomiast dane przygotowane do przeprowadzenia aproksymacji umieszczone są w tabeli \ref{tab:pomiary_czujniki}. Dane te zostały skrócone, tzn. wyeliminowano pomiar dla odległości mniejszych od \SI{3}{\centi\meter}, który wprowadzał dwuznaczność do odwzorowania \textit{pomiar$\,\to\,$odległość}.
+
+\begin{table}[H]
+    \centering
+    \caption{Uzyskane wyniki pomiarów charakterystyk każdego z czujników.}
+    \label{tab:pomiary_czujniki}
+
+    \begin{tabularx}{0.9\textwidth}{c | S | S}
+        \toprule
+        Odległość do piłki & {Wartość z ADC czujnika lewego} & {Wartość z ADC czujnika prawego} \\
+        \midrule
+        % \SI{2}{\centi\meter} & 7780,799615 & 7387,194313 \\ % wprowadza dwuznaczność
+        \SI{3}{\centi\meter} & 8318,137584 & 8364,10453 \\
+        \SI{4}{\centi\meter} & 7340,2222 & 6993,866279 \\
+        \SI{5}{\centi\meter} & 6053,363328 & 5767,105651 \\
+        \SI{6}{\centi\meter} & 5216,61082 & 5029,89899 \\
+        \SI{7}{\centi\meter} & 4366,262745 & 4334,347917 \\
+        \SI{8}{\centi\meter} & 3956,949782 & 3875,203271 \\
+        \SI{9}{\centi\meter} & 3629,119926 & 3501,318182 \\
+        \SI{10}{\centi\meter} & 3264,490872 & 3120,025641 \\
+        \SI{11}{\centi\meter} & 2902,293996 & 2815,218324 \\
+        \SI{12}{\centi\meter} & 2685,820809 & 2594,338488 \\
+        \SI{13}{\centi\meter} & 2560,291417 & 2426,931271 \\
+        \SI{14}{\centi\meter} & 2354,944805 & 2217,032895 \\
+        \SI{15}{\centi\meter} & 2191,632399 & 2091,435986 \\
+        \SI{16}{\centi\meter} & 2066,078067 & 1970,516373 \\
+        \SI{17}{\centi\meter} & 1944,336323 & 1806,977578 \\
+        \SI{18}{\centi\meter} & 1756,851385 & 1699,710037 \\
+        \SI{19}{\centi\meter} & 1677,359862 & 1611,165109 \\
+        \SI{20}{\centi\meter} & 1603,756579 & 1527,873377 \\
+        \SI{21}{\centi\meter} & 1492,209622 & 1380,49501 \\
+        \SI{22}{\centi\meter} & 1435,164948 & 1346,626204 \\
+        \SI{23}{\centi\meter} & 1368,446394 & 1271,832298 \\
+        \SI{24}{\centi\meter} & 1313,357143 & 1199,407708 \\
+        \SI{25}{\centi\meter} & 1251,582888 & 1153,330258 \\
+        \SI{26}{\centi\meter} & 1206,343458 & 1109,593886 \\
+        \SI{27}{\centi\meter} & 1157,610417 & 1077,421569 \\
+        \SI{28}{\centi\meter} & 1113,545455 & 1024,010471 \\
+        \SI{29}{\centi\meter} & 1074,938575 & 991,7826825 \\
+        \SI{30}{\centi\meter} & 1028,267442 & 955,1822222 \\
+        \SI{31}{\centi\meter} & 979,5052265 & 930,057047 \\
+        \SI{32}{\centi\meter} & 960,6421801 & 904,1445087 \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+Aproksymacja charakterystyk czujników została przeprowadzona za pomocą narzędzia \texttt{Curve Fitting} z programu \textsc{Matlab}. Najlepsze przybliżenia otrzymano przy wykorzystaniu aproksymacji wykładniczej (zob. \cref{fig:aproksymacja_czujnika_lewego}, \cref{fig:aproksymacja_czujnika_prawego}), tj. postaci $y = a x^b + c$, gdzie $x$ to wartość pomiaru z przetwornika, a $y$ to odległość do przeszkody. Odpowiednie funkcje przedstawiono w tabeli \ref{tab:aproksymacja_czujnikow}.
+
+\begin{table}[h]
+    \centering
+    \caption{Funkcje aproksymujące charakterystyki czujników.}
+    \label{tab:aproksymacja_czujnikow}
+    
+    \begin{tabularx}{0.62\textwidth}{l | l | S}
+        \toprule
+        Czujnik & Funkcja aproksymująca & {Wartość błędu \textit{RSME}} \\
+        \midrule
+        Lewy  & $y = 9819 x ^ {-0,8229} - \num{2,651} $ & 0,197 \\
+        Prawy & $y = 8166 x ^ {-0,8055} - \num{2,525} $ & 0,2639 \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=1\textwidth,svgpath=./vector_graphics/]{aproksymacja_czujnika_lewego}
+    \caption{Wykres przedstawiający aproksymację charakterystyki czujnika lewego.}
+    \label{fig:aproksymacja_czujnika_lewego}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includesvg[width=1\textwidth,svgpath=./vector_graphics/]{aproksymacja_czujnika_prawego}
+    \caption{Wykres przedstawiający aproksymację charakterystyki czujnika prawego.}
+    \label{fig:aproksymacja_czujnika_prawego}
+\end{figure}
+
+W ramach eksperymentów przeprowadzono również test zachowania czujników, gdy pomiędzy nimi nie ma żadnej przeszkody. Pozwoliło to oszacować wartości progowe, które użyte zostały do oszacowania braku lub obecności kulki. Więcej szczegółów umieszczono w~rozdziale \ref{sec:ch7_wykrywanie_braku_kulki}.
+
 \section{Identyfikacja parametrów silnika}
 \label{sec:ch6_identyfikacja_parametrow_silnika}
 
-\section{Weryfikacja parametrów silnika}
-\label{sec:ch6_weryfikacja_parametrow_silnika}
+Jak to zostało zasygnalizowane we wstępie do rozdziału, nie wszystkie parametry silnika są poprawne lub zostały podane przez producenta. Spośród podanych przez producenta (zob. tab. \ref{tab:parametry_silnika}) do zweryfikowania możliwe są:
+
+\begin{itemize}
+    \item napięcie zasilania silnika,
+    \item prędkość biegu jałowego odpowiadającego temu napięciu,
+    \item prąd biegu jałowego.
+\end{itemize}
+
+Niestety niemożliwe jest zweryfikowanie prądu zatrzymania silnika, tj. prądu pobieranego przez silnik przy napięciu znamionowym oraz fizycznym zablokowaniu obrotu wału silnika. Doprowadzenie do takiej sytuacji spowodowałoby fizyczne uszkodzenie zasilacza, mostka H lub samego silnika. Z identycznych powodów niemożliwe jest zmierzenie momentu koniecznego do zatrzymania obrotu wału silnika w tych samych warunkach.
+
+\subsection{Weryfikacja parametrów podanych przez producenta silnika}
+\label{subsec:ch6_weryfikacja_parametrow_producenta_silnika}
+
+Poniższe pomiary i eksperymenty wykonano przy nieobciążonym silniku, tj. po rozłączeniu połączenia wału silnika z korbą.
+
+Za pomocą multimetru zmierzono napięcie na stykach zasilacza przeznaczonego dla silnika (zob. rozdział \ref{sec:ch3_systemy_napiec}), które wyniosło \SI{11,95}{\volt}. Również za pomocą multimetru, tym razem wpinając się szeregowo w obwód zasilania silnika, zmierzono prąd biegu jałowego, którego natężenie wyniosło \SI{0,23}{\ampere}.
+
+Prędkość biegu jałowego silnika wyznaczono za pomocą eksperymentu: na silnik podano maksymalne sterowanie, a za pomocą narzędzia \texttt{Traces} z programu \textsc{Siemens TIA Portal} pobrano odpowiedź silnika (wartość licznika enkodera); próbkowanie w tym eksperymencie wyniosło około \SI{1}{\milli\second}. Następnie dla części danych, dla których silnik osiągnął stałą wartość prędkości, wyznaczono nachylenie. Wartość tego nachylenia odpowiada prędkości kątowej wału silnika, co zaprezentowano na \cref{fig:odpowiedz_silnika_na_maksymalny_skok_jednostkowy}.
+
+Z powyższego eksperymentu uzyskano wartość prędkość obrotowej biegu jałowego \SI{58,267}{\radian\per\second}.
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.7\textwidth,svgpath=./vector_graphics/]{predkosc_biegu_jalowego}
+    \caption{Wykres odpowiedzi silnika na skok jednostkowy (maksymalne napięcie) z zaznaczoną prostą, której nachylenie odpowiada prędkości kątowej wału silnika.}
+    \label{fig:odpowiedz_silnika_na_maksymalny_skok_jednostkowy}
+\end{figure}
+
+\subsection{Identyfikacja parametrów niepodanych przez producenta silnika}
+\label{subsec:ch6_identyfikacja_parametrow_niepodanych_przez_producenta_silnika}
+
+
+
+\section{Weryfikacja identyfikacji silnika}
+\label{sec:ch6_weryfikacja_identyfikacji_silnika}
 
 \section{Identyfikacja momentu bezwładności kulki}
 \label{sec:ch6_identyfikacja_bezwladnosci_kulki}

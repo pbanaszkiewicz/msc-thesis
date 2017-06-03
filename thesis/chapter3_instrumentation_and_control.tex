@@ -85,12 +85,12 @@ Wybrany silnik stanowi dobry kompromis między złożonością, wydajnością i 
     \label{fig:silnik}
 \end{figure}
 
-Producent silnika nie dostarcza pełnej dokumentacji, a jedynie kilka wybranych parametrów. Wymusiło to analityczne lub eksperymentalne wyznaczenie pozostałych wymaganych do zamodelowania silnika parametrów. Wszystkie parametry zostały przedstawione w tabeli \ref{tab:parametry_silnika} poniżej.
+Producent silnika nie dostarcza pełnej dokumentacji, a jedynie kilka wybranych parametrów. Wymusiło to analityczne lub eksperymentalne wyznaczenie pozostałych wymaganych do zamodelowania silnika parametrów. Wszystkie podane parametry zostały przedstawione w tabeli \ref{tab:parametry_silnika} poniżej.
 
 \begin{table}[H]
     \centering
     \begin{threeparttable}
-        \caption{Parametry producenta silnika, enkodera i przekładni\tnote{a}.}
+        \caption{Parametry producenta silnika\tnote{a}, enkodera i przekładni\tnote{b}.}
         \label{tab:parametry_silnika}
         
         \begin{tabularx}{0.9\textwidth}{l | l}
@@ -117,7 +117,8 @@ Producent silnika nie dostarcza pełnej dokumentacji, a jedynie kilka wybranych 
         
         \begin{tablenotes}
             \footnotesize
-            \item[a] opracowanie własne na podstawie \cite{SILNIK_MANUAL}.
+            \item[a] niektóre parametry silnika w rzeczywistości mają inne wartości, zob. rozdział \ref{sec:ch6_identyfikacja_parametrow_silnika},
+            \item[b] opracowanie własne na podstawie \cite{SILNIK_MANUAL}.
         \end{tablenotes}
     \end{threeparttable}
 \end{table}
@@ -190,13 +191,12 @@ Wszystkie wymagane połączenia elektryczne wykonano na uniwersalnej płytce PCB
     \end{threeparttable}
 \end{table}
 
-% TODO: dodać odnośnik do wzoru?
 W układzie nie zastosowano czujnika położenia wału, do którego przymocowana jest belka; zamiast tego wykorzystano zależność geometryczną pomiędzy obrotem wału silnika a obrotem belki. W przypadku niewielkich odchyleń kąt belki $\theta$ powinien być liniowo związany z kątem obrotu wału silnika $\alpha$~w~następujący sposób:
 
 \begin{equation}\label{eq:uproszczona_zaleznosc_kata_belki}
     \theta = \frac{L}{d_k} \alpha
 \end{equation}
-gdzie: $L$ to odległość końca belki od osi obrotu, $d_k$ to długość korby.
+gdzie: $L$ to odległość końca belki od osi obrotu, $d_k$ to długość korby. Zależność (\ref{eq:uproszczona_zaleznosc_kata_belki}) wynika z założenia, że punkty zaczepu korbowodu przebędą taką samą drogę łukową, a zatem $\theta d_k = \alpha L$.
 
 Niestety, równanie (\ref{eq:uproszczona_zaleznosc_kata_belki}) jest poprawne tylko w niewielkich odchyleniach belki od poziomu oraz gdy linia łącząca punkt zaczepu mechanizmu korbowego i oś obrotu belki jest równoległa do korby. Faktyczna zależność $\theta(\alpha)$ została zidentyfikowana za pomocą modelu symulacyjnego (rozdział \ref{sec:ch4_zaleznosc_kata_silnika_i_kata_belki}).
 
@@ -245,42 +245,20 @@ Czujniki optyczne pracujące w podczerwieni nie są jedynymi sensorami, które m
     \end{threeparttable}
 \end{table}
 
-Czujniki zostały zamontowane na wspornikach umożliwiających regulację wysokości oraz pochylenia względem belki (zob. rozdział \ref{sec:ch2_belka}). Odległość między czujnikami to \SI{40}{\centi\meter} (powyżej górnej granicy zakresu pracy), a ich wysokość nad belką to \SI{4}{\centi\meter}.
+Czujniki zostały zamontowane na wspornikach umożliwiających regulację wysokości oraz pochylenia względem belki (zob. rozdział \ref{sec:ch2_belka}). Odległość między czujnikami to \SI{40}{\centi\meter} (powyżej górnej granicy zakresu pomiarowego), a ich wysokość nad belką to \SI{4}{\centi\meter}. W dalszej części pracy, czujnik zamontowany dalej od punktu zaczepu korbowodu nazywany jest ,,lewy'', natomiast czujnik zamontowany bliżej tego punktu --- ,,prawy''.
 
-Charakterystyka każdego z czujników jest mocno nieliniowa (zob. \cref{fig:charakterystyka_czujnikow}). Dobrą aproksymację charakterystyki można otrzymać (po odcięciu wartości poniżej \SI{3}{\centi\meter}) za pomocą funkcji postaci $y =\nobreak a x ^ b + c$ (zob. tabela \ref{tab:aproksymacja_czujnikow}), gdzie $x$ to wartość cyfrowa pomiaru z czujnika, a $y$ to odległość do przeszkody.
+Charakterystyka każdego z czujników jest mocno nieliniowa (zob. \cref{fig:charakterystyka_czujnikow}). Dobrą aproksymację charakterystyki można otrzymać (po odcięciu wartości poniżej \SI{3}{\centi\meter}) za pomocą funkcji postaci $y =\nobreak a x ^ b + c$ (zob. tabela \ref{tab:aproksymacja_czujnikow}), gdzie $x$ to wartość pomiaru z przetwornika, a $y$ to odległość do przeszkody.
 
-Sposób zebrania charakterystyk czujników oraz wykonana aproksymacja zostały opisane w rozdziale \ref{sec:ch6_identyfikacja_charakterystyk_czujnikow}
+Sposób zebrania charakterystyk czujników oraz wykonana aproksymacja zostały opisane w rozdziale~\ref{sec:ch6_identyfikacja_charakterystyk_czujnikow}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{charakterystyka_czujnikow}
+    \includesvg[width=\textwidth,svgpath=./vector_graphics/]{charakterystyka_czujnikow}
     \caption{Charakterystyka czujników odległości.}
     \label{fig:charakterystyka_czujnikow}
 \end{figure}
 
-\begin{table}[h]
-    \centering
-    \begin{threeparttable}
-        \caption{Funkcje aproksymujące charakterystyki czujników.}
-        \label{tab:aproksymacja_czujnikow}
-        
-        \begin{tabularx}{0.65\textwidth}{l | l | l}
-            \toprule
-            Czujnik & Funkcja aproksymująca & Wartość błędu \textit{RSME} \\
-            \midrule
-            Lewy\tnote{a}  & $y = 9819 x ^ {-0,8229} - {2,651} $ & \num{0,197} \\
-            Prawy\tnote{a} & $y = 8166 x ^ {-0,8055} - {2,525} $ & \num{0,2639} \\
-            \bottomrule
-        \end{tabularx}
-        
-        \begin{tablenotes}
-            \footnotesize
-            \item[a] czujnik określony jako ,,lewy'' jest bardziej oddalony od zespołu napędowego.
-        \end{tablenotes}
-    \end{threeparttable}
-\end{table}
-
-Z powodu dużej złożoności obliczeniowej liczenia potęg niecałkowitych zrezygnowano z implementacji takich aproksymacji w sterowniku PLC. Wobec tych utrudnień zastosowano inne rozwiązanie w celu obliczenia pozycji kulki: aproksymację liniową pomiędzy punktami charakterystyki. W tym celu wprowadzono punkty charakterystyki każdego z czujników (pary: wartość z czujnika po przetworniku ADC, odległość do kulki) do dwóch tablic w sterowniku PLC.
+Z powodu dużej złożoności obliczeniowej liczenia potęg niecałkowitych zrezygnowano z implementacji takich aproksymacji w sterowniku PLC. Wobec tych utrudnień zastosowano inne rozwiązanie w celu obliczenia pozycji kulki: aproksymację liniową pomiędzy punktami charakterystyki. W tym celu wprowadzono punkty charakterystyki każdego z czujników (pary: wartość z przetwornika ADC, odległość do kulki) do dwóch tablic w sterowniku PLC.
 
 Oba czujniki są równoodległe ($x_d = \SI{20}{\centi\meter}$) od środka belki, co oznacza, że aby uzyskać wychylenie środka kulki od środka belki, należy transformować układy odniesienia czujników, co ilustruje \cref{fig:polozenie_kulki}. Mając dwie odległości $d_l$ oraz $d_r$ od czujników do kulki, pozycję kulki $d_b$ oblicza się w~następujący sposób:
 \begin{equation}\label{eq:pozycja_kulki}
@@ -400,7 +378,7 @@ Zasilanie po stronie \SI{230}{\volt} AC, \SI{50}{\hertz} zostało zabezpieczone 
 % TODO: zweryfikuj ilość, rozłożenie szyn
 Wyłącznik nadprądowy, zasilacz \SI{12}{\volt}, zasilacz \SI{24}{\volt} oraz sterownik PLC zostały przymocowane do wspólnej szyny DIN (TH \num{35}). Dodatkowo zamontowano na niej listwy przyłączeniowe dla każdego poziomu napięcia (zob. rozdział \ref{sec:ch3_systemy_napiec}): \SI{0}{\volt} (wspólna masa), \SI{5}{\volt}, \SI{25}{\volt}. Z napięcia \SI{12}{\volt} korzysta tylko silnik, więc to połączenie zostało zrealizowane bezpośrednio, bez użycia listwy przyłączeniowej.
 
-Zasilacz \SI{5}{\volt} posiada jednofazową wtyczkę elektryczną bez uziemienia, dlatego na szynie DIN dodatkowo zamontowano gniazdko połączone szeregowo z wyłącznikiem nadprądowym.
+Zasilacz \SI{5}{\volt} posiada jednofazową wtyczkę elektryczną bez uziemienia, dlatego na szynie DIN dodatkowo zamontowano gniazdko elektryczne połączone szeregowo z wyłącznikiem nadprądowym.
 
 % TODO: dodaj ilustrację szyn
 
