@@ -3,18 +3,40 @@
 
 Cechą charakterystyczną obiektu regulacji typu kulka i belka jest pewna dowolność w wyborze układu napędowego, wprawiającego belkę w ruch obrotowy. W niniejszym dodatku przeglądnięto kilka alternatywnych sposobów, które były brane pod uwagę przy projektowaniu układu.
 
-\section{Siłownik liniowy}
+%%%
+\section{Napędy}
 
-Oddziałujący na koniec belki siłownik musiałby zostać zamontowany pionowo; sprzęgnięcie go z belką również nie byłoby trywialne, gdyż punkt na końcu belki zakreśla w przestrzeni łuk, a nie odcinek (tak jak na przykład tłok w klasycznym mechanizmie korbowym). Kolejną wadą jest wysoka cena i prawdopodobne konieczne użycie specjalistycznego sterownika.
+\subsection{Siłownik liniowy}
 
-\section{Serwomechanizm modelarski}
+Oddziałujący na koniec belki siłownik musiałby zostać zamontowany pionowo; sprzęgnięcie go z~belką również nie byłoby trywialne, gdyż punkt na końcu belki zakreśla w przestrzeni łuk, a nie odcinek (tak jak na przykład tłok w klasycznym mechanizmie korbowym). Kolejną wadą napędu jest wysoka cena i prawdopodobne konieczne użycie specjalistycznego sterownika.
+
+\subsection{Serwomechanizm modelarski}
 
 Rozwiązanie stosowane w niektórych układach typu kulka i belka. Cechuje je przystępna cena, ale również brak możliwości ingerencji w wewnętrzny układ regulacji położenia wału.
 
-Zastosowanie takiego silnika nie rozwiązuje problemu przeniesienia napędu.
-
-\section{Silnik tarczowy (\textit{pancake}) z wirnikiem PCB}
+\subsection{Silnik tarczowy (\textit{pancake}) z wirnikiem PCB}
 
 Silnik tarczowy DC z wirnikiem wykonanym w technologii obwodów drukowanych jest propozycją wymagającą zasilacza dużej mocy oraz oddzielnie zamontowanego enkodera; ma też wysoką cenę.
 
-\section{Silnik krokowy}
+\subsection{Silnik krokowy dużej mocy}
+
+Silniki krokowe mają z reguły bardziej skomplikowany układ sterowania niż silniki prądu stałego, dlatego taka pozycja wymagałaby, poza zasilaczem dużej mocy, drogi sterownik. Sam silnik również jest droższy od silnika prądu stałego DC niepracującego krokowo.
+% \footnote{Naturalnie chodzi o porównanie silnika krokowego z silnikiem prądu stałego, w którym jest mniej biegunów magnetycznych, a więc sterowanie nie odbywa się}
+
+\subsection{Znacznie przewymiarowany silnik prądu stałego}
+
+Przykładem znacznie przewymiarowanego silnika w stosunku do skali sterowania obiektem jest np. silnik elektryczny do skutera bądź roweru. Wadami takiego silnika są: wielkość (w stosunku do całości obiektu sterowania), duże prądy, wygórowana cena (kilkukrotnie wyższa od zastosowanego rozwiązania).
+
+% Silniki specjalne o znacznej liczbie par biegunów, skutkuj¹cej wysokim momentem przy ma³ych prêdkoœciach obrotowych
+% Wady: cena, specjalizowany sterownik (?)
+
+%%%
+\section{Mechanizm przeniesienia napędu}
+
+\subsection{Przekładnia śrubowa lub ślimakowa}
+
+Problem z tego typu przekładnią jest ściśle konstrukcyjny, zbliżony do problemu związanego z montażem siłownika liniowego. Następuje tutaj przeniesienie ruchu obrotowego na wzdłużny (śruba), który to następnie musi z powrotem zostać zamieniony na ruch obrotowy (obrót belki). W przypadku montażu mechanizmu na końcu belki, który zakreśla w przestrzeni łuk, wymusza to ruszaniem całą przekładnią, a więc umieszczenie jednego jej końca na dodatkowej osi. Jest to więc dużo większe skomplikowanie układu mechanicznego, niż ma miejsce w zastosowanej w obiekcie przekładni korbowej.
+
+\subsection{Przekładnia pasowa}
+
+Przekładnia pasowa stanowi dość dobrą alternatywę do zastosowanej przekładni korbowej. Pozwala równie łatwo zmieniać przełożenie, a jej montaż nie powinien przysporzyć kłopotów. Wadą jest trudność w uzyskaniu części; w przypadku przekładni korbowej, korbę i korbowód można zbudować w warunkach domowych, co nie jest takie proste w przypadku kół lub pasa przekładni pasowej.
