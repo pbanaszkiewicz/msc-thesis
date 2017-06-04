@@ -134,7 +134,7 @@ Sama kulka została dołączona do schematu poza subsystemem \textit{Ball mechan
 \section{Model silnika}
 \label{sec:ch4_model_silnika}
 
-Widoczny na \cref{fig:sm_electric_motor} model silnika prądu stałego odpowiada modelowi matematycznemu opartemu o równanie elektryczne obwodu silnika (\ref{eq:silnik_r_el}) i mechaniczne (\ref{eq:silnik_r_mech}):
+Widoczny na \cref{fig:sm_electric_motor} model silnika prądu stałego odpowiada modelowi matematycznemu opartemu o równanie elektryczne obwodu silnika \eqref{eq:silnik_r_el} i mechaniczne \eqref{eq:silnik_r_mech}:
 
 \begin{equation}\label{eq:silnik_r_el}
     u - R i - L \deriv{i}{t} = K \omega 
@@ -159,7 +159,7 @@ gdzie:
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\textwidth]{simmechanics_electric_motor.png}
+    \includegraphics[width=0.8\textwidth]{simmechanics_electric_motor.png}
     \caption{Schemat subsystemu \textit{Electric Motor} odpowiadającego za model silnika prądu stałego.}
     \label{fig:sm_electric_motor}
 \end{figure}
@@ -197,7 +197,7 @@ gdzie:
     \item $B$ --- wyraz wolny.
 \end{itemize}
 
-Po przeprowadzeniu aproksymacji numerycznej za pomocą funkcji \texttt{fminsearch} z programu \textsc{Matlab} otrzymano następujące wartości parametrów funkcji (\ref{eq:aproksymacja_kata_walu}): $A = \num{0.1181}$, $\omega = \num{0.9963}$, $\phi = \num{-1.7076}$, $B = \num{-0.0099}$; przybliżenie zostało przedstawione na \cref{fig:zaleznosc_kata_belki_od_enkodera}. Taka funkcja nie jest trudna do implementacji na sterowniku PLC, nie powinna również stanowić zbyt dużego wyzwania obliczeniowego\footnote{Producent deklaruje min. \SI{18}{\micro\second} dla obliczeń zmiennoprzecinkowych.} dla wybranego procesora (zob. tabelę \ref{tab:parametry_PLC_SB}).
+Po przeprowadzeniu aproksymacji numerycznej za pomocą funkcji \texttt{fminsearch} z programu \textsc{Matlab} otrzymano następujące wartości parametrów funkcji \eqref{eq:aproksymacja_kata_walu}: $A = \num{0.1181}$, $\omega = \num{0.9963}$, $\phi = \num{-1.7076}$, $B = \num{-0.0099}$; przybliżenie zostało przedstawione na \cref{fig:zaleznosc_kata_belki_od_enkodera}. Taka funkcja nie jest trudna do implementacji na sterowniku PLC, nie powinna również stanowić zbyt dużego wyzwania obliczeniowego\footnote{Producent deklaruje min. \SI{18}{\micro\second} dla obliczeń zmiennoprzecinkowych.} dla wybranego procesora (zob. tabelę \ref{tab:parametry_PLC_SB}).
 
 \section{Podsumowanie}
 

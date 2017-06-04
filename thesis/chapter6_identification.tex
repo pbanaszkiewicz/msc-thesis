@@ -17,7 +17,7 @@ Procedura pojedynczego eksperymentu przeprowadzana była następująco: kulkę z
 Pobieranie próbek odbywało się poprzez narzędzie \texttt{Traces} z programu \textsc{Siemens TIA Portal}, które umożliwia eksport wyników do formatu \texttt{.csv} w celu dalszej obróbki.
 
 % TODO: ilustracja pomiaru
-Z każdej serii próbek odpowiadającej jednej pozycji środka kulki wyliczono średnią arytmetyczną wartości z~obu przetworników. Przyjęto, że wartości te odpowiadają odpowiedziom czujników na odległość do bliższej im krawędzi kulki; to założenie jest słuszne dlatego, że do pomiaru środka kulki wykorzystana jest para czujników i~wartość średnia ich odczytów (por. rozdział \ref{sec:ch3_czujniki_odleglosci}, szczególnie wzór~(\ref{eq:pozycja_kulki})).
+Z każdej serii próbek odpowiadającej jednej pozycji środka kulki wyliczono średnią arytmetyczną wartości z~obu przetworników. Przyjęto, że wartości te odpowiadają odpowiedziom czujników na odległość do bliższej im krawędzi kulki; to założenie jest słuszne dlatego, że do pomiaru środka kulki wykorzystana jest para czujników i~wartość średnia ich odczytów (por. rozdział \ref{sec:ch3_czujniki_odleglosci}, szczególnie wzór~\eqref{eq:pozycja_kulki}).
 
 Wykres uzyskanych danych pomiarowych został przedstawiony na \cref{fig:charakterystyka_czujnikow}, natomiast dane przygotowane do przeprowadzenia aproksymacji umieszczone są w tabeli \ref{tab:pomiary_czujniki}. Dane te zostały skrócone, tzn. wyeliminowano pomiar dla odległości mniejszych od \SI{3}{\centi\meter}, który wprowadzał dwuznaczność do odwzorowania \textit{pomiar$\,\to\,$odległość}.
 
@@ -104,12 +104,12 @@ W ramach eksperymentów przeprowadzono również test zachowania czujników, gdy
 Jak to zostało zasygnalizowane we wstępie do rozdziału, nie wszystkie parametry silnika są poprawne lub zostały podane przez producenta. Spośród podanych przez producenta (zob. tab. \ref{tab:parametry_silnika}) do zweryfikowania możliwe są:
 
 \begin{itemize}
-    \item napięcie zasilania silnika,
-    \item prędkość biegu jałowego odpowiadającego temu napięciu,
-    \item prąd biegu jałowego.
+    \item napięcie zasilania silnika $u_N$,
+    \item prędkość biegu jałowego odpowiadającego temu napięciu $\omega_N$,
+    \item prąd biegu jałowego $i_N$.
 \end{itemize}
 
-Niestety niemożliwe jest zweryfikowanie prądu zatrzymania silnika, tj. prądu pobieranego przez silnik przy napięciu znamionowym oraz fizycznym zablokowaniu obrotu wału silnika. Doprowadzenie do takiej sytuacji spowodowałoby fizyczne uszkodzenie zasilacza, mostka H lub samego silnika. Z identycznych powodów niemożliwe jest zmierzenie momentu koniecznego do zatrzymania obrotu wału silnika w tych samych warunkach.
+Niestety niemożliwe jest zweryfikowanie prądu zatrzymania silnika $i_S$, tj. prądu pobieranego przez silnik przy napięciu znamionowym oraz fizycznym zablokowaniu obrotu wału silnika. Doprowadzenie do takiej sytuacji spowodowałoby fizyczne uszkodzenie zasilacza, mostka H lub samego silnika. Z identycznych powodów niemożliwe jest zmierzenie momentu koniecznego do zatrzymania obrotu wału silnika w tych samych warunkach.
 
 \subsection{Weryfikacja parametrów podanych przez producenta silnika}
 \label{subsec:ch6_weryfikacja_parametrow_producenta_silnika}
@@ -132,7 +132,63 @@ Z powyższego eksperymentu uzyskano wartość prędkość obrotowej biegu jałow
 \subsection{Identyfikacja parametrów niepodanych przez producenta silnika}
 \label{subsec:ch6_identyfikacja_parametrow_niepodanych_przez_producenta_silnika}
 
+Pozostałe parametry, wymagane do poprawnego działania modelu silnika (zob. rozdział \ref{sec:ch4_model_silnika}), których wartości nie zostały podane przez producenta, to:
 
+\begin{itemize}
+    \item rezystancja silnika $R$,
+    \item stała silnika $K$,
+    \item indukcyjność silnika $L$,
+    \item współczynniki tarcia wiskotycznego $\beta$ oraz suchego $b$,
+    \item moment bezwładności wału silnika $J$.
+\end{itemize}
+
+Wartości tych parametrów zostały najpierw obliczone analitycznie, a następnie zoptymalizowane numerycznie.
+
+Rezystancję $R$ obliczono z równania elektrycznego silnika \eqref{eq:silnik_r_el} dla sytuacji zatrzymania silnika ($\omega = 0$, $i = i_S$). Mamy wtedy:
+
+\begin{equation}
+    R = \frac{u_N}{i_S} = \frac{\num{11,95}}{\num{5}} = \SI{2,39}{[\ohm]}
+\end{equation}
+
+Z tego samego równania \eqref{eq:silnik_r_el} dla pracy jałowej silnika można wyciągnąć zależność na stałą silnika $K$:
+
+\begin{equation}
+    K = \frac{u_N - R i_N}{\omega_N} = \frac{\num{11,95} - \num{2,39} \cdot \num{0,23}}{\num{58,267}} = \num{0,195656203}
+\end{equation}
+
+Jednostką stałej $K$ jest \si{\newton\meter\per\ampere} (dla stałej momentu) lub \si{\volt\second\per\radian} (dla stałej SEM rotacji).
+
+Zależności na współczynniki tarcia wiskotycznego i suchego można natomiast wyciągnąć z równania mechanicznego silnika \eqref{eq:silnik_r_mech} działającego przy ustalonej prędkości obrotowej ($\dot{\omega} = 0$):
+
+\begin{align}
+    K i &= \beta \omega + b \sgn \omega \nonumber \\
+    \frac{K}{R} (u - K \omega) &= \beta \omega + b \sgn \omega \nonumber \\
+    \frac{K}{R} u &= \left(\frac{K^2}{R} + \beta \right) \omega + b \sgn \omega \nonumber \\
+    \omega &= \frac{K}{R \left(\frac{K^2}{R} + \beta \right)} u + \frac{b}{\frac{K^2}{R} + \beta} \sgn \omega \label{eq:predkosc_obrotowa_walu}
+\end{align}
+
+Możliwe jest wyznaczenie analityczne zależności dla $\beta$ \eqref{eq:zaleznosc_beta} oraz $b$ \eqref{eq:zaleznosc_b} na podstawie wzoru \eqref{eq:predkosc_obrotowa_walu}, jeśli przyjąć, że jest to wzór określający liniową zależność postaci $\omega(u) = K_1 u + K_2$:
+
+\begin{align}
+    K_1 &= \frac{K}{R \left(\frac{K^2}{R} + \beta \right)} \nonumber \\
+    R K_1 \left(\frac{K^2}{R} + \beta \right) &= K \nonumber \\
+    \beta &= \frac{K - K_1 K^2}{R K_1} \label{eq:zaleznosc_beta}
+\end{align}
+
+\begin{align}
+    K_2 &= \frac{b}{\frac{K^2}{R} + \beta} \nonumber \\
+    b &= K_2 \left(\frac{K^2}{R} + \beta \right) \label{eq:zaleznosc_b}
+\end{align}
+
+W wyprowadzeniu \eqref{eq:zaleznosc_b} pominięto kwestie zgodności znaku (nieciągłość wprowadzona przez $\sgn \omega$).
+% ; należy jednak spodziewać się dodatnich wartości obu współczynników jako wielkości fizycznych.
+%  Mnożenie przez $\sgn \omega$ ma na celu jedynie wskazanie, że siła tarcia suchego przeciwdziała ruchowi 
+
+Współczynniki $K_1$ oraz $K_2$ uzyskano przeprowadzając eksperymenty odpowiedzi skokowych silnika dla kolejnych wartości sterowań.
+
+% TODO: opisz eksperymenty
+% TODO: opisz wyniki
+% TODO: pokaż wykresy
 
 \section{Weryfikacja identyfikacji silnika}
 \label{sec:ch6_weryfikacja_identyfikacji_silnika}
