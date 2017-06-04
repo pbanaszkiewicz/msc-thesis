@@ -1,4 +1,29 @@
 \chapter{Alternatywne czujniki pozycji kulki}
 \label{appB_alternatywne_czujniki_pozycji_kulki}
 
-Text of Appendix B is here.
+W systemach typu kulka i belka, poza dowolnością w wyborze mechanizmu napędu, istnieje kilka różnych alternatywnych czujników mierzących położenie kulki na belce.
+
+\section{Listwa rezystancyjna}
+
+% TODO: opisz to lepiej bo słabo
+Czujnik zastosowany na zaprezentowanym urządzeniu komercyjnym (\cref{fig:quanser_ball_beam}). Idea działania jest owiana tajemnicą.
+
+Wadami takiego rozwiązania jest ograniczenie do wąskiego zakresu rozmiarów kulek oraz wyłącznie do kulek przewodzących prąd elektryczny.
+
+\section{System wizyjny}
+
+Użycie kamery do śledzenia pozycji kulki jest możliwe, ale w celu uproszczenia algorytmów kamera powinna być umieszczona w tym samym układzie odniesienia, co belka. Oznacza to, że wraz z ruchem obrotowym belki, również kamera powinna się obracać, co stanowi spore wyzwanie konstrukcyjne.
+
+Dodatkowo zastosowanie taniej kamery (nieprzemysłowej) wymaga osobnego komputera kontrolującego algorytmy wizyjne; jest to zatem droga pozycja.
+
+\section{Laserowy czujnik odległości}
+
+Przemysłowe czujniki odległości są głównie czujnikami laserowymi. Zapewniają doskonałą dokładność, jest to jednak okupione dużą ceną i koniecznością dobrego wycelowania punktu lasera w przedmiot, do którego odległość jest mierzona. W przypadku metalicznej kulki, trafienie laserem niecentralnie w kulkę może powodować problem z prawidłowym odczytem odległości.
+
+\section{Ultradźwiękowy czujnik odległości}
+
+W przypadku rozwiązań hobbystycznych, ultradźwiękowe czujniki odległości potrafią być bardzo tanie, ale niedostatecznie wydajne lub dokładne. Istnieją czujniki przemysłowe tego typu, ale ich cena jest duża. Dodatkowym problemem jest niewielka powierzchnia celu (kulki), w który fale dźwiękowe muszą trafić. Mogłoby to skutkować fałszowaniem pomiaru, np. w przypadku odbijania się fal od ścian belki.
+
+%\section{Liniowy enkoder magnetyczny}
+%
+%Przemysłowy enkoder magnetyczny jest czujnikiem bardzo dokładnym i drogim. Podobnie jak w przypadku listwy rezystancyjnej, wymaga on kulek wykonanych z odpowiedniego tworzywa.
