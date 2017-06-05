@@ -117,15 +117,15 @@ Producent silnika nie dostarcza pełnej dokumentacji, a jedynie kilka wybranych 
         
         \begin{tablenotes}
             \footnotesize
-            \item[a] niektóre parametry silnika w rzeczywistości mają inne wartości, zob. rozdział \ref{sec:ch6_identyfikacja_parametrow_silnika},
+            \item[a] niektóre parametry silnika w rzeczywistości mają inne wartości, zob. rozdział \ref{sec:ch5_identyfikacja_parametrow_silnika},
             \item[b] opracowanie własne na podstawie \cite{SILNIK_MANUAL}.
         \end{tablenotes}
     \end{threeparttable}
 \end{table}
 
-Parametry niewymienione w tabeli \ref{tab:parametry_silnika}, takie jak rezystancja silnika, stała silnika, moment bezwładności wału czy współczynniki tarcia suchego i wiskotycznego, nie zostały podane przez producenta, dlatego została przeprowadzona ich identyfikacja opisana w rozdziale \ref{sec:ch6_identyfikacja_parametrow_silnika}.
+Parametry niewymienione w tabeli \ref{tab:parametry_silnika}, takie jak rezystancja silnika, stała silnika, moment bezwładności wału czy współczynniki tarcia suchego i wiskotycznego, nie zostały podane przez producenta, dlatego została przeprowadzona ich identyfikacja opisana w rozdziale \ref{sec:ch5_identyfikacja_parametrow_silnika}.
 
-Silnik sterowany jest przez PLC za pomocą układu scalonego mostka H z~tranzystorami MOSFET (Pololu BD65496MUV). Został on dobrany tak, by spełniać wymagania elektryczne silnika przy pracy znamionowej. Sterowany jest sygnałem PWM o częstotliwości \SI{20}{\kilo\hertz}. Dodatkowym sygnałem jest binarny sygnał kierunku obrotu silnika. Najistotniejsze parametry wybranego mostka H przedstawiono w tabeli \ref{tab:parametry_mostka_H}.
+Silnik sterowany jest przez PLC za pomocą układu scalonego mostka H z~tranzystorami MOSFET (Pololu BD65496MUV). Został on dobrany tak, by spełniać wymagania elektryczne silnika przy pracy znamionowej. Sterowany jest sygnałem PWM o częstotliwości \SI{20}{\kilo\hertz}. Dodatkowym sygnałem jest binarny sygnał kierunku obrotu silnika. Najistotniejsze parametry wybranego mostka H przedstawiono w~tabeli \ref{tab:parametry_mostka_H}.
 
 \begin{table}[H]
     \centering
@@ -249,7 +249,7 @@ Czujniki zostały zamontowane na wspornikach umożliwiających regulację wysoko
 
 Charakterystyka każdego z czujników jest mocno nieliniowa (zob. \cref{fig:charakterystyka_czujnikow}). Dobrą aproksymację charakterystyki można otrzymać (po odcięciu wartości poniżej \SI{3}{\centi\meter}) za pomocą funkcji postaci $y =\nobreak a x ^ b + c$ (zob. tabela \ref{tab:aproksymacja_czujnikow}), gdzie $x$ to wartość pomiaru z przetwornika, a $y$ to odległość do przeszkody.
 
-Sposób zebrania charakterystyk czujników oraz wykonana aproksymacja zostały opisane w rozdziale~\ref{sec:ch6_identyfikacja_charakterystyk_czujnikow}.
+Sposób zebrania charakterystyk czujników oraz wykonana aproksymacja zostały opisane w rozdziale~\ref{sec:ch5_identyfikacja_charakterystyk_czujnikow}.
 
 \begin{figure}[h]
     \centering
@@ -258,7 +258,7 @@ Sposób zebrania charakterystyk czujników oraz wykonana aproksymacja zostały o
     \label{fig:charakterystyka_czujnikow}
 \end{figure}
 
-Z powodu dużej złożoności obliczeniowej liczenia potęg niecałkowitych zrezygnowano z implementacji takich aproksymacji w sterowniku PLC. Wobec tych utrudnień zastosowano inne rozwiązanie w celu obliczenia pozycji kulki: aproksymację liniową pomiędzy punktami charakterystyki. W tym celu wprowadzono punkty charakterystyki każdego z czujników (pary: wartość z przetwornika ADC, odległość do kulki) do dwóch tablic w sterowniku PLC.
+Z powodu dużej złożoności obliczeniowej liczenia potęg niecałkowitych zrezygnowano z implementacji takich aproksymacji w sterowniku PLC. Wobec tych utrudnień zastosowano inne rozwiązanie w~celu obliczenia pozycji kulki: aproksymację liniową pomiędzy punktami charakterystyki. W tym celu wprowadzono punkty charakterystyki każdego z czujników (pary: wartość z przetwornika ADC, odległość do kulki) do dwóch tablic w sterowniku PLC.
 
 Oba czujniki są równoodległe ($x_d = \SI{20}{\centi\meter}$) od środka belki, co oznacza, że aby uzyskać wychylenie środka kulki od środka belki, należy transformować układy odniesienia czujników, co ilustruje \cref{fig:polozenie_kulki}. Mając dwie odległości $d_l$ oraz $d_r$ od czujników do kulki, pozycję kulki $d_b$ oblicza się w~następujący sposób:
 \begin{equation}\label{eq:pozycja_kulki}

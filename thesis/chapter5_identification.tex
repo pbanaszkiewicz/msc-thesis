@@ -1,5 +1,5 @@
 \chapter{Identyfikacja}
-\label{cha:ch6_identyfikacja}
+\label{cha:ch5_identyfikacja}
 
 Używany w projekcie silnik prądu stałego nie posiada w dokumentacji wszystkich parametrów, jakie konieczne są, aby go zamodelować prawidłowo, a te parametry, które zostały podane, mają niepoprawne wartości. Wymusiło to ponowną identyfikację silnika --- częściowo eksperymentalną, częściowo numeryczno--optymalizacyjną.
 
@@ -8,7 +8,7 @@ Podobnie charakterystyki czujników odległości, chociaż podane przez producen
 W niniejszym rozdziale przeprowadzono identyfikację nieznanych parametrów, a także weryfikację tych podanych przez producenta.
 
 \section{Identyfikacja charakterystyk czujników odległości}
-\label{sec:ch6_identyfikacja_charakterystyk_czujnikow}
+\label{sec:ch5_identyfikacja_charakterystyk_czujnikow}
 
 W celu pobrania charakterystyk indywidualnych czujników przeprowadzono serię eksperymentów, w których zmierzono odpowiedzi czujników w zależności od pozycji przeszkody. Użytą przeszkodą była kulka (zob. rozdział \ref{sec:ch2_kulka}).
 
@@ -99,7 +99,7 @@ Aproksymacja charakterystyk czujników została przeprowadzona za pomocą narzę
 W ramach eksperymentów przeprowadzono również test zachowania czujników, gdy pomiędzy nimi nie ma żadnej przeszkody. Pozwoliło to oszacować wartości progowe, które użyte zostały do oszacowania braku lub obecności kulki. Więcej szczegółów umieszczono w~rozdziale \ref{sec:ch7_wykrywanie_braku_kulki}.
 
 \section{Identyfikacja parametrów silnika}
-\label{sec:ch6_identyfikacja_parametrow_silnika}
+\label{sec:ch5_identyfikacja_parametrow_silnika}
 
 Jak to zostało zasygnalizowane we wstępie do rozdziału, nie wszystkie parametry silnika są poprawne lub zostały podane przez producenta. Spośród podanych przez producenta (zob. tab. \ref{tab:parametry_silnika}) do zweryfikowania możliwe są:
 
@@ -109,10 +109,10 @@ Jak to zostało zasygnalizowane we wstępie do rozdziału, nie wszystkie paramet
     \item prąd biegu jałowego $i_N$.
 \end{itemize}
 
-Niestety niemożliwe jest zweryfikowanie prądu zatrzymania silnika $i_S$, tj. prądu pobieranego przez silnik przy napięciu znamionowym oraz fizycznym zablokowaniu obrotu wału silnika. Doprowadzenie do takiej sytuacji spowodowałoby fizyczne uszkodzenie zasilacza, mostka H lub samego silnika. Z identycznych powodów niemożliwe jest zmierzenie momentu koniecznego do zatrzymania obrotu wału silnika w tych samych warunkach.
+Niestety niemożliwe jest zweryfikowanie prądu zatrzymania silnika $i_S$, tj. prądu pobieranego przez silnik przy napięciu znamionowym oraz fizycznym zablokowaniu obrotu wału silnika. Doprowadzenie do takiej sytuacji spowodowałoby fizyczne uszkodzenie zasilacza, mostka H lub samego silnika. Z~identycznych powodów niemożliwe jest zmierzenie momentu koniecznego do zatrzymania obrotu wału silnika w tych samych warunkach.
 
 \subsection{Weryfikacja parametrów podanych przez producenta silnika}
-\label{subsec:ch6_weryfikacja_parametrow_producenta_silnika}
+\label{subsec:ch5_weryfikacja_parametrow_producenta_silnika}
 
 Poniższe pomiary i eksperymenty wykonano przy nieobciążonym silniku, tj. po rozłączeniu połączenia wału silnika z korbą.
 
@@ -125,12 +125,12 @@ Z powyższego eksperymentu uzyskano wartość prędkość obrotowej biegu jałow
 \begin{figure}[h]
     \centering
     \includesvg[width=0.7\textwidth,svgpath=./vector_graphics/]{predkosc_biegu_jalowego}
-    \caption{Wykres odpowiedzi silnika na skok jednostkowy (maksymalne napięcie) z zaznaczoną prostą, której nachylenie odpowiada prędkości kątowej wału silnika.}
+    \caption{Wykres odpowiedzi silnika na skok jednostkowy (maksymalne napięcie) z~zaznaczoną prostą, której nachylenie odpowiada prędkości kątowej wału silnika.}
     \label{fig:odpowiedz_silnika_na_maksymalny_skok_jednostkowy}
 \end{figure}
 
 \subsection{Identyfikacja parametrów niepodanych przez producenta silnika}
-\label{subsec:ch6_identyfikacja_parametrow_niepodanych_przez_producenta_silnika}
+\label{subsec:ch5_identyfikacja_parametrow_niepodanych_przez_producenta_silnika}
 
 Pozostałe parametry, wymagane do poprawnego działania modelu silnika (zob. rozdział \ref{sec:ch4_model_silnika}), których wartości nie zostały podane przez producenta, to:
 
@@ -184,7 +184,7 @@ W wyprowadzeniu \eqref{eq:zaleznosc_b} pominięto kwestie zgodności znaku (niec
 % ; należy jednak spodziewać się dodatnich wartości obu współczynników jako wielkości fizycznych.
 %  Mnożenie przez $\sgn \omega$ ma na celu jedynie wskazanie, że siła tarcia suchego przeciwdziała ruchowi 
 
-Współczynniki $K_1$ oraz $K_2$ uzyskano przeprowadzając eksperymenty odpowiedzi skokowych silnika dla kolejnych wartości sterowań. Na podstawie danych pomiarowych, na które składają się sterowanie i wartość licznika enkodera, obliczono prędkość ustaloną silnika dla każdego sterowania, co przedstawia tabela \ref{tab:predkosc_silnika_rozne_sterowania}.
+Współczynniki $K_1$ oraz $K_2$ uzyskano przeprowadzając eksperymenty odpowiedzi skokowych silnika dla kolejnych wartości sterowań. Na podstawie danych pomiarowych, na które składają się sterowanie i~wartość licznika enkodera, obliczono prędkość ustaloną silnika dla każdego sterowania, co przedstawia tabela \ref{tab:predkosc_silnika_rozne_sterowania}.
 
 Wykres danych z tabeli \ref{tab:predkosc_silnika_rozne_sterowania}, wraz z naniesionymi przybliżeniami (krzywymi regresji liniowych) uzyskanymi z narzędzia \texttt{Curve Fitting} z programu \textsc{Matlab}, został przedstawiony na \cref{fig:predkosci_obrotowe_silnika}. Jak widać, krzywe regresji nie przecinają się w punkcie $(0, 0)$, co oznacza, że wyraz wolny równania \eqref{eq:predkosc_obrotowa_walu} jest niezerowy, a zatem współczynnik $b$ również jest niezerowy. Dowodzi to, że słusznie wzięto pod uwagę w modelu silnika tarcie suche.
 
@@ -277,7 +277,7 @@ Zidentyfikowano zatem następujące parametry silnika:
 Należy zauważyć, że wszystkie te parametry zależą bezpośrednio ($R$) lub pośrednio ($K$, $\beta$, $b$) od wartości prądu zatrzymania silnika $i_S$, której nie można zmierzyć bez niszczenia elementów obiektu, a~należy podejrzewać, że wartość przedstawiona przez producenta nie jest prawidłowa. W związku z~tym istnieją podstawy, by przeprowadzić dodatkową optymalizację wyznaczonych wartości wspomnianych parametrów. Razem z nią zidentyfikować można pozostałe, brakujące parametry --- indukcyjność obwodów silnika $L$ oraz moment bezwładności wału $J$.
 
 \subsection{Identyfikacja parametrów metodami optymalizacji numerycznej}
-\label{subsec:ch6_identyfikacja_parametrow_metodami_optymalizacji_numerycznej}
+\label{subsec:ch5_identyfikacja_parametrow_metodami_optymalizacji_numerycznej}
 
 Do identyfikacji wykorzystano model zbliżony do modelu z \cref{fig:sm_electric_motor}, również oparty o równania elektryczne \eqref{eq:silnik_r_el} i mechaniczne silnika \eqref{eq:silnik_r_mech}. Został on przedstawiony na \cref{fig:electric_motor}. Główną różnicą w~stosunku do modelu ze schematu symulacyjnego obiektu jest brak polegania na mechanice przybornika narzędziowego \textsc{SimScape Multibody} w celu wyliczenia momentu, prędkości obrotowej czy przyspieszenia kątowego.
 
@@ -333,8 +333,9 @@ Dane wejściowe, wyjściowe i odpowiedź modelu przedstawiono na \cref{fig:silni
 
 Jak widać z \cref{fig:silnik_oszacowanie_parametrow}, dopasowanie odpowiedzi modelu do odpowiedzi obiektu rzeczywistego jest bardzo dobre, nawet bez uwzględnienia indukcyjności obwodów silnika. Oznacza to, że wartość parametru $L$ jest pomijalnie mała.
 
+%%%%
 \section{Weryfikacja identyfikacji silnika}
-\label{sec:ch6_weryfikacja_identyfikacji_silnika}
+\label{sec:ch5_weryfikacja_identyfikacji_silnika}
 
 Narzędzie \texttt{Parameter Estimation} z pakietu \textsc{Matlab/Simulink} poza optymalizacją parametrów modelu umożliwia również weryfikację działania przy użyciu innych danych.
 
@@ -348,7 +349,7 @@ Weryfikację przeprowadzono z wykorzystaniem ,,ujemnych'' skoków jednostkowych
 \end{figure}
 
 \section{Identyfikacja momentu bezwładności kulki}
-\label{sec:ch6_identyfikacja_bezwladnosci_kulki}
+\label{sec:ch5_identyfikacja_bezwladnosci_kulki}
 
 % TODO: przeczytać informacje od dra Tutaja
 
