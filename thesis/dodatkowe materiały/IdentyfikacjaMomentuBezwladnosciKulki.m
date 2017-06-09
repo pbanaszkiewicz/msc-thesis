@@ -6,7 +6,7 @@ syms r_e positive
 
 % kąt pochylenia belki
 syms alpha positive
-assumeAlso(alfa < pi/2)
+assumeAlso(alpha < pi/2)
 
 % masa kulki
 syms m positive

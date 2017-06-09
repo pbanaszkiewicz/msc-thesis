@@ -3,7 +3,8 @@
 
 % Lista wszystkich języków stanowiących języki pozycji bibliograficznych użytych w pracy.
 % (Zgodnie z zasadami tworzenia bibliografii każda pozycja powinna zostać utworzona zgodnie z zasadami języka, w którym dana publikacja została napisana.)
-\usepackage[english,polish]{babel}
+%\usepackage[english,polish]{babel}
+\usepackage[polish,english]{babel}
 
 % Użyj polskiego łamania wyrazów (zamiast domyślnego angielskiego).
 \usepackage{polski}
@@ -167,11 +168,14 @@ backend=biber
 
 \sisetup{
     group-digits = integer,
-    list-final-separator = { \translate{and} },
+    list-final-separator = { oraz },
     range-phrase = { -- },
     mode = text,
     range-units = single,
 }
+
+% usuwa spacje po przecinkach przy liczbach w trybie matematycznym
+\usepackage{icomma}
 
 % -------------------
 % --- < dodatki > ---

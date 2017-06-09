@@ -7,6 +7,7 @@ Podobnie charakterystyki czujników odległości, chociaż podane przez producen
 
 W niniejszym rozdziale przeprowadzono identyfikację nieznanych parametrów, a także weryfikację tych podanych przez producenta.
 
+%%%%
 \section{Identyfikacja charakterystyk czujników odległości}
 \label{sec:ch5_identyfikacja_charakterystyk_czujnikow}
 
@@ -150,12 +151,13 @@ Rezystancję $R$ obliczono z równania elektrycznego silnika \eqref{eq:silnik_r
     R = \frac{u_N}{i_S} = \frac{\num{11,95}}{\num{5}} = \SI{2,39}{[\ohm]}
 \end{equation}
 
-Z tego samego równania \eqref{eq:silnik_r_el} dla pracy jałowej silnika można wyciągnąć zależność na stałą silnika $K$:
+Z tego samego równania \eqref{eq:silnik_r_el} dla pracy jałowej silnika można wyciągnąć zależność na stałą silnika~$K$:
 
 \begin{equation}
     K = \frac{u_N - R i_N}{\omega_N} = \frac{\num{11,95} - \num{2,39} \cdot \num{0,23}}{\num{58,267}} = \num{0,195656203}
 \end{equation}
 
+% TODO: $\mathrm{N}\cdot\mathrm{m}\cdot\mathrm{A}^-1$
 Jednostką stałej $K$ jest \si{\newton\meter\per\ampere} (dla stałej momentu) lub \si{\volt\second\per\radian} (dla stałej SEM rotacji).
 
 Zależności na współczynniki tarcia wiskotycznego i suchego można natomiast wyciągnąć z równania mechanicznego silnika \eqref{eq:silnik_r_mech} działającego przy ustalonej prędkości obrotowej ($\dot{\omega} = 0$):
@@ -180,13 +182,23 @@ Możliwe jest wyznaczenie analityczne zależności dla $\beta$ \eqref{eq:zalezno
     b &= K_2 \left(\frac{K^2}{R} + \beta \right) \label{eq:zaleznosc_b}
 \end{align}
 
-W wyprowadzeniu \eqref{eq:zaleznosc_b} pominięto kwestie zgodności znaku (nieciągłość wprowadzona przez $\sgn \omega$).
+W wyprowadzeniu \eqref{eq:zaleznosc_b} pominięto kwestie zgodności znaku (nieciągłość wprowadzona przez~$\sgn \omega$).
 % ; należy jednak spodziewać się dodatnich wartości obu współczynników jako wielkości fizycznych.
 %  Mnożenie przez $\sgn \omega$ ma na celu jedynie wskazanie, że siła tarcia suchego przeciwdziała ruchowi 
 
-Współczynniki $K_1$ oraz $K_2$ uzyskano przeprowadzając eksperymenty odpowiedzi skokowych silnika dla kolejnych wartości sterowań. Na podstawie danych pomiarowych, na które składają się sterowanie i~wartość licznika enkodera, obliczono prędkość ustaloną silnika dla każdego sterowania, co przedstawia tabela \ref{tab:predkosc_silnika_rozne_sterowania}.
+Współczynniki $K_1$ oraz $K_2$ uzyskano przeprowadzając eksperymenty odpowiedzi skokowych silnika dla kilkudziesięciu kolejnych wartości sterowań, pokrywających cały dopuszczalny zakres. Na podstawie danych pomiarowych, na które składają się sterowanie i~wartość licznika enkodera, obliczono prędkość ustaloną silnika dla każdego sterowania, co przedstawia tabela \ref{tab:predkosc_silnika_rozne_sterowania}.
 
 Wykres danych z tabeli \ref{tab:predkosc_silnika_rozne_sterowania}, wraz z naniesionymi przybliżeniami (krzywymi regresji liniowych) uzyskanymi z narzędzia \texttt{Curve Fitting} z programu \textsc{Matlab}, został przedstawiony na \cref{fig:predkosci_obrotowe_silnika}. Jak widać, krzywe regresji nie przecinają się w punkcie $(0, 0)$, co oznacza, że wyraz wolny równania \eqref{eq:predkosc_obrotowa_walu} jest niezerowy, a zatem współczynnik $b$ również jest niezerowy. Dowodzi to, że słusznie wzięto pod uwagę w modelu silnika tarcie suche.
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=1\textwidth,svgpath=./vector_graphics/]{tarcie}
+    \caption{Wykres ustalonych prędkości obrotowych silnika w zależności od podanego sterowania.}
+    \label{fig:predkosci_obrotowe_silnika}
+\end{figure}
+
+% TODO: zapis naukowy dla wartosci \beta
+Współczynniki regresji liniowych $K_1$, $K_2$ wraz z obliczonymi na ich podstawie wartościami współczynników tarcia $\beta$ oraz $b$ zostały przedstawione w tabeli \ref{tab:param_regresji_lin_wsp_tarcia}. W dalszych rozważaniach przyjęto wartość uśrednioną z obu wyników: $\beta = \num{0,000082436}$, $b = \num{0,017283013}$.
 
 \begin{table}[H]
     \centering
@@ -198,7 +210,7 @@ Wykres danych z tabeli \ref{tab:predkosc_silnika_rozne_sterowania}, wraz z nanie
             \toprule
             {Sterowanie\tnote{a}} & {Napięcie\tnote{b} \si{[\volt]}} & {Prędkość obrotowa \si{[\radian\per\second]}} \\
             \midrule
-            \SI{-100}{\percent} & -11,95 & -59,1747823797 \\
+            \SI{-100}{\percent} & -11,95 & -59,1747823797\tnote{c} \\
             \SI{-90}{\percent} & -10,755 & -53,5556835151 \\
             \SI{-80}{\percent} & -9,56 & -47,7764908354 \\
             \SI{-70}{\percent} & -8,365 & -41,4676492 \\
@@ -229,21 +241,13 @@ Wykres danych z tabeli \ref{tab:predkosc_silnika_rozne_sterowania}, wraz z nanie
         \begin{tablenotes}
             \footnotesize
             \item[a] wypełnienie sygnału PWM, przy czym znak sterowania zmienia drugi sygnał kierunku obrotów (zob. rozdział \ref{sec:ch3_uklad_napedowy}),
-            \item[b] efektywne napięcie (wprost proporcjonalne do napięcia sygnału PWM).
+            \item[b] efektywne napięcie (wprost proporcjonalne do napięcia sygnału PWM),
+            \item[c] wartość różna o około \SI{1}{\radian\per\second} od zmierzonej prędkości ustalonej podanej w rozdziale \ref{subsec:ch5_weryfikacja_parametrow_producenta_silnika}; pewne implikacje tej różnicy opisano w rozdziale \ref{sec:ch5_weryfikacja_identyfikacji_silnika}.
         \end{tablenotes}
     \end{threeparttable}
 \end{table}
 
-\begin{figure}[h]
-    \centering
-    \includesvg[width=1\textwidth,svgpath=./vector_graphics/]{tarcie}
-    \caption{Wykres ustalonych prędkości obrotowych silnika w zależności od podanego sterowania.}
-    \label{fig:predkosci_obrotowe_silnika}
-\end{figure}
-
-Współczynniki regresji liniowych $K_1$, $K_2$ wraz z obliczonymi na ich podstawie wartościami współczynników tarcia $\beta$ oraz $b$ zostały przedstawione w tabeli \ref{tab:param_regresji_lin_wsp_tarcia}. W dalszych rozważaniach przyjęto wartość uśrednioną z obu wyników: $\beta = \num{0,000082436}$, $b = \num{0,017283013}$.
-
-\begin{table}[H]
+\begin{table}[h]
     \centering
     \begin{threeparttable}
         \caption{Parametry regresji liniowych i współczynniki tarcia.}
@@ -290,27 +294,11 @@ Do identyfikacji wykorzystano model zbliżony do modelu z \cref{fig:sm_electric_
 
 Optymalizacja została przeprowadzona za pomocą narzędzia \texttt{Parameter Estimation} z pakietu \textsc{Matlab/Simulink}. Wykorzystuje ono z góry zadane sterowanie i znaną odpowiedź rzeczywistego obiektu do takiego dobrania parametrów, aby odpowiedź modelu była jak najbliższa rzeczywistej.
 
-Jako zadane sterowanie wykorzystano zapisany za pomocą narzędzia \texttt{Traces} z programu \texttt{Siemens TIA Portal} kilkukrotny skok jednostkowy sterowania; podobnie użytą odpowiedzią obiektu była zapisana wartość licznika enkodera przeliczona na kąt obrotu belki.
+Jako zadane sterowanie wykorzystano zapisany za pomocą narzędzia \texttt{Traces} z programu \textsc{Siemens TIA Portal} kilkukrotny skok jednostkowy sterowania; podobnie użytą odpowiedzią obiektu była zapisana wartość licznika enkodera przeliczona na kąt obrotu belki. Za początkowe wartości parametrów przyjęto wartości obliczone w poprzednich rozdziałach, a w przypadku momentu bezwładności wału silnika przyjęto $J = \SI{0,0014}{\kilogram\meter\squared}$.
 
-Jak początkowe wartości parametrów wykorzystano wartości obliczone w poprzednich rozdziałach, a w przypadku momentu bezwładności wału silnika przyjęto $J = \num{0,0014}$.
+Dane wejściowe, wyjściowe i odpowiedź modelu przedstawiono na \cref{fig:silnik_oszacowanie_parametrow}, a wyniki końcowe estymacji zostały umieszczone w tabeli \ref{tab:parametry_silnika_optymalizacja}.
 
-Dane wejściowe, wyjściowe i odpowiedź modelu przedstawiono na \cref{fig:silnik_oszacowanie_parametrow}, proces optymalizacji parametrów na \cref{fig:silnik_oszacowanie_zmiana_parametrow}, a wyniki końcowe estymacji zostały umieszczone w tabeli \ref{tab:parametry_silnika_optymalizacja}.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{silnik_oszacowanie}
-    \caption{Zrzut ekranu wykresów danych wejściowych (dół) i wyjściowych dla procesu optymalizacji oraz odpowiedź obiektu po przeprowadzonej optymalizacji parametrów (góra).}
-    \label{fig:silnik_oszacowanie_parametrow}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{silnik_oszacowanie_zmiana_parametrow}
-    \caption{Zrzut ekranu wykresu ze zmianami wartości optymalizowanych parametrów w kolejnych iteracjach funkcji optymalizującej.}
-    \label{fig:silnik_oszacowanie_zmiana_parametrow}
-\end{figure}
-
-\begin{table}[H]
+\begin{table}[h]
     \centering
     \begin{threeparttable}
         \caption{Parametry silnika przed i po optymalizacji.}
@@ -331,26 +319,55 @@ Dane wejściowe, wyjściowe i odpowiedź modelu przedstawiono na \cref{fig:silni
 \end{table}
 % TODO: skomentować zmianę bety?
 
-Jak widać z \cref{fig:silnik_oszacowanie_parametrow}, dopasowanie odpowiedzi modelu do odpowiedzi obiektu rzeczywistego jest bardzo dobre, nawet bez uwzględnienia indukcyjności obwodów silnika. Oznacza to, że wartość parametru $L$ jest pomijalnie mała.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{optymalizacja_exp1}
+    \caption{Zrzut ekranu wykresów danych wejściowych (dół) i wyjściowych dla procesu optymalizacji oraz odpowiedź obiektu po przeprowadzonej optymalizacji parametrów (góra).}
+    \label{fig:silnik_oszacowanie_parametrow}
+\end{figure}
+
+%\begin{figure}[h]
+%    \centering
+%    \includegraphics[width=0.8\textwidth]{silnik_oszacowanie_zmiana_parametrow}
+%    \caption{Zrzut ekranu wykresu ze zmianami wartości optymalizowanych parametrów w kolejnych iteracjach funkcji optymalizującej.}
+%    \label{fig:silnik_oszacowanie_zmiana_parametrow}
+%\end{figure}
+
+Jak widać z \cref{fig:silnik_oszacowanie_parametrow}, dopasowanie odpowiedzi modelu do odpowiedzi obiektu rzeczywistego jest bardzo dobre, nawet bez uwzględnienia indukcyjności obwodów silnika. Oznacza to, że wartość parametru $L$ jest zaniedbywalna.
 
 %%%%
 \section{Weryfikacja identyfikacji silnika}
 \label{sec:ch5_weryfikacja_identyfikacji_silnika}
 
-Narzędzie \texttt{Parameter Estimation} z pakietu \textsc{Matlab/Simulink} poza optymalizacją parametrów modelu umożliwia również weryfikację działania przy użyciu innych danych.
+Narzędzie \texttt{Parameter Estimation} z pakietu \textsc{Matlab/Simulink} poza optymalizacją parametrów modelu umożliwia również weryfikację działania modelu opartego o te parametry. Weryfikacja odbywa się przy użyciu innych danych niż optymalizacja.
 
-Weryfikację przeprowadzono z wykorzystaniem ,,ujemnych'' skoków jednostkowych, tj. sterowania silnika skierowanego w przeciwną stronę. Wyniki zostały zaprezentowane na \cref{fig:silnik_weryfikacja_parametrow}. Jak widać, dobrane numerycznie parametry modelu silnika dają zadowalające rezultaty.
+Pierwszą weryfikację przeprowadzono z wykorzystaniem ,,ujemnych'' skoków jednostkowych, tj. sterowania silnika skierowanego w przeciwną stronę. Wyniki zostały zaprezentowane na \cref{fig:silnik_weryfikacja_parametrow}. Jak widać, dobrane numerycznie parametry modelu silnika dają w tym przypadku zadowalające rezultaty.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{silnik_weryfikacja_parametrow}
+    \includegraphics[width=0.7\textwidth]{walidacja_exp2}
     \caption{Zrzut ekranu wykresów danych wejściowych (dół) i wyjściowych dla procesu weryfikacji oraz odpowiedź obiektu ze zoptymalizowanymi parametrami (góra).}
     \label{fig:silnik_weryfikacja_parametrow}
 \end{figure}
 
-\section{Identyfikacja momentu bezwładności kulki}
-\label{sec:ch5_identyfikacja_bezwladnosci_kulki}
+Druga weryfikacja, w której sterowaniem w danych wejściowych były pojedyncze skoki o wartościach \SIlist{100;-100;50;-50}{\percent}, nie przyniosła tak dobrych rezultatów (\cref{fig:silnik_nieudana_weryfikacja_parametrow}). Być może jest to wynikiem osiągania innych prędkości ustalonych przez silnik, co zostało zaznaczone wcześniej w rozdziałach \ref{subsec:ch5_weryfikacja_parametrow_producenta_silnika} oraz \ref{subsec:ch5_identyfikacja_parametrow_niepodanych_przez_producenta_silnika}. Niemniej jednak, różnica w osiągach silnika nie jest wielka, zatem należy się spodziewać, że zaprojektowane sprzężenie zwrotne pozwoli te różnice zminimalizować.
 
-% TODO: przeczytać informacje od dra Tutaja
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{walidacja_exp3}
+    \caption{Zrzut ekranu wykresów danych wejściowych (dół) i wyjściowych dla procesu weryfikacji przy kolejnym eksperymencie.}
+    \label{fig:silnik_nieudana_weryfikacja_parametrow}
+\end{figure}
+
+%%%%
+% \section{Identyfikacja momentu bezwładności kulki}
+% \label{sec:ch5_identyfikacja_bezwladnosci_kulki}
+
+% TODO: skonsultować wyniki z drem Tutajem
+
+%%%%
+\section{Podsumowanie}
+
+W niniejszym rozdziale przedstawiono sposób wyznaczenia charakterystyk czujników odległości oraz identyfikację parametrów silnika prądu stałego. Parametry silnika, które zostały podane przez producenta, okazały się niedokładne, dlatego w pierwszej kolejności zweryfikowano je --- o ile było to możliwe. Następnie na podstawie równań elektrycznego i mechanicznego silnika wyznaczono prawie wszystkie nieznane parametry. W ostatnim kroku zidentyfikowano numerycznie pozostałe parametry oraz zoptymalizowano już wyznaczone, co potwierdziła opisana weryfikacja wyników identyfikacji parametrów silnika.
 
 %---------------------------------------------------------------------------

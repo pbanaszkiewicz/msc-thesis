@@ -194,9 +194,9 @@ Wszystkie wymagane połączenia elektryczne wykonano na uniwersalnej płytce PCB
 W układzie nie zastosowano czujnika położenia wału, do którego przymocowana jest belka; zamiast tego wykorzystano zależność geometryczną pomiędzy obrotem wału silnika a obrotem belki. W przypadku niewielkich odchyleń kąt belki $\theta$ powinien być liniowo związany z kątem obrotu wału silnika $\alpha$~w~następujący sposób:
 
 \begin{equation}\label{eq:uproszczona_zaleznosc_kata_belki}
-    \theta = \frac{L}{d_k} \alpha
+    \theta = \frac{d_L}{d_k} \alpha
 \end{equation}
-gdzie: $L$ to odległość końca belki od osi obrotu, $d_k$ to długość korby. Zależność \eqref{eq:uproszczona_zaleznosc_kata_belki} wynika z założenia, że punkty zaczepu korbowodu przebędą taką samą drogę łukową, a zatem $\theta d_k = \alpha L$.
+gdzie: $d_L = 2 d_c$ to odległość końca belki od osi obrotu, $d_k$ to długość korby. Zależność \eqref{eq:uproszczona_zaleznosc_kata_belki} wynika z~założenia, że punkty zaczepu korbowodu przebędą taką samą drogę łukową, a zatem $\theta d_k = \alpha d_L$.
 
 Niestety, równanie \eqref{eq:uproszczona_zaleznosc_kata_belki} jest poprawne tylko w niewielkich odchyleniach belki od poziomu oraz gdy linia łącząca punkt zaczepu mechanizmu korbowego i oś obrotu belki jest równoległa do korby. Faktyczna zależność $\theta(\alpha)$ została zidentyfikowana za pomocą modelu symulacyjnego (rozdział \ref{sec:ch4_zaleznosc_kata_silnika_i_kata_belki}).
 
