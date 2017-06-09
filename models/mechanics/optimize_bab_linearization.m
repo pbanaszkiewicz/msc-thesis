@@ -8,7 +8,7 @@ clear linsys operating_point_report;
 assert(is_diagonal(S1.c, eps));
 S1.c = diag(diag(S1.c));  % remove elements other than diagonal
 G1 = tf(S1);
-clear m;
+%clear m;
 
 %% convert state space system to achieve identity output matrix
 % transform state space by it's output matrix C (this gives identity output
@@ -26,7 +26,7 @@ S2.a(k) = 0;
 
 % similarly ensure ones are in the same places as they were in S1.A
 k = find(S1.a == 1);
-assert(all(abs(S2.a(k) - 1) < 1e-3));
+assert(all(abs(S2.a(k) - 1) < 1e-6));
 S2.a(k) = 1;
 G2 = tf(S2);
 clear k;
@@ -62,7 +62,7 @@ S4.b(k) = 0;
 
 % ensure specific state matrix elements are zero'd
 k = [2 14];
-assert(all(abs(S4.a(k)) < 1e-3));
+assert(all(abs(S4.a(k)) < 1e-12));
 S4.a(k) = 0;
 G4 = tf(S4);
 
