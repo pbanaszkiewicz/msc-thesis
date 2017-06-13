@@ -1,11 +1,53 @@
 \chapter{Algorytmy sterowania}
 \label{cha:ch7_algorytmy_sterowania}
 
-Lorem ipsum.
+Obsługa czujników odległości i bazowania, a także algorytmy sterowania zostały zaimplementowane na przemysłowym sterowniku PLC Siemens S7-1211C. Schemat blokowy głównej pętli programu został przedstawiony na \cref{fig:schemat_petla_glowna_PLC}, natomiast szczegółowy opis poszczególnych elementów i algorytmów zamieszczono poniżej.
 
-% TODO: schemat ogólny sterowania, tj. od czego zaczynamy (od bazowania) i co robimy gdy jakieś zdarzenie wystąpi
+\begin{figure}[ht]
+    \centering
+    
+    \begin{tikzpicture}[auto, node distance=1cm,>=latex']
+    \node [roundblock] (start) {\textsc{START}};
+    \node [block, below=of start] (sensors) {Odczyt czujników};
+    \node [block, below=of sensors] (main_sequence) {Główna sekwencja};
+    \node [block, below=of main_sequence] (outputs) {Zapis do wyjść};
+    
+    \draw [->] (start) -- (sensors);
+    \draw [->] (sensors) -- (main_sequence);
+    \draw [->] (main_sequence) -- (outputs);
+    \draw [->] (outputs.west) -- ++ (-1,0) |- (sensors.west);
+    \end{tikzpicture}
+    
+    \caption{Schemat pętli głównej programu.}
+    \label{fig:schemat_petla_glowna_PLC}
+\end{figure}
 
-% TODO: również schemat wywoływanych funkcji, tj. np. najpierw odczyt czujników itd.
+W ramach bloku \textit{Odczyt czujników} następują poniższe operacje:
+\begin{itemize}
+    \item obsługa enkodera:
+    \begin{itemize}
+        \item przeliczanie wartości licznika enkodera na kąt obrotu wału motoreduktora,
+        \item przeliczanie kąta obrotu wału motoreduktora na kąt obrotu belki, zgodnie z informacjami podanymi w rozdziale \ref{sec:ch4_zaleznosc_kata_silnika_i_kata_belki},
+    \end{itemize}
+    \item obsługa czujników odległości:
+    \begin{itemize}
+        \item obliczanie odległości dla każdego czujnika przy wykorzystaniu punktów charakterystyki i algorytmu aproksymacji liniowej,
+        \item obliczanie pozycji kulki oraz jej średnicy,
+        \item weryfikacja obecności kulki (szerzej opisana w rozdziale \ref{sec:ch7_wykrywanie_braku_kulki}),
+    \end{itemize}
+    \item generowanie impulsów od zboczy: narastającego dla przycisku \texttt{START} (NO) oraz opadającego dla przycisku \texttt{STOP} (NC),
+    \item generowanie impulsu od opadającego zbocza czujnika bazowania.
+\end{itemize}
+
+W programie obsługiwane są tylko \num{3} wyjścia sterownika. Dwa z nich służą do sterowania silnikiem (sygnały \textit{PWM}, \textit{kierunek}), trzeci steruje diodą sygnalizacyjną. Sygnał \textit{PWM} kontrolowany jest przez sterownik jako tzw. wyjście pulsacyjne (\textit{PTO}); rolą programisty jest dostarczenie odpowiedniej wartości liczbowej do konkretnego słowa wyjściowego sterownika (tutaj \texttt{\%QW1000}). Częstotliwość wyjścia pulsacyjnego ustawiono na \SI{20}{\kilo\hertz}, natomiast kontrolę wypełnienia na setki, tzn. wpisanie wartości \num{85} do słowa wyjściowego sygnału PWM oznacza wypełnienie \SI{85}{\percent}.
+
+Z racji możliwości sterowania obrotami silnika w dwie strony, regulator pozycji belki może zwrócić wartość z zakresu \numrange[range-phrase={ do }]{-100}{100}; stąd w bloku \textit{Zapis do wyjść} następuje konwersja tej wartości na jej moduł i zapis tego modułu do \texttt{\%QW1000}, natomiast sygnał \textit{kierunek} ustawiony jest na \num{1} dla ujemnej wartości sterowania.
+
+% TODO: schemat sekwencji głównej
+
+% TODO: opis sekwencji głównej
+
+% TODO: wywoływane OB35
 
 %%%%
 \section{Wykrywanie braku kulki}
@@ -28,4 +70,8 @@ Lorem ipsum.
 \label{sec:ch7_regulatory}
 
 % TODO: ogólnie opisać sposób implementacji regulatorów w sterowniku
+
+%%%%
+\subsection{Regulator belki}
+\label{subsec:ch7_regulator_belki}
 %---------------------------------------------------------------------------

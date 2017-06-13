@@ -6,6 +6,10 @@
 \usepackage[english,polish]{babel}
 %\usepackage[polish,english]{babel}
 
+%%% fix for \lll
+\let\babellll\lll
+\let\lll\relax
+
 % Użyj polskiego łamania wyrazów (zamiast domyślnego angielskiego).
 \usepackage{polski}
 
@@ -16,7 +20,12 @@
 \usepackage{mathtools}
 \usepackage{amsfonts}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{amsthm}
+
+%%% fix for \lll
+\let\mathlll\lll
+\let\lll\babellll
 
 % operator '\sgn'
 \DeclareMathOperator{\sgn}{sgn}
@@ -185,9 +194,10 @@ backend=biber
 \usetikzlibrary{arrows,calc,positioning}
 
 \tikzset{
+    roundblock/.style = {draw, ellipse, minimum height=1cm, minimum width=2cm},
     block/.style = {draw, rectangle, minimum height=1cm, minimum width=2cm},
     gain/.style = {draw, isosceles triangle},
-    input/.style = {coordinate,node distance=1cm},
+    input/.style = {coordinate,node distance=3cm},
     output/.style = {coordinate,node distance=2cm},
     arrow/.style={draw, -latex,node distance=2cm},
     pinstyle/.style = {pin edge={latex-, black,node distance=2cm}},

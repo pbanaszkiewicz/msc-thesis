@@ -321,31 +321,87 @@ x_1 \\ x_2 \\ x_3 \\ x_4
 \section{Regulator pochylenia belki}
 \label{sec:ch6_regulator_belki}
 
-Jako regulator pochylenia belki wybrano prosty regulator proporcjonalny od stanu. Struktura regulacji przedstawiona jest na 
+Jako regulator pochylenia belki wybrano prosty regulator proporcjonalny od stanu. Struktura regulacji przedstawiona jest na \cref{fig:schemat_regulacji_belka}, gdzie:
+\begin{itemize}
+    \item $\alpha_\text{ref}$ oraz $\omega_\text{ref}$ są wartościami zadanymi odpowiednio kąta oraz prędkości kątowej belki,
+    \item $K_b$ jest macierzą wzmocnień regulatora,
+    \item $G_b(s)$ jest transmitancją (typu \textit{SIMO}) zlinearyzowanego systemu wyodrębnionego z równań stanu~\eqref{eq:rownania_stanu}, \eqref{eq:rownania_wyjscia},
+    \item $y_3$, $y_4$ są wartościami wyjściowymi z modelu (pozycją kątową i prędkością kątową belki).
+\end{itemize}
 
 \begin{figure}[ht]
     \centering
     
     \begin{tikzpicture}[auto, node distance=1cm,>=latex']
         \node [input, name=input] {};
-        \node [sum, right=of input] (sum) {};
-        \node [gain, right=of sum] (controller) {$K$};
-        \node [block, right=of controller] (plant) {$G(s)$};
+        \node [sum, right=2of input] (sum) {};
+        \node [gain, right=of sum] (controller) {$K_b$};
+        \node [block, right=of controller] (plant) {$G_b(s)$};
         \node [output, right=of plant] (output) {};
-        \draw [draw,->] (input) -- node {$U(s)$} (sum);
+        \draw [draw,->] (input) -- node {$\left[\alpha_\text{ref}, ~\omega_\text{ref}\right]^\intercal$} (sum);
         \draw [->] (sum) -- node {} (controller);
         \draw [->] (controller) -- node {} (plant);
-        \draw [->] (plant) -- node [name=y] {$Y(s)$}(output);
-        \draw [->] (y) -- ++ (0,-2) -| node [pos=0.99] {$-$} (sum);
+        \draw [->] (plant) -- node [name=y] {$\left[y_3, ~y_4\right]^\intercal$}(output);
+        \draw [->] (y) -- ++ (0,-1.5) -| node [pos=0.95] {$-$} (sum);
     \end{tikzpicture}
     
-    \caption{Schemat regulacji liniowego systemu regulacji pochyleniem belki.}
+    \caption{Schemat sterowania zlinearyzowanego systemu odpowiadającego za zachowanie belki.}
     \label{fig:schemat_regulacji_belka}
 \end{figure}
 
+System $G_b(s)$, wyodrębniony z równań stanu dla całego modelu, przedstawia się jako  następujący układ równań stanu:
+\begin{align}
+    \begin{bmatrix}
+        \dot{x}_3 \\ \dot{x}_4
+    \end{bmatrix}
+    &= \begin{bmatrix}
+        0 & 1 \\
+        0,0331 & -6,9832
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_3 \\ x_4
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        0 \\ 6,8896
+    \end{bmatrix}
+    u \label{eq:rownania_stanu_belki} \\%\displaybreak\\
+    \begin{bmatrix}
+        y_3 \\ y_4
+    \end{bmatrix}
+    &= \begin{bmatrix}
+        1 & 0 \\
+        0 & 1 \\
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_3 \\ x_4
+    \end{bmatrix} \label{eq:rownania_wyjscia_belki} 
+\end{align}
 
+Wartość wzmocnienia $K_b$ została dobrana za pomocą funkcji \texttt{looptune} z programu \textsc{Matlab}, co pozwoliło uzyskać dużą dynamikę działania regulatora. Wspomniana funkcja optymalizuje pętlę sprzężenia zwrotnego układu zaprezentowaną na \cref{fig:schemat_regulacji_looptune} według ustalonych kryteriów częstotliwościowych: \begin{itemize}
+    \item pasmo przenoszenia -- punkt przejścia charakterystyki amplitudy przez zero musi zawierać się w wyznaczonym zakresie częstotliwości,
+    \item wydajność -- akcja całkująca na częstotliwościach poniżej wyznaczonego zakresu,
+    \item odporność (ang. \textit{robustness}) -- odpowiednie zapasy stabilności na częstotliwościach poniżej wyznaczonego zakresu.
+\end{itemize}
 
-% TODO: regulator od stanu
+Do funkcji \texttt{looptune} podano jako argument zakres częstotliwości \SIrange{5}{20}{\hertz}, uzyskując wzmocnienie regulatora $K_b = \left[-8,2069;~  -1,5756\right]$. Informacje o sposobie implementacji regulatora zamieszczone są w rozdziale \ref{subsec:ch7_regulator_belki}.
+
+\begin{figure}[ht]
+    \centering
+    
+    \begin{tikzpicture}[auto, node distance=1cm,>=latex']
+    \node [block] (plant) {$G(s)$};
+    \node [block, below=of plant] (controller) {$C(s)$};
+    \draw [->] (plant.east) -- ++ (1,0) |- node {$y$} (controller.east);
+    \draw [->] (controller.west) -- ++ (-1,0) |- node {$u$} (plant.west);
+    %\draw [->] (y) -- ++ (0,-1.5) -| node [pos=0.95] {$-$} (sum);
+    \end{tikzpicture}
+    
+    \caption{Schemat układu optymalizowanego przez funkcję \texttt{looptune}.}
+    \label{fig:schemat_regulacji_looptune}
+\end{figure}
+
+% TODO: charakterystyka bodego? :(
 
 %%%%
 \section{Regulator pozycji kulki}
