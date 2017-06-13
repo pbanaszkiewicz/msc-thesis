@@ -17,7 +17,6 @@ Procedura pojedynczego eksperymentu przeprowadzana była następująco: kulkę z
 
 Pobieranie próbek odbywało się poprzez narzędzie \texttt{Traces} z programu \textsc{Siemens TIA Portal}, które umożliwia eksport wyników do formatu \texttt{.csv} w celu dalszej obróbki.
 
-% TODO: ilustracja pomiaru
 Z każdej serii próbek odpowiadającej jednej pozycji środka kulki wyliczono średnią arytmetyczną wartości z~obu przetworników. Przyjęto, że wartości te odpowiadają odpowiedziom czujników na odległość do bliższej im krawędzi kulki; to założenie jest słuszne dlatego, że do pomiaru środka kulki wykorzystana jest para czujników i~wartość średnia ich odczytów (por. rozdział \ref{sec:ch3_czujniki_odleglosci}, szczególnie wzór~\eqref{eq:pozycja_kulki}).
 
 Wykres uzyskanych danych pomiarowych został przedstawiony na \cref{fig:charakterystyka_czujnikow}, natomiast dane przygotowane do przeprowadzenia aproksymacji umieszczone są w tabeli \ref{tab:pomiary_czujniki}. Dane te zostały skrócone, tzn. wyeliminowano pomiar dla odległości mniejszych od \SI{3}{\centi\meter}, który wprowadzał dwuznaczność do odwzorowania \textit{pomiar$\,\to\,$odległość}.
@@ -110,23 +109,23 @@ Jak to zostało zasygnalizowane we wstępie do rozdziału, nie wszystkie paramet
     \item prąd biegu jałowego $i_N$.
 \end{itemize}
 
-Niestety niemożliwe jest zweryfikowanie prądu zatrzymania silnika $i_S$, tj. prądu pobieranego przez silnik przy napięciu znamionowym oraz fizycznym zablokowaniu obrotu wału silnika. Doprowadzenie do takiej sytuacji spowodowałoby fizyczne uszkodzenie zasilacza, mostka H lub samego silnika. Z~identycznych powodów niemożliwe jest zmierzenie momentu koniecznego do zatrzymania obrotu wału silnika w tych samych warunkach.
+Niestety niemożliwe jest zweryfikowanie prądu zatrzymania silnika $i_S$, tj. prądu pobieranego przez silnik przy napięciu znamionowym oraz fizycznym zablokowaniu obrotu wału silnika. Doprowadzenie do takiej sytuacji spowodowałoby fizyczne uszkodzenie zasilacza, mostka H lub samego silnika. Z~identycznych powodów niemożliwe jest zmierzenie momentu koniecznego do zatrzymania obrotu wału motoreduktora w tych samych warunkach.
 
 \subsection{Weryfikacja parametrów podanych przez producenta silnika}
 \label{subsec:ch5_weryfikacja_parametrow_producenta_silnika}
 
-Poniższe pomiary i eksperymenty wykonano przy nieobciążonym silniku, tj. po rozłączeniu połączenia wału silnika z korbą.
+Poniższe pomiary i eksperymenty wykonano przy nieobciążonym silniku, tj. po rozłączeniu połączenia wału motoreduktora z korbą.
 
 Za pomocą multimetru zmierzono napięcie na stykach zasilacza przeznaczonego dla silnika (zob. rozdział \ref{sec:ch3_systemy_napiec}), które wyniosło \SI{11,95}{\volt}. Również za pomocą multimetru, tym razem wpinając się szeregowo w obwód zasilania silnika, zmierzono prąd biegu jałowego, którego natężenie wyniosło \SI{0,23}{\ampere}.
 
-Prędkość biegu jałowego silnika wyznaczono za pomocą eksperymentu: na silnik podano maksymalne sterowanie, a za pomocą narzędzia \texttt{Traces} z programu \textsc{Siemens TIA Portal} pobrano odpowiedź silnika (wartość licznika enkodera); próbkowanie w tym eksperymencie wyniosło około \SI{1}{\milli\second}. Następnie dla części danych, dla których silnik osiągnął stałą wartość prędkości, wyznaczono nachylenie. Wartość tego nachylenia odpowiada prędkości kątowej wału silnika, co zaprezentowano na \cref{fig:odpowiedz_silnika_na_maksymalny_skok_jednostkowy}.
+Prędkość biegu jałowego silnika wyznaczono za pomocą eksperymentu: na silnik podano maksymalne sterowanie, a za pomocą narzędzia \texttt{Traces} z programu \textsc{Siemens TIA Portal} pobrano odpowiedź silnika (wartość licznika enkodera); próbkowanie w tym eksperymencie wyniosło około \SI{1}{\milli\second}. Następnie dla części danych, dla których silnik osiągnął stałą wartość prędkości, wyznaczono nachylenie. Wartość tego nachylenia odpowiada prędkości kątowej wału motoreduktora, co zaprezentowano na \cref{fig:odpowiedz_silnika_na_maksymalny_skok_jednostkowy}.
 
-Z powyższego eksperymentu uzyskano wartość prędkość obrotowej biegu jałowego \SI{58,267}{\radian\per\second}.
+Z powyższego eksperymentu uzyskano wartość prędkość kątowej biegu jałowego \SI{58,267}{\radian\per\second}.
 
 \begin{figure}[h]
     \centering
     \includesvg[width=0.7\textwidth,svgpath=./vector_graphics/]{predkosc_biegu_jalowego}
-    \caption{Wykres odpowiedzi silnika na skok jednostkowy (maksymalne napięcie) z~zaznaczoną prostą, której nachylenie odpowiada prędkości kątowej wału silnika.}
+    \caption{Wykres odpowiedzi silnika na skok jednostkowy (maksymalne napięcie) z~zaznaczoną prostą, której nachylenie odpowiada prędkości kątowej wału motoreduktora.}
     \label{fig:odpowiedz_silnika_na_maksymalny_skok_jednostkowy}
 \end{figure}
 
@@ -140,7 +139,7 @@ Pozostałe parametry, wymagane do poprawnego działania modelu silnika (zob. roz
     \item stała silnika $K$,
     \item indukcyjność silnika $L$,
     \item współczynniki tarcia wiskotycznego $\beta$ oraz suchego $b$,
-    \item moment bezwładności wału silnika $J$.
+    \item moment bezwładności wału motoreduktora $J$.
 \end{itemize}
 
 Wartości tych parametrów zostały najpierw obliczone analitycznie, a następnie zoptymalizowane numerycznie.
@@ -148,7 +147,7 @@ Wartości tych parametrów zostały najpierw obliczone analitycznie, a następni
 Rezystancję $R$ obliczono z równania elektrycznego silnika \eqref{eq:silnik_r_el} dla sytuacji zatrzymania silnika ($\omega = 0$, $i = i_S$). Mamy wtedy:
 
 \begin{equation}
-    R = \frac{u_N}{i_S} = \frac{\num{11,95}}{\num{5}} = \SI{2,39}{[\ohm]}
+    R = \frac{u_N}{i_S} = \frac{\num{11,95}}{\num{5}} = \SI{2,39}{\ohm}
 \end{equation}
 
 Z tego samego równania \eqref{eq:silnik_r_el} dla pracy jałowej silnika można wyciągnąć zależność na stałą silnika~$K$:
@@ -157,10 +156,9 @@ Z tego samego równania \eqref{eq:silnik_r_el} dla pracy jałowej silnika można
     K = \frac{u_N - R i_N}{\omega_N} = \frac{\num{11,95} - \num{2,39} \cdot \num{0,23}}{\num{58,267}} = \num{0,195656203}
 \end{equation}
 
-% TODO: $\mathrm{N}\cdot\mathrm{m}\cdot\mathrm{A}^-1$
 Jednostką stałej $K$ jest \si{\newton\meter\per\ampere} (dla stałej momentu) lub \si{\volt\second\per\radian} (dla stałej SEM rotacji).
 
-Zależności na współczynniki tarcia wiskotycznego i suchego można natomiast wyciągnąć z równania mechanicznego silnika \eqref{eq:silnik_r_mech} działającego przy ustalonej prędkości obrotowej ($\dot{\omega} = 0$):
+Zależności na współczynniki tarcia wiskotycznego i suchego można natomiast wyciągnąć z równania mechanicznego silnika \eqref{eq:silnik_r_mech} działającego przy ustalonej prędkości kątowej ($\dot{\omega} = 0$):
 
 \begin{align}
     K i &= \beta \omega + b \sgn \omega \nonumber \\
@@ -190,25 +188,17 @@ Współczynniki $K_1$ oraz $K_2$ uzyskano przeprowadzając eksperymenty odpowied
 
 Wykres danych z tabeli \ref{tab:predkosc_silnika_rozne_sterowania}, wraz z naniesionymi przybliżeniami (krzywymi regresji liniowych) uzyskanymi z narzędzia \texttt{Curve Fitting} z programu \textsc{Matlab}, został przedstawiony na \cref{fig:predkosci_obrotowe_silnika}. Jak widać, krzywe regresji nie przecinają się w punkcie $(0, 0)$, co oznacza, że wyraz wolny równania \eqref{eq:predkosc_obrotowa_walu} jest niezerowy, a zatem współczynnik $b$ również jest niezerowy. Dowodzi to, że słusznie wzięto pod uwagę w modelu silnika tarcie suche.
 
-\begin{figure}[h]
-    \centering
-    \includesvg[width=1\textwidth,svgpath=./vector_graphics/]{tarcie}
-    \caption{Wykres ustalonych prędkości obrotowych silnika w zależności od podanego sterowania.}
-    \label{fig:predkosci_obrotowe_silnika}
-\end{figure}
-
-% TODO: zapis naukowy dla wartosci \beta
-Współczynniki regresji liniowych $K_1$, $K_2$ wraz z obliczonymi na ich podstawie wartościami współczynników tarcia $\beta$ oraz $b$ zostały przedstawione w tabeli \ref{tab:param_regresji_lin_wsp_tarcia}. W dalszych rozważaniach przyjęto wartość uśrednioną z obu wyników: $\beta = \num{0,000082436}$, $b = \num{0,017283013}$.
+%\pagebreak
 
 \begin{table}[H]
     \centering
     \begin{threeparttable}
-        \caption{Prędkość obrotowa silnika dla różnych sterowań.}
+        \caption{Prędkość kątowa silnika dla różnych sterowań.}
         \label{tab:predkosc_silnika_rozne_sterowania}
         
-        \begin{tabularx}{0.59\textwidth}{r | S[round-mode=places, round-precision=3] | S[round-mode=places, round-precision=2]}
+        \begin{tabularx}{0.7\textwidth}{r | S[round-mode=places, round-precision=3] | S[round-mode=places, round-precision=2]}
             \toprule
-            {Sterowanie\tnote{a}} & {Napięcie\tnote{b} \si{[\volt]}} & {Prędkość obrotowa \si{[\radian\per\second]}} \\
+            {Sterowanie\tnote{a}} & {Napięcie\tnote{b} \si{[\volt]}} & {Prędkość kątowa \si{[\radian\per\second]}} \\
             \midrule
             \SI{-100}{\percent} & -11,95 & -59,1747823797\tnote{c} \\
             \SI{-90}{\percent} & -10,755 & -53,5556835151 \\
@@ -247,7 +237,16 @@ Współczynniki regresji liniowych $K_1$, $K_2$ wraz z obliczonymi na ich podsta
     \end{threeparttable}
 \end{table}
 
-\begin{table}[h]
+Współczynniki regresji liniowych $K_1$, $K_2$ wraz z obliczonymi na ich podstawie wartościami współczynników tarcia $\beta$ oraz $b$ zostały przedstawione w tabeli \ref{tab:param_regresji_lin_wsp_tarcia}. W dalszych rozważaniach przyjęto wartość uśrednioną z obu wyników: $\beta = \num{8,2436e-5}$, $b = \num{0,017283013}$.
+
+\begin{figure}[p]
+    \centering
+    \includesvg[width=1\textwidth,svgpath=./vector_graphics/]{tarcie}
+    \caption{Wykres ustalonych prędkości kątowych silnika w zależności od podanego sterowania.}
+    \label{fig:predkosci_obrotowe_silnika}
+\end{figure}
+
+\begin{table}[p]
     \centering
     \begin{threeparttable}
         \caption{Parametry regresji liniowych i współczynniki tarcia.}
@@ -270,6 +269,8 @@ Współczynniki regresji liniowych $K_1$, $K_2$ wraz z obliczonymi na ich podsta
         \end{tablenotes}
     \end{threeparttable}
 \end{table}
+
+\pagebreak
 
 Zidentyfikowano zatem następujące parametry silnika:
 \begin{itemize}
@@ -294,7 +295,7 @@ Do identyfikacji wykorzystano model zbliżony do modelu z \cref{fig:sm_electric_
 
 Optymalizacja została przeprowadzona za pomocą narzędzia \texttt{Parameter Estimation} z pakietu \textsc{Matlab/Simulink}. Wykorzystuje ono z góry zadane sterowanie i znaną odpowiedź rzeczywistego obiektu do takiego dobrania parametrów, aby odpowiedź modelu była jak najbliższa rzeczywistej.
 
-Jako zadane sterowanie wykorzystano zapisany za pomocą narzędzia \texttt{Traces} z programu \textsc{Siemens TIA Portal} kilkukrotny skok jednostkowy sterowania; podobnie użytą odpowiedzią obiektu była zapisana wartość licznika enkodera przeliczona na kąt obrotu belki. Za początkowe wartości parametrów przyjęto wartości obliczone w poprzednich rozdziałach, a w przypadku momentu bezwładności wału silnika przyjęto $J = \SI{0,0014}{\kilogram\meter\squared}$.
+Jako zadane sterowanie wykorzystano zapisany za pomocą narzędzia \texttt{Traces} z programu \textsc{Siemens TIA Portal} kilkukrotny skok jednostkowy sterowania; podobnie użytą odpowiedzią obiektu była zapisana wartość licznika enkodera przeliczona na kąt obrotu belki. Za początkowe wartości parametrów przyjęto wartości obliczone w poprzednich rozdziałach, a w przypadku momentu bezwładności wału motoreduktora przyjęto $J = \SI{0,0014}{\kilogram\meter\squared}$.
 
 Dane wejściowe, wyjściowe i odpowiedź modelu przedstawiono na \cref{fig:silnik_oszacowanie_parametrow}, a wyniki końcowe estymacji zostały umieszczone w tabeli \ref{tab:parametry_silnika_optymalizacja}.
 
@@ -319,19 +320,12 @@ Dane wejściowe, wyjściowe i odpowiedź modelu przedstawiono na \cref{fig:silni
 \end{table}
 % TODO: skomentować zmianę bety?
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{optymalizacja_exp1}
+    \includegraphics[width=0.8\textwidth]{optymalizacja_exp1}
     \caption{Zrzut ekranu wykresów danych wejściowych (dół) i wyjściowych dla procesu optymalizacji oraz odpowiedź obiektu po przeprowadzonej optymalizacji parametrów (góra).}
     \label{fig:silnik_oszacowanie_parametrow}
 \end{figure}
-
-%\begin{figure}[h]
-%    \centering
-%    \includegraphics[width=0.8\textwidth]{silnik_oszacowanie_zmiana_parametrow}
-%    \caption{Zrzut ekranu wykresu ze zmianami wartości optymalizowanych parametrów w kolejnych iteracjach funkcji optymalizującej.}
-%    \label{fig:silnik_oszacowanie_zmiana_parametrow}
-%\end{figure}
 
 Jak widać z \cref{fig:silnik_oszacowanie_parametrow}, dopasowanie odpowiedzi modelu do odpowiedzi obiektu rzeczywistego jest bardzo dobre, nawet bez uwzględnienia indukcyjności obwodów silnika. Oznacza to, że wartość parametru $L$ jest zaniedbywalna.
 

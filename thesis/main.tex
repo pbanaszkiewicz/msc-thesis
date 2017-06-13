@@ -3,8 +3,8 @@
 
 % Lista wszystkich języków stanowiących języki pozycji bibliograficznych użytych w pracy.
 % (Zgodnie z zasadami tworzenia bibliografii każda pozycja powinna zostać utworzona zgodnie z zasadami języka, w którym dana publikacja została napisana.)
-%\usepackage[english,polish]{babel}
-\usepackage[polish,english]{babel}
+\usepackage[english,polish]{babel}
+%\usepackage[polish,english]{babel}
 
 % Użyj polskiego łamania wyrazów (zamiast domyślnego angielskiego).
 \usepackage{polski}
@@ -177,6 +177,24 @@ backend=biber
 % usuwa spacje po przecinkach przy liczbach w trybie matematycznym
 \usepackage{icomma}
 
+% ----------------------------
+% --- < schematy w tikz > ---
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{arrows,calc,positioning}
+
+\tikzset{
+    block/.style = {draw, rectangle, minimum height=1cm, minimum width=2cm},
+    gain/.style = {draw, isosceles triangle},
+    input/.style = {coordinate,node distance=1cm},
+    output/.style = {coordinate,node distance=2cm},
+    arrow/.style={draw, -latex,node distance=2cm},
+    pinstyle/.style = {pin edge={latex-, black,node distance=2cm}},
+    sum/.style = {draw, circle, node distance=1cm, path picture={\draw (path picture bounding box.south east) -- (path picture bounding box.north west) (path picture bounding box.south west) -- (path picture bounding box.north east);}},
+,
+}
+
 % -------------------
 % --- < dodatki > ---
 %\usepackage[toc,page]{appendix}
@@ -218,7 +236,7 @@ backend=biber
 
 %---------------------------------------------------------------------------
 \setcounter{secnumdepth}{4}
-%\brokenpenalty=10000\relax  %?????
+\brokenpenalty=10000\relax  %?????
 
 \begin{document}
 

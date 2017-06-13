@@ -56,7 +56,7 @@
     \put(0.5846988,0.03815265){\makebox(0,0)[lb]{\smash{15}}}%
     \put(0.73963855,0.03815265){\makebox(0,0)[lb]{\smash{20}}}%
     \put(0.89457831,0.03815265){\makebox(0,0)[lb]{\smash{25}}}%
-    \put(0.39939795,0.0148594){\makebox(0,0)[lb]{\smash{Kąt obrotu enkodera [rad]}}}%
+    \put(0.35602446,0.0148594){\makebox(0,0)[lb]{\smash{Kąt obrotu wału motoreduktora [rad]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{zaleznosc_kata.pdf}}%
     \put(0.08273096,0.05481928){\makebox(0,0)[lb]{\smash{-0.15}}}%
     \put(0.09236952,0.12730928){\makebox(0,0)[lb]{\smash{-0.1}}}%
@@ -67,7 +67,7 @@
     \put(0.08875506,0.48975904){\makebox(0,0)[lb]{\smash{0.15}}}%
     \put(0.07309241,0.18012072){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Kąt obrotu belki [rad]}}}}%
     \put(0.3759041,0.52500916){\makebox(0,0)[lb]{\smash{\textbf{Zależność kąta obrotu belki}}}}%
-    \put(0.39036193,0.50332241){\makebox(0,0)[lb]{\smash{\textbf{od kąta obrotu enkodera}}}}%
+    \put(0.41204867,0.50332241){\makebox(0,0)[lb]{\smash{\textbf{od kąta obrotu wału}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{zaleznosc_kata.pdf}}%
     \put(0.68086747,0.47748386){\makebox(0,0)[lb]{\smash{Dane rzeczywiste}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{zaleznosc_kata.pdf}}%

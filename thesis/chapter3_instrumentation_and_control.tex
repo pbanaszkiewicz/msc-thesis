@@ -1,7 +1,7 @@
 \chapter{Układ sterowania i instrumentacji}
 \label{cha:ch3_uklad_ster_i_instrumentacji}
 
-Do odczytywania danych z obiektu i sterowania nim wykorzystano opisany w tym rozdziale układ sterowania i instrumentacji (\cref{fig:schemat_ukl_sterowania_instrumentacji}). W jego sercu znajduje się przemysłowy sterownik PLC, który odczytuje dane o położeniu kulki z dwóch czujników odległości oraz położenie kątowe wału silnika z~enkodera. Dodatkowo do sterownika podłączony został czujnik bazowania oraz przyciski: \texttt{START} (NO), \texttt{STOP} (NC). Na wyjścia sterownika podłączony został mostek H kontrolujący silnik oraz dioda sygnalizacyjna.
+Do odczytywania danych z obiektu i sterowania nim wykorzystano opisany w tym rozdziale układ sterowania i instrumentacji (\cref{fig:schemat_ukl_sterowania_instrumentacji}). W jego sercu znajduje się przemysłowy sterownik PLC, który odczytuje dane o położeniu kulki z dwóch czujników odległości oraz położenie kątowe wału motoreduktora z~enkodera. Dodatkowo do sterownika podłączony został czujnik bazowania oraz przyciski: \texttt{START} (NO), \texttt{STOP} (NC). Na wyjścia sterownika podłączony został mostek H kontrolujący silnik oraz dioda sygnalizacyjna.
 
 \begin{figure}[H]
     \centering
@@ -74,7 +74,7 @@ Podstawowe parametry sterownika oraz płytki sygnałowej zostały zebrane w tabe
 \section{Silnik z reduktorem i enkoderem}
 \label{sec:ch3_uklad_napedowy}
 
-Jak już zasygnalizowano w rozdziale \ref{sec:ch2_przeniesienie_napedu}, w pracy użyto silnik prądu stałego (komutatorowy, z~magnesami trwałymi). Silnik sprzężony jest z~zębatą przekładnią redukcyjną o przełożeniu \num{18,75}:\num{1}. Na wale silnika zamocowany jest enkoder inkrementalny kwadraturowy o~64 impulsach na obrót wału, co daje 1200 impulsów za przekładnią. Zdjęcie silnika przedstawiono na \cref{fig:silnik}.
+Jak już zasygnalizowano w rozdziale \ref{sec:ch2_przeniesienie_napedu}, w pracy użyto silnik prądu stałego (komutatorowy, z~magnesami trwałymi). Silnik sprzężony jest z~zębatą przekładnią redukcyjną o przełożeniu \num{18,75}:\num{1} (całość nazywana jest motoreduktorem). Na wale silnika zamocowany jest enkoder inkrementalny kwadraturowy o~64 impulsach na obrót wału, co daje 1200 impulsów za przekładnią. Zdjęcie silnika przedstawiono na \cref{fig:silnik}.
 
 Wybrany silnik stanowi dobry kompromis między złożonością, wydajnością i ceną. Dyskusja na temat możliwości zastosowania innych typów napędów została przeprowadzona w dodatku \ref{appA_warianty_zespolu_napedowego}.
 
@@ -191,7 +191,7 @@ Wszystkie wymagane połączenia elektryczne wykonano na uniwersalnej płytce PCB
     \end{threeparttable}
 \end{table}
 
-W układzie nie zastosowano czujnika położenia wału, do którego przymocowana jest belka; zamiast tego wykorzystano zależność geometryczną pomiędzy obrotem wału silnika a obrotem belki. W przypadku niewielkich odchyleń kąt belki $\theta$ powinien być liniowo związany z kątem obrotu wału silnika $\alpha$~w~następujący sposób:
+W układzie nie zastosowano czujnika położenia wału, do którego przymocowana jest belka; zamiast tego wykorzystano zależność geometryczną pomiędzy obrotem wału motoreduktora a obrotem belki. W przypadku niewielkich odchyleń kąt belki $\theta$ powinien być liniowo związany z kątem obrotu wału motoreduktora $\alpha$~w~następujący sposób:
 
 \begin{equation}\label{eq:uproszczona_zaleznosc_kata_belki}
     \theta = \frac{d_L}{d_k} \alpha
@@ -277,8 +277,7 @@ d_b = \frac{d_l + 2\cdot d_c - d_r}{2} - d_c
 \section{Czujnik bazowania}
 \label{sec:ch3_czujnik_bazowania}
 
-% TODO: uaktualnij odnośnik
-Z powodu wykorzystania enkodera inkrementalnego, po każdym uruchomieniu urządzenia konieczne jest przeprowadzenie procedury bazowania (zob. rozdział \ref{cha:ch7_algorytmy_sterowania}) w celu określenia dokładnej pozycji kątowej wału silnika, a co za tym idzie: pozycji kątowej belki.
+Z powodu wykorzystania enkodera inkrementalnego, po każdym uruchomieniu urządzenia konieczne jest przeprowadzenie procedury bazowania (zob. rozdział \ref{sec:ch7_bazowanie}) w celu określenia dokładnej pozycji kątowej wału motoreduktora, a co za tym idzie: pozycji kątowej belki.
 
 Do wykrycia pozycji bazowania wykorzystano transoptor szczelinowy TCST1103 firmy Vishay Semiconductors połączony w układzie przedstawionym na \cref{fig:uklad_transoptora}, natomiast podstawowe parametry transoptora zostały opisane w tabeli \ref{tab:parametry_transoptora}.
 
@@ -323,8 +322,7 @@ Układ z \cref{fig:uklad_transoptora} przylutowano do płytki uniwersalnej (\cre
     \label{fig:czujnik_bazowania_PCB}
 \end{figure}
 
-% TODO: zweryfikuj ilość impulsów do bazowania
-Płytka z czujnikiem bazowania została przytwierdzona do układu kulki i belki poniżej silnika. Sztywny, lekki i nieprzezroczysty element przyczepiony został na końcu korby tak, aby przechodził przez szczelinę enkodera w momencie skierowania korby pionowo w dół. Przyjęto, że w chwili zasłonięcia szczeliny (przy ruchu zgodnie ze wskazówkami zegara) licznik enkodera powinien otrzymać wartość \num{75}; wówczas poziomemu położeniu belki odpowiada wartość \num{0}.
+Płytka z czujnikiem bazowania została przytwierdzona do układu kulki i belki poniżej silnika. Sztywny, lekki i nieprzezroczysty element przyczepiony został na końcu korby tak, aby przechodził przez szczelinę enkodera w momencie skierowania korby pionowo w dół. Przyjęto, że w chwili zasłonięcia szczeliny (przy ruchu zgodnie ze wskazówkami zegara) licznik enkodera powinien otrzymać wartość \num{149}; wówczas pionowemu położeniu korby odpowiada wartość \num{0}.
 
 %%%%%%%%
 \section{Systemy napięć}

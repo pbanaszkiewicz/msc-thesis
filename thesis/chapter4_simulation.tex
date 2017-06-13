@@ -8,8 +8,7 @@ Do zaprojektowania odpowiedniego układu regulacji systemem kulka i belka, a wi�
     \item czy z dynamiki kulki zależnej od ruchu obrotowego belki.
 \end{itemize}
 
-% TODO: uaktualinij odnośnik
-Wobec tego zdecydowano się nie przystępować do opisu matematycznego zachowania się układu w sposób klasyczny, np. poprzez równania Eulera--Lagrange'a czy funkcjonał Hamiltona. Zamiast tego, wykorzystując narzędzia pakietu \textsc{Matlab/Simulink}, zbudowano przestrzenną i fizyczną reprezentację obiektu regulacji, która następnie została wykorzystana do linearyzacji i dobrania regulatorów (rozdział \ref{cha:ch7_algorytmy_sterowania}).
+Wobec tego zdecydowano się nie przystępować do opisu matematycznego zachowania się układu w sposób klasyczny, np. poprzez równania Eulera--Lagrange'a czy funkcjonał Hamiltona. Zamiast tego, wykorzystując narzędzia pakietu \textsc{Matlab/Simulink}, zbudowano przestrzenną i fizyczną reprezentację obiektu regulacji, która następnie została wykorzystana do linearyzacji i dobrania regulatorów (rozdział \ref{cha:ch6_model_liniowy}).
 
 \section{Wykorzystanie przybornika \textsc{SimMechanics}}
 \label{sec:ch4_simmechanics}
@@ -108,7 +107,7 @@ Sposób wykorzystania złącza obrotowego \textit{RJ3} został opisany w rozdzia
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{simmechanics_crank}
-    \caption{Schemat subsystemu \textit{Crank} odpowiadającego za umocowanie wału obrotu belki w danym układzie odniesienia.}
+    \caption{Schemat subsystemu \textit{Crank} odpowiadającego za umocowanie korby na wale motoreduktora.}
     \label{fig:sm_crank}
 \end{figure}
 
@@ -150,8 +149,8 @@ gdzie:
     \item $K$ --- stała elektryczna bądź mechaniczna silnika (w jednostkach \si{\volt\second\per\radian} lub \si{\newton\meter\per\ampere}),
     \item $L$ --- indukcyjność silnika (w modelu na \cref{fig:sm_electric_motor} przyjęta za zerową),
     \item $T$ --- moment generowany przez silnik,
-    \item $J$ --- moment bezwładności wału silnika,
-    \item $\omega$ --- prędkość kątowa wału silnika,
+    \item $J$ --- moment bezwładności wału motoreduktora,
+    \item $\omega$ --- prędkość kątowa wału motoreduktora,
     \item $\epsilon = \deriv{\omega}{t}$ --- przyspieszenie kątowe wału silnika,
     \item $\beta$ --- współczynnik tarcia wiskotycznego przekładni oraz silnika,
     \item $b$ --- współczynnik tarcia suchego przekładni oraz silnika.
@@ -168,24 +167,23 @@ Warto zauważyć, że obliczanie kąta obrotu, prędkości kątowej oraz przyspi
 
 W modelu silnika pominięto indukcyjność, gdyż jej wartość w rzeczywistości jest bardzo niska. Dodatkowo, przeprowadzona identyfikacja tarcia (rozdział \ref{sec:ch5_identyfikacja_parametrow_silnika}) pokazała, że poza tarciem mokrym w~układzie występuje pewne tarcie suche. Z powodu pracy silnika w sposób powtarzalny, tarcie suche może mieć spory wpływ na odpowiedź silnika, dlatego zdecydowano się go nie pomijać.
 
-\section{Aproksymacja zależności kąta obrotu wału silnika i osi belki}
+\section{Aproksymacja zależności kąta obrotu wału motoreduktora i osi belki}
 \label{sec:ch4_zaleznosc_kata_silnika_i_kata_belki}
 
-W związku z brakiem czujnika obrotu wału belki, do odczytania jej położenia należy się posłużyć zależnością geometryczną od obrotu wału silnika. W rozdziale \ref{sec:ch3_uklad_napedowy} zasygnalizowano, że w pewnych niewielkich odchyleniach zależność ta może być opisana wzorem $\theta = \frac{L}{d_k} \alpha$.
+W związku z brakiem czujnika kąta obrotu wału belki, do odczytania jej położenia należy się posłużyć zależnością geometryczną od kąta obrotu wału motoreduktora. W rozdziale \ref{sec:ch3_uklad_napedowy} zasygnalizowano, że w pewnych niewielkich odchyleniach zależność ta może być opisana wzorem $\theta = \frac{L}{d_k} \alpha$.
 
-Model symulacyjny \textsc{SimMechanics} eliminuje ten problem, gdyż pozycja i prędkość wału belki odczytywane są bezpośrednio ze złącza obrotowego, w którym osadzony jest wspomniany wał. Niemniej jednak problem nadal występuje w rzeczywistym układzie sterowania, dlatego postanowiono zmierzyć zależność $\theta(\alpha)$ poprzez symulację zbudowanego modelu. W tym celu podano stałe sterowanie na silnik i zmierzono jednocześnie kąt obrotu wału silnika i wału belki.
+Model symulacyjny \textsc{SimMechanics} eliminuje to ograniczenie, gdyż pozycja i prędkość wału belki odczytywane są bezpośrednio ze złącza obrotowego, w którym osadzony jest wspomniany wał. Niemniej jednak problem nadal występuje w rzeczywistym układzie, ponieważ nie zastosowano tam żadnego czujnika pozycji kątowej belki. Stąd postanowiono zmierzyć zależność $\theta(\alpha)$ poprzez symulację zbudowanego modelu. W tym celu podano stałe sterowanie na silnik i zmierzono jednocześnie kąt obrotu wału motoreduktora i wału belki.
 
 \begin{figure}[h]
     \centering
-    \includesvg[width=\textwidth,svgpath=./vector_graphics/]{zaleznosc_kata}
-    \caption{Zależność kąta obrotu wału belki od kąta obrotu wału silnika.}
+    \includesvg[width=0.9\textwidth,svgpath=./vector_graphics/]{zaleznosc_kata2}
+    \caption{Zależność kąta obrotu wału belki od kąta obrotu wału motoreduktora.}
     \label{fig:zaleznosc_kata_belki_od_enkodera}
 \end{figure}
 
 Należy zauważyć, że brak dobranych poprawnie parametrów silnika lub kulki nie wpływa negatywnie na dokładność aproksymacji, gdyż elementy łączące belkę z silnikiem są sztywne, a pomiar nie dotyczył dynamiki (prędkość, przyspieszenie) lecz statyki (obrót).
 
-Obrót belki w funkcji obrotu wału silnika postanowiono aproksymować sinusoidą (\cref{fig:zaleznosc_kata_belki_od_enkodera}) o następującym wzorze:
-
+Obrót belki w funkcji obrotu wału motoreduktora postanowiono aproksymować sinusoidą (\cref{fig:zaleznosc_kata_belki_od_enkodera}) o następującym wzorze:
 \begin{equation}\label{eq:aproksymacja_kata_walu}
     \theta(\alpha) = A \sin (\omega \alpha + \phi) + B
 \end{equation}
@@ -197,10 +195,14 @@ gdzie:
     \item $B$ --- wyraz wolny.
 \end{itemize}
 
-Po przeprowadzeniu aproksymacji numerycznej za pomocą funkcji \texttt{fminsearch} z programu \textsc{Matlab} otrzymano następujące wartości parametrów funkcji \eqref{eq:aproksymacja_kata_walu}: $A = \num{0.1181}$, $\omega = \num{0.9963}$, $\phi = \num{-1.7076}$, $B = \num{-0.0099}$; przybliżenie zostało przedstawione na \cref{fig:zaleznosc_kata_belki_od_enkodera}. Taka funkcja nie jest trudna do implementacji na sterowniku PLC, nie powinna również stanowić zbyt dużego wyzwania obliczeniowego\footnote{Producent deklaruje min. \SI{18}{\micro\second} dla obliczeń zmiennoprzecinkowych.} dla wybranego procesora (zob. tabelę \ref{tab:parametry_PLC_SB}).
+%Dane otrzymane po przeprowadzeniu aproksymacji numerycznej za pomocą funkcji \texttt{fminsearch} z programu \textsc{Matlab} pokazały, że kąt obrotu belki nie jest funkcją 
+%Po przeprowadzeniu aproksymacji numerycznej za pomocą funkcji \texttt{fminsearch} z programu \textsc{Matlab} otrzymano 
+Po przeprowadzeniu aproksymacji numerycznej za pomocą funkcji \texttt{fminsearch} z programu \textsc{Mat\-lab} otrzymano następujące wartości parametrów funkcji \eqref{eq:aproksymacja_kata_walu}: $A = \num{0.2387}$, $\omega = \num{1.0014}$, $\phi = \num{-1.5484}$, $B = \num{-0.05655}$; przybliżenie zostało przedstawione na \cref{fig:zaleznosc_kata_belki_od_enkodera}. Taka funkcja nie jest trudna do implementacji na sterowniku PLC, nie powinna również stanowić zbyt dużego wyzwania obliczeniowego\footnote{Producent deklaruje min. \SI{18}{\micro\second} dla obliczeń zmiennoprzecinkowych.} dla wybranego procesora (zob. tabelę \ref{tab:parametry_PLC_SB}).
+
+Należy zauważyć, że wykres rzeczywistego kąta obrotu belki na \cref{fig:zaleznosc_kata_belki_od_enkodera} ma taki sam okres, jak wykres przybliżenia sinusoidą, a jednak nie odpowiada mu całkowicie. Nie jest to błędem, gdyż w związku z działaniem w punkcie równowagi (zob. rozdział \ref{cha:ch6_model_liniowy}) największa dokładność przybliżenia oczekiwana jest w zakresie od ok. \num{0} do \SI{1}{\radian} kąta obrotu wału, czyli tam, gdzie charakterystyki się nakładają.
 
 \section{Podsumowanie}
 
-W niniejszym rozdziale opisano sposób budowy modeli za pomocą przybornika narzędziowego \textsc{Simscape Multibody}, następnie przedstawiono i omówiono zbudowany w ten sposób model symulacyjny obiektu regulacji. W kolejnej części opisano model matematyczny silnika prądu stałego i jego implementację. Na końcu zaprezentowano wykorzystanie modelu obiektu do znalezienia zależności geometrycznej między kątem obrotu wału silnika i wału belki.
+W niniejszym rozdziale opisano sposób budowy modeli za pomocą przybornika narzędziowego \textsc{Simscape Multibody}, następnie przedstawiono i omówiono zbudowany w ten sposób model symulacyjny obiektu regulacji. W kolejnej części opisano model matematyczny silnika prądu stałego i jego implementację. Na końcu zaprezentowano wykorzystanie modelu obiektu do znalezienia zależności geometrycznej między kątem obrotu wału motoreduktora i wału belki.
 
 %---------------------------------------------------------------------------

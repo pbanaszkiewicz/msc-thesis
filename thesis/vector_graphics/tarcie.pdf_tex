@@ -64,7 +64,7 @@
     \put(0.10195593,0.40757653){\makebox(0,0)[lb]{\smash{20}}}%
     \put(0.10195593,0.48931024){\makebox(0,0)[lb]{\smash{40}}}%
     \put(0.10195593,0.57104395){\makebox(0,0)[lb]{\smash{60}}}%
-    \put(0.08572622,0.20786542){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Prędkość obrotowa [rad/s]}}}}%
+    \put(0.08572622,0.20786542){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Prędkość kątowa [rad/s]}}}}%
     \put(0.25405793,0.60143571){\makebox(0,0)[lb]{\smash{\textbf{Zależność prędkości silnika od zadanego napięcia}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{tarcie.pdf}}%
     \put(0.19600499,0.55065231){\makebox(0,0)[lb]{\smash{Prędkość przy ujemnym sterowaniu}}}%

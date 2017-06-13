@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Wygenerowane w aplikacji Microsoft Visio 11.0, SVG Export, wersja 1.0. przeciwny_ruch_kulki.svg Page-1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="5.05307in" height="1.94204in"
+		viewBox="0 0 363.821 139.827" xml:space="preserve" color-interpolation-filters="sRGB" class="st8">
+	<v:documentProperties v:langID="1045" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="msvNoAutoConnect" v:val="VT0(1):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#96afcf;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st2 {fill:#ffffff;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st3 {fill:#00b050;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st4 {stroke:#000000;stroke-dasharray:1.68,1.2;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st5 {marker-end:url(#mrkr1-17);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st6 {fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:0.11764705882353}
+		.st7 {marker-start:url(#mrkr1-23);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st8 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<defs id="Markers">
+		<g id="lend1">
+			<path d="M 1 -1 L 0 0 L 1 1 " style="stroke-linecap:round;stroke-linejoin:round;fill:none"/>
+		</g>
+		<marker id="mrkr1-17" class="st6" v:arrowType="1" v:arrowSize="1" orient="auto" markerUnits="strokeWidth"
+				overflow="visible">
+			<use xlink:href="#lend1" transform="scale(-8.5,-8.5) "/>
+		</marker>
+		<marker id="mrkr1-23" class="st6" v:arrowType="1" v:arrowSize="1" orient="auto" markerUnits="strokeWidth"
+				overflow="visible">
+			<use xlink:href="#lend1" transform="scale(8.5) "/>
+		</marker>
+	</defs>
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<v:custProps>
+			<v:cp v:nameU="AskOnDrop" v:lbl="Pytaj przy upuszczaniu" v:type="3" v:format="&#34;" v:langID="1045" v:cal="0"
+					v:val="VT0(0):5"/>
+		</v:custProps>
+		<v:userDefs>
+			<v:ud v:nameU="LPrec" v:val="VT0(2):26"/>
+			<v:ud v:nameU="LUnits" v:val="VT0(0):26"/>
+			<v:ud v:nameU="ShowUnits" v:val="VT0(0):26"/>
+			<v:ud v:nameU="APrec" v:val="VT0(1):26"/>
+			<v:ud v:nameU="AUnits" v:val="VT0(1):26"/>
+		</v:userDefs>
+		<title>Strona 1</title>
+		<v:pageProperties v:drawingScale="39.3701" v:pageScale="3.93701" v:drawingUnits="6" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<v:layer v:name="Pomiar" v:index="0" v:print="false"/>
+		<v:layer v:name="Wymiary" v:index="1"/>
+		<g id="shape1-1" v:mID="1" v:groupContext="shape" transform="translate(143.772,-2.04)">
+			<title>Trójkąt — podstawa, wysokość</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<path d="M0 139.83 L56.69 139.83 L28.35 68.96 L0 139.83 Z" class="st1"/>
+		</g>
+		<g id="shape2-3" v:mID="2" v:groupContext="shape" transform="translate(14.8739,-87.1974) rotate(5)">
+			<title>Prostokąt</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<rect x="0" y="111.48" width="340.157" height="28.3465" class="st1"/>
+		</g>
+		<g id="shape3-5" v:mID="3" v:groupContext="shape" transform="translate(165.032,-65.8195)">
+			<title>Okrąg, elipsa</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<path d="M0 132.74 A7.08661 7.08661 0 0 1 14.17 132.74 A7.08661 7.08661 0 1 1 0 132.74 Z" class="st2"/>
+		</g>
+		<g id="shape4-7" v:mID="4" v:groupContext="shape" transform="translate(161.473,-101.22)">
+			<title>Arkusz.4</title>
+			<ellipse cx="14.1732" cy="125.653" rx="14.1732" ry="14.1732" class="st3"/>
+		</g>
+		<g id="shape5-9" v:mID="5" v:groupContext="shape" transform="translate(172.119,-72.9061)">
+			<title>Linia przedłużana</title>
+			<v:userDefs>
+				<v:ud v:nameU="AntiScale" v:val="VT0(10):26"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<path d="M-170.08 139.83 L173.04 139.83" class="st4"/>
+		</g>
+		<g id="shape8-12" v:mID="8" v:groupContext="shape" transform="translate(84.509,-68.2621) rotate(-40.1079)">
+			<title>Łuk — graficznie</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<path d="M34 139.83 A33.9969 33.9969 -180 0 0 0 105.83" class="st5"/>
+		</g>
+		<g id="shape9-18" v:mID="9" v:groupContext="shape" transform="translate(207.047,-82.9054) rotate(13.9433)">
+			<title>Łuk — graficznie.9</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(14):26"/>
+			</v:userDefs>
+			<path d="M185.78 139.83 A185.782 185.782 -180 0 0 176.96 83.26" class="st7"/>
+		</g>
+	</g>
+</svg>

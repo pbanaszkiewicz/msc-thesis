@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.91, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'predkosc_biegu_jalowego.pdf' (pdf, eps, ps)
+%% Accompanies image file 'zmienne_stanu.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{456bp}%
+    \setlength{\unitlength}{424.1174469bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,23 +48,10 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.78947368)%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{predkosc_biegu_jalowego.pdf}}%
-    \put(0.11140351,0.05555561){\makebox(0,0)[lb]{\smash{1.5}}}%
-    \put(0.31578947,0.05555561){\makebox(0,0)[lb]{\smash{2}}}%
-    \put(0.49912281,0.05555561){\makebox(0,0)[lb]{\smash{2.5}}}%
-    \put(0.70350877,0.05555561){\makebox(0,0)[lb]{\smash{3}}}%
-    \put(0.88684211,0.05555561){\makebox(0,0)[lb]{\smash{3.5}}}%
-    \put(0.46491263,0.02163737){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{predkosc_biegu_jalowego.pdf}}%
-    \put(0.10467842,0.13333333){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.09064333,0.24035088){\makebox(0,0)[lb]{\smash{10}}}%
-    \put(0.09064333,0.34736842){\makebox(0,0)[lb]{\smash{20}}}%
-    \put(0.09064333,0.45438596){\makebox(0,0)[lb]{\smash{30}}}%
-    \put(0.09064333,0.56140351){\makebox(0,0)[lb]{\smash{40}}}%
-    \put(0.09064333,0.66842105){\makebox(0,0)[lb]{\smash{50}}}%
-    \put(0.07660825,0.17982491){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Kąt obrotu wału motoreduktora [rad]}}}}%
-    \put(0.14386018,0.74166667){\makebox(0,0)[lb]{\smash{\textbf{Odpowiedź silnika na skok (maksymalne napięcie)}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{predkosc_biegu_jalowego.pdf}}%
+  \begin{picture}(1,0.36713057)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{zmienne_stanu.pdf}}%
+    \put(0.51005143,0.28574438){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x_1$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{zmienne_stanu.pdf}}%
+    \put(0.82919845,0.20554005){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x_3$}}}%
   \end{picture}%
 \endgroup%
