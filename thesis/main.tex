@@ -29,6 +29,7 @@
 
 % operator '\sgn'
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\eig}{eig}
 
 % polecenie \diff generujące \mathrm{d}
 \makeatletter
@@ -195,13 +196,14 @@ backend=biber
 
 \tikzset{
     roundblock/.style = {draw, ellipse, minimum height=1cm, minimum width=2cm},
-    block/.style = {draw, rectangle, minimum height=1cm, minimum width=2cm},
-    gain/.style = {draw, isosceles triangle},
+    block/.style = {draw, rectangle, minimum height=1cm, minimum width=1cm},
+    gain/.style = {draw, isosceles triangle, isosceles triangle stretches, minimum height=1cm, minimum width=1cm},
     input/.style = {coordinate,node distance=3cm},
     output/.style = {coordinate,node distance=2cm},
     arrow/.style={draw, -latex,node distance=2cm},
     pinstyle/.style = {pin edge={latex-, black,node distance=2cm}},
     sum/.style = {draw, circle, node distance=1cm, path picture={\draw (path picture bounding box.south east) -- (path picture bounding box.north west) (path picture bounding box.south west) -- (path picture bounding box.north east);}},
+    mux/.style = {draw, rectangle, fill=black, minimum height=1cm, minimum width=0.1cm},
 ,
 }
 

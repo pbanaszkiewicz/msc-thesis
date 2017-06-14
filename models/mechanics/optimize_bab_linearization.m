@@ -3,7 +3,7 @@
 %linearize_bab;
 load 'bab_lin3.mat'
 S1 = linsys1;
-%clear linsys operating_point_report;
+clear linsys1 op_trim1;
 
 %% ensure output matrix is diagonal or close to diagonal
 assert(is_diagonal(S1.c, eps));

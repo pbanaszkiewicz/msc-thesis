@@ -117,6 +117,7 @@ Ponadto w tym obiekcie regulacji zastosowano silnik prądu stałego zamiast rozw
 % TODO: czas teraźniejszy?!
 Korzystając z powyższych obserwacji i wspomnianego ciągu następstw, w niniejszej pracy proponuje się zastosowanie kaskadowego układu regulacji, w którym regulator nadrzędny pozycji kulki generuje sygnał sterujący dla regulatora podrzędnego wychylenia belki. Schemat ilustrujący taką strukturę sterowania przedstawiony jest na \cref{fig:kaskadowy_uklad_regulacji}.
 
+% TODO: wymień na Tikz
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\textwidth]{kaskadowy_uklad_regulacji}
@@ -432,12 +433,12 @@ Jako regulator pochylenia belki wybrano prosty regulator proporcjonalny od stanu
         \draw [->] (y) -- ++ (0,-1.5) -| node [pos=0.95] {$-$} (sum);
     \end{tikzpicture}
     
-    \caption{Schemat sterowania zlinearyzowanego systemu odpowiadającego za zachowanie belki.}
+    \caption{Schemat blokowy sterowania zlinearyzowanego systemu odpowiadającego za zachowanie belki.}
     \label{fig:schemat_regulacji_belka}
 \end{figure}
 
 Wartość wzmocnienia $K_b$ została dobrana za pomocą funkcji \texttt{looptune} z programu \textsc{Matlab}, co pozwoliło uzyskać dużą dynamikę działania regulatora. Wspomniana funkcja optymalizuje pętlę sprzężenia zwrotnego układu zaprezentowaną na \cref{fig:schemat_regulacji_looptune} według ustalonych kryteriów częstotliwościowych: \begin{itemize}
-    \item pasmo przenoszenia -- punkt przejścia charakterystyki amplitudy przez zero musi zawierać się w wyznaczonym zakresie częstotliwości,
+    \item pasmo przenoszenia -- punkt przejścia charakterystyki amplitudy przez zero musi zawierać się w~wyznaczonym zakresie częstotliwości,
     \item wydajność -- akcja całkująca na częstotliwościach poniżej wyznaczonego zakresu,
     \item odporność (ang. \textit{robustness}) -- odpowiednie zapasy stabilności na częstotliwościach poniżej wyznaczonego zakresu.
 \end{itemize}
@@ -455,7 +456,7 @@ Do funkcji \texttt{looptune} podano jako argument zakres częstotliwości \SIran
     %\draw [->] (y) -- ++ (0,-1.5) -| node [pos=0.95] {$-$} (sum);
     \end{tikzpicture}
     
-    \caption{Schemat układu optymalizowanego przez funkcję \texttt{looptune}.}
+    \caption{Schemat blokowy układu optymalizowanego przez funkcję \texttt{looptune}; $G(s)$ to obiekt regulacji, $C(s)$ to regulator.}
     \label{fig:schemat_regulacji_looptune}
 \end{figure}
 
@@ -465,11 +466,143 @@ Do funkcji \texttt{looptune} podano jako argument zakres częstotliwości \SIran
 \section{Regulator pozycji kulki}
 \label{sec:ch6_regulator_kulki}
 
-% TODO: regulator od stanu
+Po uzyskaniu odpowiedniej struktury wewnętrznej pętli sprzężenia zwrotnego (\cref{fig:schemat_regulacji_belka}), w podobny sposób zaprojektowano zewnętrzną pętlę sprzężenia zwrotnego, obejmującą swym działaniem oba systemy zlinearyzowane -- kulkę oraz belkę. Schemat zbudowanego systemu przedstawiono na \cref{fig:schemat_regulacji_belka_i_kulka}; system korzysta z wyprowadzonej w równaniach \eqref{eq:rownania_stanu_kulki2} oraz \eqref{eq:rownania_wyjscia_kulki2} postaci równań stanu systemu kulki.
+
+\begin{figure}[ht]
+    \centering
+    
+    \begin{tikzpicture}[auto, node distance=1cm,>=latex']
+        \node [input, name=input] {};
+        \node [sum, right=1.5of input] (sum_outer) {};
+        \node [gain, right=of sum_outer] (K_ball) {$K_k$};
+        \node [sum, right=1.5of K_ball] (sum_inner) {};
+        \node [gain, right=of sum_inner, minimum width=1cm] (K_beam) {$K_b$};
+        \node [block, right=of K_beam] (beam) {$G_b(s)$};
+        \node [block, right=1.5of beam] (ball) {$G_k(s)$};
+        \node [output, right=of ball] (output) {};
+        \node [mux, below=0.5of beam] (mux) {};
+        \draw [draw,->] (input) -- node {$\begin{bmatrix}s_\text{ref} \\ v_\text{ref} \\ \alpha_\text{ref}^* \\ \omega_\text{ref}^*\end{bmatrix}$} (sum_outer);
+        \draw [->] (sum_outer) -- node {} (K_ball);
+        \draw [->] (K_ball) -- node {$\begin{bmatrix}\alpha_\text{ref} \\ \omega_\text{ref}\end{bmatrix}$} (sum_inner);
+        \draw [->] (sum_inner) -- node {} (K_beam);
+        \draw [->] (K_beam) -- node {} (beam);
+        \draw [->] (beam) -- node [name=Y_beam] {$\begin{bmatrix}y_3 \\ y_4\end{bmatrix}$} (ball);
+        \draw [->] (ball) -- node [name=Y_ball] {$\begin{bmatrix}y_1 \\ y_2\end{bmatrix}$} (output);
+        \draw [->] (Y_beam) -- ++ (0,-1.5) -| node [pos=0.93] {$-$} (sum_inner);
+        \draw [->] (Y_beam) |- (mux.300);
+        \draw [->] (Y_ball) |- (mux.60);
+        \draw [->] (mux) -| node [pos=0.95] {$-$} (sum_outer);
+    \end{tikzpicture}
+    
+    \caption{Schemat sterowania zlinearyzowanego systemu odpowiadającego za zachowanie belki oraz kulki.}
+    \label{fig:schemat_regulacji_belka_i_kulka}
+\end{figure}
+
+Na \cref{fig:schemat_regulacji_belka_i_kulka} zastosowano następujące oznaczenia:
+\begin{itemize}
+    \item $s_\text{ref}$, $v_\text{ref}$, $\alpha_\text{ref}^*$, $\omega_\text{ref}^*$ to wartości zadane położenia i prędkości liniowej kulki, a także kąta i prędkości belki dla zewnętrznej pętli sprzężenia zwrotnego,
+    \item $K_k$ to macierz wzmocnień regulatora nadrzędnego,
+    \item $\alpha_\text{ref}$, $\omega_\text{ref}$ to wartości zadane kąta i prędkości kątowej belki wygenerowane przez regulator $K_k$,
+    \item $K_b$, $G_b(s)$, $y_3$ oraz $y_4$ jak na \cref{fig:schemat_regulacji_belka},
+    \item $G_k(s)$ to transmitancja (typu \textit{MIMO}) zlinearyzowanego systemu kulki opartego o równania stanu \eqref{eq:rownania_stanu_kulki2} i wyjścia \eqref{eq:rownania_wyjscia_kulki2},
+    \item $y_1$, $y_2$ to wartości wyjściowe z modelu kulki (położenie i prędkość).
+\end{itemize}
+
+Względem schematu ideowego z \cref{fig:kaskadowy_uklad_regulacji} nastąpiła zmiana wektora wartości zadanych dla zewnętrznej pętli, która również została rozszerzona o dodatkowe dwa stany związane z pochyleniem i prędkością kątową belki. Zmiany te wynikają z większych możliwości kształtowania sygnału sterowania dla wewnętrznej pętli, gdy do dyspozycji regulatora $K_k$ jest więcej stanów.
+
+Wewnętrzną pętlę sprzężenia zwrotnego oraz system $G_k(s)$ ,,zwinięto'' za pomocą komend \texttt{sumblk} oraz \texttt{connect} z programu \textsc{Matlab} w jeden system typu \textit{State-Space}. Pozwoliło to uzyskać strukturę potrzebną do użycia, podobnie jak w przypadku regulatora od stanu belki, funkcji \texttt{looptune} do wyznaczenia macierzy wzmocnień regulatora.
+
+Funkcja \texttt{looptune} w przypadku zewnętrznej pętli sprzężenia zwrotnego wygenerowała następującą macierz wzmocnień regulatora $K_k$:
+\begin{equation}
+    K_k = \begin{bmatrix}
+    1,7905 &  1,7813 &  0,9181 &  1,1457 \\
+    0,1802 & -0,4902 &  0,1762 &  0,2744
+    \end{bmatrix} \label{eq:regulator_kulki}
+\end{equation}
+
+Należy przypomnieć, że funkcja \texttt{looptune} jest funkcją optymalizacyjną; w związku z tym, jej wynik może być zależny od punktu rozpoczęcia optymalizacji. Macierz \eqref{eq:regulator_kulki} została wygenerowana z~punktu początkowego $K_k^* = \begin{bmatrix}
+1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0
+\end{bmatrix}$.
+
+Po ponownym ,,zwinięciu'' regulatora $K_k$ i wewnętrznej pętli sprzężenia zwrotnego za pomocą komend \texttt{sumblk} oraz \texttt{connect} uzyskano system \textit{State-Space} całego zlinearyzowanego układu wraz z~pętlami sprzężeń zwrotnych. Macierze stanu tego systemu zostały zaprezentowane na poniżej \eqref{eq:macierze_stanu_calego_ukladu}:
+\begin{align}
+    A_c &= \begin{bmatrix}
+        0 & 1 & 0 & 0 \\
+        -103,4 & -79,16 & -103,2 & -95,39 \\
+        0 & 0 & 0 & 1 \\
+        7,005 & 0 & 0 & 0
+    \end{bmatrix} \nonumber \\
+    B_c &= \begin{bmatrix}
+        0 & 0 & 0 & 0 \\
+        103,2 & 95,39 & 53,82 & 67,76 \\
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0
+    \end{bmatrix} \nonumber \\
+    C_c &= \begin{bmatrix}
+        -0,0675 & 0 & 1 & 0 \\
+        0 & -0,0675 & 0 & 1 \\
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+    \end{bmatrix} \nonumber \\
+    D_c &= \begin{bmatrix}
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0
+    \end{bmatrix} \label{eq:macierze_stanu_calego_ukladu}
+\end{align}
+
+Sprawdzenie wartości własnych macierzy $A_c$ pokazuje, że układ ten ma charakter oscylacyjnie stabilny \eqref{eq:wartosci_wlasne_A_c}:
+\begin{equation}
+    \eig{A_c} = \begin{bmatrix}
+     -77,9427 \\
+     -0,0527 + 2,8869i \\
+     -0,0527 - 2,8869i \\
+     -1,1124
+    \end{bmatrix} \label{eq:wartosci_wlasne_A_c}
+\end{equation}
+
+Po implementacji regulatora, opisanej w rozdziale \ref{subsec:ch7_regulator_kulki}, okazało się, że układ nie jest w stanie w~rozsądnym czasie ustabilizować położenia kulki. Dobrano więc w sposób empiryczny inne nastawy $K_k$, które polepszyły zachowanie układu. Zmiany względem oryginalnych nastaw $K_k$ zostały wyróżnione na~\eqref{eq:regulator_kulki2}:
+\begin{equation}
+K_k = \begin{bmatrix}
+    1,7905 &  1,7813 &  0,9181 &  \mathbf{0,2} \\
+    0,1802 & -0,4902 &  0,1762 &  0,2744
+\end{bmatrix} \label{eq:regulator_kulki2}
+\end{equation}
+
+Po wprowadzeniu zmienionego regulatora do całości układu, w macierzach stanu nie zaszły duże zmiany, a charakter układu pozostał oscylacyjnie stabilny:
+\begin{align}
+    A_c &= \begin{bmatrix}
+        0 & 1 & 0 & 0 \\
+        -103,4 & \mathbf{-78,65} & -103,2 & \mathbf{-102,9} \\
+        0 & 0 & 0 & 1 \\
+        7,005 & 0 & 0 & 0
+    \end{bmatrix} \nonumber \\
+    B_c &= \begin{bmatrix}
+        0 & 0 & 0 & 0 \\
+        103,2 & \mathbf{102,9} & 53,82 & 67,76 \\
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0
+    \end{bmatrix} \nonumber \\
+    C_c &= \begin{bmatrix}
+        -0,0675 & 0 & 1 & 0 \\
+        0 & -0,0675 & 0 & 1 \\
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+    \end{bmatrix} \nonumber \\
+    D_c &= \begin{bmatrix}
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0
+    \end{bmatrix} \label{eq:macierze_stanu_calego_ukladu2}
+\end{align}
 
 %%%%
 \section{Podsumowanie}
 
-% TODO: dokończ
+W niniejszym rozdziale przedstawiono obrane zmienne stanu i proces linearyzacji wykorzystujący narzędzia dostępne dla projektantów systemów sterowania w pakiecie \textsc{Matlab/Simulink}. Pokazano również transformację, której konieczne było poddanie wyniku linearyzacji, aby uzyskać pożądane zmienne stanu, a nie wybrane przez narzędzie \texttt{Linear Analysis Tool}. Następnie przedstawiono ideę i strukturę kaskadowego układu sterownia oraz powody, dla których postanowiono taką strukturę zastosować, a także przeprowadzono szereg transformacji i zmian w wynikowych macierzach stanu układu zlinearyzowanego, aby doprowadzić go do pożądanej struktury.
+
+Na koniec w rozdziale przedstawiono dobór regulatorów podrzędnego, odpowiadającego za sterowanie silnikiem i belką, oraz nadrzędnego, kontrolującego pozycję kulki poprzez generowanie wartości zadanych dla regulatora podrzędnego.
 
 %---------------------------------------------------------------------------
