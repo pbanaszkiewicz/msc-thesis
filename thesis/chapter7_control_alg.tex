@@ -53,9 +53,24 @@ Z racji możliwości sterowania obrotami silnika w dwie strony, regulator pozycj
 \section{Wykrywanie braku kulki}
 \label{sec:ch7_wykrywanie_braku_kulki}
 
-% TODO: opisz wartości progowe
-% TODO: opisz zachowanie algorytmu zatrzaskiwania (histereza?)
-% TODO: dodaj wykres charakterystyki czujników
+Jak to zostało wspomniane w rozdziale \ref{sec:ch5_identyfikacja_charakterystyk_czujnikow}, poza zebraniem charakterystyk czujników odległości dla kolejnych położeń kulki, sprawdzono również jak reagują czujniki, gdy pomiędzy nimi nie znajduje się żadna przeszkoda.
+
+Pomiary przedstawiono na \cref{fig:czujniki_charakterystyka_bez_przeszkody}. Wynika z nich, że oba czujniki przy braku przeszkody mocno szumią; jednocześnie widać, że średnie sygnałów to około \num{700} i niecałe \num{500}, a także widać sporadyczne skoki (zwłaszcza czujnika lewego) do wartości w zakresie charakterystyk (por. \cref{fig:aproksymacja_czujnika_lewego}).
+
+Biorąc powyższe fakty pod uwagę, zdecydowano się na następujący algorytm wykrywania obecności kulki pomiędzy czujnikami:
+\begin{itemize}
+    \item jeżeli wartość z przetwornika ADC czujnika lewego wynosi mniej niż \num{800} oraz wartość z przetwornika ADC czujnika prawego wynosi mniej niż \num{600}, to zresetuj zmienną binarną \textit{kulka obecna},
+    \item jeżeli wartość z przetwornika ADC czujnika lewego wynosi więcej niż \num{900} oraz wartość z przetwornika ADC czujnika prawego wynosi więcej niż \num{900}, to ustaw zmienną binarną \textit{kulka obecna}.
+\end{itemize}
+
+W wyniku zastosowania powyższych warunków, błędnie określona obecność kulki będzie tylko w sytuacji chwilowego wystąpienia skoków wartości na obu czujnikach; brak kulki zostanie wykryty natychmiast po zaniknięciu obu skoków wartości.
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=1\textwidth,svgpath=./vector_graphics/]{bez_przeszkody}    
+    \caption{Odpowiedź czujników, gdy pomiędzy nimi nie ma żadnej przeszkody.}
+    \label{fig:czujniki_charakterystyka_bez_przeszkody}
+\end{figure}
 
 %%%%
 \section{Bazowanie}

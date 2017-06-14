@@ -317,6 +317,93 @@ x_1 \\ x_2 \\ x_3 \\ x_4
     \label{fig:charakterystyka_amplitudowo_fazowa}
 \end{figure}
 
+Do uzyskania struktury kaskadowej systemu zlinearyzowanego należy wydzielić równania stanu kulki oraz belki:
+\begin{align}
+\begin{bmatrix}
+\dot{x}_1 \\ \dot{x}_2
+\end{bmatrix}
+&= \begin{bmatrix}
+    0 & 1 & 0 \\
+    0 & 0 & 7,0047
+\end{bmatrix}
+\begin{bmatrix}
+    x_1 \\ x_2 \\ x_3
+\end{bmatrix} \label{eq:rownania_stanu_kulki} \\
+\begin{bmatrix}
+    y_1 \\ y_2
+\end{bmatrix}
+&= \begin{bmatrix}
+    1 & 0 & -0,0675 & 0 \\
+    0 & 1 & 0 & -0.0675 \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3 \\ x_4
+\end{bmatrix} \label{eq:rownania_wyjscia_kulki} \\
+\begin{bmatrix}
+    \dot{x}_3 \\ \dot{x}_4
+\end{bmatrix}
+&= \begin{bmatrix}
+    0 & 1 \\
+    0,0331 & -6,9832
+\end{bmatrix}
+\begin{bmatrix}
+    x_3 \\ x_4
+\end{bmatrix}
++
+\begin{bmatrix}
+    0 \\ 6,8896
+\end{bmatrix}
+u \label{eq:rownania_stanu_belki} \\%\displaybreak\\
+\begin{bmatrix}
+    y_3 \\ y_4
+\end{bmatrix}
+&= \begin{bmatrix}
+    1 & 0 \\
+    0 & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+    x_3 \\ x_4
+\end{bmatrix} \label{eq:rownania_wyjscia_belki} 
+\end{align}
+
+Oczywiście taka forma równań \eqref{eq:rownania_stanu_kulki} i \eqref{eq:rownania_wyjscia_kulki} jest niepoprawna, ale bardzo łatwo można ją przekształcić do schematu z \cref{fig:kaskadowy_uklad_regulacji} stosując podmianę $u_1^* = x_3$, $u_2^* = x_4$: %(równania \eqref{eq:rownania_stanu_kulki2} oraz \eqref{eq:rownania_wyjscia_kulki2}). 
+\begin{align}
+\begin{bmatrix}
+    \dot{x}_1 \\ \dot{x}_2
+\end{bmatrix}
+&= \begin{bmatrix}
+    0 & 1 \\
+    0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2
+\end{bmatrix}
++
+\begin{bmatrix}
+    0 & 0 \\ 7,0047 & 0
+\end{bmatrix}
+\begin{bmatrix}
+    u_1^* \\ u_2^*
+\end{bmatrix} \label{eq:rownania_stanu_kulki2} \\
+\begin{bmatrix}
+    y_1 \\ y_2
+\end{bmatrix}
+&= \begin{bmatrix}
+    1 & 0 \\
+    0 & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+    x_1 \\ x_2
+\end{bmatrix}
++ \begin{bmatrix}
+    -0,0675 & 0 \\
+    0 & -0.0675
+\end{bmatrix}
+\begin{bmatrix}
+    u_1^* \\ u_2^*
+\end{bmatrix} \label{eq:rownania_wyjscia_kulki2}
+\end{align}
+
 %%%%
 \section{Regulator pochylenia belki}
 \label{sec:ch6_regulator_belki}
@@ -325,7 +412,7 @@ Jako regulator pochylenia belki wybrano prosty regulator proporcjonalny od stanu
 \begin{itemize}
     \item $\alpha_\text{ref}$ oraz $\omega_\text{ref}$ są wartościami zadanymi odpowiednio kąta oraz prędkości kątowej belki,
     \item $K_b$ jest macierzą wzmocnień regulatora,
-    \item $G_b(s)$ jest transmitancją (typu \textit{SIMO}) zlinearyzowanego systemu wyodrębnionego z równań stanu~\eqref{eq:rownania_stanu}, \eqref{eq:rownania_wyjscia},
+    \item $G_b(s)$ jest transmitancją (typu \textit{SIMO}) zlinearyzowanego systemu belki opartego o równania stanu \eqref{eq:rownania_stanu_belki} i wyjścia \eqref{eq:rownania_wyjscia_belki},
     \item $y_3$, $y_4$ są wartościami wyjściowymi z modelu (pozycją kątową i prędkością kątową belki).
 \end{itemize}
 
@@ -348,35 +435,6 @@ Jako regulator pochylenia belki wybrano prosty regulator proporcjonalny od stanu
     \caption{Schemat sterowania zlinearyzowanego systemu odpowiadającego za zachowanie belki.}
     \label{fig:schemat_regulacji_belka}
 \end{figure}
-
-System $G_b(s)$, wyodrębniony z równań stanu dla całego modelu, przedstawia się jako  następujący układ równań stanu:
-\begin{align}
-    \begin{bmatrix}
-        \dot{x}_3 \\ \dot{x}_4
-    \end{bmatrix}
-    &= \begin{bmatrix}
-        0 & 1 \\
-        0,0331 & -6,9832
-    \end{bmatrix}
-    \begin{bmatrix}
-        x_3 \\ x_4
-    \end{bmatrix}
-    +
-    \begin{bmatrix}
-        0 \\ 6,8896
-    \end{bmatrix}
-    u \label{eq:rownania_stanu_belki} \\%\displaybreak\\
-    \begin{bmatrix}
-        y_3 \\ y_4
-    \end{bmatrix}
-    &= \begin{bmatrix}
-        1 & 0 \\
-        0 & 1 \\
-    \end{bmatrix}
-    \begin{bmatrix}
-        x_3 \\ x_4
-    \end{bmatrix} \label{eq:rownania_wyjscia_belki} 
-\end{align}
 
 Wartość wzmocnienia $K_b$ została dobrana za pomocą funkcji \texttt{looptune} z programu \textsc{Matlab}, co pozwoliło uzyskać dużą dynamikę działania regulatora. Wspomniana funkcja optymalizuje pętlę sprzężenia zwrotnego układu zaprezentowaną na \cref{fig:schemat_regulacji_looptune} według ustalonych kryteriów częstotliwościowych: \begin{itemize}
     \item pasmo przenoszenia -- punkt przejścia charakterystyki amplitudy przez zero musi zawierać się w wyznaczonym zakresie częstotliwości,

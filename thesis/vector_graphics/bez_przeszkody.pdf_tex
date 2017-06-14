@@ -1,0 +1,78 @@
+%% Creator: Inkscape inkscape 0.91, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'bez_przeszkody.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{633.6bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.56818182)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{bez_przeszkody.pdf}}%
+    \put(0.12436869,0.03998321){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.2535774,0.03998321){\makebox(0,0)[lb]{\smash{2}}}%
+    \put(0.38278624,0.03998321){\makebox(0,0)[lb]{\smash{4}}}%
+    \put(0.51199495,0.03998321){\makebox(0,0)[lb]{\smash{6}}}%
+    \put(0.64120366,0.03998321){\makebox(0,0)[lb]{\smash{8}}}%
+    \put(0.76536199,0.03998321){\makebox(0,0)[lb]{\smash{10}}}%
+    \put(0.89457071,0.03998321){\makebox(0,0)[lb]{\smash{12}}}%
+    \put(0.47979836,0.01557235){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{bez_przeszkody.pdf}}%
+    \put(0.09175088,0.05744949){\makebox(0,0)[lb]{\smash{200}}}%
+    \put(0.09175088,0.13341755){\makebox(0,0)[lb]{\smash{400}}}%
+    \put(0.09175088,0.20938548){\makebox(0,0)[lb]{\smash{600}}}%
+    \put(0.09175088,0.28535354){\makebox(0,0)[lb]{\smash{800}}}%
+    \put(0.08038725,0.36132159){\makebox(0,0)[lb]{\smash{1000}}}%
+    \put(0.08038725,0.43728952){\makebox(0,0)[lb]{\smash{1200}}}%
+    \put(0.08038725,0.51325758){\makebox(0,0)[lb]{\smash{1400}}}%
+    \put(0.07028624,0.1559346){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Wartość z przetwornika ADC}}}}%
+    \put(0.34532879,0.55019899){\makebox(0,0)[lb]{\smash{\textbf{Odpowiedź czujników odległości}}}}%
+    \put(0.31565707,0.52747172){\makebox(0,0)[lb]{\smash{\textbf{przy braku przeszkody pomiędzy nimi}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{bez_przeszkody.pdf}}%
+    \put(0.73611111,0.49603826){\makebox(0,0)[lb]{\smash{Czujnik lewy}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{bez_przeszkody.pdf}}%
+    \put(0.73611111,0.47618396){\makebox(0,0)[lb]{\smash{Czujnik prawy}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{bez_przeszkody.pdf}}%
+  \end{picture}%
+\endgroup%
