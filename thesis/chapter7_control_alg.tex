@@ -1,7 +1,7 @@
 \chapter{Algorytmy sterowania}
 \label{cha:ch7_algorytmy_sterowania}
 
-Obsługa czujników odległości i bazowania, a także algorytmy sterowania zostały zaimplementowane na przemysłowym sterowniku PLC Siemens S7-1211C. Schemat blokowy głównej pętli programu został przedstawiony na \cref{fig:schemat_petla_glowna_PLC}, natomiast szczegółowy opis poszczególnych elementów i algorytmów zamieszczono poniżej.
+Obsługa czujników odległości i bazowania, a także algorytmy sterowania, zostały zaimplementowane na przemysłowym sterowniku PLC Siemens S7-1211C. Schemat blokowy głównej pętli programu, uruchamianej co cykl procesora w bloku \texttt{OB1}, został przedstawiony na \cref{fig:schemat_petla_glowna_PLC}, natomiast szczegółowy opis poszczególnych elementów i algorytmów zamieszczono poniżej.
 
 \begin{figure}[ht]
     \centering
@@ -31,7 +31,7 @@ W ramach bloku \textit{Odczyt czujników} następują poniższe operacje:
     \end{itemize}
     \item obsługa czujników odległości:
     \begin{itemize}
-        \item obliczanie odległości dla każdego czujnika przy wykorzystaniu punktów charakterystyki i algorytmu aproksymacji liniowej,
+        \item obliczanie odległości dla każdego czujnika przy wykorzystaniu punktów charakterystyki i~algorytmu aproksymacji liniowej,
         \item obliczanie pozycji kulki oraz jej średnicy,
         \item weryfikacja obecności kulki (szerzej opisana w rozdziale \ref{sec:ch7_wykrywanie_braku_kulki}),
     \end{itemize}
@@ -41,13 +41,21 @@ W ramach bloku \textit{Odczyt czujników} następują poniższe operacje:
 
 W programie obsługiwane są tylko \num{3} wyjścia sterownika. Dwa z nich służą do sterowania silnikiem (sygnały \textit{PWM}, \textit{kierunek}), trzeci steruje diodą sygnalizacyjną. Sygnał \textit{PWM} kontrolowany jest przez sterownik jako tzw. wyjście pulsacyjne (\textit{PTO}); rolą programisty jest dostarczenie odpowiedniej wartości liczbowej do konkretnego słowa wyjściowego sterownika (tutaj \texttt{\%QW1000}). Częstotliwość wyjścia pulsacyjnego ustawiono na \SI{20}{\kilo\hertz}, natomiast kontrolę wypełnienia na setki, tzn. wpisanie wartości \num{85} do słowa wyjściowego sygnału PWM oznacza wypełnienie \SI{85}{\percent}.
 
-Z racji możliwości sterowania obrotami silnika w dwie strony, regulator pozycji belki może zwrócić wartość z zakresu \numrange[range-phrase={ do }]{-100}{100}; stąd w bloku \textit{Zapis do wyjść} następuje konwersja tej wartości na jej moduł i zapis tego modułu do \texttt{\%QW1000}, natomiast sygnał \textit{kierunek} ustawiony jest na \num{1} dla ujemnej wartości sterowania.
+Z racji możliwości sterowania obrotami silnika w dwie strony, regulator pozycji belki może zwrócić wartość z zakresu \numrange[range-phrase={ do }]{-100}{100}; stąd w bloku \textit{Zapis do wyjść} następuje konwersja tej wartości na jej moduł i zapis tego modułu do \texttt{\%QW1000}, natomiast sygnał \textit{kierunek} ustawiony jest na \num{1} dla ujemnej wartości sterowania, a na \num{0} dla dodatniej.
 
-% TODO: schemat sekwencji głównej
+Równolegle do bloku \texttt{OB1}, wywoływanego co cykl procesora, użyto dwóch bloków organizacyjnych \texttt{OB30} i \texttt{OB31} wywoływanych co \SI{100}{\milli\second}. Rolą pierwszego z nich jest uruchamianie regulatorów (więcej w rozdziale \ref{sec:ch7_regulatory}), natomiast rolą drugiego jest obliczanie pochodnych sygnałów w czasie.
 
-% TODO: opis sekwencji głównej
-
-% TODO: wywoływane OB30, OB31
+W \texttt{OB31} następuje obliczanie prędkości liniowej kulki oraz prędkości kątowej belki według następujących wzorów:
+\begin{align*}
+    v &= \frac{\Delta x}{\Delta t} \\
+    \omega &= \frac{\Delta \alpha}{\Delta t}
+\end{align*}
+gdzie:
+\begin{itemize}
+    \item $\Delta t$ to stała wartość \SI{100}{\milli\second} równa okresowi wywołań bloku \texttt{OB31},
+    \item $\Delta x$ to różnica wartości obecnej pozycji liniowej kulki oraz pozycji z poprzedniego wywołania bloku \texttt{OB31},
+    \item $\Delta \alpha$ to różnica wartości obecnego kąta belki oraz kąta z poprzedniego wywołania bloku \texttt{OB31}.
+\end{itemize}
 
 %%%%
 \section{Wykrywanie braku kulki}
@@ -68,9 +76,63 @@ W wyniku zastosowania powyższych warunków, błędnie określona obecność kul
 \begin{figure}[ht]
     \centering
     \includesvg[width=1\textwidth,svgpath=./vector_graphics/]{bez_przeszkody}    
-    \caption{Odpowiedź czujników, gdy pomiędzy nimi nie ma żadnej przeszkody.}
+    \caption{Odpowiedź czujników odległości, gdy pomiędzy nimi nie ma żadnej przeszkody.}
     \label{fig:czujniki_charakterystyka_bez_przeszkody}
 \end{figure}
+
+%%%%
+\section{Sekwencja główna programu}
+\label{sec:sekwencja_glowna}
+
+Sterownik PLC Siemens z serii S7-1200 nie obsługuje języka sterowania sekwencyjnego \textsc{S7-GRAPH}, który został zastrzeżony przez producenta tylko dla mocniejszej serii S7-1500 (\cite{SCL_S71200_S71500}). W~związku z~tym w~języku obsługiwanym przez S7-1200 (diagram drabinkowy \textit{LAD} \cite{PROGRAMOWANIE_PLC}) zaimplementowano okrojoną wersję sterowania sekwencyjnego, przedstawioną na \cref{fig:schemat_sekwencji}.
+
+\begin{figure}[ht]
+    \centering
+    
+    \begin{tikzpicture}[auto, node distance=1cm,>=latex']
+    \node [startblock] (S1) {Bazowanie};
+    \node [block, below=1.25of S1] (S2) {Oczekiwanie na przycisk};
+    \node [block, below=2of S2] (S3) {Stabilizacja kulki w położeniu zerowym};
+    \node [block, below=1.25of S3] (S4) {Identyfikacja systemu kulki};
+    \node [block, below=2of S4] (S5) {Identyfikacja systemu belki};
+    \node [block, below=2of S5] (S6) {Zmiana regulatorów na zidentyfikowane};
+    
+    \draw [->] (S1) -- node [] {$T_1$} (S2);
+    \draw [->] (S2) -- node [pos=0.25,name=T2_1] {} node [pos=0.70] {$\uparrow$\texttt{START}} (S3);
+    \draw [->] (T2_1.west) -| ++ (-2.5,1.5) node [left] {$\downarrow$\texttt{STOP}} |- (S1.west);
+    \draw [->] (S3) -- node [] {$\uparrow$\texttt{START}} (S4);
+    \draw [->] (S4) -- node [pos=0.25,name=T4_3] {} node [pos=0.70] {$T_4$} (S5);
+    \draw [->] (S5) -- node [pos=0.25,name=T5_3] {} node [pos=0.70] {$T_5$} (S6);
+    \draw [->] (T4_3.west) -| ++ (-3.5,1.5) node [left] {$\downarrow$\texttt{STOP}} |- (S3.185);
+    \draw [->] (T5_3.west) -| ++ (-5,2) node [left] {$\downarrow$\texttt{STOP}} |- (S3.175);
+    \draw [->] (S6.east) -| ++ (1.5,4) node [right] {$T_6$} |- (S3);
+    \end{tikzpicture}
+    
+    \caption{Schemat sterowania sekwencyjnego zaimplementowanego w sterowniku PLC.}
+    \label{fig:schemat_sekwencji}
+\end{figure}
+
+Na schemacie sekwencji z \cref{fig:schemat_sekwencji} wyróżnić można:
+\begin{itemize}
+    \item stany, oznaczone jako prostokąty, w tym stan początkowy (prostokąt z podwójnym obramowaniem),
+    \item tranzycje, widoczne jako połączenia między stanami przy użyciu strzałek,
+    \item warunki tranzycji umieszczone obok strzałek, oznaczone przy użyciu symbolu $T_i$ lub przy użyciu faktycznie wykorzystanych warunków logicznych.
+\end{itemize}
+
+Względem symboliki powszechnie stosowanej w językach sterowania sekwencyjnego (\cite{SEKW1}\cite{SEKW2}), na \cref{fig:schemat_sekwencji} brakuje działań. Zostało to zrobione umyślnie, gdyż każde działanie wiąże się z dłuższym algorytmem lub, jak w przypadku bazowania, równoległym grafem sekwencji, a zatem wpisanie ich obok bloków stanów wpłynęłoby negatywnie na czytelność schematu.
+
+% TODO: zaktualizuj referencję
+Na schemacie sekwencji \cref{fig:schemat_sekwencji} wyróżnione zostały następujące warunki tranzycji:
+\begin{itemize}
+    \item $\downarrow$\texttt{STOP} oznacza zbocze opadające na sygnale z przycisku \texttt{STOP},
+    \item analogicznie $\uparrow$\texttt{START} oznacza zbocze narastające na sygnale z przycisku \texttt{START},
+    \item $T_1$ -- stan wysoki na rejestrze binarnym \texttt{M\_homed} oznaczającym wybazowanie wału motoreduktora,
+    \item $T_4$ -- pomyślne zakończenie procesu identyfikacji kulki,
+    \item $T_5$ -- pomyślne zakończenie procesu identyfikacji belki,
+    \item $T_6$ -- uaktualnienie (zmiana) regulatorów używanych w systemie lub ich nastaw.
+\end{itemize}
+
+Poszczególne stany wymienione na \cref{fig:schemat_sekwencji} i uruchamiane w nich działania opisane zostały poniżej (proces bazowania, stabilizacja kulki w położeniu zerowym) oraz w rozdziale \ref{cha:ch8_algorytm_samostrojenia} (identyfikacja systemu kulki, belki oraz przeprowadzone na ich podstawie samostrojenie).
 
 %%%%
 \section{Bazowanie}
