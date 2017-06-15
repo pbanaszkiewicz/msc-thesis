@@ -71,7 +71,7 @@ Biorąc powyższe fakty pod uwagę, zdecydowano się na następujący algorytm w
     \item jeżeli wartość z przetwornika ADC czujnika lewego wynosi więcej niż \num{900} oraz wartość z przetwornika ADC czujnika prawego wynosi więcej niż \num{900}, to ustaw zmienną binarną \textit{kulka obecna}.
 \end{itemize}
 
-W wyniku zastosowania powyższych warunków, błędnie określona obecność kulki będzie tylko w sytuacji chwilowego wystąpienia skoków wartości na obu czujnikach; brak kulki zostanie wykryty natychmiast po zaniknięciu obu skoków wartości.
+W wyniku zastosowania powyższych warunków, błędnie określona obecność kulki będzie tylko w~sytuacji chwilowego wystąpienia skoków wartości na obu czujnikach; brak kulki zostanie wykryty natychmiast po zaniknięciu obu skoków wartości.
 
 \begin{figure}[ht]
     \centering
@@ -138,30 +138,100 @@ Poszczególne stany wymienione na \cref{fig:schemat_sekwencji} i uruchamiane w n
 \section{Bazowanie}
 \label{sec:ch7_bazowanie}
 
-% TODO: opisz ideę
-% TODO: schemat blokowy algorytmu
-% TODO: wartość enkodera
+W wyniku zastosowania w obiekcie enkodera inkrementalnego bez pamięci, za każdym razem po uruchomieniu sterownika PLC konieczne jest przeprowadzenie procedury bazowania w~celu wykrycia położenia kątowego wału motoreduktora. Schemat procedury bazowania został przedstawiony na \cref{fig:schemat_bazowania}.
+
+% TODO: znajdź źródło!!!
+W procesie bazowania istotne jest najechanie na czujnik krańcowy (bazowania) zawsze od tej samej strony. Ta konieczność spowodowana jest obecnością luzów na przekładniach i dotyczy większości układów mechanicznych, w których użyto przekładni.
+
+Dzięki zastosowaniu mechanizmu obrotowego, algorytm bazowania jest uproszczony, tzn. możliwe było zrezygnowanie z cofania się (obrotu w przeciwnym kierunku) wału w sytuacji, gdy znajduje się on na pozycji zasłaniającej czujnik bazowania. Zamiast tego wystarczy reakcja na zbocze opadające sygnału z czujnika.
+
+\begin{figure}[ht]
+    \centering
+    
+    \begin{tikzpicture}[auto, node distance=1cm,>=latex']
+    \node [roundblock] (S1) {Start};
+    \node [conditionblock, below=1of S1] (S2) {Czy enkoder jest wybazowany?};
+    \node [block, below=1of S2] (S3) {Ustaw niską wartość napięcia sterującego silnikiem};
+    \node [conditionblock, below=1of S3] (S4) {Czy nastąpiło zbocze opadające na czujniku bazowania?};
+    \node [block, below=1of S4] (S5) {Ustaw zerowe napięcie sterujące silnikiem};
+    \node [block, below=1of S5] (S6) {Ustaw bit wybazowania enkodera};
+    \node [block, below=1of S6] (S7) {Ustaw wartość licznika enkodera};
+    \node [roundblock, below=1of S7] (S8) {Stop};
+    
+    \draw [->] (S1) -- (S2);
+    \draw [->] (S2.west) -| ++ (-2,0) node [above right] {Tak} |- (S8);
+    \draw [->] (S2) -- node [] {Nie} (S3);
+    \draw [->] (S3) -- (S4);
+    \draw [->] (S4) -- node [] {Tak} (S5);
+    \draw [->] (S4.east) -| ++ (2,0) node [above left] {Nie} |- (S3);
+    \draw [->] (S5) -- (S6);
+    \draw [->] (S6) -- (S7);
+    \draw [->] (S7) -- (S8);
+    \end{tikzpicture}
+    
+    \caption{Schemat blokowy algorytmu bazowania licznika enkodera.}
+    \label{fig:schemat_bazowania}
+\end{figure}
+
+W momencie wystąpienia zbocza opadającego sygnału z czujnika bazowania następuje ustawienie wartości \num{149} w liczniku enkodera oraz ustawienie stanu wysokiego w rejestrze \textsc{M\_homed}, używanym m.in. przez sekwencję główną.
 
 %%%%
 \section{Regulatory}
 \label{sec:ch7_regulatory}
 
-% TODO: ogólnie opisać sposób implementacji regulatorów w sterowniku
+Jak to zostało wspomniane we wstępie do rozdziału, obliczanie nowych wartości sterowania z obu regulatorów umieszczone zostało w bloku \texttt{OB30} wywoływanym przez sterownik PLC z okresem \SI{100}{\milli\second}.
+
+Wywoływanie regulatorów z określoną częstotliwością ma swoje podłoże w regulacji typu PID. Oprogramowanie \textsc{Siemens TIA Portal}, jak również sterowniki serii S7-1200, obsługuje tak zwane obiekty technologiczne (\cite{S7MANUAL}\cite{SCL_S71200_S71500}); jednym z nich jest prosty regulator typu PID z mechanizmem automatycznego strojenia. Blok takiego obiektu technologicznego musi być wywoływany w programie sterownika z określoną częstotliwością, co związane jest z koniecznością liczenia pochodnych sygnału uchybu w czasie.
+
+Umieszczenie regulatorów w bloku \texttt{OB30} umożliwia zatem przeprowadzenie łatwej zamiany na obiekt technologiczny PID gdyby nastała taka konieczność.
+
+Ponadto sygnały, z których korzystają regulatory, takie jak prędkość obrotowa belki czy prędkość liniowa kulki, również są liczone z~okresem \SI{100}{\milli\second}, co oznacza, że nie należy uruchamiać bloku \texttt{OB30} ani rzadziej (co powodowałoby pracę ze zbyt starymi wartościami sygnałów), ani częściej (co powodowałoby brak realistycznej reakcji na wartości prędkości).
+
+Regulatory opisane w rozdziałach \ref{sec:ch6_regulator_belki} oraz \ref{sec:ch6_regulator_kulki} są regulatorami typu proporcjonalnego od stanu, co oznacza, że ich implementacja w sterowniku PLC jest równoznaczna z obliczeniem sumy sygnałów od stanu wymnożonych przez macierz współczynników. W przypadku obu regulatorów, uzyskano to za pomocą bloku \texttt{Calculate} (\cref{fig:tia_portal_blok_calculate}), umożliwiającego zdefiniowanie prostych wyrażeń algebraicznych.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{tia_calculate_block}
+    \caption{Zrzut ekranu z programu \textsc{Siemens TIA Portal} z widocznym blokiem \texttt{Calculate} i przykładowym równaniem, które ten blok może obliczyć.}
+    \label{fig:tia_portal_blok_calculate}
+\end{figure}
+
+% TODO: eksperyment regulacji poprzez obiekt technologiczny PID -- może próba przeprowadzenia samostrojenia?
 
 %%%%
-\subsection{Regulator belki}
+\subsection{Regulator położenia belki}
 \label{subsec:ch7_regulator_belki}
 
-% TODO: opisać implementację regulatora belki
+Regulator podrzędny, odpowiedzialny za ustawienie belki w zadanym miejscu, realizuje obliczanie napięcia podanego na silnik według wzoru \eqref{eq:regulator_belki_wzor}:
+\begin{equation}
+    u = K_b(1) \cdot \epsilon_\alpha + K_b(2) \cdot \epsilon_\omega
+    \label{eq:regulator_belki_wzor}
+\end{equation}
+gdzie $K_b$ to macierz wzmocnień regulatora (opisana w rozdziale \ref{sec:ch6_regulator_belki}), a $\epsilon_\alpha$ i $\epsilon_\omega$ to odpowiednio odchyłka położenia kątowego belki i jej prędkości kątowej od zadanych przez regulator nadrzędny wartości.
+
+Należy zwrócić uwagę, że realizacja powyższego wzoru na sterowniku PLC wymaga przeskalowania napięcia $u$ na wypełnienie sygnału PWM. W tym celu zastosowano skalowanie liniowe o współczynniku kierunkowym $\frac{100}{11,95}=8,3682$, gdzie \num{100} to maksymalna wartość wypełnienia PWM, a \num{11,95} to napięcie znamionowe, które zostało użyte w modelu symulacyjnym silnika (rozdział \ref{sec:ch4_model_silnika}).
 
 %%%%
-\subsection{Regulator kulki}
+\subsection{Regulator położenia kulki}
 \label{subsec:ch7_regulator_kulki}
 
-% TODO: opisać implementację regulatora kulki
+Regulator nadrzędny, nazywany regulatorem położenia kulki, ma za zadanie generować sterowanie dla regulatora podrzędnego według wzoru \eqref{eq:regulator_kulki_wzor}:
+
+\begin{nalign}
+    \alpha_\text{ref} &= K_k(1) \cdot \epsilon_1 + K_k(2) \cdot \epsilon_2 + K_k(3) \cdot \epsilon_3 + K_k(4) \cdot \epsilon_4 \\
+    \omega_\text{ref} &= K_k(5) \cdot \epsilon_1 + K_k(6) \cdot \epsilon_2 + K_k(7) \cdot \epsilon_3 + K_k(8) \cdot \epsilon_4
+    \label{eq:regulator_kulki_wzor}
+\end{nalign}
+gdzie $K_k$ to macierz wzmocnień regulatora (opisana w rozdziale \ref{sec:ch6_regulator_kulki}), $\alpha_\text{ref}$ oraz $\omega_\text{ref}$ są wartościami zadanymi dla regulatora podrzędnego, a $\epsilon_i, ~i=1\dots4$ to odchyłki wartości stanów systemu od ich wartości zadanych.
+
+% TODO: zmierzyć prędkość kątową?
+%Wartości wyjściowe z tego regulatora $\alpha_\text{ref}$ oraz $\omega_\text{ref}$ zostały przeskalowane za pomocą pary bloków \texttt{Limit} tak, że nie wykraczają poza fizyczne możliwości ruchu belki (\SI{+-0,3}{\radian} dla pozycji kątowej i \SI{+-58}{\radian\per\second} dla prędkości kątowej).
 
 %%%%
 \section{Podsumowanie}
 
-% TODO: dokończ
+W niniejszym rozdziale przedstawiono sposób obsługi oprzyrządowania obiektu regulacji (w tym czujników odległości i bazowania, przycisków oraz diody), a także szczegóły implementacyjne sterowania silnikiem przez mostek H i sygnały generowane na wyjściach sterownika PLC. Następnie opisano zadania bloków organizacyjnych \texttt{OB1}, \texttt{OB30} i \texttt{OB31} sterownika w obliczaniu pochodnych sygnałów, wyjścia z regulatorów czy pętli głównej programu.
+
+W dalszej części rozdziału przedstawiono wykorzystane algorytmy wykrywania braku kulki, bazowania czy implementację regulatorów. Opisano również schemat sekwencji głównej programu.
+
 %---------------------------------------------------------------------------

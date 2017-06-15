@@ -41,27 +41,27 @@ Przed linearyzacją konieczne było znalezienie punktu pracy, czyli przeprowadze
 
 Po wyznaczeniu punktu równowagi, nadal wykorzystując narzędzie \texttt{Linear Analysis Tool}, zlinearyzowano układ otrzymując wynikowe macierze:
 
-\begin{align}
+\begin{nalign}
     \widetilde{A} &= \begin{bmatrix}
         0 & 1 & 0 & 0 \\
         -0,2289 & 0 & 47,607 & 3,2117 \\
         0 & 0 & 0 & 1 \\
         0,4977 & 0 & 0,262 & -6,9832 \\
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix} \\
     \widetilde{B} &= \begin{bmatrix}
         0 \\
         -15,5016 \\
         0 \\
         33,7051 \\
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix} \\
     \widetilde{C} &= \begin{bmatrix}
             0,03 & 0 & 0 & 0 \\
             0 & 0,03 & 0 & 0 \\
             0 & 0 & 0,2044 & 0 \\
             0 & 0 & 0 & 0,2044 \\
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix} \\
     \widetilde{D} &= 0 \label{eq:macierze_stanu1}
-\end{align}
+\end{nalign}
 
 Dalsza analiza wyników linearyzacji wykazała, że narzędzie \texttt{Linear Analysis Tool} dobrało inne zmienne stanu niż oczekiwane, a mianowicie:
 
@@ -75,33 +75,33 @@ Dalsza analiza wyników linearyzacji wykazała, że narzędzie \texttt{Linear An
 Należy zauważyć, że kąt obrotu kulki wokół własnej osi $\tilde{x}_1$ oraz przesunięcie liniowe kulki $x_1$ są ze sobą liniowo zależne: $\tilde{x}_1 = r x_1$, gdzie $r$ to promień kulki. Podobnie kąty obrotu belki $x_3$ i obrotu wału motoreduktora $\tilde{x}_3$ również są od siebie liniowo zależne w pobliżu punktu pracy, co zostało wskazane w rozdziale \ref{sec:ch3_uklad_napedowy}, wzór \eqref{eq:uproszczona_zaleznosc_kata_belki}. Oznacza to, że można dokonać transformacji macierzy stanu \eqref{eq:macierze_stanu1} tak, aby otrzymać oczekiwane zmienne stanu.
 
 Transformację podobieństwa zmiennych stanu $\breve{x} = T_1 \tilde{x}$ przeprowadza się następująco:
-\begin{align}
-    \breve{x}' &= T_1 \widetilde{A} T_1^{-1} \breve{x} + T_1 \widetilde{B} u \nonumber \\
+\begin{nalign}
+    \breve{x}' &= T_1 \widetilde{A} T_1^{-1} \breve{x} + T_1 \widetilde{B} u \\
     \breve{y} &= \widetilde{C} T_1^{-1} \breve{x} + \widetilde{D} u \label{eq:transformacja_x}
-\end{align}
+\end{nalign}
 
 Jako macierz transformacji $T_1$ użyto macierzy wyjścia $\widetilde{C}$ i otrzymano następujące macierze wynikowe:
-\begin{align}
+\begin{nalign}
     \breve{A} &= \begin{bmatrix}
          0 & 1 & 0 & 0 \\
          -0,2289 & 0 & 6,9871 & 0,4714 \\
          0 & 0 & 0 & 1 \\
          3,3914 & 0 & 0,262 & -6,9832 \\
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix} \\
     \breve{B} &= \begin{bmatrix}
          0 \\
          -0,465 \\
          0 \\
          6,8896 \\
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix} \\
     \breve{C} &= \begin{bmatrix}
         1 & 0 & 0 & 0 \\
         0 & 1 & 0 & 0 \\
         0 & 0 & 1 & 0 \\
         0 & 0 & 0 & 1 \\
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix} \\
     \breve{D} &= 0 \label{eq:macierze_stanu2}
-\end{align}
+\end{nalign}
 
 % TODO: lepsza argumentacja?
 Jak można zaobserwować, położenie zer i jedynek w macierzach $\widetilde{A}$ i $\breve{A}$ pozostało takie samo, co potwierdza, że dokonana została transformacja liniowa.
@@ -220,7 +220,7 @@ gdzie $\breve{B}_i$ oznacza \textit{i}-ty element macierzy $\breve{B}$.
 % TODO: skąd się bierze ten współczynnik?!?!?!?!
 
 Dzięki przekształceniu przez macierz \eqref{eq:transformacja2_x} otrzymano następujące macierze stanu:
-\begin{align}
+\begin{nalign}
     \hat{A} &= \begin{bmatrix}
     0 & 1 & 0 & 0 \\
     0 & 0 & 7,0047 & 0 \\
@@ -235,44 +235,44 @@ Dzięki przekształceniu przez macierz \eqref{eq:transformacja2_x} otrzymano nas
         \hline
         \hat{A}_{21} & \hat{A}_{22}
         \end{array}
-    \right] \nonumber \\
+    \right] \\
     \hat{B} &= \begin{bmatrix}
     0 \\
     0 \\
     0 \\
     6,8896 \\
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix} \\
     \hat{C} &= \begin{bmatrix}
     1 & 0 & -0,0675 & 0 \\
     0 & 1 & 0 & -0,0675 \\
     0 & 0 & 1 & 0 \\
     0 & 0 & 0 & 1 \\
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix} \\
     \hat{D} &= 0 \label{eq:macierze_stanu3}
-\end{align}
+\end{nalign}
 
 Widać, że postać macierzy $\hat{B}$ z \eqref{eq:macierze_stanu3} odpowiada już oczekiwanej strukturze, natomiast macierz $\hat{A}$~jeszcze nie ma takiej formy. W związku z tym zdecydowano się doprowadzić macierz $\hat{A}$ do postaci blokowo-trójkątnej górnej poprzez wyzerowanie $\hat{A}_{21}$. Nowe macierze stanu przedstawiają się następująco:
-\begin{align}
+\begin{nalign}
     A &= \begin{bmatrix}
     0 & 1 & 0 & 0 \\
     0 & 0 & 7,0047 & 0 \\
     0 & 0 & 0 & 1 \\
     0 & 0 & 0,0331 & -6,9832 \\
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix} \\
     B &= \begin{bmatrix}
     0 \\
     0 \\
     0 \\
     6,8896 \\
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix} \\
     C &= \begin{bmatrix}
     1 & 0 & -0,0675 & 0 \\
     0 & 1 & 0 & -0,0675 \\
     0 & 0 & 1 & 0 \\
     0 & 0 & 0 & 1 \\
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix} \\
     D &= 0 \label{eq:macierze_stanu4}
-\end{align}
+\end{nalign}
 
 Aby udowodnić, że wyzerowanie ww. elementu macierzy $\hat{A}$ nie przyniosło negatywnych skutków, poniżej przedstawiono wykresy charakterystyk amplitudowo-fazowych dla systemów opisanych macierzami $\hat{A}$, $\hat{B}$, $\hat{C}$ i $\hat{D}$ oraz $A$, $B$, $C$ i $D$.
 
@@ -311,7 +311,11 @@ x_1 \\ x_2 \\ x_3 \\ x_4
 \end{bmatrix} \label{eq:rownania_wyjscia} 
 \end{align}
 
-\begin{figure}[h]
+Za pomocą kryterium macierzy Kalmana stwierdzono, że układ \eqref{eq:rownania_stanu} jest sterowalny, a zatem możliwe jest dobranie regulatora, który ten układ doprowadzi do dowolnego punktu pracy. Ponadto macierz stanu układu posiada następujące wartości własne: $\begin{bmatrix}
+0 & 0 & 0.0047 & -6.9880
+\end{bmatrix}^\intercal$, co jest sprzeczne z założeniami twierdzenia Hartmana-Grobmana (\cite{TEORIASTERCW}), a zatem nie pozwala twierdzić o podobieństwie reprezentacji systemu zlinearyzowanego do systemu nieliniowego.
+
+\begin{figure}[ht]
     \centering
     \includesvg[width=1\textwidth,svgpath=./vector_graphics/]{ch_amplitudowo_fazowa}
     \caption{Wykresy amplitudowo-fazowe systemów opisanych macierzami \eqref{eq:macierze_stanu3} oraz \eqref{eq:macierze_stanu4}. Przedstawiona charakterystyka dla pierwszej zmiennej stanu (położenia linio\-wego kulki).}
@@ -319,6 +323,7 @@ x_1 \\ x_2 \\ x_3 \\ x_4
 \end{figure}
 
 Do uzyskania struktury kaskadowej systemu zlinearyzowanego należy wydzielić równania stanu kulki oraz belki:
+
 \begin{align}
 \begin{bmatrix}
 \dot{x}_1 \\ \dot{x}_2
@@ -525,32 +530,32 @@ Należy przypomnieć, że funkcja \texttt{looptune} jest funkcją optymalizacyjn
 \end{bmatrix}$.
 
 Po ponownym ,,zwinięciu'' regulatora $K_k$ i wewnętrznej pętli sprzężenia zwrotnego za pomocą komend \texttt{sumblk} oraz \texttt{connect} uzyskano system \textit{State-Space} całego zlinearyzowanego układu wraz z~pętlami sprzężeń zwrotnych. Macierze stanu tego systemu zostały zaprezentowane na poniżej \eqref{eq:macierze_stanu_calego_ukladu}:
-\begin{align}
+\begin{nalign}
     A_c &= \begin{bmatrix}
         0 & 1 & 0 & 0 \\
         -103,4 & -79,16 & -103,2 & -95,39 \\
         0 & 0 & 0 & 1 \\
         7,005 & 0 & 0 & 0
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix}  \\
     B_c &= \begin{bmatrix}
         0 & 0 & 0 & 0 \\
         103,2 & 95,39 & 53,82 & 67,76 \\
         0 & 0 & 0 & 0 \\
         0 & 0 & 0 & 0
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix}  \\
     C_c &= \begin{bmatrix}
         -0,0675 & 0 & 1 & 0 \\
         0 & -0,0675 & 0 & 1 \\
         1 & 0 & 0 & 0 \\
         0 & 1 & 0 & 0 \\
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix}  \\
     D_c &= \begin{bmatrix}
         0 & 0 & 0 & 0 \\
         0 & 0 & 0 & 0 \\
         0 & 0 & 0 & 0 \\
         0 & 0 & 0 & 0
     \end{bmatrix} \label{eq:macierze_stanu_calego_ukladu}
-\end{align}
+\end{nalign}
 
 Sprawdzenie wartości własnych macierzy $A_c$ pokazuje, że układ ten ma charakter oscylacyjnie stabilny \eqref{eq:wartosci_wlasne_A_c}:
 \begin{equation}
@@ -571,32 +576,32 @@ K_k = \begin{bmatrix}
 \end{equation}
 
 Po wprowadzeniu zmienionego regulatora do całości układu, w macierzach stanu nie zaszły duże zmiany, a charakter układu pozostał oscylacyjnie stabilny:
-\begin{align}
+\begin{nalign}
     A_c &= \begin{bmatrix}
         0 & 1 & 0 & 0 \\
         -103,4 & \mathbf{-78,65} & -103,2 & \mathbf{-102,9} \\
         0 & 0 & 0 & 1 \\
         7,005 & 0 & 0 & 0
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix} \\
     B_c &= \begin{bmatrix}
         0 & 0 & 0 & 0 \\
         103,2 & \mathbf{102,9} & 53,82 & 67,76 \\
         0 & 0 & 0 & 0 \\
         0 & 0 & 0 & 0
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix} \\
     C_c &= \begin{bmatrix}
         -0,0675 & 0 & 1 & 0 \\
         0 & -0,0675 & 0 & 1 \\
         1 & 0 & 0 & 0 \\
         0 & 1 & 0 & 0 \\
-    \end{bmatrix} \nonumber \\
+    \end{bmatrix} \\
     D_c &= \begin{bmatrix}
         0 & 0 & 0 & 0 \\
         0 & 0 & 0 & 0 \\
         0 & 0 & 0 & 0 \\
         0 & 0 & 0 & 0
     \end{bmatrix} \label{eq:macierze_stanu_calego_ukladu2}
-\end{align}
+\end{nalign}
 
 %%%%
 \section{Podsumowanie}

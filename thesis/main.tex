@@ -187,6 +187,16 @@ backend=biber
 % usuwa spacje po przecinkach przy liczbach w trybie matematycznym
 \usepackage{icomma}
 
+% nowe środowisko do użycia wielokrotnych linii ale tylko jednego numeru
+\newenvironment{nalign}{
+    \begin{equation}
+    \begin{aligned}
+}{
+    \end{aligned}
+    \end{equation}
+    \ignorespacesafterend
+}
+
 % ----------------------------
 % --- < schematy w tikz > ---
 
@@ -205,6 +215,7 @@ backend=biber
     sum/.style = {draw, circle, node distance=1cm, path picture={\draw (path picture bounding box.south east) -- (path picture bounding box.north west) (path picture bounding box.south west) -- (path picture bounding box.north east);}},
     mux/.style = {draw, rectangle, fill=black, minimum height=1cm, minimum width=0.1cm},
     startblock/.style = {draw, rectangle, minimum height=1cm, minimum width=1cm, double, double distance=1mm},
+    conditionblock/.style = {draw, rectangle, minimum height=1cm, minimum width=1cm, text width=5cm},
 ,
 }
 
