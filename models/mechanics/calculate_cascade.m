@@ -13,9 +13,10 @@ C_beam = linear_system_SS.C(3:4, 3:4);
 D_beam = 0;
 
 beam_SS = ss(A_beam, B_beam, C_beam, D_beam);
+%beam_SS = ss([0 1; 0 -1/T], [0; K/T], [1 0], 0);
 beam_SS.InputName = {'voltage'};
 beam_SS.OutputName = {'beam_angle'; 'beam_angular_velocity'};
-beam_TF = tf(beam_SS);
+%beam_TF = tf(beam_SS);
 
 % Find gain by placing poles
 %P_beam = [-3 -10];
@@ -87,7 +88,7 @@ sum_outer = sumblk('%v = %s - %y', ...
 %P_ball.D = [2 1 0 0; 1 0 0 0]; nie to nie daje
 %P_ball.D = [3.8804    0.1733    4.6754    3.0000;
 %    0.7450    0.0333    0.8976    0.5760];
-P_ball.D(4) = 0.2;
+P_ball.D(4) = 0.1;
 collapsed = connect(P_ball, collapsed_beam_ball, sum_outer, ...
     {'position_ref', 'velocity_ref', 'angle_ref', 'angular_velocity_ref'}, ...
     {'ball_position'; 'ball_velocity'; 'beam_angle'; 'beam_angular_velocity'});
