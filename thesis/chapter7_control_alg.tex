@@ -121,8 +121,7 @@ Na schemacie sekwencji z \cref{fig:schemat_sekwencji} wyróżnić można:
 
 Względem symboliki powszechnie stosowanej w językach sterowania sekwencyjnego (\cite{SEKW1}\cite{SEKW2}), na \cref{fig:schemat_sekwencji} brakuje działań. Zostało to zrobione umyślnie, gdyż każde działanie wiąże się z dłuższym algorytmem lub, jak w przypadku bazowania, równoległym grafem sekwencji, a zatem wpisanie ich obok bloków stanów wpłynęłoby negatywnie na czytelność schematu.
 
-% TODO: zaktualizuj referencję
-Na schemacie sekwencji \cref{fig:schemat_sekwencji} wyróżnione zostały następujące warunki tranzycji:
+Na schemacie sekwencji na \cref{fig:schemat_sekwencji} wyróżnione zostały następujące warunki tranzycji:
 \begin{itemize}
     \item $\downarrow$\texttt{STOP} oznacza zbocze opadające na sygnale z przycisku \texttt{STOP},
     \item analogicznie $\uparrow$\texttt{START} oznacza zbocze narastające na sygnale z przycisku \texttt{START},
@@ -132,7 +131,8 @@ Na schemacie sekwencji \cref{fig:schemat_sekwencji} wyróżnione zostały nastę
     \item $T_6$ -- uaktualnienie (zmiana) regulatorów używanych w systemie lub ich nastaw.
 \end{itemize}
 
-Poszczególne stany wymienione na \cref{fig:schemat_sekwencji} i uruchamiane w nich działania opisane zostały poniżej (proces bazowania, stabilizacja kulki w położeniu zerowym) oraz w rozdziale \ref{cha:ch8_algorytm_samostrojenia} (identyfikacja systemu kulki, belki oraz przeprowadzone na ich podstawie samostrojenie).
+% TODO: zaktualizuj referencję
+Poszczególne stany wymienione na \cref{fig:schemat_sekwencji} i uruchamiane w nich działania opisane zostały poniżej (proces bazowania, regulator pozycji belki i regulator stabilizujący kulkę w położeniu zerowym) oraz w rozdziale \ref{cha:ch8_algorytmy_samostrojenia} (identyfikacja systemu kulki, belki oraz przeprowadzone na ich podstawie samostrojenie).
 
 %%%%
 \section{Bazowanie}
@@ -224,7 +224,8 @@ Regulator nadrzędny, nazywany regulatorem położenia kulki, ma za zadanie gene
 \end{nalign}
 gdzie $K_k$ to macierz wzmocnień regulatora (opisana w rozdziale \ref{sec:ch6_regulator_kulki}), $\alpha_\text{ref}$ oraz $\omega_\text{ref}$ są wartościami zadanymi dla regulatora podrzędnego, a $\epsilon_i, ~i=1\dots4$ to odchyłki wartości stanów systemu od ich wartości zadanych.
 
-% TODO: zmierzyć prędkość kątową?
+% bez sensu te limity bo nic nie dają realistycznego
+%% TODO: zmierzyć prędkość kątową?
 %Wartości wyjściowe z tego regulatora $\alpha_\text{ref}$ oraz $\omega_\text{ref}$ zostały przeskalowane za pomocą pary bloków \texttt{Limit} tak, że nie wykraczają poza fizyczne możliwości ruchu belki (\SI{+-0,3}{\radian} dla pozycji kątowej i \SI{+-58}{\radian\per\second} dla prędkości kątowej).
 
 %%%%
