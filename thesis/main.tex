@@ -30,6 +30,7 @@
 % operator '\sgn'
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\eig}{eig}
+\DeclareMathOperator{\tr}{tr}
 
 % polecenie \diff generujące \mathrm{d}
 \makeatletter
@@ -201,7 +202,7 @@ backend=biber
 % --- < schematy w tikz > ---
 
 \usepackage{tikz}
-\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{shapes,arrows,patterns}
 \usetikzlibrary{arrows,calc,positioning}
 
 \tikzset{
@@ -218,6 +219,9 @@ backend=biber
     conditionblock/.style = {draw, rectangle, minimum height=1cm, minimum width=1cm, text width=5cm},
 ,
 }
+
+\usepackage{pgfplots}  % rysowanie wykresów
+\usepgfplotslibrary{fillbetween}  % wypełnianie wykresów
 
 % -------------------
 % --- < dodatki > ---

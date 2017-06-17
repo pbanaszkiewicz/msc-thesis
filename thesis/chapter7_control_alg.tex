@@ -93,14 +93,14 @@ Sterownik PLC Siemens z serii S7-1200 nie obsługuje języka sterowania sekwency
     \node [startblock] (S1) {Bazowanie};
     \node [block, below=1.25of S1] (S2) {Oczekiwanie na przycisk};
     \node [block, below=2of S2] (S3) {Stabilizacja kulki w położeniu zerowym};
-    \node [block, below=1.25of S3] (S4) {Identyfikacja systemu kulki};
-    \node [block, below=2of S4] (S5) {Identyfikacja systemu belki};
+    \node [block, below=1.25of S3] (S4) {Identyfikacja systemu belki};
+    \node [block, below=2of S4] (S5) {Identyfikacja systemu kulki};
     \node [block, below=2of S5] (S6) {Zmiana regulatorów na zidentyfikowane};
     
     \draw [->] (S1) -- node [] {$T_1$} (S2);
     \draw [->] (S2) -- node [pos=0.25,name=T2_1] {} node [pos=0.70] {$\uparrow$\texttt{START}} (S3);
     \draw [->] (T2_1.west) -| ++ (-2.5,1.5) node [left] {$\downarrow$\texttt{STOP}} |- (S1.west);
-    \draw [->] (S3) -- node [] {$\uparrow$\texttt{START}} (S4);
+    \draw [->] (S3) -- node [] {$\uparrow$\texttt{START}, brak kulki} (S4);
     \draw [->] (S4) -- node [pos=0.25,name=T4_3] {} node [pos=0.70] {$T_4$} (S5);
     \draw [->] (S5) -- node [pos=0.25,name=T5_3] {} node [pos=0.70] {$T_5$} (S6);
     \draw [->] (T4_3.west) -| ++ (-3.5,1.5) node [left] {$\downarrow$\texttt{STOP}} |- (S3.185);
@@ -121,13 +121,14 @@ Na schemacie sekwencji z \cref{fig:schemat_sekwencji} wyróżnić można:
 
 Względem symboliki powszechnie stosowanej w językach sterowania sekwencyjnego (\cite{SEKW1}\cite{SEKW2}), na \cref{fig:schemat_sekwencji} brakuje działań. Zostało to zrobione umyślnie, gdyż każde działanie wiąże się z dłuższym algorytmem lub, jak w przypadku bazowania, równoległym grafem sekwencji, a zatem wpisanie ich obok bloków stanów wpłynęłoby negatywnie na czytelność schematu.
 
+% TODO: uaktualnij wyrażenie w przy T_6
 Na schemacie sekwencji na \cref{fig:schemat_sekwencji} wyróżnione zostały następujące warunki tranzycji:
 \begin{itemize}
     \item $\downarrow$\texttt{STOP} oznacza zbocze opadające na sygnale z przycisku \texttt{STOP},
     \item analogicznie $\uparrow$\texttt{START} oznacza zbocze narastające na sygnale z przycisku \texttt{START},
     \item $T_1$ -- stan wysoki na rejestrze binarnym \texttt{M\_homed} oznaczającym wybazowanie wału motoreduktora,
-    \item $T_4$ -- pomyślne zakończenie procesu identyfikacji kulki,
-    \item $T_5$ -- pomyślne zakończenie procesu identyfikacji belki,
+    \item $T_4$ -- pomyślne zakończenie procesu identyfikacji belki,
+    \item $T_5$ -- pomyślne zakończenie procesu identyfikacji kulki,
     \item $T_6$ -- uaktualnienie (zmiana) regulatorów używanych w systemie lub ich nastaw.
 \end{itemize}
 

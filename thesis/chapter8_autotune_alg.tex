@@ -1,16 +1,167 @@
 \chapter{Algorytmy samostrojenia}
 \label{cha:ch8_algorytmy_samostrojenia}
 
-% TODO: pobierz odpowiedź skokową PĘTLI SPRZĘŻENIA ZWROTNEGO, albo dla kąta belki, albo dla enkodera (najlepiej dla obu i określ które pasuje)
-
-Lorem ipsum.
-
 % TODO: wodolejstwo o różnych mechanizmach samostrojenia
-% TODO: powołanie się na jakąś książkę!
-% TODO: powołanie się na Podstawy Automatyki, J. Kowala
 
-% rozdział musi zawierać
-% - opis matematyczny podjętych algorytmów identyfikacji (pewnie charakterystyka skokowa) i wyciągniętych na ich podstawie nastaw regulatorów
-% - opis implementacji obliczeń na PLC
+Samostrojenie regulatorów podrzędnego i nadrzędnego oparto o automatyczne procesy identyfikacji matematycznych obiektów belki oraz kulki.
+
+%%%%
+\section{Identyfikacja obiektu belki}
+\label{sec:ch8_identyfikacja_belki}
+
+Identyfikację belki oparto o odpowiedź skokową modelu obiektu pierwszego rzędu opisanego transmitancją:
+\begin{equation}
+    G_b(s) = \frac{K_b}{T_b s+1}
+    \label{eq:transmitancja_obiektu_pierwszego_rzedu}
+\end{equation}
+gdzie $K_b$ oznacza wzmocnienie obiektu, a $T_b$ jego stałą czasową (\cite{KOWAL}). Parametry te można odczytać z~wykresu odpowiedzi skokowej (\cref{fig:odpowiedz_skokowa_obiektu_pierwszego_rzedu}, równanie \eqref{eq:odpowiedz_skokowa}) obiektu w następujący sposób:
+\begin{itemize}
+    \item wzmocnienie $K_b$ to iloraz wartości ustalonej $h_{ss}$ oraz zadanej amplitudy $A_\text{ref}$,
+    \item stała czasowa $T_b$ równa jest ilorazowi pola powierzchni $S^+$ pod asymptotą i nad wykresem charakterystyki oraz wartości ustalonej.
+\end{itemize}
+
+\begin{equation}
+    h(t) = h_{ss} \left( 1 - e^{-\frac{t}{T_b}} \right) \label{eq:odpowiedz_skokowa}
+\end{equation}
+
+Pole powierzchni $S^+$ (zobrazowane na \cref{fig:odpowiedz_skokowa_obiektu_pierwszego_rzedu}) określa się jako całkę:
+\begin{nalign}
+    S^+ &= \int \limits_{0}^{\infty} \left(h_{ss} - h(t) \right) \mathrm{d}x \\
+        &= \int \limits_{0}^{\infty} \left(K_b A_\text{ref} - K_b A_\text{ref} + K_b A_\text{ref} e^{-\frac{t}{T_b}} \right) \mathrm{d}x \\
+        &= T_b K_b A_\text{ref} e^{-\frac{t}{T_b}}|_{t=0}^{\infty} \\
+        &= T_b K_b A_\text{ref} \label{eq:pole_nad_figura}
+\end{nalign}
+
+Przykładową odpowiedź skokową wału motoreduktora wraz z jej aproksymacją zaprezentowano na \cref{fig:identyfikacja_belki}. W celu identyfikacji zdecydowano się wykorzystać odczyt prędkości wału motoreduktora z~dwóch powodów:
+\begin{itemize}
+    \item po pierwsze, tylko prędkość kątowa wału jest wartością zachowującą się ściśle jak obiekt inercyjny pierwszego rzędu,
+    \item po drugie, obrót belki zależny jest sinusoidalnie od obrotu wału silnika; stąd trudniejsze byłoby odczytanie parametrów ,,ukrytych'' w przebiegu sinusoidalnym, gdyby identyfikację przeprowadzano na kącie lub prędkości kątowej belki.
+\end{itemize}
+Algorytm identyfikacyjny (zob. rozdział \ref{sec:ch8_algorytm_identyfikacji_belki}) również korzysta z odpowiedzi skokowej wału motoreduktora.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            domain=0.0:3,
+            xmin=0, xmax=2,
+            ymin=0, ymax=40,
+            samples=400,
+            axis y line=center,
+            axis x line=middle,
+            legend pos=north west,
+        ]
+            \addplot+[name path=A, no marks] {25*(1-e^(-x/0.118))};
+            \addlegendentry{Odpowiedź skokowa $h(t)$};
+            \addplot[dashed,name path=B] {25};
+            \addlegendentry{Wartość graniczna (stan ustalony) $h_{ss}$};
+            \addplot[pattern=north east lines,pattern color=gray] fill between[of=A and B];
+            \addlegendentry{Pole nad odpowiedzią skokową $S^+$};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Wykres odpowiedzi skokowej obiektu inercyjnego pierwszego rzędu.}
+    \label{fig:odpowiedz_skokowa_obiektu_pierwszego_rzedu}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=1\textwidth,svgpath=./vector_graphics/]{identyfikacja_belki}    
+    \caption{Przykład aproksymacji odpowiedzi skokowej prędkości obrotowej wału motoreduktora.}
+    \label{fig:identyfikacja_belki}
+\end{figure}
+
+Należy zwrócić uwagę, że wartością, która częściej jest wykorzystywana w algorytmach sterowania w tym obiekcie, jest nie prędkość kątowa wału motoreduktora, ale jego pozycja kątowa. Rozważany w procesie identyfikacji obiekt \eqref{eq:transmitancja_obiektu_pierwszego_rzedu} nie reprezentuje odpowiedzi kątowej silnika, dlatego należy użyć dodatkowego integratora, co pozwoli uzyskać kąt obrotu:
+\begin{equation}
+    H_b(s) = G_b(s) \cdot \frac{1}{s} = \frac{K_b}{T_b s^2 + s} \label{eq:transmitancja_silnik_odp_katowa}
+\end{equation}
+
+Obiektowi w ten sposób opisanemu odpowiadają następujące macierze stanu\footnote{Dzięki użyciu charakterystyki obiektu całkującego rzeczywistego \eqref{eq:transmitancja_silnik_odp_katowa} możliwe jest rozszerzenie macierzy wyjścia tak, aby móc odczytać dwa stany jednocześnie; nie jest to jednak wymagane w dalszej analizie, dlatego zostało pominięte.}:
+\begin{nalign}
+    A_I &= \begin{bmatrix}
+        0 & 1 \\ 0 & -\frac{1}{T_b}
+    \end{bmatrix} \\
+    B_I &= \begin{bmatrix}
+        0 \\ \frac{K_b}{T_b}
+    \end{bmatrix} \\
+    C_I &= \begin{bmatrix}
+        1 & 0
+    \end{bmatrix} \\
+    D_I &= 0  \label{eq:macierze_stanu_obiektu_pierwszego_rzedu}
+\end{nalign}
+
+Regulator, który steruje belką, oparty jest o stan (kąt i prędkość kątową obrotu) belki (zob. rozdział \ref{sec:ch6_regulator_belki}), a jego nastawy obliczono wykorzystując funkcję \texttt{looptune} z programu \textsc{Matlab}, która optymalizuje zadany układ w dziedzinie częstotliwości. Przy samostrojeniu tego regulatora zdecydowano się na inne podejście oparte o przesuwanie wartości własnych zamkniętego układu. W tym celu wyliczono zależność algebraiczną pomiędzy nastawami regulatora a zadanymi wartościami własnymi.
+
+Zamknięty układ regulacji z regulatorem od stanu $K_I = \begin{bmatrix}
+    k_1 & k_2
+\end{bmatrix}$ opisany jest równaniem:
+\begin{equation}
+    x' = \underbrace{(A_I - B_I K_I)}_{M \in \mathbb{C}^{2 \times 2}} x
+\end{equation}
+
+Macierz $M$ ma dwie wartości własne $\lambda_1$ oraz $\lambda_2$, które spełniają następujące zależności:
+\begin{nalign}
+    \det(M) &= \lambda_1 \lambda_2 \\
+    \tr(M) &= \lambda_1 + \lambda_2 \label{eq:obiekt1_zaleznosc_lambd}
+\end{nalign}
+
+Dzięki \eqref{eq:obiekt1_zaleznosc_lambd} możliwe jest uzyskanie układu równań, po którego rozwiązaniu uzyskuje się następującą zależność na $K_I$:
+
+\begin{nalign}
+    k_1 &= \frac{\lambda_1 \lambda_2}{\frac{K_b}{T_b}} \\
+    k_2 &= \frac{\frac{-1}{T_b} - \lambda_1 - \lambda_2}{\frac{K_b}{T_b}} \label{eq:zaleznosc_regulator_belki}
+\end{nalign}
+
+Należy zwrócić uwagę, że postać równań stanu obiektu \eqref{eq:macierze_stanu_obiektu_pierwszego_rzedu} nie do końca odpowiada postaci otrzymanej z linearyzacji \eqref{eq:rownania_stanu_belki} i \eqref{eq:rownania_wyjscia_belki}, w związku z tym zdecydowano się narzucić inne wartości własne macierzy $M$ niż te, które ma ,,zwinięty'' układ regulatora pozycji belki (\cref{fig:schemat_regulacji_belka}).
+
+%%%%
+\section{Algorytm identyfikacji obiektu belki}
+\label{sec:ch8_algorytm_identyfikacji_belki}
+
+Opisany w rozdziale \ref{sec:ch8_identyfikacja_belki} eksperyment (odpowiedź skokowa prędkości kątowej wału motoreduktora) został zaimplementowany w sterowniku PLC, a jego wyniki służą do obliczania nowych nastaw regulatora według równań \eqref{eq:zaleznosc_regulator_belki}. Eksperyment polega na ustawieniu sterowania silnika na \SI{50}{\percent} na czas \SI{2}{\second}~i~zarejestrowaniu odczytu prędkości kątowej wału motoreduktora (jego odpowiedzi skokowej).
+
+Procedura identyfikacyjna została przeprowadzona w sekwencji opisanej na \cref{fig:schemat_samostrojenia_belka}, a sama sekwencja została zaimplementowana w języku drabinkowym \textit{LAD} podobnie jak sekwencja bazowania czy sekwencja główna (rozdział \ref{sec:sekwencja_glowna}).
+
+\begin{figure}[ht]
+    \centering
+    
+    \begin{tikzpicture}[auto, node distance=1cm,>=latex']
+    \node [startblock] (S1) {Reset zapisanych wartości};
+    \node [block, below=2of S1] (S2) {Obliczanie całki pod wykresem};
+    \node [block, right=of S2] (S3) {Zbieranie danych do obliczenia $h_{ss}$};
+    \node [block, below=2of S2] (S4) {Obliczanie parametrów};
+    \node [block, below=of S4] (S5) {Obliczanie regulatora};
+        
+    \draw [->] (S1) -- node [name=J1,left] {} node[name=T1,pos=0.75] {$T_1$} (S2);
+    \draw [->] (J1) -| node [name=T2,pos=0.75] {$T_2$} (S3.north);
+    \draw [->] (S2) -- node [name=J2,left] {} node[name=T3,pos=0.75] {$T_3$} (S4);
+    \draw [-] (S3) |- (J2);
+    \draw [->] (S4) -- (S5);
+    \end{tikzpicture}
+    
+    \caption{Schemat sekwencji samostrojenia regulatora belki.}
+    \label{fig:schemat_samostrojenia_belka}
+\end{figure}
+
+Tranzycjom $T_i$ zaznaczonym na schemacie na \cref{fig:schemat_samostrojenia_belka} odpowiadają następujące warunki:
+\begin{itemize}
+    \item $T_1$ -- rozpoczęcie eksperymentu (podanie sterowania \SI{50}{\percent} na silnik),
+    \item $T_2$ -- upłynięcie czasu połowy eksperymentu (\SI{1}{\second}),
+    \item $T_3$ -- zakończenie eksperymentu.
+\end{itemize}
+
+Krok pierwszy algorytmu, oznaczony jako \textit{Reset zapisanych wartości}, zeruje zapisaną wartość całki oraz dwa rejestry przechowujące sumę oraz ilość wartości, co uaktualniane jest co cykl procesora w~bloku \textit{Zbieranie danych do obliczenia $h_{ss}$}. Wartości te służą do obliczenia średniej arytmetycznej, która odpowiada oczekiwanej wartości ustalonej prędkości $h_{ss}$. Jest to wymuszone mocną kwantyzacją chwilowych wartości prędkości, co można zaobserwować na \cref{fig:identyfikacja_belki}.
+
+Obliczanie całki odbywa się za pomocą bloku \texttt{LGF\_Integration}\cite{LGF} dostępnego w bibliotece \texttt{LGF} udostępnionej przez firmę \textsc{Siemens}. Na podstawie wzorów umieszczonych w rozdziale \ref{sec:ch8_identyfikacja_belki} obliczane są parametry $S$ (pole całkowite), $A_b$, $K_b$, $S^+$, $T_b$ oraz nastawy regulatora $k_1$, $k_2$.
+
+%%%%
+\section{Identyfikacja obiektu kulki}
+\label{sec:ch8_identyfikacja_kulki}
+
+%%%%
+\section{Algorytm identyfikacji obiektu kulki}
+\label{sec:ch8_algorytm_identyfikacji_kulki}
+
+%%%%
+\section{Podsumowanie}
 
 %---------------------------------------------------------------------------
