@@ -157,9 +157,121 @@ Obliczanie całki odbywa się za pomocą bloku \texttt{LGF\_Integration}\cite{LG
 \section{Identyfikacja obiektu kulki}
 \label{sec:ch8_identyfikacja_kulki}
 
-%%%%
-\section{Algorytm identyfikacji obiektu kulki}
-\label{sec:ch8_algorytm_identyfikacji_kulki}
+Wykorzystując schemat sił działających na kulkę znajdującą się na pochylonej pod kątem $\theta$ belce (\cref{fig:sily_dzialajace_na_kulke}) wyznaczono, w sposób opisany poniżej, zależność przyspieszenia liniowego, które działa na kulkę, od kąta pochylenia belki.
+
+\def\iangle{6} % Angle of the inclined plane
+\def\arcr{1.1cm} % Radius of the arc used to indicate angles
+\def\down{-90}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+        scale = 3,
+        force/.style={>=latex,draw=blue,fill=blue},
+        plane/.style={draw=black},
+        M/.style={draw,circle,fill=lightgray,minimum size=1cm,thin},
+        axis/.style={densely dashed,gray,font=\small},
+    ]
+        %\draw[plane] (0,-) coordinate (base) 
+        %-- coordinate[pos=0.5] (mid) ++(\iangle:3) coordinate (top)
+        %|- (base) -- cycle;
+        \draw[dashed] (3,-1) -- (0,-1) coordinate (base);
+        \draw (base)
+        -- coordinate[pos=0.5] (mid) ++(\iangle:3) coordinate (top);
+        \path (mid) node[M,rotate=\iangle,yshift=0.5cm] (M) {};
+        \draw[->] (base)++(\arcr,0) arc (0:\iangle:\arcr);
+        \path (base)++(\iangle*0.5:\arcr+3pt) node {$\theta$};
+        
+        \begin{scope}[rotate=\iangle]
+            \draw [force,->] (M.center) -- ++(0,0.4) node[above right] {$\vec{N}$};
+            % Assuming that Mg = 1. The normal force will therefore be cos(alpha)
+            \draw [force,->] (M.west) -- ++(-0.3,0) node[above] {$\vec{F_1}$};
+            \draw [force,->] (M.south) -- ++(0.3,0) node[above] {$\vec{N_1}$};
+        \end{scope}
+        \draw[force,->] (M.center) -- ++(0,-0.4) node[below] {$\vec{Q}$};
+    \end{tikzpicture}
+    
+    \caption{Schemat sił działających na kulkę znajdującą się na pochylonej pod kątem $\theta$ belce.}
+    \label{fig:sily_dzialajace_na_kulke}
+\end{figure}
+
+Zgodnie z rysunkiem, na kulkę działają dwie siły: $\vec{Q}$ (siła ciężkości) i $\vec{N}$ (siła reakcji podłoża). Dodatkowo zostały zaznaczone składowe równoległe do powierzchni belki wspomnianych sił, $\vec{F_1}$ oraz $\vec{N_1}$; ich wypadkowa $F = am = F_1 - N_1$ jest siłą powodującą staczanie się kulki z przyspieszeniem wypadkowym $a$ wzdłuż belki.
+
+Wartość siły ciężkości działającej na kulkę definiowana jest jako $Q=mg$, gdzie $m$ to masa kulki, a~$g$~to przyspieszenie ziemskie. Automatycznie składowa $F_1$ ma wartość $F_1=mg\sin\theta$.
+
+Siła $\vec{N_1}$, pochodząca od tarcia suchego kulki o belkę, wprowadza kulkę w ruch obrotowy, stąd $\epsilon J = r N_1$, gdzie $\epsilon$ to przyspieszenie kątowe kulki, $J$ to moment bezwładności kulki, a $r$ to jej promień. Dodatkowo pojawia się zależność przyspieszenia liniowego od kątowego $a = \epsilon r$, która jest właściwa przy braku poślizgu kulki o belkę.
+
+Podstawiając wartości sił $F_1$ i $N_1$ do równania na siłę wypadkową działającą na kulkę otrzymano:
+
+\begin{nalign}
+    F &= mg\sin\theta - \frac{\epsilon}{r}J \\
+    a m &= mg\sin\theta - \frac{a}{r^2}J \\
+    a\left(m + \frac{J}{r^2} \right) &= mg\sin\theta \\
+    a &= \frac{mg\sin\theta}{m+\frac{J}{r^2}} \\
+    a &= \frac{r^2mg\sin\theta}{r^2m+J}
+    \label{eq:przyspieszenie_kulki1}
+\end{nalign}
+
+Wiadomo, że moment bezwładności $J$ jednolitej kulki o promieniu $r$ wynosi $J=\frac{2}{5}r^2m$. Podstawiając ten wzór do wyniku z \eqref{eq:przyspieszenie_kulki1} otrzymano:
+
+\begin{nalign}
+    a &= \frac{r^2mg\sin\theta}{r^2m+J}\\
+    a &= \frac{r^2mg\sin\theta}{r^2m+\frac{2}{5}r^2m} \\
+    a &= \frac{g\sin\theta}{1+\frac{2}{5}} \\
+    a &= \frac{5}{7} g \sin\theta
+    \label{eq:przyspieszenie_kulki2}
+\end{nalign}
+
+Wartość $\frac{5}{7}g$ to w przybliżeniu 7, natomiast dla małych kątów $\sin\theta \approx \theta$. Stąd ostateczny wynik:
+
+\begin{equation}
+    a \approx 7 \cdot \theta \label{eq:przyspieszenie_kulki3}
+\end{equation}
+
+Oznacza to, że przyspieszenie kulki staczającej się po pochylonej belce jest stałe i wynosi około siedmiokrotność kąta pochylenia belki. Należy w tym miejscu zwrócić uwagę na wyniki linearyzacji \eqref{eq:rownania_stanu_kulki2} oraz \eqref{eq:rownania_wyjscia_kulki2}, które zostały przypomniane poniżej:
+
+\begin{align*}
+    \begin{bmatrix}
+        \dot{x}_1 \\ \dot{x}_2
+    \end{bmatrix}
+    &= \begin{bmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1 \\ x_2
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        0 & 0 \\ 7,0047 & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_1^* \\ u_2^*
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        y_1 \\ y_2
+    \end{bmatrix}
+    &= \begin{bmatrix}
+        1 & 0 \\
+        0 & 1 \\
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1 \\ x_2
+    \end{bmatrix}
+    + \begin{bmatrix}
+        -0,0675 & 0 \\
+        0 & -0.0675
+    \end{bmatrix}
+    \begin{bmatrix}
+        u_1^* \\ u_2^*
+    \end{bmatrix}
+\end{align*}
+
+Jak widać po równaniach stanu, $x_1$ jest całką $x_2$, a pochodna stanu $x_2$ --- $\dot{x}_2$ --- jest siedmiokrotnością sterowania $u_1^*$. Wyniki te są zgodne z otrzymaną zależnością \eqref{eq:przyspieszenie_kulki3}, gdyż $x_1$ to pozycja liniowa kulki, $x_2$ to jej prędkość liniowa, $\dot{x}_2$ to przyspieszenie liniowe, a $u_1^*$ to kąt belki.
+
+Powyższy wywód dowodzi, że przyspieszenie kulki, które charakteryzuje jej dynamikę, jest niezależne od rozmiaru czy masy kulki, a zatem eksperymenty identyfikacyjne nie dadzą rezultatów, które mogłyby w jakikolwiek sposób pomóc w doborze regulatora.
+
+% TODO: obliczanie regulatora po doborze regulatora belki
 
 %%%%
 \section{Podsumowanie}

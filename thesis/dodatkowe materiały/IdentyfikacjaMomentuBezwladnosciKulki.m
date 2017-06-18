@@ -51,16 +51,16 @@ epsilon = a / r_e;
 [a, R_tau] = solve (a * m == G_tau - R_tau, epsilon * J == R_tau * r_e, a, R_tau)
 
 % czas swobodnego staczania (od t_0 = 0, v_0 = 0, x_0 = 0)
-syms Delta_t positive
+syms dt positive
 % Delta_t = t_1 - t_0
 
 % droga przebyta w czasie Delta_t
-syms Delta_x positive
+syms dx positive
 % Delta_x = x_1 - x_0,   x_1 = x(t_1)
 
 % równanie dla ruchu jednostajnie przyspieszonego
 % Delta_x == 1/2*a*Delta_t^2
-J = solve(Delta_x == 1/2*a*Delta_t^2, J)
+J = solve(dx == 1/2*a*dt^2, J)
 J = simplify(J)
 
 % uzyskany wynik
