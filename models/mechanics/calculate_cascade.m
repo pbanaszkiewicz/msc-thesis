@@ -74,7 +74,6 @@ P_ball_tunable.OutputName = {'alpha_ref'; 'omega_ref'};
 [~, P_ball] = looptune(collapsed_beam_ball, P_ball_tunable, 100);
 P_ball = ss(-P_ball);
 P_ball.InputName = {'pos_error'; 'vel_error'; 'angle_error'; 'ang_velo_error'};
-K_ball = get(P_ball, 'D');
 
 % sum block in the external loop
 sum_outer = sumblk('%v = %s - %y', ...
@@ -83,7 +82,9 @@ sum_outer = sumblk('%v = %s - %y', ...
     {'ball_position'; 'ball_velocity'; 'beam_angle'; 'beam_angular_velocity'});
 
 % collapse
-P_ball.D(4) = 0.1;
+P_ball.D(3) = 1.0813;
+P_ball.D(7) = 0.1;
+K_ball = get(P_ball, 'D');
 collapsed = connect(P_ball, collapsed_beam_ball, sum_outer, ...
     {'position_ref', 'velocity_ref', 'angle_ref', 'angular_velocity_ref'}, ...
     {'ball_position'; 'ball_velocity'; 'beam_angle'; 'beam_angular_velocity'});
