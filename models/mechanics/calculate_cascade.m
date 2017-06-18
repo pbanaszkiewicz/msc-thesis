@@ -45,9 +45,7 @@ beam_collapsed = connect(P_beam, beam_SS, sum_inter, ...
     {'alpha_ref'; 'omega_ref'}, {'beam_angle'; 'beam_angular_velocity'});
 beam_collapsed_TF = tf(beam_collapsed);
 %bode(beam_collapsed(1,1));
-step(beam_collapsed);
-
-clear P_beam_tunable
+%step(beam_collapsed);
 
 %% ball calculations
 
@@ -73,7 +71,7 @@ collapsed_beam_ball = connect(beam_collapsed, ball_SS, ...
 P_ball_tunable = tunableGain('K_ball', [1 0 0 0; 0 1 0 0;]);
 P_ball_tunable.InputName = {'ball_position'; 'ball_velocity'; 'beam_angle'; 'beam_angular_velocity'};
 P_ball_tunable.OutputName = {'alpha_ref'; 'omega_ref'};
-[~, P_ball, gam, info] = looptune(collapsed_beam_ball, P_ball_tunable, 100);
+[~, P_ball] = looptune(collapsed_beam_ball, P_ball_tunable, 100);
 P_ball = ss(-P_ball);
 P_ball.InputName = {'pos_error'; 'vel_error'; 'angle_error'; 'ang_velo_error'};
 K_ball = get(P_ball, 'D');
@@ -85,9 +83,6 @@ sum_outer = sumblk('%v = %s - %y', ...
     {'ball_position'; 'ball_velocity'; 'beam_angle'; 'beam_angular_velocity'});
 
 % collapse
-%P_ball.D = [2 1 0 0; 1 0 0 0]; nie to nie daje
-%P_ball.D = [3.8804    0.1733    4.6754    3.0000;
-%    0.7450    0.0333    0.8976    0.5760];
 P_ball.D(4) = 0.1;
 collapsed = connect(P_ball, collapsed_beam_ball, sum_outer, ...
     {'position_ref', 'velocity_ref', 'angle_ref', 'angular_velocity_ref'}, ...

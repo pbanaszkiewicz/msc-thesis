@@ -58,18 +58,6 @@ beam_collapsed2 = connect(P_beam2, beam_SS2, sum_inter, ...
     {'alpha_ref'; 'omega_ref'}, {'beam_angle'; 'beam_angular_velocity'});
 beam_collapsed2_TF = tf(beam_collapsed2);
 
-collapsed_beam_ball2 = connect(beam_collapsed2, ball_SS, ...
+collapsed_beam_ball2 = connect(beam_collapsed, ball_SS, ...
     {'alpha_ref'; 'omega_ref'}, ...
-    {'ball_position'; 'ball_velocity'; 'beam_angle'; 'beam_angular_velocity'});
-
-P_ball_tunable2 = tunableGain('K_ball2', [1 0 0 0; 0 1 0 0;]);
-P_ball_tunable2.InputName = {'ball_position'; 'ball_velocity'; 'beam_angle'; 'beam_angular_velocity'};
-P_ball_tunable2.OutputName = {'alpha_ref'; 'omega_ref'};
-[~, P_ball2] = looptune(collapsed_beam_ball2, P_ball_tunable2, 1);
-P_ball2 = ss(-P_ball2);
-P_ball2.InputName = {'pos_error'; 'vel_error'; 'angle_error'; 'ang_velo_error'};
-K_ball2 = get(P_ball2, 'D');
-
-collapsed2 = connect(P_ball, collapsed_beam_ball2, sum_outer, ...
-    {'position_ref', 'velocity_ref', 'angle_ref', 'angular_velocity_ref'}, ...
     {'ball_position'; 'ball_velocity'; 'beam_angle'; 'beam_angular_velocity'});

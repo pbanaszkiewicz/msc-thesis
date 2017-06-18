@@ -45,10 +45,10 @@ assert(all(S3.a([3 : 4, 7 : 8]) == 0));
 G3 = tf(S3);
 
 %% compare system step and frequency responses
-figure(1);
-step(S2, S3, 0 : 0.001 : 5);
-figure(2);
-bode(S2(1, 1), S3(1, 1), {1e-2, 1e2});
+%figure(1);
+%step(S2, S3, 0 : 0.001 : 5);
+%figure(2);
+%bode(S2(1, 1), S3(1, 1), {1e-2, 1e2});
 
 %% use a different transformation matrix
 % compensate reverse ball rotating motion caused by positive angular
@@ -77,7 +77,7 @@ S5.a([4, 1]) = 0;
 G5 = tf(S5);
 
 %% compare system step and frequency responses
-figure(3);
-step(S4, S5, 0 : 0.001 : 5);
-figure(4);
-bode(S4(1, 1), S5(1, 1), {1e-2, 1e7});
+%figure(3);
+%step(S4, S5, 0 : 0.001 : 5);
+%figure(4);
+%bode(S4(1, 1), S5(1, 1), {1e-2, 1e7});
