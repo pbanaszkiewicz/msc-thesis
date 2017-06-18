@@ -43,7 +43,7 @@ W programie obsługiwane są tylko \num{3} wyjścia sterownika. Dwa z nich słu�
 
 Z racji możliwości sterowania obrotami silnika w dwie strony, regulator pozycji belki może zwrócić wartość z zakresu \numrange[range-phrase={ do }]{-100}{100}; stąd w bloku \textit{Zapis do wyjść} następuje konwersja tej wartości na jej moduł i zapis tego modułu do \texttt{\%QW1000}, natomiast sygnał \textit{kierunek} ustawiony jest na \num{1} dla ujemnej wartości sterowania, a na \num{0} dla dodatniej.
 
-Równolegle do bloku \texttt{OB1}, wywoływanego co cykl procesora, użyto dwóch bloków organizacyjnych \texttt{OB30} i \texttt{OB31} wywoływanych co \SI{100}{\milli\second}. Rolą pierwszego z nich jest uruchamianie regulatorów (więcej w rozdziale \ref{sec:ch7_regulatory}), natomiast rolą drugiego jest obliczanie pochodnych sygnałów w czasie.
+Równolegle do bloku \texttt{OB1}, wywoływanego co cykl procesora, użyto dwóch bloków organizacyjnych \texttt{OB30} i \texttt{OB31} wywoływanych co \SI{50}{\milli\second}. Rolą pierwszego z nich jest uruchamianie regulatorów (więcej w rozdziale \ref{sec:ch7_regulatory}), natomiast rolą drugiego jest obliczanie pochodnych sygnałów w czasie.
 
 W \texttt{OB31} następuje obliczanie prędkości liniowej kulki oraz prędkości kątowej belki według następujących wzorów:
 \begin{align*}
@@ -52,7 +52,7 @@ W \texttt{OB31} następuje obliczanie prędkości liniowej kulki oraz prędkośc
 \end{align*}
 gdzie:
 \begin{itemize}
-    \item $\Delta t$ to stała wartość \SI{100}{\milli\second} równa okresowi wywołań bloku \texttt{OB31},
+    \item $\Delta t$ to stała wartość \SI{50}{\milli\second} równa okresowi wywołań bloku \texttt{OB31},
     \item $\Delta x$ to różnica wartości obecnej pozycji liniowej kulki oraz pozycji z poprzedniego wywołania bloku \texttt{OB31},
     \item $\Delta \alpha$ to różnica wartości obecnego kąta belki oraz kąta z poprzedniego wywołania bloku \texttt{OB31}.
 \end{itemize}
@@ -180,13 +180,13 @@ W momencie wystąpienia zbocza opadającego sygnału z czujnika bazowania nastę
 \section{Regulatory}
 \label{sec:ch7_regulatory}
 
-Jak to zostało wspomniane we wstępie do rozdziału, obliczanie nowych wartości sterowania z obu regulatorów umieszczone zostało w bloku \texttt{OB30} wywoływanym przez sterownik PLC z okresem \SI{100}{\milli\second}.
+Jak to zostało wspomniane we wstępie do rozdziału, obliczanie nowych wartości sterowania z obu regulatorów umieszczone zostało w bloku \texttt{OB30} wywoływanym przez sterownik PLC z okresem \SI{50}{\milli\second}.
 
 Wywoływanie regulatorów z określoną częstotliwością ma swoje podłoże w regulacji typu PID. Oprogramowanie \textsc{Siemens TIA Portal}, jak również sterowniki serii S7-1200, obsługuje tak zwane obiekty technologiczne (\cite{S7MANUAL}\cite{SCL_S71200_S71500}); jednym z nich jest prosty regulator typu PID z mechanizmem automatycznego strojenia. Blok takiego obiektu technologicznego musi być wywoływany w programie sterownika z określoną częstotliwością, co związane jest z koniecznością liczenia pochodnych sygnału uchybu w czasie.
 
 Umieszczenie regulatorów w bloku \texttt{OB30} umożliwia zatem przeprowadzenie łatwej zamiany na obiekt technologiczny PID gdyby nastała taka konieczność.
 
-Ponadto sygnały, z których korzystają regulatory, takie jak prędkość obrotowa belki czy prędkość liniowa kulki, również są liczone z~okresem \SI{100}{\milli\second}, co oznacza, że nie należy uruchamiać bloku \texttt{OB30} ani rzadziej (co powodowałoby pracę ze zbyt starymi wartościami sygnałów), ani częściej (co powodowałoby brak realistycznej reakcji na wartości prędkości).
+Ponadto sygnały, z których korzystają regulatory, takie jak prędkość obrotowa belki czy prędkość liniowa kulki, również są liczone z~okresem \SI{50}{\milli\second}, co oznacza, że nie należy uruchamiać bloku \texttt{OB30} ani rzadziej (co powodowałoby pracę ze zbyt starymi wartościami sygnałów), ani częściej (co powodowałoby duże opóźnienie w reakcji regulatora).
 
 Regulatory opisane w rozdziałach \ref{sec:ch6_regulator_belki} oraz \ref{sec:ch6_regulator_kulki} są regulatorami typu proporcjonalnego od stanu, co oznacza, że ich implementacja w sterowniku PLC jest równoznaczna z obliczeniem sumy sygnałów od stanu wymnożonych przez macierz współczynników. W przypadku obu regulatorów, uzyskano to za pomocą bloku \texttt{Calculate} (\cref{fig:tia_portal_blok_calculate}), umożliwiającego zdefiniowanie prostych wyrażeń algebraicznych.
 

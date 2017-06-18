@@ -1,0 +1,92 @@
+%% Creator: Inkscape inkscape 0.91, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'ball2_stabilization.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{680.8bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.52878966)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{ball2_stabilization.pdf}}%
+    \put(0.12514689,0.03721116){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.2363886,0.03721116){\makebox(0,0)[lb]{\smash{5}}}%
+    \put(0.34292985,0.03721116){\makebox(0,0)[lb]{\smash{10}}}%
+    \put(0.45417156,0.03721116){\makebox(0,0)[lb]{\smash{15}}}%
+    \put(0.26204477,0.01449271){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{ball2_stabilization.pdf}}%
+    \put(0.08421469,0.05346651){\makebox(0,0)[lb]{\smash{-0.15}}}%
+    \put(0.09361539,0.13948296){\makebox(0,0)[lb]{\smash{-0.1}}}%
+    \put(0.08421469,0.22549941){\makebox(0,0)[lb]{\smash{-0.05}}}%
+    \put(0.11359189,0.31151586){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.09009013,0.39753231){\makebox(0,0)[lb]{\smash{0.05}}}%
+    \put(0.09949083,0.48354877){\makebox(0,0)[lb]{\smash{0.1}}}%
+    \put(0.07481398,0.17920118){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Położenie liniowe [m]}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{ball2_stabilization.pdf}}%
+    \put(0.33842538,0.45710928){\makebox(0,0)[lb]{\smash{Położenie kulki}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{ball2_stabilization.pdf}}%
+    \put(0.56462985,0.03721116){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.67626322,0.03721116){\makebox(0,0)[lb]{\smash{5}}}%
+    \put(0.78319624,0.03721116){\makebox(0,0)[lb]{\smash{10}}}%
+    \put(0.89482961,0.03721116){\makebox(0,0)[lb]{\smash{15}}}%
+    \put(0.70211528,0.01449271){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{ball2_stabilization.pdf}}%
+    \put(0.53309835,0.05346651){\makebox(0,0)[lb]{\smash{-1.5}}}%
+    \put(0.5483745,0.12514689){\makebox(0,0)[lb]{\smash{-1}}}%
+    \put(0.53309835,0.19682726){\makebox(0,0)[lb]{\smash{-0.5}}}%
+    \put(0.55307485,0.26850764){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.5389738,0.34018801){\makebox(0,0)[lb]{\smash{0.5}}}%
+    \put(0.55307485,0.41186839){\makebox(0,0)[lb]{\smash{1}}}%
+    \put(0.5389738,0.48354877){\makebox(0,0)[lb]{\smash{1.5}}}%
+    \put(0.52369765,0.23736804){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Wartość}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{ball2_stabilization.pdf}}%
+    \put(0.67567568,0.11633373){\makebox(0,0)[lb]{\smash{Prędkość kulki [m/s]}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{ball2_stabilization.pdf}}%
+    \put(0.67567568,0.09811986){\makebox(0,0)[lb]{\smash{Kąt belki [rad]}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{ball2_stabilization.pdf}}%
+    \put(0.67567568,0.07990599){\makebox(0,0)[lb]{\smash{Prędkość kątowa belki [rad/s]}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{ball2_stabilization.pdf}}%
+    \put(0.35546463,0.50616921){\makebox(0,0)[lb]{\smash{\textbf{Stabilizacja położenia drugiej kulki}}}}%
+  \end{picture}%
+\endgroup%

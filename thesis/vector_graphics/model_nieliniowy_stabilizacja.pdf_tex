@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{785.28076172bp}%
+    \setlength{\unitlength}{772.38632812bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,77 +48,79 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.42787245)%
+  \begin{picture}(1,0.43501547)%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{model_nieliniowy_stabilizacja.pdf}}%
-    \put(0.06692014,0.02818528){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.11215237,0.02818528){\makebox(0,0)[lb]{\smash{20}}}%
-    \put(0.16145958,0.02818528){\makebox(0,0)[lb]{\smash{40}}}%
-    \put(0.21076678,0.02818528){\makebox(0,0)[lb]{\smash{60}}}%
-    \put(0.26007399,0.02818528){\makebox(0,0)[lb]{\smash{80}}}%
-    \put(0.30530622,0.02818528){\makebox(0,0)[lb]{\smash{100}}}%
-    \put(0.16421029,0.0084895){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0.06688599,0.02865582){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.11701635,0.02865582){\makebox(0,0)[lb]{\smash{2}}}%
+    \put(0.1671467,0.02865582){\makebox(0,0)[lb]{\smash{4}}}%
+    \put(0.21727706,0.02865582){\makebox(0,0)[lb]{\smash{6}}}%
+    \put(0.26740741,0.02865582){\makebox(0,0)[lb]{\smash{8}}}%
+    \put(0.31339476,0.02865582){\makebox(0,0)[lb]{\smash{10}}}%
+    \put(0.16580033,0.00863122){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{model_nieliniowy_stabilizacja.pdf}}%
-    \put(0.03143393,0.04227787){\makebox(0,0)[lb]{\smash{-0.12}}}%
-    \put(0.03958388,0.07722079){\makebox(0,0)[lb]{\smash{-0.1}}}%
-    \put(0.03143393,0.11216371){\makebox(0,0)[lb]{\smash{-0.08}}}%
-    \put(0.03143393,0.14710662){\makebox(0,0)[lb]{\smash{-0.06}}}%
-    \put(0.03143393,0.18204954){\makebox(0,0)[lb]{\smash{-0.04}}}%
-    \put(0.03143393,0.21699245){\makebox(0,0)[lb]{\smash{-0.02}}}%
-    \put(0.05690253,0.25193537){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.03652765,0.28687829){\makebox(0,0)[lb]{\smash{0.02}}}%
-    \put(0.03652765,0.3218212){\makebox(0,0)[lb]{\smash{0.04}}}%
-    \put(0.03652765,0.35676412){\makebox(0,0)[lb]{\smash{0.06}}}%
-    \put(0.03652765,0.39170704){\makebox(0,0)[lb]{\smash{0.08}}}%
-    \put(0.02328398,0.13956812){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Położenie liniowe [m]}}}}%
+    \put(0.03080737,0.04298367){\makebox(0,0)[lb]{\smash{-0.12}}}%
+    \put(0.03909337,0.07850993){\makebox(0,0)[lb]{\smash{-0.1}}}%
+    \put(0.03080737,0.1140362){\makebox(0,0)[lb]{\smash{-0.08}}}%
+    \put(0.03080737,0.14956246){\makebox(0,0)[lb]{\smash{-0.06}}}%
+    \put(0.03080737,0.18508872){\makebox(0,0)[lb]{\smash{-0.04}}}%
+    \put(0.03080737,0.22061499){\makebox(0,0)[lb]{\smash{-0.02}}}%
+    \put(0.05670114,0.25614125){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.03598612,0.29166751){\makebox(0,0)[lb]{\smash{0.02}}}%
+    \put(0.03598612,0.32719378){\makebox(0,0)[lb]{\smash{0.04}}}%
+    \put(0.03598612,0.36272004){\makebox(0,0)[lb]{\smash{0.06}}}%
+    \put(0.03598612,0.3982463){\makebox(0,0)[lb]{\smash{0.08}}}%
+    \put(0.02252136,0.14189811){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Położenie liniowe [m]}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{model_nieliniowy_stabilizacja.pdf}}%
-    \put(0.20903492,0.3687853){\makebox(0,0)[lb]{\smash{Położenie kulki}}}%
+    \put(0.21137328,0.3749419){\makebox(0,0)[lb]{\smash{Położenie kulki}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{model_nieliniowy_stabilizacja.pdf}}%
-    \put(0.39088071,0.02818528){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.43611294,0.02818528){\makebox(0,0)[lb]{\smash{20}}}%
-    \put(0.48542014,0.02818528){\makebox(0,0)[lb]{\smash{40}}}%
-    \put(0.53472735,0.02818528){\makebox(0,0)[lb]{\smash{60}}}%
-    \put(0.58403455,0.02818528){\makebox(0,0)[lb]{\smash{80}}}%
-    \put(0.62926678,0.02818528){\makebox(0,0)[lb]{\smash{100}}}%
-    \put(0.48817085,0.0084895){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0.39625485,0.02865582){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.4463852,0.02865582){\makebox(0,0)[lb]{\smash{2}}}%
+    \put(0.49651556,0.02865582){\makebox(0,0)[lb]{\smash{4}}}%
+    \put(0.54664591,0.02865582){\makebox(0,0)[lb]{\smash{6}}}%
+    \put(0.59677626,0.02865582){\makebox(0,0)[lb]{\smash{8}}}%
+    \put(0.64276361,0.02865582){\makebox(0,0)[lb]{\smash{10}}}%
+    \put(0.49516918,0.00863122){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=5]{model_nieliniowy_stabilizacja.pdf}}%
-    \put(0.35539449,0.04227787){\makebox(0,0)[lb]{\smash{-0.15}}}%
-    \put(0.36354444,0.09219632){\makebox(0,0)[lb]{\smash{-0.1}}}%
-    \put(0.35539449,0.14211478){\makebox(0,0)[lb]{\smash{-0.05}}}%
-    \put(0.38086309,0.19203323){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.36048821,0.24195168){\makebox(0,0)[lb]{\smash{0.05}}}%
-    \put(0.36863816,0.29187013){\makebox(0,0)[lb]{\smash{0.1}}}%
-    \put(0.36048821,0.34178858){\makebox(0,0)[lb]{\smash{0.15}}}%
-    \put(0.36863816,0.39170704){\makebox(0,0)[lb]{\smash{0.2}}}%
-    \put(0.34724454,0.18999594){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Wartość}}}}%
+    \put(0.36846223,0.04298367){\makebox(0,0)[lb]{\smash{-0.4}}}%
+    \put(0.36846223,0.08234221){\makebox(0,0)[lb]{\smash{-0.3}}}%
+    \put(0.36846223,0.12170076){\makebox(0,0)[lb]{\smash{-0.2}}}%
+    \put(0.36846223,0.1610593){\makebox(0,0)[lb]{\smash{-0.1}}}%
+    \put(0.38607,0.20041784){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.37364098,0.23977638){\makebox(0,0)[lb]{\smash{0.1}}}%
+    \put(0.37364098,0.27913493){\makebox(0,0)[lb]{\smash{0.2}}}%
+    \put(0.37364098,0.31849347){\makebox(0,0)[lb]{\smash{0.3}}}%
+    \put(0.37364098,0.35785201){\makebox(0,0)[lb]{\smash{0.4}}}%
+    \put(0.37364098,0.39721055){\makebox(0,0)[lb]{\smash{0.5}}}%
+    \put(0.36017622,0.19264991){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Wartość}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=6]{model_nieliniowy_stabilizacja.pdf}}%
-    \put(0.44334602,0.3687853){\makebox(0,0)[lb]{\smash{Prędkość kulki [m/s]}}}%
+    \put(0.44959603,0.37390615){\makebox(0,0)[lb]{\smash{Prędkość kulki [m/s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=7]{model_nieliniowy_stabilizacja.pdf}}%
-    \put(0.44334602,0.35299477){\makebox(0,0)[lb]{\smash{Kąt belki [rad]}}}%
+    \put(0.44959603,0.35785201){\makebox(0,0)[lb]{\smash{Kąt belki [rad]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=8]{model_nieliniowy_stabilizacja.pdf}}%
-    \put(0.44334602,0.33720424){\makebox(0,0)[lb]{\smash{Prędkość kątowa belki [rad/s]}}}%
+    \put(0.44959603,0.34179787){\makebox(0,0)[lb]{\smash{Prędkość kątowa belki [rad/s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=9]{model_nieliniowy_stabilizacja.pdf}}%
-    \put(0.71586002,0.02818528){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.76109225,0.02818528){\makebox(0,0)[lb]{\smash{20}}}%
-    \put(0.81039945,0.02818528){\makebox(0,0)[lb]{\smash{40}}}%
-    \put(0.85970666,0.02818528){\makebox(0,0)[lb]{\smash{60}}}%
-    \put(0.90901386,0.02818528){\makebox(0,0)[lb]{\smash{80}}}%
-    \put(0.95424609,0.02818528){\makebox(0,0)[lb]{\smash{100}}}%
-    \put(0.81315016,0.0084895){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0.72665945,0.02865582){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.77678981,0.02865582){\makebox(0,0)[lb]{\smash{2}}}%
+    \put(0.82692016,0.02865582){\makebox(0,0)[lb]{\smash{4}}}%
+    \put(0.87705052,0.02865582){\makebox(0,0)[lb]{\smash{6}}}%
+    \put(0.92718087,0.02865582){\makebox(0,0)[lb]{\smash{8}}}%
+    \put(0.97316822,0.02865582){\makebox(0,0)[lb]{\smash{10}}}%
+    \put(0.82557379,0.00863122){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=10]{model_nieliniowy_stabilizacja.pdf}}%
-    \put(0.70176743,0.04227787){\makebox(0,0)[lb]{\smash{-1}}}%
-    \put(0.68852375,0.11216371){\makebox(0,0)[lb]{\smash{-0.5}}}%
-    \put(0.7058424,0.18204954){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.69361747,0.25193537){\makebox(0,0)[lb]{\smash{0.5}}}%
-    \put(0.7058424,0.3218212){\makebox(0,0)[lb]{\smash{1}}}%
-    \put(0.69361747,0.39170704){\makebox(0,0)[lb]{\smash{1.5}}}%
-    \put(0.6803738,0.18999594){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Wartość}}}}%
+    \put(0.7123316,0.04298367){\makebox(0,0)[lb]{\smash{-1}}}%
+    \put(0.69886683,0.1140362){\makebox(0,0)[lb]{\smash{-0.5}}}%
+    \put(0.7164746,0.18508872){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.70404559,0.25614125){\makebox(0,0)[lb]{\smash{0.5}}}%
+    \put(0.7164746,0.32719378){\makebox(0,0)[lb]{\smash{1}}}%
+    \put(0.70404559,0.3982463){\makebox(0,0)[lb]{\smash{1.5}}}%
+    \put(0.69058083,0.19316779){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Wartość}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=11]{model_nieliniowy_stabilizacja.pdf}}%
-    \put(0.76628784,0.3687853){\makebox(0,0)[lb]{\smash{Zadany kąt belki [rad]}}}%
+    \put(0.77792913,0.3749419){\makebox(0,0)[lb]{\smash{Zadany kąt belki [rad]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=12]{model_nieliniowy_stabilizacja.pdf}}%
-    \put(0.76628784,0.35299477){\makebox(0,0)[lb]{\smash{Zadana prędkość belki [rad/s]}}}%
+    \put(0.77792913,0.35888776){\makebox(0,0)[lb]{\smash{Zadana prędkość belki [rad/s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=13]{model_nieliniowy_stabilizacja.pdf}}%
-    \put(0.76628784,0.33720424){\makebox(0,0)[lb]{\smash{Napięcie sterowania [V]}}}%
+    \put(0.77792913,0.34283362){\makebox(0,0)[lb]{\smash{Napięcie sterowania [V]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=14]{model_nieliniowy_stabilizacja.pdf}}%
-    \put(0.36846885,0.4123366){\makebox(0,0)[lb]{\smash{\textbf{Stabilizacja modelu nieliniowego}}}}%
+    \put(0.3827906,0.4098985){\makebox(0,0)[lb]{\smash{\textbf{Stabilizacja modelu nieliniowego}}}}%
   \end{picture}%
 \endgroup%

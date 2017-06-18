@@ -582,7 +582,7 @@ Sprawdzenie wartości własnych macierzy $A_c$ pokazuje, że układ ten ma chara
 Po implementacji regulatora, opisanej w rozdziale \ref{subsec:ch7_regulator_kulki}, okazało się, że układ nie jest w stanie w~rozsądnym czasie ustabilizować położenia kulki. Dobrano więc w sposób empiryczny inne nastawy $K_k$, które polepszyły zachowanie układu. Zmiany względem oryginalnych nastaw $K_k$ zostały wyróżnione na~\eqref{eq:regulator_kulki2}:
 \begin{equation}
 K_k = \begin{bmatrix}
-    1,7905 &  1,7813 &  0,9181 &  \mathbf{0,1} \\
+    1,7905 &  \mathbf{1,0813} &  0,9181 &  \mathbf{0,1} \\
     0,1802 & -0,4902 &  0,1762 &  0,2744
 \end{bmatrix} \label{eq:regulator_kulki2}
 \end{equation}
@@ -591,13 +591,13 @@ Po wprowadzeniu zmienionego regulatora do całości układu, w macierzach stanu 
 \begin{nalign}
     A_c &= \begin{bmatrix}
         0 & 1 & 0 & 0 \\
-        -103,4 & \mathbf{-78,73} & -103,2 & \mathbf{-101,8} \\
+        -103.4 & \mathbf{-22.7} & -103.2 & \mathbf{-55.82} \\
         0 & 0 & 0 & 1 \\
         7,005 & 0 & 0 & 0
     \end{bmatrix} \\
     B_c &= \begin{bmatrix}
         0 & 0 & 0 & 0 \\
-        103,2 & \mathbf{101,8} & 53,82 & 67,76 \\
+        103.2 & 55.82 & 53,82 & \mathbf{8.633} \\
         0 & 0 & 0 & 0 \\
         0 & 0 & 0 & 0
     \end{bmatrix} \\
@@ -614,10 +614,10 @@ Po wprowadzeniu zmienionego regulatora do całości układu, w macierzach stanu 
         0 & 0 & 0 & 0
     \end{bmatrix} \\
     \Lambda(A_c) &= \begin{bmatrix}
-    -77.5116 \\
-    -0.0844 + 2.9825i \\
-    -0.0844 - 2.9825i \\
-    -1.0475
+     -18.0548 \\
+     -0.9213 + 3.6632i \\
+     -0.9213 - 3.6632i \\
+     -2.8061
     \end{bmatrix} \label{eq:macierze_stanu_calego_ukladu2}
 \end{nalign}
 

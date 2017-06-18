@@ -1,0 +1,94 @@
+%% Creator: Inkscape inkscape 0.91, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'beam_tuned.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{672.8bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.49940547)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{beam_tuned.pdf}}%
+    \put(0.12425684,0.03289738){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.23602854,0.03289738){\makebox(0,0)[lb]{\smash{2}}}%
+    \put(0.34780024,0.03289738){\makebox(0,0)[lb]{\smash{4}}}%
+    \put(0.45957194,0.03289738){\makebox(0,0)[lb]{\smash{6}}}%
+    \put(0.26159346,0.0099088){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{beam_tuned.pdf}}%
+    \put(0.08283793,0.04934602){\makebox(0,0)[lb]{\smash{-0.25}}}%
+    \put(0.09235042,0.09466243){\makebox(0,0)[lb]{\smash{-0.2}}}%
+    \put(0.08283793,0.13997883){\makebox(0,0)[lb]{\smash{-0.15}}}%
+    \put(0.09235042,0.18529524){\makebox(0,0)[lb]{\smash{-0.1}}}%
+    \put(0.08283793,0.23061165){\makebox(0,0)[lb]{\smash{-0.05}}}%
+    \put(0.11256445,0.27592818){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.08878323,0.32124459){\makebox(0,0)[lb]{\smash{0.05}}}%
+    \put(0.09829572,0.366561){\makebox(0,0)[lb]{\smash{0.1}}}%
+    \put(0.08878323,0.41187741){\makebox(0,0)[lb]{\smash{0.15}}}%
+    \put(0.09829572,0.45719382){\makebox(0,0)[lb]{\smash{0.2}}}%
+    \put(0.07332545,0.15576718){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Położenie kątowe [rad]}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{beam_tuned.pdf}}%
+    \put(0.33769322,0.43043995){\makebox(0,0)[lb]{\smash{Położenie belki}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{beam_tuned.pdf}}%
+    \put(0.56539834,0.03289738){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.67677372,0.03289738){\makebox(0,0)[lb]{\smash{2}}}%
+    \put(0.78814899,0.03289738){\makebox(0,0)[lb]{\smash{4}}}%
+    \put(0.89952438,0.03289738){\makebox(0,0)[lb]{\smash{6}}}%
+    \put(0.70214043,0.0099088){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{beam_tuned.pdf}}%
+    \put(0.5489497,0.04934602){\makebox(0,0)[lb]{\smash{-5}}}%
+    \put(0.5489497,0.11732069){\makebox(0,0)[lb]{\smash{-4}}}%
+    \put(0.5489497,0.18529524){\makebox(0,0)[lb]{\smash{-3}}}%
+    \put(0.5489497,0.25326992){\makebox(0,0)[lb]{\smash{-2}}}%
+    \put(0.5489497,0.32124459){\makebox(0,0)[lb]{\smash{-1}}}%
+    \put(0.55370595,0.38921914){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.55370595,0.45719382){\makebox(0,0)[lb]{\smash{1}}}%
+    \put(0.53943722,0.22176005){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Wartość}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{beam_tuned.pdf}}%
+    \put(0.63020214,0.09496112){\makebox(0,0)[lb]{\smash{Prędkość kątowa belki [rad/s]}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{beam_tuned.pdf}}%
+    \put(0.63020214,0.07626361){\makebox(0,0)[lb]{\smash{Napięcie sterowania [V]}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{beam_tuned.pdf}}%
+    \put(0.29726564,0.47057075){\makebox(0,0)[lb]{\smash{\textbf{Stabilizacja położenia belki (samostrojenie)}}}}%
+  \end{picture}%
+\endgroup%

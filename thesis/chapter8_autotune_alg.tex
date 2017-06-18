@@ -113,9 +113,13 @@ Dzięki \eqref{eq:obiekt1_zaleznosc_lambd} możliwe jest uzyskanie układu równ
     k_2 &= \frac{\frac{-1}{T_b} - \lambda_1 - \lambda_2}{\frac{K_b}{T_b}} \label{eq:zaleznosc_regulator_belki}
 \end{nalign}
 
-Należy zwrócić uwagę, że postać równań stanu obiektu \eqref{eq:macierze_stanu_obiektu_pierwszego_rzedu} nie do końca odpowiada postaci otrzymanej z linearyzacji \eqref{eq:rownania_stanu_belki} i \eqref{eq:rownania_wyjscia_belki}, w związku z tym zdecydowano się narzucić inne wartości własne macierzy $M$ niż te, które ma ,,zwinięty'' układ regulatora pozycji belki (\cref{fig:schemat_regulacji_belka}).
+Należy zwrócić uwagę, że postać równań stanu obiektu \eqref{eq:macierze_stanu_obiektu_pierwszego_rzedu} nie do końca odpowiada postaci otrzymanej z linearyzacji \eqref{eq:rownania_stanu_belki} i \eqref{eq:rownania_wyjscia_belki}, w związku z tym zdecydowano się narzucić inne wartości własne macierzy $M$ niż te, które ma ,,zwinięty'' układ regulatora pozycji belki (\cref{fig:schemat_regulacji_belka}):
 
-% TODO: inne wartości własne
+\begin{equation}
+    \Lambda(M) = \begin{bmatrix}
+    -8.2378 \\ -37.7286
+    \end{bmatrix}
+\end{equation}
 
 %%%%
 \section{Algorytm identyfikacji obiektu belki}
