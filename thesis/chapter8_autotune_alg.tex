@@ -1,9 +1,11 @@
 \chapter{Algorytmy samostrojenia}
 \label{cha:ch8_algorytmy_samostrojenia}
 
-% TODO: wodolejstwo o różnych mechanizmach samostrojenia
+W literaturze do teorii sterowania znajdują się opisy wielu klasycznych metod strojenia regulatorów, takich jak metoda Zieglera-Nicholsa \cite{KOWAL}\cite{CTRLENG} czy Åströma-Hägglunda \cite{CTRLENG}\cite{ASTROMHAGGLUND}. Wielu producentów oprogramowania serwonapędów lub sterowników technologicznych dostarcza własne algorytmy strojenia \textit{online} \cite{S7MANUAL}\cite{SCL_S71200_S71500}.
 
-Samostrojenie regulatorów podrzędnego i nadrzędnego oparto o automatyczne procesy identyfikacji matematycznych obiektów belki oraz kulki.
+Zdecydowano się zrezygnować z metod klasycznych strojenia algorytmów, gdyż są one powszechnie znane i polegają na doprowadzeniu obiektu do cyklu granicznego, co w przypadku zastosowanej konstrukcji przeniesienia napędu można uzyskać podając stałe sterowanie na silnik. Prawdopodobnie dokładnie z takiego powodu oprogramowanie służące do programowania sterownika PLC --- \textsc{Siemens TIA Portal} --- nie było w stanie zakończyć poprawnie procesu samostrojenia regulatora pozycji belki.
+
+Biorąc pod uwagę powyższe ograniczenia, zdecydowano się oprzeć samostrojenie regulatorów podrzędnego i nadrzędnego o automatyczne procesy identyfikacji matematycznych obiektów belki oraz kulki, co zostało opisane w niniejszym rozdziale.
 
 %%%%
 \section{Identyfikacja obiektu belki}
