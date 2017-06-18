@@ -84,7 +84,7 @@ W wyniku zastosowania powyższych warunków, błędnie określona obecność kul
 \section{Sekwencja główna programu}
 \label{sec:sekwencja_glowna}
 
-Sterownik PLC Siemens z serii S7-1200 nie obsługuje języka sterowania sekwencyjnego \textsc{S7-GRAPH}, który został zastrzeżony przez producenta tylko dla mocniejszej serii S7-1500 (\cite{SCL_S71200_S71500}). W~związku z~tym w~języku obsługiwanym przez S7-1200 (diagram drabinkowy \textit{LAD} \cite{PROGRAMOWANIE_PLC}) zaimplementowano okrojoną wersję sterowania sekwencyjnego, przedstawioną na \cref{fig:schemat_sekwencji}.
+Sterownik PLC Siemens z serii S7-1200 nie obsługuje języka sterowania sekwencyjnego \textsc{S7-GRAPH}, który został zastrzeżony przez producenta tylko dla mocniejszej serii S7-1500 \cite{SCL_S71200_S71500}. W~związku z~tym w~języku obsługiwanym przez S7-1200 (diagram drabinkowy \textit{LAD} \cite{PROGRAMOWANIE_PLC}) zaimplementowano okrojoną wersję sterowania sekwencyjnego, przedstawioną na \cref{fig:schemat_sekwencji}.
 
 \begin{figure}[ht]
     \centering
@@ -94,7 +94,7 @@ Sterownik PLC Siemens z serii S7-1200 nie obsługuje języka sterowania sekwency
     \node [block, below=1.25of S1] (S2) {Oczekiwanie na przycisk};
     \node [block, below=2of S2] (S3) {Stabilizacja kulki w położeniu zerowym};
     \node [block, below=1.25of S3] (S4) {Identyfikacja systemu belki};
-    \node [block, below=2of S4] (S5) {Identyfikacja systemu kulki};
+    \node [block, below=2of S4] (S5) {Identyfikacja systemu kulki\footnotemark};
     \node [block, below=2of S5] (S6) {Zmiana regulatorów na zidentyfikowane};
     
     \draw [->] (S1) -- node [] {$T_1$} (S2);
@@ -111,6 +111,8 @@ Sterownik PLC Siemens z serii S7-1200 nie obsługuje języka sterowania sekwency
     \caption{Schemat sterowania sekwencyjnego zaimplementowanego w sterowniku PLC.}
     \label{fig:schemat_sekwencji}
 \end{figure}
+
+\footnotetext{Szerszy opis wyjaśniający dlaczego jest to niemożliwe do zrealizowania został zamieszczony w rozdziale \ref{sec:ch8_identyfikacja_kulki}.}
 
 Na schemacie sekwencji z \cref{fig:schemat_sekwencji} wyróżnić można:
 \begin{itemize}
