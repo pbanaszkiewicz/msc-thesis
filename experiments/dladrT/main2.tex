@@ -1,0 +1,113 @@
+\documentclass[10pt,a4paper,onecolumn]{article}
+\usepackage[english,polish]{babel}
+
+% Użyj polskiego łamania wyrazów (zamiast domyślnego angielskiego).
+\usepackage{polski}
+
+\usepackage[utf8]{inputenc}
+
+% dodatkowe pakiety
+
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+%\DeclareMathOperator{\sgn}{sgn}
+
+\usepackage{csquotes}
+% Ponieważ `csquotes` nie posiada polskiego stylu, można skorzystać z mocno zbliżonego stylu chorwackiego.
+\DeclareQuoteAlias{croatian}{polish}
+
+\AtBeginDocument{
+	\renewcommand{\tablename}{Tabela}
+	\renewcommand{\figurename}{Fig.}
+}
+
+% ------------------
+% --- < tabele > ---
+
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage[flushleft]{threeparttable}
+%\usepackage{longtable} %????
+\usepackage{longtable}
+
+% defines the X column to use m (\parbox[c]) instead of p (`parbox[t]`)
+\newcolumntype{C}[1]{>{\hsize=#1\hsize\centering\arraybackslash}X}
+
+% ------------------------------
+% --- < linki i referencje > ---
+
+\usepackage[hidelinks, colorlinks=false]{hyperref}
+\usepackage{cleveref}
+
+% ------------------
+% --- < figury > ---
+
+% najprawdopodobniej jakaś paczka ładuje subcaption, a svg ładuje subfig, które
+% nie są kompatybilne; poniższe rozwiązanie wzięte z https://tex.stackexchange.com/a/213279
+\usepackage{subcaption}
+\expandafter\def\csname ver@subfig.sty\endcsname{}
+
+
+\usepackage{graphicx}
+\usepackage{float} % lepsze pozycjonowanie
+\usepackage{svg}
+\graphicspath{{graphics/}}  % obrazki i zdjęcia muszą być w podfolderze "graphics"
+
+% ----------------------------
+% --- < liczby i symbole > ---
+
+\usepackage{siunitx}
+
+\sisetup{
+    group-digits = integer,
+    list-final-separator = { \translate{and} },
+    range-phrase = { -- },
+    mode = text,
+}
+
+% defines the X column to use m (\parbox[c]) instead of p (`parbox[t]`)
+%\newcolumntype{C}[1]{>{\hsize=#1\hsize\centering\arraybackslash}X}
+
+\DeclareMathOperator{\sgn}{sgn}
+
+\begin{document}
+
+Wyprowadzenie wzorów zupełnie jak w Pana mailu pt. ,,Identyfikacja momentu bezwładności kulki'' z 26.05.2017.
+
+Siły działające na kulkę: $F_1$ -- składowa siły ciężkości działająca równolegle do pochylni, $N_1$ -- składowa reakcji podłoża również działająca równolegle, ale skierowana przeciwnie do $F_1$.
+
+\[
+F_1 = m g \sin \alpha
+\]
+
+\[
+N_1 = \frac{\epsilon J}{r}
+\]
+
+Zatem wypadkowa siła działająca na kulkę to $F_1 - N_1 = m g \sin \alpha - \frac{\epsilon J}{r} = a m$, skąd można otrzymać wzór na $a$, po skorzystaniu z zależności $\epsilon r = a$:
+
+\begin{align*}
+    a m &= m g \sin \alpha - \frac{\epsilon J}{r} \\
+    a m &= m g \sin \alpha - \frac{a J}{r^2} \\
+    a (m + \frac{J}{r^2}) &= mg\sin\alpha \\
+    a &= \frac{mg\sin\alpha}{m + \frac{J}{r^2}} \\
+    a &= \frac{mgr^2\sin\alpha}{mr^2 + J}
+\end{align*}
+
+Wzór na moment bezwładności kulki $J = \frac{2}{5} m r^2$, dalej:
+
+\begin{align*}
+    a &= \frac{mgr^2\sin\alpha}{mr^2 + J} \\
+    a &= \frac{mgr^2\sin\alpha}{mr^2 + \frac{2}{5}mr^2} \\
+    a &= \frac{g\sin\alpha}{1+\frac{2}{5}} \\
+    a &= \frac{5g\sin\alpha}{7} \\
+    a &\approx 7\sin\alpha \approx 7 \alpha
+\end{align*}
+
+\end{document}
