@@ -1,8 +1,29 @@
 \chapter{Wstęp}
 \label{cha:ch1_wstep}
 
-Lorem ipsum.
+Celem niniejszej pracy magisterskiej było dobranie algorytmów regulacji oraz samostrojenia dla niestabilnego, nieliniowego obiektu mechatronicznego kontrolowanego przez sterownik PLC. W tym celu, w ramach prac przygotowawczych, od podstaw został wykonany obiekt typu kulka na belce wraz z~zestawem niezbędnych czujników, urządzeniem wykonawczym w formie silnika prądu stałego, układem regulacji opartym o przemysłowy sterownik PLC oraz pozostałymi niezbędnymi elementami i innymi podzespołami pomocniczymi.
 
+Motywacją do podjęcia się tego tematu była chęć zmierzenia się z budową średnio-skomplikowanego układu regulacji od zera, a także chęć zbudowania algorytmów regulacji w oparciu o przemysłowy sterownik PLC. Należy w tym miejscu zauważyć, że większość nieliniowych obiektów regulacji dostępnych w laboratorium sterowania cyfrowego w trakcie cyklu studiów nie była sterowana przy użyciu sterownika PLC, a w przemyśle takie sterowniki stanowią \textit{de facto} standard.
+
+% związek zagadnienia z literaturą
+% związek zagadnienia z przemysłem
 % Tu motywacje (mogą być też osobiste - zawodowe), uzasadnienie potrzeby, wskazanie na popularność, umocowanie w szerszym konktekście, wykazanie pożytków itp.
+
+\section{Zawartość pracy}
+
+Opis zasady działania układu typu kulka i belka, projekt mechaniczny, budowę obiektu regulacji (konstrukcję belki i przeniesienie napędu) zawarto w rozdziale \ref{cha:ch2_obiekt_regulacji}. W kolejnym rozdziale (\ref{cha:ch3_uklad_ster_i_instrumentacji}) umieszczono opis oprzyrządowania użytego w obiekcie (czujniki odległości, bazowania, sterownik PLC, zespół silnika z enkoderem i przekładnią) oraz okablowania.
+
+Część zasadnicza pracy rozpoczyna się w rozdziale \ref{cha:ch4_model_symulacyjny} od opisu budowy analitycznego modelu symulacyjnego obiektu. Zostało to wykonane przy użyciu narzędzi inżynieryjnych dostępnych w pakiecie oprogramowania \textsc{Matlab/Simulink}, a konkretnie przybornika \textsc{Simscape Multibody}. Sam model obiektu powstał na podstawie fizycznych własności rzeczywistego obiektu: jego wymiarów, ułożenia oraz masy, i posłużył między innymi do aproksymacji zależności kąta obrotu belki od kąta obrotu wału motoreduktora, co było konieczne, gdyż w obiekcie nie użyto czujnika mierzącego kąt obrotu belki. W tym samym rozdziale opisano również budowę, już na podstawie równań matematycznych, modelu silnika wykorzystanego w obiekcie.
+
+Kolejny rozdział (\ref{cha:ch5_identyfikacja}) zawiera opisy przeprowadzonych procesów identyfikacyjnych czujników odległości oraz parametrów silnika. W przypadku parametrów silnika identyfikacja była kilkustopniowa: najpierw zweryfikowano i poprawiono wartości podane przez producenta, następnie na ich podstawie oraz wykorzystując równania elektryczne i mechaniczne silnika wyliczono kilka parametrów niepodanych przez producenta; w ostatnim kroku zoptymalizowano numerycznie wartości wszystkich parametrów.
+
+W rozdziale \ref{cha:ch6_model_liniowy}, ponownie wykorzystując narzędzia przybornika do projektowania systemów sterowania z pakietu \textsc{Matlab/Simulink}, uzyskano model liniowy całego układu, który następnie poddano przekształceniom tak, aby przyjął formę potrzebną do użycia w zaproponowanym kaskadowym układzie regulacji. Dalej opisano syntezę regulatorów opartych o stan systemu.
+
+Algorytmy sterowania, bazowania i procedury odczytu wartości z czujników zostały opisane w rozdziale \ref{cha:ch7_algorytmy_sterowania}. Znajduje się tam wyszczególnienie głównej sekwencji programu oraz opis implementacji algorytmów. W kolejnym rozdziale opisano procedurę identyfikacji (opartą o odpowiedź skokową) systemu odpowiadającego za zachowanie belki; również w tym rozdziale opisana jest próba identyfikacji kulki.
+
+W ostatnim rozdziale zaprezentowano wyniki przeprowadzonych symulacji modeli nieliniowego i~liniowego oraz eksperymentów zaczerpniętych z rzeczywistego obiektu regulacji. Eksperymenty dotyczyły reakcji belki na zadane położenie przed i po wykonanej procedurze samostrojenia, a także przedstawiały działanie regulatorów w zadaniu stabilizacji położenia kulki przed i po procedurze samostrojenia.
+
+W pracy zamieszczono również dwa dodatki opisujące inne możliwe do zastosowania zespoły napędowe (dodatek \ref{appA_warianty_zespolu_napedowego}) i alternatywne czujniki pozycji kulki (dodatek \ref{appB_alternatywne_czujniki_pozycji_kulki}).
+
 
 %---------------------------------------------------------------------------

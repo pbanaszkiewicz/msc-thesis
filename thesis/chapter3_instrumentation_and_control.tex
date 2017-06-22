@@ -27,7 +27,7 @@ Podstawowe parametry sterownika oraz płytki sygnałowej zostały zebrane w tabe
         \caption{Podstawowe parametry sterownika PLC Siemens S7-1211C i płytki sygnałowej Siemens SB 1223\tnote{a}.}
         \label{tab:parametry_PLC_SB}
         
-        \begin{tabularx}{\textwidth}{p{5cm} | p{5cm} | p{5cm} }
+        \begin{tabular}{p{4.5cm} | l | l}
             \toprule
             Nazwa & Siemens S7-1211C & Siemens SB 1223 \\
             \midrule
@@ -38,7 +38,7 @@ Podstawowe parametry sterownika oraz płytki sygnałowej zostały zebrane w tabe
             Liczba wejść analogowych & 2 & 0 \\
             Liczba wyjść analogowych & 0 & 0 \\
             Typ wejść cyfrowych & \textit{sink-source} & \textit{source} \\
-            Typ wyjść cyfrowych & półprzewodnikowe MOSFET \textit{source} & półprzewodnikowe MOSFET \textit{sink-source} \\
+            Typ wyjść cyfrowych & MOSFET \textit{source} & MOSFET \textit{sink-source} \\
             Typ wejść analogowych & Napięciowe \SIrange{0}{10}{V} & n.d. \\
             \midrule
             Szybkie liczniki & Do 6 z częstotliwością \SI{100}{kHz}\tnote{b} & Do 2 z częstotliwością \SI{200}{kHz}\tnote{c} \\
@@ -52,7 +52,7 @@ Podstawowe parametry sterownika oraz płytki sygnałowej zostały zebrane w tabe
             Czas wykonywania operacji na typie WORD & \SI{1,7}{\micro\second}/instrukcję & n.d. \\
             Czas wykonywania operacji na typie REAL & \SI{2,3}{\micro\second}/instrukcję & n.d. \\
             \bottomrule
-        \end{tabularx}
+        \end{tabular}
         
         \begin{tablenotes}
             \footnotesize
@@ -85,7 +85,7 @@ Wybrany silnik stanowi dobry kompromis między złożonością, wydajnością i 
     \label{fig:silnik}
 \end{figure}
 
-Producent silnika nie dostarcza pełnej dokumentacji, a jedynie kilka wybranych parametrów. Wymusiło to analityczne lub eksperymentalne wyznaczenie pozostałych wymaganych do zamodelowania silnika parametrów. Wszystkie podane parametry zostały przedstawione w tabeli \ref{tab:parametry_silnika} poniżej.
+Producent silnika nie dostarcza doń pełnej dokumentacji, a jedynie wartości kilku wybranych parametrów. Wymusiło to analityczne lub eksperymentalne wyznaczenie pozostałych wymaganych do zamodelowania silnika parametrów. Wszystkie podane parametry zostały przedstawione w tabeli \ref{tab:parametry_silnika} poniżej.
 
 \begin{table}[H]
     \centering
@@ -123,7 +123,7 @@ Producent silnika nie dostarcza pełnej dokumentacji, a jedynie kilka wybranych 
     \end{threeparttable}
 \end{table}
 
-Parametry niewymienione w tabeli \ref{tab:parametry_silnika}, takie jak rezystancja silnika, stała silnika, moment bezwładności wału czy współczynniki tarcia suchego i wiskotycznego, nie zostały podane przez producenta, dlatego została przeprowadzona ich identyfikacja opisana w rozdziale \ref{sec:ch5_identyfikacja_parametrow_silnika}.
+Parametry niewymienione w tabeli \ref{tab:parametry_silnika}, takie jak rezystancja silnika, stała silnika, moment bezwładności wału czy współczynniki tarcia suchego i wiskotycznego, nie zostały podane przez producenta, dlatego przeprowadzono ich identyfikację opisaną w rozdziale \ref{sec:ch5_identyfikacja_parametrow_silnika}.
 
 Silnik sterowany jest przez PLC za pomocą układu scalonego mostka H z~tranzystorami MOSFET (Pololu BD65496MUV). Został on dobrany tak, by spełniać wymagania elektryczne silnika przy pracy znamionowej. Sterowany jest sygnałem PWM o częstotliwości \SI{20}{\kilo\hertz}. Dodatkowym sygnałem jest binarny sygnał kierunku obrotu silnika. Najistotniejsze parametry wybranego mostka H przedstawiono w~tabeli \ref{tab:parametry_mostka_H}.
 
@@ -196,7 +196,7 @@ W układzie nie zastosowano czujnika położenia wału, do którego przymocowana
 \begin{equation}\label{eq:uproszczona_zaleznosc_kata_belki}
     \theta = \frac{d_L}{d_k} \alpha
 \end{equation}
-gdzie: $d_L = 2 d_c$ to odległość końca belki od osi obrotu, $d_k$ to długość korby. Zależność \eqref{eq:uproszczona_zaleznosc_kata_belki} wynika z~założenia, że punkty zaczepu korbowodu przebędą taką samą drogę łukową, a zatem $\theta d_k = \alpha d_L$.
+gdzie: $d_L$ to odległość końca belki od osi obrotu, a $d_k$ to długość korby. Zależność \eqref{eq:uproszczona_zaleznosc_kata_belki} wynika z~założenia, że punkty zaczepu korbowodu przebędą taką samą drogę łukową, a zatem $\theta d_k = \alpha d_L$.
 
 Niestety, równanie \eqref{eq:uproszczona_zaleznosc_kata_belki} jest poprawne tylko w niewielkich odchyleniach belki od poziomu oraz gdy linia łącząca punkt zaczepu mechanizmu korbowego i oś obrotu belki jest równoległa do korby. Faktyczna zależność $\theta(\alpha)$ została zidentyfikowana za pomocą modelu symulacyjnego (rozdział \ref{sec:ch4_zaleznosc_kata_silnika_i_kata_belki}).
 
@@ -211,7 +211,7 @@ Niestety, równanie \eqref{eq:uproszczona_zaleznosc_kata_belki} jest poprawne ty
 \section{Czujniki odległości}
 \label{sec:ch3_czujniki_odleglosci}
 
-Do pomiaru położenia kulki wykorzystano parę analogowych czujników Sharp GP2Y0A41SK0F (\cref{fig:czujnik_sharp}). Każdy z czujników składa się z nadajnika światła podczerwonego i odbiornika; obliczanie pozycji obiektu odbywa się na zasadzie triangulacji. Podstawowe parametry czujników opisano w tabeli \ref{tab:parametry_czujnikow_Sharp}.
+Do pomiaru położenia kulki wykorzystano parę analogowych czujników Sharp GP2Y0A41SK0F (\cref{fig:czujnik_sharp}). Każdy z czujników składa się z nadajnika światła podczerwonego i odbiornika; obliczanie pozycji obiektu odbywa się na zasadzie triangulacji. Podstawowe parametry czujników opisano w~tabeli~\ref{tab:parametry_czujnikow_Sharp}.
 
 \begin{figure}[h]
     \centering
@@ -328,7 +328,7 @@ Płytka z czujnikiem bazowania została przytwierdzona do układu kulki i belki 
 \section{Systemy napięć}
 \label{sec:ch3_systemy_napiec}
 
-Jak można zauważyć, elementy elektroniczne i elektromechaniczne użyte do zbudowania obiektu sterowania korzystają z poziomów logicznych o różnych napięciach (\cref{tab:poziomy_napiec}). Wynika to z faktu połączenia obiektu typowo przemysłowego, jakim jest sterownik PLC Siemens S7-1211C, który wykorzystuje napięcie \SI{24}{\volt}, oraz elektroniki hobbystycznej (czujniki odległości, mostek H, enkoder), która wykorzystuje napięcia \SI{5}{\volt}. Dodatkowym utrudnieniem jest element wykonawczy, tj. silnik prądu stałego, o napięciu znamionowym 12V.
+Jak można zauważyć, elementy elektroniczne i elektromechaniczne użyte do zbudowania obiektu sterowania korzystają z poziomów logicznych o różnych napięciach (tabela \ref{tab:poziomy_napiec}). Wynika to z faktu połączenia obiektu typowo przemysłowego, jakim jest sterownik PLC Siemens S7-1211C, który wykorzystuje napięcie \SI{24}{\volt}, oraz elektroniki hobbystycznej (czujniki odległości, mostek H, enkoder), która wykorzystuje napięcia \SI{5}{\volt}. Dodatkowym utrudnieniem jest element wykonawczy, tj. silnik prądu stałego, o napięciu znamionowym 12V.
 
 \begin{table}[h]
     \centering
@@ -343,7 +343,7 @@ Jak można zauważyć, elementy elektroniczne i elektromechaniczne użyte do zbu
             Sterownik PLC & \SI{24}{\volt} \\
             Płytka sygnałowa & \SI{5}{\volt} \\
             Mostek H (logika) & \SI{5}{\volt} \\
-            Mostek H (zasilanie silnika)\tnote[a] & \SI{12}{\volt} \\
+            Mostek H (zasilanie silnika)\tnote{a} & \SI{12}{\volt} \\
             Enkoder & \SI{5}{\volt} \\
             Czujniki odległości (zasilanie) & \SI{5}{\volt} \\
             Czujniki odległości (wyjście analogowe) & \SIrange{0,25}{3,1}{\volt} \\
@@ -373,17 +373,16 @@ Połączenia elektryczne pomiędzy komponentami pracy zrealizowano za pomocą pr
 
 Zasilanie po stronie \SI{230}{\volt} AC, \SI{50}{\hertz} zostało zabezpieczone instalacyjnym wyłącznikiem nadprądowym klasy B10.
 
-% TODO: zweryfikuj ilość, rozłożenie szyn
-Wyłącznik nadprądowy, zasilacz \SI{12}{\volt}, zasilacz \SI{24}{\volt} oraz sterownik PLC zostały przymocowane do wspólnej szyny DIN (TH \num{35}). Dodatkowo zamontowano na niej listwy przyłączeniowe dla każdego poziomu napięcia (zob. rozdział \ref{sec:ch3_systemy_napiec}): \SI{0}{\volt} (wspólna masa), \SI{5}{\volt}, \SI{25}{\volt}. Z napięcia \SI{12}{\volt} korzysta tylko silnik, więc to połączenie zostało zrealizowane bezpośrednio, bez użycia listwy przyłączeniowej.
+Wyłącznik nadprądowy, zasilacz \SI{12}{\volt}, zasilacz \SI{24}{\volt} oraz sterownik PLC zostały przymocowane do wspólnej szyny DIN (TH \num{35}). Zasilacz impulsowy \SI{5}{\volt} nie był przeznaczony do montowania na szynie DIN (posiadał jednofazową wtyczkę elektryczną), dlatego na szynie DIN wspólnie ze sterownikiem i~pozostałymi zasilaczami zamontowano gniazdko elektryczne (połączone szeregowo za wyłącznikiem nadprądowym), do którego zasilacz \SI{5}{\volt} został podłączony.
 
-Zasilacz \SI{5}{\volt} posiada jednofazową wtyczkę elektryczną bez uziemienia, dlatego na szynie DIN dodatkowo zamontowano gniazdko elektryczne połączone szeregowo z wyłącznikiem nadprądowym.
+Na drugiej szynie DIN zostały zamontowane cztery listwy przyłączeniowe przeznaczone dla każdego poziomu napięcia (zob. rozdział \ref{sec:ch3_systemy_napiec}): dwie dla napięcia \SI{0}{\volt} (wspólna masa), po jednej dla napięć \SI{5}{\volt}~oraz \SI{24}{\volt}. Z napięcia \SI{12}{\volt} korzysta tylko silnik, więc to połączenie zostało zrealizowane bezpośrednio, bez użycia listwy przyłączeniowej.
 
 % TODO: dodaj ilustrację szyn
 
 %%%%%%%%
 \section{Podsumowanie}
 
-W niniejszym rozdziale przedstawiono układy elektryczne, elektroniczne i elektromechaniczne wykorzystane do stworzenia obiektu typu kulka i belka. Następnie opisano poszczególnych elementów: sterownika PLC, płytki sygnałowej, silnika, enkodera, mostku H i czujników odległości. Przedstawiono charakterystyki czujników, sposób ich implementacji w sterowniku oraz sposób obliczania pozycji kulki. Następnie przedstawiono czujnik wykorzystywany do bazowania.
+W niniejszym rozdziale przedstawiono układy elektryczne, elektroniczne i elektromechaniczne wykorzystane do stworzenia obiektu typu kulka i belka. Następnie opisano poszczególne elementy: sterownik PLC, płytkę sygnałową, silnik, enkoder, mostek~H i~czujniki odległości. Przedstawiono charakterystyki czujników, sposób ich implementacji w sterowniku oraz sposób obliczania pozycji kulki. Następnie przedstawiono czujnik wykorzystywany do bazowania.
 
 W kolejnych podrozdziałach poruszono kwestię różnych systemów napięć, zastosowanych zasilaczy, zabezpieczeń, okablowania i organizacji przewodów.
 

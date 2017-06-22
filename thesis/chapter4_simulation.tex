@@ -1,7 +1,7 @@
 \chapter{Model symulacyjny}
 \label{cha:ch4_model_symulacyjny}
 
-Do zaprojektowania odpowiedniego układu regulacji systemem kulka i belka, a więc dobrania struktury regulatorów, konieczne jest posiadanie modelu tego systemu. Jest to jednak zadanie utrudnione, gdy system jest wybitnie nieliniowy --- a obiekt regulacji taki właśnie jest. Mamy tutaj do czynienia z~nieliniowościami wynikającymi z:
+Do zaprojektowania odpowiedniego układu regulacji systemem kulka i belka, a więc dobrania struktury regulatorów, konieczne jest posiadanie modelu tego systemu. Jest to jednak zadanie utrudnione, gdy system jest wybitnie nieliniowy --- a obiekt regulacji taki właśnie jest, gdyż zawiera nieliniowości wynikające z:
 \begin{itemize}
     \item zastosowania silnika prądu stałego,
     \item przeniesienia napędu poprzez przekładnię korbową,
@@ -17,28 +17,28 @@ Wobec tego zdecydowano się nie przystępować do opisu matematycznego zachowani
 
 \begin{figure}[h]
     \centering
-    \begin{subfigure}[t]{0.15\textwidth}
+    \begin{subfigure}[t]{0.2\textwidth}
         \centering
         \includegraphics[width=0.75\textwidth]{sm_solid}
         \caption{Ciało stałe.}
         \label{fig:sm_solid}
     \end{subfigure}
     ~ 
-    \begin{subfigure}[t]{0.15\textwidth}
+    \begin{subfigure}[t]{0.2\textwidth}
         \centering
         \includegraphics[width=0.75\textwidth]{sm_rigid_transform}
         \caption{Transformacja układu odniesienia.}
         \label{fig:sm_rigid_transform}
     \end{subfigure}
     ~ 
-    \begin{subfigure}[t]{0.15\textwidth}
+    \begin{subfigure}[t]{0.2\textwidth}
         \centering
         \includegraphics[width=0.75\textwidth]{sm_prismatic_joint}
         \caption{Złącze pryzmatyczne.}
         \label{fig:sm_prismatic_joint}
     \end{subfigure}
     ~
-    \begin{subfigure}[t]{0.15\textwidth}
+    \begin{subfigure}[t]{0.2\textwidth}
         \centering
         \includegraphics[width=0.75\textwidth]{sm_revolute_joint}
         \caption{Złącze obrotowe.}

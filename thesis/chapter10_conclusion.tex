@@ -1,8 +1,57 @@
-\chapter{Wnioski}
+\chapter{Wnioski i podsumowanie pracy}
 \label{cha:ch10_wnioski}
 
-Lorem ipsum.
+% zrealizowane zagadnienia
+W niniejszej pracy zrealizowano następujące zagadnienia:
+\begin{itemize}
+    \item budowa od podstaw obiektu regulacji,
+    \item dobór czujników i oprzyrządowania,
+    \item stworzenie nieliniowego modelu symulacyjnego na podstawie rzeczywistego obiektu,
+    \item przeprowadzenie identyfikacji charakterystyk nieliniowych czujników i parametrów wykorzystanego silnika prądu stałego,
+    \item zaproponowanie kaskadowego układu regulacji i linearyzacja modelu nieliniowego,
+    \item przekształcenie modelu liniowego do postaci wymaganej przez kaskadowy układ regulacji,
+    \item synteza regulatorów,
+    \item implementacja algorytmów sterowania w sterowniku PLC,
+    \item zaproponowanie metody samostrojenia regulatora podrzędnego bazującej na procedurze identyfikacji obiektu inercyjnego pierwszego rzędu,
+    \item zaprogramowanie wspomnianej metody samostrojenia,
+    \item przeprowadzenie symulacji udowadniających odpowiednie zachowanie modelu liniowego i nieliniowego obiektu,
+    \item przeprowadzenie eksperymentów porównujących zachowanie obiektu regulacji dla różnych kulek,
+    \item przeprowadzenie eksperymentów porównujących odpowiedzi regulatora podrzędnego przed i po samostrojeniu,
+    \item przeprowadzenie kolejnych eksperymentów porównujących jakość stabilizacji pozycji kulki w~obiekcie po samostrojeniu i przy wykorzystaniu różnych kulek.
+\end{itemize}
 
+Spośród założonych celów, opisanych we wstępie do pracy (rozdział \ref{cha:ch1_wstep}), niemożliwym było przeprowadzenie samostrojenia regulatorów opartego o identyfikację dynamiki kulki, na co dowód zamieszczono w rozdziale \ref{sec:ch8_identyfikacja_kulki}. Udało się natomiast dobrać naturalną strukturę sterowania, w której następuje swoista ,,enkapsulacja'' regulatorów: każdy odpowiada tylko za swoje ograniczone pole działania; przykładowo: jeżeli zachowanie kulki zależy przede wszystkim od kąta belki (\ref{sec:ch8_identyfikacja_kulki}), to regulator pozycji kulki powinien wymuszać odpowiednie ustawienie belki dla pożądanej odpowiedzi kulki.
+
+%Ponadto należy wspomnieć, że implementacja układu sterowania, wraz z dodatkowymi działaniami jak na przykład implem
+
+\section{Podsumowanie wyników}
+
+Zaproponowany układ sterowania naturalnie oddziela role regulatorów, co zostało zasygnalizowane wcześniej w tym rozdziale. Implementacja regulatorów proporcjonalnych od stanu pozwala spełniać główne zadanie regulacji --- stabilizować kulkę w zerowym położeniu --- w sposób odpowiednio szybki.
+
+Na podstawie wyników symulacji modelu nieliniowego oraz niektórych eksperymentów można wyciągnąć wniosek, że w pewnych sytuacjach może wystąpić uchyb statyczny regulacji --- głównie na skutek obecności tarcia statycznego kulki lub nieregularności w jej budowie (np. szwy) --- co oznacza, że rozsądnym byłoby rozbudowanie regulatora nadrzędnego o akcję całkującą, mającą za zadanie zminimalizować wspomniany uchyb.
+
+Należy również wspomnieć o przydatności wykorzystanych do budowy układu sterowania narzędzi inżynieryjnych oferowanych przez pakiet \textsc{Matlab/Simulink}. Bardzo dużym uproszczeniem w~stosunku do ,,klasycznych'' metod modelowania (np. równań Eulera-Lagrange'a) było wykorzystanie przybornika narzędziowego \textsc{Simscape Multibody}, który umożliwił zbudowanie wirtualnego obiektu regulacji na podstawie fizycznych parametrów rzeczywistego układu, istniejących w nim połączeń i mas poszczególnych elementów. Spośród użytych narzędzi, funkcja \texttt{looptune} jako jedyna zaprezentowała mieszane wyniki; z jednej strony, regulator pozycji belki zbudowany przy jej użyciu działał bardzo dobrze, z drugiej strony nie poradziła sobie z syntezą regulatora nadrzędnego (rozdział \ref{sec:ch6_regulator_kulki}; wymagane było zmienienie dwóch wzmocnień). Należy mieć na uwadze, że funkcja \texttt{looptune} ma charakter optymalizacyjny, a więc być może jej wartości początkowe były nieodpowiednie; być może jednak problem stanowiły zaszumione sygnały z czujników położenia kulki, co skutkowało dużymi skokami wartości prędkości kulki. Dodatkowy negatywny wpływ na działanie regulatora obliczonego przez wspomnianą funkcję mógł mieć błąd wynikający z obliczania prędkości kulki i belki na zasadzie równań różnicowych z określonym okresem.
+
+% wnioski
 % Wspomnij o zaufaniu do `looptune`, które poradziło sobie z belką ale nie z kulką
+
+\section{Potencjalne ścieżki rozwoju pracy}
+% potencjalne ścieżki rozwoju pracy
+
+Wykorzystany w pracy obiekt regulacji typu kulka i belka stanowi interesujący problem z dziedziny sterowania cyfrowego, a zadanie stabilizacji położenia kulki w wybranym miejscu jest jednym z wielu możliwych zagadnień, jakie można poruszyć w trakcie pracy z tym obiektem. Jednocześnie można wykazać kilka punktów, których analiza lub poprawa przyniosłaby korzyści.
+
+W kwestiach mechanicznych obiekt regulacji powinien być wyposażony w czujnik kąta obrotu belki, gdyż nawet pomimo dość prostej zależności między nim a kątem obrotu motoreduktora, dużo wygodniejszym byłoby operowanie na zmiennej stanu, która odczytana jest bezpośrednio z fizycznego układu. Ponadto wskazanym byłoby przebudowanie struktury nośnej obiektu np. na profile aluminiowe, gdyż przy dużych wartościach sterowania silnika zapobiegłoby to odgięciom. I wreszcie sporym ułatwieniem z punktu widzenia modelu obiektu byłaby rezygnacja z nieliniowego mechanizmu przeniesienia napędu i zastąpienia go na przykład układem opartym o przekładnię pasową (zob. dodatek \ref{appA_warianty_zespolu_napedowego}).
+
+Wymiana czujników odległości na sensory przemysłowe (zob. dodatek \ref{appB_alternatywne_czujniki_pozycji_kulki}) na pewno zredukowałaby szumy przy odczycie pozycji kulki, ale alternatywnym (i być może tańszym) rozwiązaniem byłaby implementacja dodatkowego filtru, np. Kalmana.
+
+Wreszcie identyfikacji można poddać tarcia występujące w łożyskach wykorzystywanych przez belkę, czy pomiędzy kulką a belką w trakcie toczenia; ich wpływ na postać modelu matematycznego obecnie jest nieznany, a mógłby być uwzględniony przy projektowaniu regulatora.
+
+Dzięki wykorzystaniu dokładniejszych czujników położenia kulki oraz belki zasadnym stałoby się próbowanie odczytania momentu bezwładności kulki w prostych eksperymentach i tym samym identyfikacja kulek o niejednorodnym rozkładzie masy (na przykład ,,wydmuszek'').
+
+Kolejnym rozszerzeniem identyfikacji może być pomiar przełożenia mechanizmu korbowego, polegający na wyznaczeniu przyspieszenia kulki (a więc kąta pochylenia belki) staczającej się z obróconej o~pewien kąt belki.
+
+% 1. Kulka o niejednorodnym rozkładzie masy (na przykład "wydmuszka"). Dla takiej kulki wzór na moment bezwładności byłby inny, więc zasadna byłaby identyfikacja tego parametru i wzięcie pod uwagę jego wpływu na zachowanie się obiektu.
+%2. Tarcie kulki o belkę w trakcie toczenia. Tarcie to wpływa na postać modelu matematycznego obiektu, a więc mogłoby podlegać identyfikacji i być uwzględniane przy projektowaniu regulatora.
+%3. Nieznane przełożenie mechanizmu korbowego -- można założyć, że nie znamy tego przełożenia i próbujemy je zidentyfikować w oparciu o pomiar przyspieszenia kulki po wykonaniu zadanej liczby obrotów wału wyjściowego przekładni (zaczynając od położenia poziomego belki). 
 
 %---------------------------------------------------------------------------
