@@ -14,13 +14,13 @@ W niniejszej pracy zrealizowano następujące zagadnienia:
     \item implementacja algorytmów sterowania w sterowniku PLC,
     \item zaproponowanie metody samostrojenia regulatora podrzędnego bazującej na procedurze identyfikacji obiektu inercyjnego pierwszego rzędu,
     \item zaprogramowanie wspomnianej metody samostrojenia,
-    \item przeprowadzenie symulacji udowadniających odpowiednie zachowanie modelu liniowego i nieliniowego obiektu,
+    \item przeprowadzenie symulacji wykazujących odpowiednie zachowanie modelu liniowego i nieliniowego obiektu,
     \item przeprowadzenie eksperymentów porównujących zachowanie obiektu regulacji dla różnych kulek,
     \item przeprowadzenie eksperymentów porównujących odpowiedzi regulatora podrzędnego przed i po samostrojeniu,
     \item przeprowadzenie kolejnych eksperymentów porównujących jakość stabilizacji pozycji kulki w~obiekcie po samostrojeniu i przy wykorzystaniu różnych kulek.
 \end{itemize}
 
-Spośród założonych celów, opisanych we wstępie do pracy (rozdział \ref{cha:ch1_wstep}), niemożliwym było przeprowadzenie samostrojenia regulatorów opartego o identyfikację dynamiki kulki, na co dowód zamieszczono w rozdziale \ref{sec:ch8_identyfikacja_kulki}. Udało się natomiast dobrać naturalną strukturę sterowania, w której następuje swoista ,,enkapsulacja'' regulatorów: każdy odpowiada tylko za swoje ograniczone pole działania; przykładowo: jeżeli zachowanie kulki zależy przede wszystkim od kąta belki (\ref{sec:ch8_identyfikacja_kulki}), to regulator pozycji kulki powinien wymuszać odpowiednie ustawienie belki dla pożądanej odpowiedzi kulki.
+Spośród założonych celów, opisanych we wstępie do pracy (rozdział \ref{cha:ch1_wstep}), niemożliwym i niecelowym było przeprowadzenie samostrojenia regulatorów opartego o identyfikację dynamiki kulki, na co dowód zamieszczono w rozdziale \ref{sec:ch8_identyfikacja_kulki}. Udało się natomiast dobrać naturalną strukturę sterowania, w której następuje dekompozycja układów regulacji: każdy odpowiada tylko za swoje ograniczone pole działania; przykładowo: jeżeli zachowanie kulki zależy przede wszystkim od kąta belki (\ref{sec:ch8_identyfikacja_kulki}), to regulator pozycji kulki powinien wymuszać odpowiednie ustawienie belki dla pożądanej odpowiedzi kulki.
 
 %Ponadto należy wspomnieć, że implementacja układu sterowania, wraz z dodatkowymi działaniami jak na przykład implem
 
@@ -40,7 +40,7 @@ Należy również wspomnieć o przydatności wykorzystanych do budowy układu st
 
 Wykorzystany w pracy obiekt regulacji typu kulka i belka stanowi interesujący problem z dziedziny sterowania cyfrowego, a zadanie stabilizacji położenia kulki w wybranym miejscu jest jednym z wielu możliwych zagadnień, jakie można poruszyć w trakcie pracy z tym obiektem. Jednocześnie można wykazać kilka punktów, których analiza lub poprawa przyniosłaby korzyści.
 
-W kwestiach mechanicznych obiekt regulacji powinien być wyposażony w czujnik kąta obrotu belki, gdyż nawet pomimo dość prostej zależności między nim a kątem obrotu motoreduktora, dużo wygodniejszym byłoby operowanie na zmiennej stanu, która odczytana jest bezpośrednio z fizycznego układu. Ponadto wskazanym byłoby przebudowanie struktury nośnej obiektu np. na profile aluminiowe, gdyż przy dużych wartościach sterowania silnika zapobiegłoby to odgięciom. I wreszcie sporym ułatwieniem z punktu widzenia modelu obiektu byłaby rezygnacja z nieliniowego mechanizmu przeniesienia napędu i zastąpienia go na przykład układem opartym o przekładnię pasową (zob. dodatek \ref{appA_warianty_zespolu_napedowego}).
+W kwestiach mechanicznych obiekt regulacji powinien być wyposażony w czujnik kąta obrotu belki, gdyż nawet pomimo dość prostej zależności między nim a kątem obrotu motoreduktora, dużo wygodniejszym byłoby operowanie na zmiennej stanu, która odczytana jest bezpośrednio z fizycznego układu. Ponadto wskazanym byłoby przebudowanie struktury nośnej obiektu np. na profile aluminiowe, gdyż przy dużych wartościach sterowania silnika zapobiegłoby to odkształcaniu wsporników. I wreszcie sporym ułatwieniem z punktu widzenia modelu obiektu byłaby rezygnacja z nieliniowego mechanizmu przeniesienia napędu i zastąpienia go na przykład układem opartym o przekładnię pasową (zob. dodatek \ref{appA_warianty_zespolu_napedowego}).
 
 Wymiana czujników odległości na sensory przemysłowe (zob. dodatek \ref{appB_alternatywne_czujniki_pozycji_kulki}) na pewno zredukowałaby szumy przy odczycie pozycji kulki, ale alternatywnym (i być może tańszym) rozwiązaniem byłaby implementacja dodatkowego filtru, np. Kalmana.
 

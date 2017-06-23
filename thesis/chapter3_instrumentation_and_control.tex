@@ -1,7 +1,7 @@
 \chapter{Układ sterowania i instrumentacji}
 \label{cha:ch3_uklad_ster_i_instrumentacji}
 
-Do odczytywania danych z obiektu i sterowania nim wykorzystano opisany w tym rozdziale układ sterowania i instrumentacji (\cref{fig:schemat_ukl_sterowania_instrumentacji}). W jego sercu znajduje się przemysłowy sterownik PLC, który odczytuje dane o położeniu kulki z dwóch czujników odległości oraz położenie kątowe wału motoreduktora z~enkodera. Dodatkowo do sterownika podłączony został czujnik bazowania oraz przyciski: \texttt{START} (NO), \texttt{STOP} (NC). Na wyjścia sterownika podłączony został mostek H kontrolujący silnik oraz dioda sygnalizacyjna.
+Do odczytywania danych z obiektu i sterowania nim wykorzystano opisany w tym rozdziale układ sterowania i instrumentacji (\cref{fig:schemat_ukl_sterowania_instrumentacji}). W jego sercu znajduje się przemysłowy sterownik PLC, który odczytuje dane o położeniu kulki z dwóch czujników odległości oraz położenie kątowe wału wyjściowego motoreduktora z~enkodera przyrostowego kwadraturowego. Dodatkowo do sterownika podłączony został czujnik bazowania oraz przyciski: \texttt{START} (NO), \texttt{STOP} (NC). Na wyjścia sterownika podłączony został mostek H kontrolujący silnik oraz dioda świecąca sygnalizacyjna.
 
 \begin{figure}[H]
     \centering
@@ -90,7 +90,7 @@ Producent silnika nie dostarcza doń pełnej dokumentacji, a jedynie wartości k
 \begin{table}[H]
     \centering
     \begin{threeparttable}
-        \caption{Parametry producenta silnika\tnote{a}, enkodera i przekładni\tnote{b}.}
+        \caption{Parametry podane przez producenta silnika\tnote{a}, enkodera i przekładni\tnote{b}.}
         \label{tab:parametry_silnika}
         
         \begin{tabularx}{0.9\textwidth}{l | l}
@@ -133,7 +133,7 @@ Silnik sterowany jest przez PLC za pomocą układu scalonego mostka H z~tranzyst
         \caption{Najważniejsze parametry mostka H\tnote{a}.}
         \label{tab:parametry_mostka_H}
         
-        \begin{tabularx}{0.7\textwidth}{l | l}
+        \begin{tabular}{l | l}
             \toprule
             Parametr & Wartość \\
             \midrule
@@ -141,10 +141,10 @@ Silnik sterowany jest przez PLC za pomocą układu scalonego mostka H z~tranzyst
             Maksymalny prąd ciągły silnika & \SI{1,2}{\ampere} \\
             Maksymalny prąd chwilowy silnika & \SI{5}{\ampere} \\
             Maksymalna częstotliwość PWM & \SI{500}{\kilo\hertz} \\
-            Napięcie zasilania & \SIrange{2,5}{5,5}{\volt} \\
+            Napięcie zasilania części logicznej & \SIrange{2,5}{5,5}{\volt} \\
             Napięcie sygnałów logicznych & Napięcie zasilania \SI{+-0,3}{\volt} \\
             \bottomrule
-        \end{tabularx}
+        \end{tabular}
         
         \begin{tablenotes}
             \footnotesize
@@ -161,6 +161,8 @@ Wszystkie wymagane połączenia elektryczne wykonano na uniwersalnej płytce PCB
     \caption{Zdjęcie układu mostka H (Pololu BD65496MUV). Źródło: \url{https://www.pololu.com/product/2960}.}
     \label{fig:zdjecie_mostka_H}
 \end{figure}
+
+% TODO: schemat ideowy modułu (ze źródła)
 
 \begin{table}[H]
     \centering
@@ -191,7 +193,7 @@ Wszystkie wymagane połączenia elektryczne wykonano na uniwersalnej płytce PCB
     \end{threeparttable}
 \end{table}
 
-W układzie nie zastosowano czujnika położenia wału, do którego przymocowana jest belka; zamiast tego wykorzystano zależność geometryczną pomiędzy obrotem wału motoreduktora a obrotem belki. W przypadku niewielkich odchyleń kąt belki $\theta$ powinien być liniowo związany z kątem obrotu wału motoreduktora $\alpha$~w~następujący sposób:
+W układzie nie zastosowano czujnika położenia wału, do którego przymocowana jest belka; zamiast tego wykorzystano zależność geometryczną pomiędzy obrotem wału motoreduktora a obrotem belki. W przypadku niewielkich odchyleń kąt belki $\theta$ powinien być w przybliżeniu liniowo związany z kątem obrotu wału motoreduktora $\alpha$~w~następujący sposób:
 
 \begin{equation}\label{eq:uproszczona_zaleznosc_kata_belki}
     \theta = \frac{d_L}{d_k} \alpha
@@ -247,7 +249,7 @@ Czujniki optyczne pracujące w podczerwieni nie są jedynymi sensorami, które m
 
 Czujniki zostały zamontowane na wspornikach umożliwiających regulację wysokości oraz pochylenia względem belki (zob. rozdział \ref{sec:ch2_belka}). Odległość między czujnikami to \SI{40}{\centi\meter} (powyżej górnej granicy zakresu pomiarowego), a ich wysokość nad belką to \SI{4}{\centi\meter}. W dalszej części pracy, czujnik zamontowany dalej od punktu zaczepu korbowodu nazywany jest ,,lewy'', natomiast czujnik zamontowany bliżej tego punktu --- ,,prawy''.
 
-Charakterystyka każdego z czujników jest mocno nieliniowa (zob. \cref{fig:charakterystyka_czujnikow}). Dobrą aproksymację charakterystyki można otrzymać (po odcięciu wartości poniżej \SI{3}{\centi\meter}) za pomocą funkcji postaci $y =\nobreak a x ^ b + c$ (zob. tabela \ref{tab:aproksymacja_czujnikow}), gdzie $x$ to wartość pomiaru z przetwornika, a $y$ to odległość do przeszkody.
+Charakterystyka każdego z czujników jest nieróżnowartościowa i mocno nieliniowa (zob. \cref{fig:charakterystyka_czujnikow}). Dobrą aproksymację charakterystyki można otrzymać (po odcięciu wartości poniżej \SI{3}{\centi\meter}) za pomocą funkcji postaci $y =\nobreak a x ^ b + c$ (zob. tabela \ref{tab:aproksymacja_czujnikow}), gdzie $x$ to wartość pomiaru z przetwornika, a $y$ to odległość do przeszkody.
 
 Sposób zebrania charakterystyk czujników oraz wykonana aproksymacja zostały opisane w rozdziale~\ref{sec:ch5_identyfikacja_charakterystyk_czujnikow}.
 
@@ -262,7 +264,7 @@ Z powodu dużej złożoności obliczeniowej liczenia potęg niecałkowitych zrez
 
 Oba czujniki są równoodległe ($x_d = \SI{20}{\centi\meter}$) od środka belki, co oznacza, że aby uzyskać wychylenie środka kulki od środka belki, należy transformować układy odniesienia czujników, co ilustruje \cref{fig:polozenie_kulki}. Mając dwie odległości $d_l$ oraz $d_r$ od czujników do kulki, pozycję kulki $d_b$ oblicza się w~następujący sposób:
 \begin{equation}\label{eq:pozycja_kulki}
-d_b = \frac{d_l + 2\cdot d_c - d_r}{2} - d_c
+d_b = \frac{d_l + 2\cdot d_c - d_r}{2} - d_c = \frac{d_l - d_r}{2}
 \end{equation}
 
 \begin{figure}[H]
@@ -281,6 +283,7 @@ Z powodu wykorzystania enkodera inkrementalnego, po każdym uruchomieniu urządz
 
 Do wykrycia pozycji bazowania wykorzystano transoptor szczelinowy TCST1103 firmy Vishay Semiconductors połączony w układzie przedstawionym na \cref{fig:uklad_transoptora}, natomiast podstawowe parametry transoptora zostały opisane w tabeli \ref{tab:parametry_transoptora}.
 
+% TODO: dobrze byłoby dodać szeregowo diody prostownicze bądź impulsowe o napięciu zaporowym ponad 24V, co uchroniłoby układ przed omyłkową zmianą biegunów zasilania
 \begin{figure}[H]
     \centering
     \includesvg[width=0.8\textwidth,svgpath=./vector_graphics/]{uklad_transoptora}
@@ -300,9 +303,9 @@ Do wykrycia pozycji bazowania wykorzystano transoptor szczelinowy TCST1103 firmy
             Parametr & Wartość \\
             \midrule
             Szerokość szczeliny & \SI{3}{\milli\meter} \\
-            Maks. natężenie przewodzenia diody & \SI{60}{\milli\ampere} \\
+            Maks. prąd przewodzenia diody & \SI{60}{\milli\ampere} \\
             Maks. napięcie kolektor-emiter & \SI{70}{\volt} \\
-            Współczynnik wzmocnienia prądowego & \num{0,2} \\
+            Współczynnik przekładni prądowej & \num{0,2} \\
             \bottomrule
         \end{tabularx}
         
@@ -322,7 +325,7 @@ Układ z \cref{fig:uklad_transoptora} przylutowano do płytki uniwersalnej (\cre
     \label{fig:czujnik_bazowania_PCB}
 \end{figure}
 
-Płytka z czujnikiem bazowania została przytwierdzona do układu kulki i belki poniżej silnika. Sztywny, lekki i nieprzezroczysty element przyczepiony został na końcu korby tak, aby przechodził przez szczelinę enkodera w momencie skierowania korby pionowo w dół. Przyjęto, że w chwili zasłonięcia szczeliny (przy ruchu zgodnie ze wskazówkami zegara) licznik enkodera powinien otrzymać wartość \num{149}; wówczas pionowemu położeniu korby odpowiada wartość \num{0}.
+Płytka z czujnikiem bazowania została przytwierdzona do układu kulki i belki poniżej silnika. Sztywny, lekki i nieprzezroczysty element (chorągiewka) przyczepiony został na końcu korby tak, aby przechodził przez szczelinę enkodera w momencie skierowania korby pionowo w dół. Doświadczalnie ustalono, że w chwili zasłonięcia szczeliny (przy ruchu zgodnie ze wskazówkami zegara) licznik enkodera powinien otrzymać wartość \num{149}; wówczas pionowemu położeniu korby odpowiada wartość \num{0}.
 
 %%%%%%%%
 \section{Systemy napięć}
@@ -350,7 +353,7 @@ Jak można zauważyć, elementy elektroniczne i elektromechaniczne użyte do zbu
             Sterownik PLC (wejścia analogowe) & \SIrange{0}{10}{\volt} \\
             Czujnik bazowania & \SI{24}{\volt} \\
             Przyciski & \SI{24}{\volt} \\
-            Dioda sygnalizacyjna & \SI{24}{\volt} \\
+            Lampka sygnalizacyjna & \SI{24}{\volt} \\
             \bottomrule
         \end{tabularx}
         
@@ -367,9 +370,7 @@ Obecność trzech systemów napięcia poskutkowała użyciem trzech oddzielnych 
 \section{Okablowanie i zabezpieczenia}
 \label{sec:ch3_okablowanie_zabezpieczenia}
 
-% TODO: dodaj zdjęcie "szafy"
-
-Połączenia elektryczne pomiędzy komponentami pracy zrealizowano za pomocą przewodów o przekroju \SI{0,75}{\milli\meter\squared}. Za wyjątkiem złącza silnika i enkodera, wszystkie przewody zakończone są tulejami, co jest konieczne z powodu zastosowania złącz śrubowych.
+Połączenia elektryczne pomiędzy komponentami pracy zrealizowano za pomocą przewodów o przekroju \SI{0,75}{\milli\meter\squared}. Za wyjątkiem złącza silnika i enkodera, wszystkie przewody zakończone są zaciskanymi tulejami, co jest konieczne z powodu zastosowania złącz śrubowych.
 
 Zasilanie po stronie \SI{230}{\volt} AC, \SI{50}{\hertz} zostało zabezpieczone instalacyjnym wyłącznikiem nadprądowym klasy B10.
 
@@ -377,12 +378,14 @@ Wyłącznik nadprądowy, zasilacz \SI{12}{\volt}, zasilacz \SI{24}{\volt} oraz s
 
 Na drugiej szynie DIN zostały zamontowane cztery listwy przyłączeniowe przeznaczone dla każdego poziomu napięcia (zob. rozdział \ref{sec:ch3_systemy_napiec}): dwie dla napięcia \SI{0}{\volt} (wspólna masa), po jednej dla napięć \SI{5}{\volt}~oraz \SI{24}{\volt}. Z napięcia \SI{12}{\volt} korzysta tylko silnik, więc to połączenie zostało zrealizowane bezpośrednio, bez użycia listwy przyłączeniowej.
 
-% TODO: dodaj ilustrację szyn
+Użyte zasilacze posiadają drugą klasę ochronności, dlatego nie zostały dodatkowo podłączone przewodem ochronnym.
+
+% TODO: dodaj zdjęcie szyn
 
 %%%%%%%%
 \section{Podsumowanie}
 
-W niniejszym rozdziale przedstawiono układy elektryczne, elektroniczne i elektromechaniczne wykorzystane do stworzenia obiektu typu kulka i belka. Następnie opisano poszczególne elementy: sterownik PLC, płytkę sygnałową, silnik, enkoder, mostek~H i~czujniki odległości. Przedstawiono charakterystyki czujników, sposób ich implementacji w sterowniku oraz sposób obliczania pozycji kulki. Następnie przedstawiono czujnik wykorzystywany do bazowania.
+W niniejszym rozdziale przedstawiono układy elektryczne, elektroniczne i elektromechaniczne wykorzystane do stworzenia obiektu typu kulka i belka. Następnie umieszczono opisy poszczególnych elementów: sterownika PLC, płytki sygnałowej, silnika, enkodera, mostka~H i~czujników odległości. Przedstawiono charakterystyki czujników, sposób ich implementacji w sterowniku oraz sposób obliczania pozycji kulki. Następnie przedstawiono czujnik wykorzystywany do bazowania.
 
 W kolejnych podrozdziałach poruszono kwestię różnych systemów napięć, zastosowanych zasilaczy, zabezpieczeń, okablowania i organizacji przewodów.
 

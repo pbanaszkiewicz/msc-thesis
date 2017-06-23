@@ -41,7 +41,7 @@ Zatem zachowanie modelu zlinearyzowanego w otoczeniu punktu równowagi (zerowe p
 \section{Symulacje działania regulatorów}
 \label{sec:ch9_symulacje_regulatorow}
 
-Kolejnym porównaniem, któremu poddane zostały model nieliniowy oraz liniowy obiektu regulacji, była stabilizacja kulki w zerowym położeniu równowagi. Wartościami początkowymi zmiennych stanu były: \SI{-0.1}{\meter} dla pozycji kulki, oraz \num{0} dla jej prędkości oraz pochylenia i prędkości kątowej belki. W~symulacjach wykorzystano regulatory w konfiguracji kaskadowej (opisane w rozdziale \ref{sec:ch6_kaskadowy_uklad_regulacji}), przy czym w~obiekcie nieliniowym szeregowo ułożone regulatory oddziaływały na silnik, a stany odczytywane były z~odpowiednich złącz (zob. rozdział \ref{cha:ch4_model_symulacyjny}), natomiast schemat regulacji wykorzystujący model liniowy został zbudowany jak na \cref{fig:schemat_regulacji_belka_i_kulka}.
+Kolejnym porównaniem, któremu poddane zostały model nieliniowy oraz liniowy obiektu regulacji, była stabilizacja kulki w zerowym położeniu równowagi. Wartościami początkowymi zmiennych stanu były: \SI{-0.1}{\meter} dla pozycji kulki, oraz \num{0} dla jej prędkości oraz pochylenia i prędkości kątowej belki. W~symulacjach wykorzystano regulatory w konfiguracji kaskadowej (opisane w rozdziale \ref{sec:ch6_kaskadowy_uklad_regulacji}), przy czym w~modelu nieliniowym szeregowo ułożone regulatory oddziaływały na silnik, a stany odczytywane były z~odpowiednich złącz (zob. rozdział \ref{cha:ch4_model_symulacyjny}), natomiast schemat regulacji wykorzystujący model liniowy został zbudowany jak na \cref{fig:schemat_regulacji_belka_i_kulka}.
 
 \begin{figure}[h]
     \includesvg[width=1\textwidth,svgpath=./vector_graphics/,pretex=\relscale{0.6}]{model_nieliniowy_stabilizacja}
@@ -69,11 +69,11 @@ Wyniki eksperymentów przeprowadzonych na obiekcie rzeczywistym zostały zebrane
 
 Do eksperymentu porównującego stabilizację położenia różnych kulek wybrano, poza kulką opisaną w rozdziale \ref{sec:ch2_kulka}, podobną kulkę wykonaną również z pianki, ale o masie \SI{30}{\gram} i średnicy \SI{9}{\centi\meter}. Każda z kulek została ułożona na pozycji \SI{-12}{\centi\meter} od środka belki w momencie gdy belka była w~poziomie. Regulacja rozpoczynała się od razu po wykryciu przez sterownik obecności kulki.
 
-Wykresy zarejestrowanych zmiennych stanu podczas eksperymentów stabilizacji położenia kulek przedstawiono na \cref{fig:stabilizacja_kulka1} i \cref{fig:stabilizacja_kulka2}; w lewej części przedstawiona jest pozycja kulki, natomiast pozostałe zmienne stanu w prawej części. Jak widać czas regulacji w przypadku mniejszej kulki, do której został dostrojony matematycznie model obiektu (zob. rozdział \ref{cha:ch6_model_liniowy}), wynosi około \SI{2}{\second}, a liczba przeregulowań to 2.
+Wykresy zarejestrowanych zmiennych stanu podczas eksperymentów stabilizacji położenia kulek przedstawiono na \cref{fig:stabilizacja_kulka1} i \cref{fig:stabilizacja_kulka2}; w lewej części przedstawiona jest pozycja kulki, natomiast pozostałe zmienne stanu w prawej części. Jak widać czas regulacji w przypadku mniejszej kulki, do której został dostrojony matematycznie model obiektu (zob. rozdział \ref{cha:ch6_model_liniowy}), wynosi około \SI{2}{\second}, a liczba przeregulowań to~2.
 
-Wykres pozycji drugiej kulki (\cref{fig:stabilizacja_kulka2}) ukazuje większe oscylacje wokół zadanego punktu równowagi; czas regulacji również jest wydłużony i wynosi około \SI{9}{\second}. Oznacza to, że wybrany regulator słabiej radzi sobie z większą i cięższą piłką.
+Wykres pozycji drugiej kulki (\cref{fig:stabilizacja_kulka2}) ukazuje większe oscylacje wokół zadanego punktu równowagi; czas regulacji również jest wydłużony i wynosi około \SI{9}{\second}. Oznacza to, że wybrany regulator gorzej radzi sobie z większą i cięższą piłką.
 
-Dodatkowo na wykresie na \cref{fig:stabilizacja_kulka1} widoczny jest uchyb statyczny, ale nie jest on widoczny na wykresie dla drugiej kulki. Wynika to z faktu, że pierwsza kulka mogła zatrzymać się na tarciu statycznym.
+Dodatkowo na wykresie na \cref{fig:stabilizacja_kulka1} widoczny jest uchyb statyczny, ale nie jest on widoczny na wykresie dla drugiej kulki. Wynika to z faktu, że pierwsza kulka mogła zatrzymać się z powodu tarcia statycznego.
 
 \begin{figure}[p]
     \includesvg[width=1\textwidth,svgpath=./vector_graphics/,pretex=\relscale{0.7}]{ball1_stabilization}
@@ -96,7 +96,7 @@ Regulator z nastawami dobranymi w procesie samostrojenia $K_I=\begin{bmatrix}
 8,95713 & 1,071005
 \end{bmatrix}$ również osiągnął (a nawet przekroczył) zadany punkt; dodatkowo na wykresie napięcia sterowania widać, że nastąpiłoby przeregulowanie, gdyby nie obecność tarcia statycznego w przekładni, łożyskach i przegubach. W przypadku tego regulatora czas regulacji jest jednak niższy (około \SI{0.7}{\second} licząc od rozpoczęcia regulacji do ustalenia wyjścia).
 
-Jednocześnie można zaobserwować, że napięcie sterowania w przypadku obydwóch regulatorów nie osiąga nawet połowy wartości znamionowej. Z jednej strony oznacza to, że dynamika regulatorów jest mocno ograniczona, a z drugiej strony oznacza, że nie powinna nastąpić sytuacja podbicia lekkiej kulki lub jej spadku swobodnego w wyniku szybkiego ruchu belką.
+Jednocześnie można zaobserwować, że napięcie sterowania w przypadku obydwóch regulatorów nie osiąga nawet połowy wartości znamionowej. Z jednej strony oznacza to, że dynamika regulatorów jest mocno ograniczona, a z drugiej strony oznacza, że nie powinna nastąpić sytuacja podrzucenia kulki lub jej spadku swobodnego w wyniku szybkiego ruchu belką.
 
 \begin{figure}[p]
     \includesvg[width=1\textwidth,svgpath=./vector_graphics/,pretex=\relscale{0.7}]{beam_untuned}
@@ -115,11 +115,11 @@ Jednocześnie można zaobserwować, że napięcie sterowania w przypadku obydwó
 
 W tym eksperymencie porównano jakość regulacji dla takich samych kulek, jak w rozdziale \ref{subsec:ch9_stabilizacja_polozenia_roznych_kulek}, przy użyciu kryteriów czasowych (przeregulowania, czas regulacji). Różnicą w porównaniu z eksperymentem z rozdziału \ref{subsec:ch9_stabilizacja_polozenia_roznych_kulek} jest uprzednie przeprowadzenie samostrojenia regulatora belki według algorytmu opisanego w rozdziale \ref{sec:ch8_algorytm_identyfikacji_belki}. W wyniku tego procesu otrzymano następujące nastawy regulatora belki: $K_I = \begin{bmatrix}
 8,434616 & 1,022948
-\end{bmatrix}$.
+\end{bmatrix}$\footnote{Nastawy zostały uzyskane w przeprowadzonej drugi raz tej samej procedurze samostrojenia, dlatego ich wartość różni się od wartości $K_I$ umieszczonej w rozdziale \ref{subsec:ch9_odp_regulatora_belki}.}.
 
 W przypadku mniejszej z kulek (wykres na \cref{fig:stabilizacja_kulka1_nastrojona}) czas regulacji uległ skróceniu z \SI{2}{\second} do około \SI{1.8}{\second}, przy czym przeregulowanie jest jedno i widoczny jest uchyb ustalony. Ponownie może być on spowodowany tarciem statycznym pomiędzy kulką i jej podłożem.
 
-Dużej poprawie uległa regulacja drugiej, większej i cięższej kulki, zaprezentowana na \cref{fig:stabilizacja_kulka2_nastrojona}. Widoczne jest tylko jedno przeregulowanie, a czas regulacji zszedł z \SI{9}{\second} do około \SI{3}{\second}. Pojawiły się natomiast delikatne oscylacje oraz uchyb. Na wykresie po prawej stronie widoczne są zmiany kąta belki, co oznacza, że regulator nadrzędny zbyt mocno reaguje na zmiany jednej ze zmiennych stanu.
+Dużej poprawie uległa regulacja drugiej, większej i cięższej kulki, zaprezentowana na \cref{fig:stabilizacja_kulka2_nastrojona}. Widoczne jest tylko jedno przeregulowanie, a czas regulacji skrócił się z \SI{9}{\second} do około \SI{3}{\second}. Pojawiły się natomiast delikatne oscylacje oraz uchyb. Na wykresie po prawej stronie widoczne są zmiany kąta belki, co oznacza, że regulator nadrzędny zbyt mocno reaguje na zmiany jednej ze zmiennych stanu.
 
 \begin{figure}[p]
     \includesvg[width=1\textwidth,svgpath=./vector_graphics/,pretex=\relscale{0.7}]{ball1_tuned_stabilization}

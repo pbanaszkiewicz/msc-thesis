@@ -91,13 +91,13 @@ Obiektowi w ten sposób opisanemu odpowiadają następujące macierze stanu\foot
     D_I &= 0  \label{eq:macierze_stanu_obiektu_pierwszego_rzedu}
 \end{nalign}
 
-Regulator, który steruje belką, oparty jest o stan (kąt i prędkość kątową obrotu) belki (zob. rozdział \ref{sec:ch6_regulator_belki}), a jego nastawy obliczono wykorzystując funkcję \texttt{looptune} z programu \textsc{Matlab}, która optymalizuje zadany układ w dziedzinie częstotliwości. Przy samostrojeniu tego regulatora zdecydowano się na inne podejście oparte o przesuwanie wartości własnych zamkniętego układu. W tym celu wyliczono zależność algebraiczną pomiędzy nastawami regulatora a zadanymi wartościami własnymi.
+Regulator, który steruje belką, oparty jest o stan (kąt i prędkość kątową obrotu) belki (zob. rozdział \ref{sec:ch6_regulator_belki}), a jego nastawy obliczono wykorzystując funkcję \texttt{looptune} z programu \textsc{Matlab}, która optymalizuje zadany układ w dziedzinie częstotliwości. Przy samostrojeniu tego regulatora zdecydowano się na inne podejście oparte o przesuwanie (lokowanie) wartości własnych zamkniętego układu. W tym celu wyliczono zależność algebraiczną pomiędzy nastawami regulatora a zadanymi wartościami własnymi.
 
 Zamknięty układ regulacji z regulatorem od stanu $K_I = \begin{bmatrix}
     k_1 & k_2
 \end{bmatrix}$ opisany jest równaniem:
 \begin{equation}
-    x' = \underbrace{(A_I - B_I K_I)}_{M \in \mathbb{C}^{2 \times 2}} x
+    \dot{x} = \underbrace{(A_I - B_I K_I)}_{M \in \mathbb{R}^{2 \times 2}} x
 \end{equation}
 
 Macierz $M$ ma dwie wartości własne $\lambda_1$ oraz $\lambda_2$, które spełniają następujące zależności:
@@ -216,17 +216,17 @@ Podstawiając wartości sił $F_1$ i $N_1$ do równania na siłę wypadkową dzi
     a m &= mg\sin\theta - \frac{a}{r^2}J \\
     a\left(m + \frac{J}{r^2} \right) &= mg\sin\theta \\
     a &= \frac{mg\sin\theta}{m+\frac{J}{r^2}} \\
-      &= \frac{r^2mg\sin\theta}{r^2m+J}
+    a &= \frac{r^2mg\sin\theta}{r^2m+J}
     \label{eq:przyspieszenie_kulki1}
 \end{nalign}
 
 Wiadomo, że moment bezwładności $J$ jednolitej kulki o promieniu $r$ wynosi $J=\frac{2}{5}r^2m$. Podstawiając ten wzór do wyniku z \eqref{eq:przyspieszenie_kulki1} otrzymano:
 
 \begin{nalign}
-    a &= \frac{r^2mg\sin\theta}{r^2m+J}\\
-      &= \frac{r^2mg\sin\theta}{r^2m+\frac{2}{5}r^2m} \\
+    a &= \frac{r^2mg\sin\theta}{r^2m+J} = \\
+      &= \frac{r^2mg\sin\theta}{r^2m+\frac{2}{5}r^2m} = \\
       &= \frac{g\sin\theta}{1+\frac{2}{5}} \\
-      &= \frac{5}{7} g \sin\theta
+    a &= \frac{5}{7} g \sin\theta
     \label{eq:przyspieszenie_kulki2}
 \end{nalign}
 
@@ -236,7 +236,7 @@ Wartość $\frac{5}{7}g$ to w przybliżeniu 7, natomiast dla małych kątów $\s
     a \approx 7 \cdot \theta \label{eq:przyspieszenie_kulki3}
 \end{equation}
 
-Oznacza to, że przyspieszenie kulki staczającej się po pochylonej belce jest stałe i wynosi około siedmiokrotność kąta pochylenia belki. Należy w tym miejscu zwrócić uwagę na wyniki linearyzacji \eqref{eq:rownania_stanu_kulki2} oraz \eqref{eq:rownania_wyjscia_kulki2}, które zostały przypomniane poniżej:
+Oznacza to, że przyspieszenie kulki staczającej się po pochylonej belce jest wyłącznie od kąta pochylenia belki. Należy w tym miejscu zwrócić uwagę na wyniki linearyzacji \eqref{eq:rownania_stanu_kulki2} oraz \eqref{eq:rownania_wyjscia_kulki2}, które zostały przypomniane poniżej:
 
 \begin{align*}
     \begin{bmatrix}
@@ -275,16 +275,16 @@ Oznacza to, że przyspieszenie kulki staczającej się po pochylonej belce jest 
     \end{bmatrix}
 \end{align*}
 
-Jak widać po równaniach stanu, $x_1$ jest całką $x_2$, a pochodna stanu $x_2$ --- $\dot{x}_2$ --- jest siedmiokrotnością sterowania $u_1^*$. Wyniki te są zgodne z otrzymaną zależnością \eqref{eq:przyspieszenie_kulki3}, gdyż $x_1$ to pozycja liniowa kulki, $x_2$ to jej prędkość liniowa, $\dot{x}_2$ to przyspieszenie liniowe, a $u_1^*$ to kąt belki.
+Jak widać z równań stanu, $x_1$ jest całką $x_2$, a pochodna stanu $x_2$ --- $\dot{x}_2$ --- jest siedmiokrotnością sterowania $u_1^*$. Wyniki te są zgodne z otrzymaną zależnością \eqref{eq:przyspieszenie_kulki3}, gdyż $x_1$ to pozycja liniowa kulki, $x_2$ to jej prędkość liniowa, $\dot{x}_2$ to przyspieszenie liniowe, a $u_1^*$ to kąt belki.
 
-Powyższy wywód dowodzi, że przyspieszenie kulki, które charakteryzuje jej dynamikę, jest niezależne od momentu bezwładności kulki --- czyli od jej masy i rozmiaru --- a~zatem eksperymenty identyfikacyjne (takie jak pomiar czasu i/lub drogi staczania się kulki) nie dadzą rezultatów, które mogłyby w jakikolwiek sposób pomóc w doborze regulatora.
+Powyższy wywód dowodzi, że przyspieszenie kulki, które charakteryzuje jej dynamikę, jest niezależne od momentu bezwładności kulki --- czyli od jej masy i rozmiaru --- a~zatem eksperymenty identyfikacyjne (takie jak pomiar czasu i/lub drogi staczania się kulki) nie dadzą rezultatów, które mogłyby w~jakikolwiek sposób pomóc w doborze regulatora.
 
 Regulator nadrzędny został zbudowany dla systemu ,,zwiniętego'' (zob. rozdział \ref{sec:ch6_regulator_kulki}), obejmującego wewnętrzną pętlę sprzężenia zwrotnego dla systemu belki oraz system kulki, a zatem po zmianie parametrów tej pętli wewnętrznej można ponownie przeprowadzić obliczenia dające nowe nastawy regulatora nadrzędnego. Po przeprowadzeniu takich obliczeń z wykorzystaniem funkcji \texttt{looptune} okazało się, że ,,nowe'' nastawy są zbliżone do nastaw regulatora dla modelu zlinearyzowanego, dlatego zdecydowano się pominąć te obliczenia w procesie samostrojenia.
 
 %%%%
 \section{Podsumowanie}
 
-W niniejszym rozdziale zaprezentowano metodę samostrojenia regulatora podrzędnego opartą o identyfikację modelu matematycznego obiektu inercyjnego pierwszego rzędu, jakim jest silnik użyty w obiekcie regulacji. Opisano również matematyczne zależności między parametrami takiego modelu a jego odpowiedzią skokową. Następnie przeprowadzono obliczenia zależności pomiędzy regulatorem od stanu, obiektem inercyjnym pierwszego rzędu oraz zadanymi wartościami własnymi układu z zamkniętą pętlą sprzężenia zwrotnego. W kolejnej części rozdziału opisano implementację procedury samostrojenia, wykorzystującą zależności parametrów obiektu i odpowiedzi skokowej, na sterowniku PLC.
+W niniejszym rozdziale zaprezentowano metodę samostrojenia regulatora podrzędnego opartą o~identyfikację modelu matematycznego obiektu inercyjnego pierwszego rzędu, jakim jest silnik użyty w obiekcie regulacji. Opisano również matematyczne zależności między parametrami takiego modelu a~jego odpowiedzią skokową. Następnie przeprowadzono obliczenia zależności pomiędzy regulatorem od stanu, obiektem inercyjnym pierwszego rzędu oraz zadanymi wartościami własnymi układu z zamkniętą pętlą sprzężenia zwrotnego. W kolejnej części rozdziału opisano implementację procedury samostrojenia, wykorzystującą zależności parametrów obiektu i odpowiedzi skokowej, na sterowniku PLC.
 
 Na koniec przeprowadzono wywód udowadniający, że przeprowadzona identyfikacja kulki nie powiedzie się, gdyż jej model liniowy jest niezależny od parametrów fizycznych kulki, a jedynie od kąta obrotu belki. Z tego powodu zaniechano implementacji procedury samostrojenia dla kulki.
 

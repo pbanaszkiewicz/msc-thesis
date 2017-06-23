@@ -1,7 +1,7 @@
 \chapter{Identyfikacja}
 \label{cha:ch5_identyfikacja}
 
-Używany w projekcie silnik prądu stałego nie posiada w dokumentacji wszystkich parametrów, jakie konieczne są, aby go zamodelować prawidłowo, a te parametry, które zostały podane, mają niepoprawne wartości. Wymusiło to ponowną identyfikację silnika --- częściowo eksperymentalną, częściowo numeryczno--optymalizacyjną.
+Używany w projekcie silnik prądu stałego nie posiada w dokumentacji wszystkich parametrów, jakie konieczne są, aby go zamodelować prawidłowo, a te parametry, które zostały podane, mają niedokładne wartości. Wymusiło to ponowną identyfikację silnika --- częściowo eksperymentalną, częściowo numeryczno--optymalizacyjną.
 
 Podobnie charakterystyki czujników odległości, chociaż podane przez producenta, wcale nie muszą odpowiadać wartościom rzeczywistym. Z racji wykorzystania w nich układów elektronicznych możliwa jest pewna wariancja w odpowiedziach --- nawet dla tych samych pobudzeń.
 
@@ -11,9 +11,9 @@ W niniejszym rozdziale przeprowadzono identyfikację nieznanych parametrów, a t
 \section{Identyfikacja charakterystyk czujników odległości}
 \label{sec:ch5_identyfikacja_charakterystyk_czujnikow}
 
-W celu pobrania charakterystyk indywidualnych czujników przeprowadzono serię eksperymentów, w których zmierzono odpowiedzi czujników w zależności od pozycji przeszkody. Użytą przeszkodą była kulka (zob. rozdział \ref{sec:ch2_kulka}).
+W celu pobrania charakterystyk indywidualnych czujników przeprowadzono serię eksperymentów, w których zmierzono odpowiedzi czujników w zależności od pozycji przeszkody. Użytą przeszkodą była kulka (zob. rozdział \ref{sec:ch2_kulka}). Zadbano, by warunki eksperymentu kalibracyjnego jak najlepiej odpowiadały przyszłym warunkom pracy.
 
-Procedura pojedynczego eksperymentu przeprowadzana była następująco: kulkę zamieszczano tak, aby jej środek znajdował się na wybranej pozycji; następnie kulka była zabezpieczana taśmą, aby jej położenie nie uległo zmianie w trakcie eksperymentu. Próbki pobierane były z dwóch przetworników ADC co \SI{100}{\milli\second} przez kilkadziesiąt sekund (przynajmniej pół minuty). W efekcie dla każdego wyznaczonego położenia kulki do dalszej analizy dostępnych było kilkaset próbek.
+Procedura pojedynczego eksperymentu przeprowadzana była następująco: kulkę umieszczano tak, aby jej środek znajdował się na wybranej pozycji; następnie kulka była zabezpieczana taśmą, aby jej położenie nie uległo zmianie w trakcie eksperymentu. Próbki pobierane były z dwóch przetworników ADC co \SI{100}{\milli\second} przez kilkadziesiąt sekund (przynajmniej pół minuty). W efekcie dla każdego wyznaczonego położenia kulki do dalszej analizy dostępnych było kilkaset próbek.
 
 Pobieranie próbek odbywało się poprzez narzędzie \texttt{Traces} z programu \textsc{Siemens TIA Portal}, które umożliwia eksport wyników do formatu \texttt{.csv} w celu dalszej obróbki.
 
@@ -72,14 +72,14 @@ Aproksymacja charakterystyk czujników została przeprowadzona za pomocą narzę
     \caption{Funkcje aproksymujące charakterystyki czujników.}
     \label{tab:aproksymacja_czujnikow}
     
-    \begin{tabularx}{0.62\textwidth}{l | l | S}
+    \begin{tabular}{l | l | S}
         \toprule
         Czujnik & Funkcja aproksymująca & {Wartość błędu \textit{RSME}} \\
         \midrule
         Lewy  & $y = 9819 x ^ {-0,8229} - \num{2,651} $ & 0,197 \\
         Prawy & $y = 8166 x ^ {-0,8055} - \num{2,525} $ & 0,2639 \\
         \bottomrule
-    \end{tabularx}
+    \end{tabular}
 \end{table}
 
 \begin{figure}[h]
@@ -89,14 +89,14 @@ Aproksymacja charakterystyk czujników została przeprowadzona za pomocą narzę
     \label{fig:aproksymacja_czujnika_lewego}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includesvg[width=1\textwidth,svgpath=./vector_graphics/]{aproksymacja_czujnika_prawego}
     \caption{Wykres przedstawiający aproksymację charakterystyki czujnika prawego.}
     \label{fig:aproksymacja_czujnika_prawego}
 \end{figure}
 
-W ramach eksperymentów przeprowadzono również test zachowania czujników, gdy pomiędzy nimi nie ma żadnej przeszkody. Pozwoliło to oszacować wartości progowe, które użyte zostały do oszacowania braku lub obecności kulki. Więcej szczegółów umieszczono w~rozdziale \ref{sec:ch7_wykrywanie_braku_kulki}.
+W ramach eksperymentów przeprowadzono również test zachowania czujników, gdy pomiędzy nimi nie ma żadnej przeszkody. Pozwoliło to oszacować wartości progowe, które użyte zostały do wykrywania braku lub obecności kulki. Więcej szczegółów umieszczono w~rozdziale \ref{sec:ch7_wykrywanie_braku_kulki}.
 
 \section{Identyfikacja parametrów silnika}
 \label{sec:ch5_identyfikacja_parametrow_silnika}
@@ -109,18 +109,18 @@ Jak to zostało zasygnalizowane we wstępie do rozdziału, nie wszystkie paramet
     \item prąd biegu jałowego $i_N$.
 \end{itemize}
 
-Niestety niemożliwe jest zweryfikowanie prądu zatrzymania silnika $i_S$, tj. prądu pobieranego przez silnik przy napięciu znamionowym oraz fizycznym zablokowaniu obrotu wału silnika. Doprowadzenie do takiej sytuacji spowodowałoby fizyczne uszkodzenie zasilacza, mostka H lub samego silnika. Z~identycznych powodów niemożliwe jest zmierzenie momentu koniecznego do zatrzymania obrotu wału motoreduktora w tych samych warunkach.
+Niestety, niemożliwe jest zweryfikowanie prądu zatrzymania silnika $i_S$, tj. prądu pobieranego przez silnik przy napięciu znamionowym oraz fizycznym zablokowaniu obrotu wału silnika. Doprowadzenie do takiej sytuacji spowodowałoby fizyczne uszkodzenie zasilacza, mostka H lub samego silnika. Z~identycznych powodów niemożliwe jest zmierzenie momentu koniecznego do zatrzymania obrotu wału motoreduktora w tych samych warunkach.
 
 \subsection{Weryfikacja parametrów podanych przez producenta silnika}
 \label{subsec:ch5_weryfikacja_parametrow_producenta_silnika}
 
 Poniższe pomiary i eksperymenty wykonano przy nieobciążonym silniku, tj. po rozłączeniu połączenia wału motoreduktora z korbą.
 
-Za pomocą multimetru zmierzono napięcie na stykach zasilacza przeznaczonego dla silnika (zob. rozdział \ref{sec:ch3_systemy_napiec}), które wyniosło \SI{11,95}{\volt}. Również za pomocą multimetru, tym razem wpinając się szeregowo w obwód zasilania silnika, zmierzono prąd biegu jałowego, którego natężenie wyniosło \SI{0,23}{\ampere}.
+Za pomocą multimetru zmierzono napięcie na stykach zasilacza przeznaczonego dla silnika (zob. rozdział \ref{sec:ch3_systemy_napiec}), które wyniosło \SI{11,95}{\volt}. Również za pomocą multimetru, tym razem włączając go szeregowo w obwód zasilania silnika, zmierzono prąd biegu jałowego, który wyniósł \SI{0,23}{\ampere}.
 
-Prędkość biegu jałowego silnika wyznaczono za pomocą eksperymentu: na silnik podano maksymalne sterowanie, a za pomocą narzędzia \texttt{Traces} z programu \textsc{Siemens TIA Portal} pobrano odpowiedź silnika (wartość licznika enkodera); próbkowanie w tym eksperymencie wyniosło około \SI{1}{\milli\second}. Następnie dla części danych, dla których silnik osiągnął stałą wartość prędkości, wyznaczono nachylenie. Wartość tego nachylenia odpowiada prędkości kątowej wału motoreduktora, co zaprezentowano na \cref{fig:odpowiedz_silnika_na_maksymalny_skok_jednostkowy}.
+Prędkość biegu jałowego silnika wyznaczono za pomocą eksperymentu: na silnik podano maksymalne sterowanie, a za pomocą narzędzia \texttt{Traces} z programu \textsc{Siemens TIA Portal} pobrano odpowiedź silnika (wartość licznika enkodera); próbkowanie w tym eksperymencie wyniosło około \SI{1}{\milli\second}. Następnie dla części danych, dla których silnik osiągnął stałą wartość prędkości, wyznaczono nachylenie przebiegu czasowego położenia. Wartość tego nachylenia odpowiada prędkości kątowej wału motoreduktora, co zaprezentowano na \cref{fig:odpowiedz_silnika_na_maksymalny_skok_jednostkowy}.
 
-Z powyższego eksperymentu uzyskano wartość prędkość kątowej biegu jałowego \SI{58,267}{\radian\per\second}.
+Z powyższego eksperymentu uzyskano wartość prędkość kątowej biegu jałowego \SI[per-mode=fraction]{58,267}{\radian\per\second}.
 
 \begin{figure}[h]
     \centering
@@ -139,7 +139,7 @@ Pozostałe parametry, wymagane do poprawnego działania modelu silnika (zob. roz
     \item stała silnika $K$,
     \item indukcyjność silnika $L$,
     \item współczynniki tarcia wiskotycznego $\beta$ oraz suchego $b$,
-    \item moment bezwładności wału motoreduktora $J$.
+    \item wypadkowy moment bezwładności sprowadzony na wał wyjściowy motoreduktora $J$.
 \end{itemize}
 
 Wartości tych parametrów zostały najpierw obliczone analitycznie, a następnie zoptymalizowane numerycznie.
@@ -156,7 +156,7 @@ Z tego samego równania \eqref{eq:silnik_r_el} dla pracy jałowej silnika można
     K = \frac{u_N - R i_N}{\omega_N} = \frac{\num{11,95} - \num{2,39} \cdot \num{0,23}}{\num{58,267}} = \num{0,195656203}
 \end{equation}
 
-Jednostką stałej $K$ jest \si{\newton\meter\per\ampere} (dla stałej momentu) lub \si{\volt\second\per\radian} (dla stałej SEM rotacji).
+Jednostką stałej $K$ jest \si[per-mode=fraction]{\newton\meter\per\ampere} (dla stałej momentu) lub \si[per-mode=fraction]{\volt\second\per\radian} (dla stałej SEM rotacji).
 
 Zależności na współczynniki tarcia wiskotycznego i suchego można natomiast wyciągnąć z równania mechanicznego silnika \eqref{eq:silnik_r_mech} działającego przy ustalonej prędkości kątowej ($\dot{\omega} = 0$):
 
@@ -231,13 +231,13 @@ Wykres danych z tabeli \ref{tab:predkosc_silnika_rozne_sterowania}, wraz z nanie
         \begin{tablenotes}
             \footnotesize
             \item[a] wypełnienie sygnału PWM, przy czym znak sterowania zmienia drugi sygnał kierunku obrotów (zob. rozdział \ref{sec:ch3_uklad_napedowy}),
-            \item[b] efektywne napięcie (wprost proporcjonalne do napięcia sygnału PWM),
+            \item[b] efektywne napięcie (wprost proporcjonalne do współczynnika wypełnienia sygnału PWM),
             \item[c] wartość różna o około \SI{1}{\radian\per\second} od zmierzonej prędkości ustalonej podanej w rozdziale \ref{subsec:ch5_weryfikacja_parametrow_producenta_silnika}; pewne implikacje tej różnicy opisano w rozdziale \ref{sec:ch5_weryfikacja_identyfikacji_silnika}.
         \end{tablenotes}
     \end{threeparttable}
 \end{table}
 
-Współczynniki regresji liniowych $K_1$, $K_2$ wraz z obliczonymi na ich podstawie wartościami współczynników tarcia $\beta$ oraz $b$ zostały przedstawione w tabeli \ref{tab:param_regresji_lin_wsp_tarcia}. W dalszych rozważaniach przyjęto wartość uśrednioną z obu wyników: $\beta = \num{8,2436e-5}$, $b = \num{0,017283013}$.
+Współczynniki regresji liniowych $K_1$ oraz $K_2$, wraz z obliczonymi na ich podstawie wartościami współczynników tarcia $\beta$ oraz $b$, zostały przedstawione w tabeli \ref{tab:param_regresji_lin_wsp_tarcia}. W dalszych rozważaniach przyjęto wartość uśrednioną z obu wyników: $\beta = \num{8,2436e-5}$, $b = \num{0,0173}$.
 
 \begin{figure}[p]
     \centering
@@ -279,12 +279,12 @@ Zidentyfikowano zatem następujące parametry silnika:
     \item współczynniki tarcia wiskotycznego $\beta$ oraz suchego $b$.
 \end{itemize}
 
-Należy zauważyć, że wszystkie te parametry zależą bezpośrednio ($R$) lub pośrednio ($K$, $\beta$, $b$) od wartości prądu zatrzymania silnika $i_S$, której nie można zmierzyć bez niszczenia elementów obiektu, a~należy podejrzewać, że wartość przedstawiona przez producenta nie jest prawidłowa. W związku z~tym istnieją podstawy, by przeprowadzić dodatkową optymalizację wyznaczonych wartości wspomnianych parametrów. Razem z nią zidentyfikować można pozostałe, brakujące parametry --- indukcyjność obwodów silnika $L$ oraz moment bezwładności wału $J$.
+Należy zauważyć, że wszystkie te parametry zależą bezpośrednio ($R$) lub pośrednio ($K$, $\beta$, $b$) od wartości prądu zatrzymania silnika $i_S$, której nie można zmierzyć bez niszczenia elementów obiektu, a~należy podejrzewać, że wartość przedstawiona przez producenta nie jest dokładna. W związku z~tym istnieją podstawy, by przeprowadzić dodatkową optymalizację wyznaczonych wartości wspomnianych parametrów. Razem z nią zidentyfikować można pozostałe, brakujące parametry --- indukcyjność obwodów silnika $L$ oraz moment bezwładności wału $J$.
 
 \subsection{Identyfikacja parametrów metodami optymalizacji numerycznej}
 \label{subsec:ch5_identyfikacja_parametrow_metodami_optymalizacji_numerycznej}
 
-Do identyfikacji wykorzystano model zbliżony do modelu z \cref{fig:sm_electric_motor}, również oparty o równania elektryczne \eqref{eq:silnik_r_el} i mechaniczne silnika \eqref{eq:silnik_r_mech}. Został on przedstawiony na \cref{fig:electric_motor}. Główną różnicą w~stosunku do modelu ze schematu symulacyjnego obiektu jest brak polegania na mechanice przybornika narzędziowego \textsc{SimScape Multibody} w celu wyliczenia momentu, prędkości obrotowej czy przyspieszenia kątowego.
+Do identyfikacji wykorzystano model zbliżony do modelu z \cref{fig:sm_electric_motor}, również oparty o równania elektryczne \eqref{eq:silnik_r_el} i mechaniczne silnika \eqref{eq:silnik_r_mech}. Został on przedstawiony na \cref{fig:electric_motor}. Główną różnicą w~stosunku do modelu ze schematu symulacyjnego obiektu jest rezygnacja z użycia przybornika narzędziowego \textsc{SimScape Multibody} w celu wyliczenia momentu, prędkości obrotowej czy przyspieszenia kątowego.
 
 \begin{figure}[h]
     \centering
@@ -295,7 +295,7 @@ Do identyfikacji wykorzystano model zbliżony do modelu z \cref{fig:sm_electric_
 
 Optymalizacja została przeprowadzona za pomocą narzędzia \texttt{Parameter Estimation} z pakietu \textsc{Matlab/Simulink}. Wykorzystuje ono z góry zadane sterowanie i znaną odpowiedź rzeczywistego obiektu do takiego dobrania parametrów, aby odpowiedź modelu była jak najbliższa rzeczywistej.
 
-Jako zadane sterowanie wykorzystano zapisany za pomocą narzędzia \texttt{Traces} z programu \textsc{Siemens TIA Portal} kilkukrotny skok jednostkowy sterowania; podobnie użytą odpowiedzią obiektu była zapisana wartość licznika enkodera przeliczona na kąt obrotu belki. Za początkowe wartości parametrów przyjęto wartości obliczone w poprzednich rozdziałach, a w przypadku momentu bezwładności wału motoreduktora przyjęto $J = \SI{0,0014}{\kilogram\meter\squared}$.
+Jako zadane sterowanie wykorzystano zapisany za pomocą narzędzia \texttt{Traces} z programu \textsc{Siemens TIA Portal} kilkukrotny skok jednostkowy sterowania; podobnie użytą odpowiedzią obiektu była zapisana wartość licznika enkodera przeliczona na kąt obrotu wału wyjściowego reduktora. Za początkowe wartości parametrów przyjęto wartości obliczone w poprzednich rozdziałach, a w przypadku momentu bezwładności wału motoreduktora przyjęto arbitralnie $J = \SI{0,0014}{\kilogram\meter\squared}$.
 
 Dane wejściowe, wyjściowe i odpowiedź modelu przedstawiono na \cref{fig:silnik_oszacowanie_parametrow}, a wyniki końcowe estymacji zostały umieszczone w tabeli \ref{tab:parametry_silnika_optymalizacja}.
 
@@ -344,7 +344,7 @@ Pierwszą weryfikację przeprowadzono z wykorzystaniem ,,ujemnych'' skoków je
     \label{fig:silnik_weryfikacja_parametrow}
 \end{figure}
 
-Druga weryfikacja, w której sterowaniem w danych wejściowych były pojedyncze skoki o wartościach \SIlist{100;-100;50;-50}{\percent}, nie przyniosła tak dobrych rezultatów (\cref{fig:silnik_nieudana_weryfikacja_parametrow}). Być może jest to wynikiem osiągania innych prędkości ustalonych przez silnik, co zostało zaznaczone wcześniej w rozdziałach \ref{subsec:ch5_weryfikacja_parametrow_producenta_silnika} oraz \ref{subsec:ch5_identyfikacja_parametrow_niepodanych_przez_producenta_silnika}. Niemniej jednak, różnica w osiągach silnika nie jest wielka, zatem należy się spodziewać, że zaprojektowane sprzężenie zwrotne pozwoli te różnice zminimalizować.
+Druga weryfikacja, w której sterowaniem w danych wejściowych były pojedyncze skoki o wartościach \SIlist{100;-100;50;-50}{\percent}, nie przyniosła tak dobrych rezultatów (\cref{fig:silnik_nieudana_weryfikacja_parametrow}). Być może jest to wynikiem osiągania innych prędkości ustalonych przez silnik, co zostało zaznaczone wcześniej w~rozdziałach \ref{subsec:ch5_weryfikacja_parametrow_producenta_silnika} oraz \ref{subsec:ch5_identyfikacja_parametrow_niepodanych_przez_producenta_silnika}. Niemniej jednak, różnica w osiągach silnika nie jest wielka, zatem należy się spodziewać, że zaprojektowane sprzężenie zwrotne pozwoli te różnice zminimalizować.
 
 \begin{figure}[h]
     \centering
@@ -362,6 +362,6 @@ Druga weryfikacja, w której sterowaniem w danych wejściowych były pojedyncze 
 %%%%
 \section{Podsumowanie}
 
-W niniejszym rozdziale przedstawiono sposób wyznaczenia charakterystyk czujników odległości oraz identyfikację parametrów silnika prądu stałego. Parametry silnika, które zostały podane przez producenta, okazały się niedokładne, dlatego w pierwszej kolejności zweryfikowano je --- o ile było to możliwe. Następnie na podstawie równań elektrycznego i mechanicznego silnika wyznaczono prawie wszystkie nieznane parametry. W ostatnim kroku zidentyfikowano numerycznie pozostałe parametry oraz zoptymalizowano już wyznaczone, co potwierdziła opisana weryfikacja wyników identyfikacji parametrów silnika.
+W niniejszym rozdziale przedstawiono sposób wyznaczenia charakterystyk czujników odległości oraz identyfikację parametrów silnika prądu stałego. Parametry silnika, które zostały podane przez producenta, okazały się niedokładne, dlatego w pierwszej kolejności zweryfikowano je -- o ile było to możliwe. Następnie na podstawie równań elektrycznego i mechanicznego silnika wyznaczono prawie wszystkie nieznane parametry. W ostatnim kroku zidentyfikowano numerycznie pozostałe parametry oraz zoptymalizowano już wyznaczone, co potwierdziła opisana weryfikacja wyników identyfikacji parametrów silnika.
 
 %---------------------------------------------------------------------------

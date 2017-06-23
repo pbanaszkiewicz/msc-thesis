@@ -18,7 +18,8 @@ Obiekty tego typu są często wykorzystywane w dydaktyce teorii sterowania. Skł
 	\item prostota budowy,
 	\item możliwość zastosowania różnych czujników położenia kulki,
 	\item możliwość zastosowania różnych silników i mechanizmów przeniesienia napędu,
-    \item możliwość zastosowania różnych struktur i algorytmów sterowania.
+    \item możliwość zastosowania różnych struktur i algorytmów sterowania,
+    \item stosunkowo wysoki (czwarty) rząd modelu, jego nieliniowość i niestabilność.
 \end{itemize}
 
 Uproszczony schemat systemu kulka i belka przedstawiony został na rysunku \ref{fig:schemat_uproszczony}:
@@ -59,22 +60,27 @@ Przed przystąpieniem do budowy obiektu, zaprojektowano wstępny kształt w prog
 	\label{fig:cad_render}
 \end{figure}
 
-Ostateczna konstrukcja różni się względem projektu \textsc{CAD} o wysokość słupów, i umiejscowienie łącznika między nimi. Dodatkowo zastosowano sztywne połączenie osi obrotu belki i samej belki wykorzystujące podpory wału.
+Ostateczna konstrukcja różni się od projektu \textsc{CAD} o wysokość słupów i umiejscowienie łącznika między nimi. Dodatkowo zastosowano sztywne połączenie osi obrotu belki i samej belki wykorzystujące łożyskowane podpory wału.
 
 %%%%%%%%
 \section{Konstrukcja mechaniczna}
 \label{sec:ch2_konstrukcja_mechaniczna}
 
-Większość konstrukcji (\cref{fig:perspektywa}) powstała z ocynkowanych elementów stalowych, tzw. ceowników w przekroju kwadratowym o boku długości \SI{4}{cm}, pozwalających na łatwe łączenie kilku elementów przy pomocy śrub. Rozwiązanie to jest bardzo tanie w porównaniu do przemysłowych profili aluminiowych lub spawanych profili stalowych, ale jednocześnie jest dość ciężkie i poprzez niedomknięcie profilu podatne na pewne momenty gnące.
+Większość elementów konstrukcji (\cref{fig:perspektywa}) powstał z ocynkowanych segmentów stalowych, tzw. ceowników w przekroju kwadratowym o boku długości \SI{4}{cm}, pozwalających na łatwe łączenie kilku elementów przy pomocy śrub. Rozwiązanie to jest bardzo tanie w porównaniu do przemysłowych profili aluminiowych lub spawanych profili stalowych, ale jednocześnie jest dość ciężkie i poprzez niedomknięcie profilu podatne na pewne momenty gnące.
 
 Kąty proste pomiędzy elementami ustawionymi prostopadle zostały zapewnione poprzez zastosowanie kątowych wsporników stalowych.
 
+% TODO: zdjęcie ma mieć inny podpis "WSPORNIK ORAZ CZUJNIK ODLEGŁOŚCI / POŁOŻENIA KULKI"
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{perspektywa}
-	\caption{Zdjęcie obiektu regulacji z zaznaczonymi poszczególnymi elementami konstrukcji; w środku obiektu opakowanie zapałek dla perspektywy.}
+	\caption{Zdjęcie obiektu regulacji z zaznaczonymi poszczególnymi elementami konstrukcji; w środku obiektu opakowanie zapałek dla porównania rozmiarów.}
 	\label{fig:perspektywa}
 \end{figure}
+
+% TODO: zdjęcie mechanizmu korbowego wraz z czujnikiem bazowania
+
+% TODO: zdjęcie łożyskowania wału i umocowania do niego belki
 
 Na prostokątnej podstawie o wymiarach zewnętrznych \SI{60 x 23}{cm} wykonanej z ceowników ustawiono pionowo na środkach dłuższych boków słupy nośne, również wykonane z ceowników. Słupy zostały usztywnione poprzez połączenie ich przęsłem podniesionym o \SI{11}{cm} względem podstawy.
 
@@ -91,8 +97,8 @@ Silnik elektryczny, przymocowany do aluminiowego uchwytu, został umieszczony po
 W obiekcie zastosowano przeniesienie napędu wykorzystujące mechanizm korbowy. Rozwiązanie to posiada kilka zalet:
 
 \begin{itemize}
-	\item gwarantuje bezpieczeństwo mechanizmu --- błąd algorytmiczny (np. przypadkowe podanie maksymalnego sterowania) nie spowoduje uszkodzenia fizycznego żadnej części obiektu,
-	\item poprzez oddalenie punktu zaczepu korbowodu od osi obrotu belki zmniejsza wymagania dotyczące mocy silnika, a tym samym jego cenę,
+	\item gwarantuje bezpieczeństwo mechanizmu --- błąd algorytmiczny (np. przypadkowe podanie przez dłuższy czas maksymalnego sterowania) nie spowoduje uszkodzenia fizycznego żadnej części obiektu,
+	\item poprzez oddalenie punktu zaczepu korbowodu od osi obrotu belki zmniejsza wymagania dotyczące momentu obrotowego rozwijanego przez silnik, a tym samym jego cenę,
 	\item pozwala regulować zakres wychyleń belki w wyniku zmiany długości korby.
 \end{itemize}
 
@@ -136,7 +142,7 @@ Wsporniki pozwalają na zmianę wysokości czujnika względem płaszczyzny belki
 \begin{figure}[h]
     \centering
     \includesvg[width=0.32\textwidth,svgpath=./vector_graphics/]{wspornik_czujnika}
-    \caption{Schemat uchwytu na czujnik odległości w rzucie od przodu i z boku. Zastosowanie mocowania na śrubie pozwala pochylać czujnik względem belki.}
+    \caption{Schemat uchwytu na czujnik odległości w rzucie z przodu i z boku. Zastosowanie mocowania na śrubie pozwala pochylać czujnik względem belki.}
     \label{fig:uchwyt_czujnika_odleglosci}
 \end{figure}
 

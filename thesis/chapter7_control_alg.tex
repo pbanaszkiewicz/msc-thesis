@@ -1,7 +1,7 @@
 \chapter{Algorytmy sterowania}
 \label{cha:ch7_algorytmy_sterowania}
 
-Obsługa czujników odległości i bazowania, a także algorytmy sterowania, zostały zaimplementowane na przemysłowym sterowniku PLC Siemens S7-1211C. Schemat blokowy głównej pętli programu, uruchamianej co cykl procesora w bloku \texttt{OB1}, został przedstawiony na \cref{fig:schemat_petla_glowna_PLC}, natomiast szczegółowy opis poszczególnych elementów i algorytmów zamieszczono poniżej.
+Obsługa czujników odległości i bazowania, a także algorytmy sterowania, zostały zaimplementowane na przemysłowym sterowniku PLC Siemens S7-1211C. Schemat blokowy głównej pętli programu, uruchamianej co cykl procesora w bloku organizacyjnym \texttt{OB1}, został przedstawiony na \cref{fig:schemat_petla_glowna_PLC}, natomiast szczegółowy opis poszczególnych elementów i algorytmów zamieszczono poniżej.
 
 \begin{figure}[ht]
     \centering
@@ -43,7 +43,7 @@ W programie obsługiwane są tylko \num{3} wyjścia sterownika. Dwa z nich słu�
 
 Z racji możliwości sterowania obrotami silnika w dwie strony, regulator pozycji belki może zwrócić wartość z zakresu \numrange[range-phrase={ do }]{-100}{100}; stąd w bloku \textit{Zapis do wyjść} następuje konwersja tej wartości na jej moduł i zapis tego modułu do \texttt{\%QW1000}, natomiast sygnał \textit{kierunek} ustawiony jest na \num{1} dla ujemnej wartości sterowania, a na \num{0} dla dodatniej.
 
-Równolegle do bloku \texttt{OB1}, wywoływanego co cykl procesora, użyto dwóch bloków organizacyjnych \texttt{OB30} i \texttt{OB31} wywoływanych co \SI{50}{\milli\second}. Rolą pierwszego z nich jest uruchamianie regulatorów (więcej w rozdziale \ref{sec:ch7_regulatory}), natomiast rolą drugiego jest obliczanie pochodnych sygnałów w czasie.
+Równolegle do bloku \texttt{OB1}, wywoływanego co cykl procesora, użyto dwóch cyklicznych bloków organizacyjnych \texttt{OB30} i \texttt{OB31} wywoływanych co \SI{50}{\milli\second}. Rolą pierwszego z nich jest uruchamianie regulatorów (więcej w rozdziale \ref{sec:ch7_regulatory}), natomiast rolą drugiego jest obliczanie pochodnych sygnałów w~czasie. Okres bloku \texttt{OB30} został przesunięty w fazie o \SI{5}{\milli\second}, aby zapewnić jego późniejsze wywołanie od bloku \texttt{OB31}.
 
 W \texttt{OB31} następuje obliczanie prędkości liniowej kulki oraz prędkości kątowej belki według następujących wzorów:
 \begin{align*}
@@ -134,8 +134,7 @@ Na schemacie sekwencji na \cref{fig:schemat_sekwencji} wyróżnione zostały nas
     \item $T_6$ -- uaktualnienie (zmiana) regulatorów używanych w systemie lub ich nastaw.
 \end{itemize}
 
-% TODO: zaktualizuj referencję
-Poszczególne stany wymienione na \cref{fig:schemat_sekwencji} i uruchamiane w nich działania opisane zostały poniżej (proces bazowania, regulator pozycji belki i regulator stabilizujący kulkę w położeniu zerowym) oraz w rozdziale \ref{cha:ch8_algorytmy_samostrojenia} (identyfikacja systemu kulki, belki oraz przeprowadzone na ich podstawie samostrojenie).
+Poszczególne stany wymienione na \cref{fig:schemat_sekwencji} i uruchamiane w nich działania opisane zostały poniżej (proces bazowania, regulator pozycji belki i regulator stabilizujący kulkę w położeniu zerowym) oraz w~rozdziale \ref{cha:ch8_algorytmy_samostrojenia} (identyfikacja systemu kulki, belki oraz przeprowadzone na ich podstawie samostrojenie).
 
 %%%%
 \section{Bazowanie}
@@ -188,9 +187,9 @@ Wywoływanie regulatorów z określoną częstotliwością ma swoje podłoże w 
 
 Umieszczenie regulatorów w bloku \texttt{OB30} umożliwia zatem przeprowadzenie łatwej zamiany na obiekt technologiczny PID gdyby nastała taka konieczność.
 
-Ponadto sygnały, z których korzystają regulatory, takie jak prędkość obrotowa belki czy prędkość liniowa kulki, również są liczone z~okresem \SI{50}{\milli\second}, co oznacza, że nie należy uruchamiać bloku \texttt{OB30} ani rzadziej (co powodowałoby pracę ze zbyt starymi wartościami sygnałów), ani częściej (co powodowałoby duże opóźnienie w reakcji regulatora).
+Ponadto sygnały, z których korzystają regulatory, takie jak prędkość obrotowa belki czy prędkość liniowa kulki, również są liczone z~okresem \SI{50}{\milli\second}, co oznacza, że nie należy uruchamiać bloku \texttt{OB30} ani rzadziej (co powodowałoby pracę ze znacznie przeterminowanymi wartościami sygnałów), ani częściej (co powodowałoby duże opóźnienie w reakcji regulatora).
 
-Regulatory opisane w rozdziałach \ref{sec:ch6_regulator_belki} oraz \ref{sec:ch6_regulator_kulki} są regulatorami typu proporcjonalnego od stanu, co oznacza, że ich implementacja w sterowniku PLC jest równoznaczna z obliczeniem sumy sygnałów od stanu wymnożonych przez macierz współczynników. W przypadku obu regulatorów, uzyskano to za pomocą bloku \texttt{Calculate} (\cref{fig:tia_portal_blok_calculate}), umożliwiającego zdefiniowanie prostych wyrażeń algebraicznych.
+Regulatory opisane w rozdziałach \ref{sec:ch6_regulator_belki} oraz \ref{sec:ch6_regulator_kulki} są regulatorami typu proporcjonalnego od stanu, co oznacza, że ich implementacja w sterowniku PLC jest równoznaczna z obliczeniem sumy ważonej sygnałów od stanu wymnożonych przez macierz współczynników. W przypadku obu regulatorów, uzyskano to za pomocą bloku \texttt{Calculate} (\cref{fig:tia_portal_blok_calculate}), umożliwiającego zdefiniowanie prostych wyrażeń algebraicznych.
 
 \begin{figure}[h]
     \centering
@@ -207,10 +206,10 @@ Regulatory opisane w rozdziałach \ref{sec:ch6_regulator_belki} oraz \ref{sec:ch
 
 Regulator podrzędny, odpowiedzialny za ustawienie belki w zadanym miejscu, realizuje obliczanie napięcia podanego na silnik według wzoru \eqref{eq:regulator_belki_wzor}:
 \begin{equation}
-    u = K_b(1) \cdot \epsilon_\alpha + K_b(2) \cdot \epsilon_\omega
+    u = K_b(1) \cdot \epsilon_\alpha + K_b(2) \cdot \epsilon_\omega + u^*
     \label{eq:regulator_belki_wzor}
 \end{equation}
-gdzie $K_b$ to macierz wzmocnień regulatora (opisana w rozdziale \ref{sec:ch6_regulator_belki}), a $\epsilon_\alpha$ i $\epsilon_\omega$ to odpowiednio odchyłka położenia kątowego belki i jej prędkości kątowej od zadanych przez regulator nadrzędny wartości.
+gdzie $K_b$ to macierz wzmocnień regulatora (opisana w rozdziale \ref{sec:ch6_regulator_belki}), $\epsilon_\alpha$ i $\epsilon_\omega$ to odpowiednio odchyłka położenia kątowego belki i jej prędkości kątowej od zadanych przez regulator nadrzędny wartości, a $u^*$ to wartość sterowania w punkcie równowagi (zob. rozdział \ref{sec:ch6_punkt_pracy_linearyzacja}).
 
 Należy zwrócić uwagę, że realizacja powyższego wzoru na sterowniku PLC wymaga przeskalowania napięcia $u$ na wypełnienie sygnału PWM. W tym celu zastosowano skalowanie liniowe o współczynniku kierunkowym $\frac{100}{11,95}=8,3682$, gdzie \num{100} to maksymalna wartość wypełnienia PWM, a \num{11,95} to napięcie znamionowe, które zostało użyte w modelu symulacyjnym silnika (rozdział \ref{sec:ch4_model_silnika}).
 

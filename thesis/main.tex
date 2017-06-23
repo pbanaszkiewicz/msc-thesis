@@ -23,6 +23,8 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 
+\usepackage{emptypage}  % puste strony są naprawdę puste
+
 %%% fix for \lll
 \let\mathlll\lll
 \let\lll\babellll
@@ -186,6 +188,7 @@ backend=biber
     range-phrase = { -- },
     mode = text,
     range-units = single,
+    per-mode = fraction,
 }
 
 % usuwa spacje po przecinkach przy liczbach w trybie matematycznym

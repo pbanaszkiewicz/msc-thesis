@@ -1,13 +1,13 @@
 \chapter{Model liniowy obiektu i regulacja}
 \label{cha:ch6_model_liniowy}
 
-Do wyznaczenia regulatorów dla systemu konieczne jest uzyskanie jego uproszczonego modelu liniowego (\cite{TEORIASTER}), który --- w myśl twierdzenia Hartmana-Grobmana --- zachowuje się podobnie jak obiekt nieliniowy. Zgodnie z teorią sterowania, wyznaczone w tym rozdziale regulatory powinny działać w odchyłkach wybranego punktu pracy.
+Do wyznaczenia regulatorów dla systemu konieczne jest uzyskanie jego uproszczonego modelu liniowego (\cite{TEORIASTER}), który --- w myśl twierdzenia Hartmana-Grobmana --- zachowuje się podobnie jak obiekt nieliniowy. Zgodnie z teorią sterowania, wyznaczone w tym rozdziale regulatory powinny działać w~oparciu o~odchyłki od wybranego punktu pracy.
 
 %%%%
 \section{Punkt pracy i linearyzacja}
 \label{sec:ch6_punkt_pracy_linearyzacja}
 
-Za zmienne stanu przyjęto: położenie liniowe kulki względem środka belki $x_1$, kąt obrotu belki względem poziomu $x_3$ oraz ich pochodne w czasie $x_2 = \dot{x_1}$, $x_4 = \dot{x_3}$.
+Za zmienne stanu przyjęto: położenie liniowe kulki względem środka belki $x_1$, kąt obrotu belki względem poziomu $x_3$ oraz ich pochodne w czasie $x_2 = \dot{x}_1$, $x_4 = \dot{x}_3$.
 
 \begin{figure}[h]
     \centering
@@ -37,7 +37,7 @@ Linearyzację modelu przeprowadzono z wykorzystaniem narzędzi wbudowanych w pa
 
 Przed linearyzacją konieczne było znalezienie punktu pracy, czyli przeprowadzenie tzw. \textit{trimmingu} modelu. W procesie tym wyznacza się ograniczenia na stany układu lub ich wartości początkowe. Jest to istotne zagadnienie, gdyż układ zbudowany za pomocą przybornika \textsc{Simscape Multibody} zawiera \num{18} stanów, chociaż, tak jak to zdefiniowano na początku rozdziału, wybrano jedynie \num{4} do prezentacji systemu. Większość z tych ,,nadmiarowych'' stanów to położenia i prędkości złącz pryzmatycznych lub obrotowych, które nie są istotne z punktu widzenia reprezentacji liniowej układu.
 
-\textit{Trimming} modelu to tak naprawdę proces optymalizacyjny, mający na celu tak dobrać wartości początkowe stanów systemu, aby maksymalny ich błąd w trakcie symulacji był jak najmniejszy; jest to jednoznaczne z numerycznym znajdowaniem punktu równowagi systemu. Z powodu swojej optymalizacyjnej natury, proces ten nie mógł znaleźć odpowiedniego punktu, dopóki nie został rozpoczęty z odpowiednio bliskiego otoczenia punktu równowagi. Osiągnięto to podając jako wartość startową dla wejścia bloku (\textit{voltage} na \cref{fig:sm_linearization}) napięcie sterowania $u = -0,51158$. Wartość ta wynika z faktu delikatnego ciążenia belki w stronę mechanizmu korbowego, co musi rekompensować silnik poprzez wytworzenie niezerowego momentu.
+\textit{Trimming} modelu to tak naprawdę proces optymalizacyjny, mający na celu tak dobrać wartości początkowe stanów systemu, aby maksymalny ich błąd w trakcie symulacji był jak najmniejszy; jest to jednoznaczne z numerycznym znajdowaniem punktu równowagi systemu. Z powodu swojej optymalizacyjnej natury, proces ten nie mógł znaleźć odpowiedniego punktu, dopóki nie został rozpoczęty z odpowiednio bliskiego otoczenia punktu równowagi. Osiągnięto to podając jako wartość startową dla wejścia bloku (\textit{voltage} na \cref{fig:sm_linearization}) napięcie sterowania $u^* = -0,51158$. Wartość ta wynika z faktu delikatnego ciążenia belki w stronę mechanizmu korbowego, co musi rekompensować silnik poprzez wytworzenie niezerowego momentu.
 
 Po wyznaczeniu punktu równowagi, nadal wykorzystując narzędzie \texttt{Linear Analysis Tool}, zlinearyzowano układ otrzymując wynikowe macierze:
 
@@ -115,9 +115,9 @@ Należy zauważyć, że belka wraz z mechanizmem napędowym tworzą szybki, niel
 Ponadto w tym obiekcie regulacji zastosowano silnik prądu stałego zamiast rozwiązania z wbudowanym regulatorem pozycji, na przykład serwonapędem modelarskim (porównanie alternatywnych do zastosowanego wariantów zespołu napędowego umieszczono w dodatku \ref{appA_warianty_zespolu_napedowego}). W wyniku dzia\-łania tego silnika następuje ruch belki, który powoduje ruch kulki. Masa kulki jest niewielka, a zatem nie wpływa praktycznie wcale na ruch belki.
 
 % TODO: czas teraźniejszy?!
-Korzystając z powyższych obserwacji i wspomnianego ciągu następstw, w niniejszej pracy proponuje się zastosowanie kaskadowego układu regulacji, w którym regulator nadrzędny pozycji kulki generuje sygnał sterujący dla regulatora podrzędnego wychylenia belki. Schemat ilustrujący taką strukturę sterowania przedstawiony jest na \cref{fig:kaskadowy_uklad_regulacji}.
+Korzystając z powyższych obserwacji i wspomnianego ciągu następstw, w niniejszej pracy proponuje się zastosowanie kaskadowego układu regulacji, w którym regulator nadrzędny pozycji kulki generuje sygnał sterujący będący sygnałem wartości zadanej dla regulatora podrzędnego wychylenia belki. Schemat ilustrujący taką strukturę sterowania przedstawiony jest na \cref{fig:kaskadowy_uklad_regulacji}.
 
-% TODO: wymień na Tikz
+% TODO: zmień "Zadana pozycja belki" na "Zadana pozycja i prędkość kątowa belki"
 \begin{figure}[h]
     \centering
     \includegraphics[width=1\textwidth]{kaskadowy_uklad_regulacji}
@@ -569,7 +569,11 @@ Po ponownym ,,zwinięciu'' regulatora $K_k$ i wewnętrznej pętli sprzężenia z
     \end{bmatrix} \label{eq:macierze_stanu_calego_ukladu}
 \end{nalign}
 
-Sprawdzenie wartości własnych macierzy $A_c$ pokazuje, że układ ten ma charakter oscylacyjnie stabilny \eqref{eq:wartosci_wlasne_A_c}:
+W wyniku zastosowania operacji ,,zwijania'' systemu, kolejność zmiennych stanu dla macierzy \eqref{eq:macierze_stanu_calego_ukladu} została zamieniona: $x_c = \begin{bmatrix}
+    x_3 & x_4 & x_1 & x_2
+\end{bmatrix}^\intercal$.
+
+Sprawdzenie wartości własnych macierzy $A_c$ pokazuje, że układ ten ma charakter oscylacyjny asymptotycznie stabilny \eqref{eq:wartosci_wlasne_A_c}:
 \begin{equation}
     \Lambda(A_c) = \begin{bmatrix}
      -77,9427 \\
@@ -587,7 +591,7 @@ K_k = \begin{bmatrix}
 \end{bmatrix} \label{eq:regulator_kulki2}
 \end{equation}
 
-Po wprowadzeniu zmienionego regulatora do całości układu, w macierzach stanu nie zaszły duże zmiany, a charakter układu pozostał oscylacyjnie stabilny:
+Po wprowadzeniu zmienionego regulatora do całości układu, w macierzach stanu nie zaszły duże zmiany, a charakter układu pozostał oscylacyjny asymptotycznie stabilny:
 \begin{nalign}
     A_c &= \begin{bmatrix}
         0 & 1 & 0 & 0 \\
