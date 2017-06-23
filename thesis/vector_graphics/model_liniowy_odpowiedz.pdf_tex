@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{616.8bp}%
+    \setlength{\unitlength}{608.8bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,81 +48,80 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.82879377)%
+  \begin{picture}(1,0.80026281)%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{model_liniowy_odpowiedz.pdf}}%
-    \put(0.12386511,0.46000869){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.19079118,0.46000869){\makebox(0,0)[lb]{\smash{1}}}%
-    \put(0.25771725,0.46000869){\makebox(0,0)[lb]{\smash{2}}}%
-    \put(0.32464332,0.46000869){\makebox(0,0)[lb]{\smash{3}}}%
-    \put(0.39156939,0.46000869){\makebox(0,0)[lb]{\smash{4}}}%
-    \put(0.45849546,0.46000869){\makebox(0,0)[lb]{\smash{5}}}%
-    \put(0.25810649,0.43493294){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0.12417871,0.44371445){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.18331143,0.44371445){\makebox(0,0)[lb]{\smash{0.2}}}%
+    \put(0.25032852,0.44371445){\makebox(0,0)[lb]{\smash{0.4}}}%
+    \put(0.3173456,0.44371445){\makebox(0,0)[lb]{\smash{0.6}}}%
+    \put(0.38436268,0.44371445){\makebox(0,0)[lb]{\smash{0.8}}}%
+    \put(0.45926413,0.44371445){\makebox(0,0)[lb]{\smash{1}}}%
+    \put(0.25821301,0.4183092){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{model_liniowy_odpowiedz.pdf}}%
-    \put(0.11111115,0.47795071){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.08517082,0.53450065){\makebox(0,0)[lb]{\smash{0.02}}}%
-    \put(0.08517082,0.59105058){\makebox(0,0)[lb]{\smash{0.04}}}%
-    \put(0.08517082,0.64760052){\makebox(0,0)[lb]{\smash{0.06}}}%
-    \put(0.08517082,0.70415045){\makebox(0,0)[lb]{\smash{0.08}}}%
-    \put(0.09554695,0.76070039){\makebox(0,0)[lb]{\smash{0.1}}}%
-    \put(0.07479468,0.5207524){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Położenie liniowe [m]}}}}%
+    \put(0.08891813,0.46189225){\makebox(0,0)[lb]{\smash{-0.1}}}%
+    \put(0.11125716,0.51629435){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.09548844,0.57069645){\makebox(0,0)[lb]{\smash{0.1}}}%
+    \put(0.09548844,0.62509855){\makebox(0,0)[lb]{\smash{0.2}}}%
+    \put(0.09548844,0.67950066){\makebox(0,0)[lb]{\smash{0.3}}}%
+    \put(0.09548844,0.73390276){\makebox(0,0)[lb]{\smash{0.4}}}%
+    \put(0.07840565,0.49802904){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Położenie liniowe [m]}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{model_liniowy_odpowiedz.pdf}}%
-    \put(0.20492866,0.73151751){\makebox(0,0)[lb]{\smash{Położenie kulki}}}%
+    \put(0.19842313,0.7043364){\makebox(0,0)[lb]{\smash{Położenie kulki}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{model_liniowy_odpowiedz.pdf}}%
-    \put(0.12386511,0.06701258){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.19079118,0.06701258){\makebox(0,0)[lb]{\smash{1}}}%
-    \put(0.25771725,0.06701258){\makebox(0,0)[lb]{\smash{2}}}%
-    \put(0.32464332,0.06701258){\makebox(0,0)[lb]{\smash{3}}}%
-    \put(0.39156939,0.06701258){\makebox(0,0)[lb]{\smash{4}}}%
-    \put(0.45849546,0.06701258){\makebox(0,0)[lb]{\smash{5}}}%
-    \put(0.25810649,0.04193684){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0.12417871,0.06395099){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.18331143,0.06395099){\makebox(0,0)[lb]{\smash{0.2}}}%
+    \put(0.25032852,0.06395099){\makebox(0,0)[lb]{\smash{0.4}}}%
+    \put(0.3173456,0.06395099){\makebox(0,0)[lb]{\smash{0.6}}}%
+    \put(0.38436268,0.06395099){\makebox(0,0)[lb]{\smash{0.8}}}%
+    \put(0.45926413,0.06395099){\makebox(0,0)[lb]{\smash{1}}}%
+    \put(0.25821301,0.03854573){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=5]{model_liniowy_odpowiedz.pdf}}%
-    \put(0.11111115,0.0849546){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.08517082,0.15564202){\makebox(0,0)[lb]{\smash{0.01}}}%
-    \put(0.08517082,0.22632944){\makebox(0,0)[lb]{\smash{0.02}}}%
-    \put(0.08517082,0.29701686){\makebox(0,0)[lb]{\smash{0.03}}}%
-    \put(0.08517082,0.36770428){\makebox(0,0)[lb]{\smash{0.04}}}%
-    \put(0.07479468,0.12191971){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Prędkość liniowa [m/s]}}}}%
+    \put(0.08891813,0.08212878){\makebox(0,0)[lb]{\smash{-0.5}}}%
+    \put(0.11125716,0.15045992){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.09548844,0.21879106){\makebox(0,0)[lb]{\smash{0.5}}}%
+    \put(0.11125716,0.28712221){\makebox(0,0)[lb]{\smash{1}}}%
+    \put(0.09548844,0.35545335){\makebox(0,0)[lb]{\smash{1.5}}}%
+    \put(0.07840565,0.11300933){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Prędkość liniowa [m/s]}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=6]{model_liniowy_odpowiedz.pdf}}%
-    \put(0.21271077,0.3385214){\makebox(0,0)[lb]{\smash{Prędkość kulki}}}%
+    \put(0.19579501,0.32588699){\makebox(0,0)[lb]{\smash{Prędkość kulki}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=7]{model_liniowy_odpowiedz.pdf}}%
-    \put(0.56485084,0.46000895){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.63177691,0.46000895){\makebox(0,0)[lb]{\smash{1}}}%
-    \put(0.69870298,0.46000895){\makebox(0,0)[lb]{\smash{2}}}%
-    \put(0.76562905,0.46000895){\makebox(0,0)[lb]{\smash{3}}}%
-    \put(0.83255512,0.46000895){\makebox(0,0)[lb]{\smash{4}}}%
-    \put(0.89948119,0.46000895){\makebox(0,0)[lb]{\smash{5}}}%
-    \put(0.69909222,0.43493307){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0.56438896,0.44371445){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.62352168,0.44371445){\makebox(0,0)[lb]{\smash{0.2}}}%
+    \put(0.69053876,0.44371445){\makebox(0,0)[lb]{\smash{0.4}}}%
+    \put(0.75755585,0.44371445){\makebox(0,0)[lb]{\smash{0.6}}}%
+    \put(0.82457293,0.44371445){\makebox(0,0)[lb]{\smash{0.8}}}%
+    \put(0.89947438,0.44371445){\makebox(0,0)[lb]{\smash{1}}}%
+    \put(0.69842326,0.4183092){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=8]{model_liniowy_odpowiedz.pdf}}%
-    \put(0.55209689,0.47795123){\makebox(0,0)[lb]{\smash{1}}}%
-    \put(0.5144834,0.53450026){\makebox(0,0)[lb]{\smash{1.005}}}%
-    \put(0.52615655,0.59105071){\makebox(0,0)[lb]{\smash{1.01}}}%
-    \put(0.5144834,0.64760104){\makebox(0,0)[lb]{\smash{1.015}}}%
-    \put(0.52615655,0.70415006){\makebox(0,0)[lb]{\smash{1.02}}}%
-    \put(0.5144834,0.76070039){\makebox(0,0)[lb]{\smash{1.025}}}%
-    \put(0.50410726,0.51297043){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Położenie kątowe [rad]}}}}%
-    \put(0.57198444,0.77172503){\makebox(0,0)[lb]{\smash{$\times10^{-3}$}}}%
+    \put(0.55146741,0.46189225){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.53569869,0.51629435){\makebox(0,0)[lb]{\smash{0.1}}}%
+    \put(0.53569869,0.57069645){\makebox(0,0)[lb]{\smash{0.2}}}%
+    \put(0.53569869,0.62509855){\makebox(0,0)[lb]{\smash{0.3}}}%
+    \put(0.53569869,0.67950066){\makebox(0,0)[lb]{\smash{0.4}}}%
+    \put(0.53569869,0.73390276){\makebox(0,0)[lb]{\smash{0.5}}}%
+    \put(0.5251862,0.49014468){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Położenie kątowe [rad]}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=9]{model_liniowy_odpowiedz.pdf}}%
-    \put(0.65888457,0.73151751){\makebox(0,0)[lb]{\smash{Kąt belki}}}%
+    \put(0.63600526,0.7043364){\makebox(0,0)[lb]{\smash{Kąt belki}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=10]{model_liniowy_odpowiedz.pdf}}%
-    \put(0.56485084,0.06701258){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.63177691,0.06701258){\makebox(0,0)[lb]{\smash{1}}}%
-    \put(0.69870298,0.06701258){\makebox(0,0)[lb]{\smash{2}}}%
-    \put(0.76562905,0.06701258){\makebox(0,0)[lb]{\smash{3}}}%
-    \put(0.83255512,0.06701258){\makebox(0,0)[lb]{\smash{4}}}%
-    \put(0.89948119,0.06701258){\makebox(0,0)[lb]{\smash{5}}}%
-    \put(0.69909222,0.04193684){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0.56438896,0.06395099){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.62352168,0.06395099){\makebox(0,0)[lb]{\smash{0.2}}}%
+    \put(0.69053876,0.06395099){\makebox(0,0)[lb]{\smash{0.4}}}%
+    \put(0.75755585,0.06395099){\makebox(0,0)[lb]{\smash{0.6}}}%
+    \put(0.82457293,0.06395099){\makebox(0,0)[lb]{\smash{0.8}}}%
+    \put(0.89947438,0.06395099){\makebox(0,0)[lb]{\smash{1}}}%
+    \put(0.69842326,0.03854573){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=11]{model_liniowy_odpowiedz.pdf}}%
-    \put(0.55209689,0.0849546){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.55209689,0.14150454){\makebox(0,0)[lb]{\smash{1}}}%
-    \put(0.55209689,0.19805447){\makebox(0,0)[lb]{\smash{2}}}%
-    \put(0.55209689,0.25460441){\makebox(0,0)[lb]{\smash{3}}}%
-    \put(0.55209689,0.31115435){\makebox(0,0)[lb]{\smash{4}}}%
-    \put(0.55209689,0.36770428){\makebox(0,0)[lb]{\smash{5}}}%
-    \put(0.54172075,0.1206227){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Prędkość kątowa [m/s]}}}}%
-    \put(0.57198444,0.37872892){\makebox(0,0)[lb]{\smash{$\times10^{-6}$}}}%
+    \put(0.55146741,0.08212878){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.53569869,0.12768292){\makebox(0,0)[lb]{\smash{0.1}}}%
+    \put(0.53569869,0.17323693){\makebox(0,0)[lb]{\smash{0.2}}}%
+    \put(0.53569869,0.21879106){\makebox(0,0)[lb]{\smash{0.3}}}%
+    \put(0.53569869,0.2643452){\makebox(0,0)[lb]{\smash{0.4}}}%
+    \put(0.53569869,0.30989921){\makebox(0,0)[lb]{\smash{0.5}}}%
+    \put(0.53569869,0.35545335){\makebox(0,0)[lb]{\smash{0.6}}}%
+    \put(0.5251862,0.11169527){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Prędkość kątowa [m/s]}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=12]{model_liniowy_odpowiedz.pdf}}%
-    \put(0.6692607,0.11413748){\makebox(0,0)[lb]{\smash{Prędkość kątowa belki}}}%
+    \put(0.70565046,0.11169514){\makebox(0,0)[lb]{\smash{Prędkość kątowa belki}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=13]{model_liniowy_odpowiedz.pdf}}%
-    \put(0.35668016,0.80123217){\makebox(0,0)[lb]{\smash{\textbf{Odpowiedź modelu liniowego}}}}%
+    \put(0.36530933,0.75919842){\makebox(0,0)[lb]{\smash{\textbf{Odpowiedź modelu liniowego}}}}%
   \end{picture}%
 \endgroup%

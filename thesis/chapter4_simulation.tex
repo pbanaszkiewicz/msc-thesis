@@ -63,7 +63,7 @@ Ostatnią wartą wspomnienia informacją jest możliwość ustawienia pewnej war
 
 Bardzo dużą zaletą korzystania z \textsc{SimMechanics} jest automatyczne generowanie podglądu i animacji (zob. \cref{fig:uklad_simmechanics}) budowanego układu. Pozwala to przeprowadzać obserwację działania różnych algorytmów sterowania oraz łatwo znajdować błędy złożenia brył.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{simmechanics_ballandbeam}
     \caption{Wizualizacja układu kulki i belki zamodelowanego przy pomocy \textsc{SimMechanics} (por. z obiektem rzeczywistym przedstawionym na \cref{fig:perspektywa}).}
@@ -74,14 +74,14 @@ Schemat użyty do wygenerowania modelu z \cref{fig:uklad_simmechanics} został p
 
 \begin{itemize}
     \item obiekty \textit{Base}, \textit{Tower1}, \textit{Tower2}, \textit{MotorBase}, \textit{Shaft Supports}, \textit{Motor}, \textit{Beam}, \textit{Pin2}, \textit{Ball} oraz \textit{CrankShaft},
-    \item subsystemy \textit{Shaft}, \textit{Electric Motor}, \textit{Crank} oraz \textit{Ball mechanics},
+    \item podsystemy \textit{Shaft}, \textit{Electric Motor}, \textit{Crank} oraz \textit{Ball mechanics},
     \item sporo bloków \textit{Rigid Transform} o nazwach \textit{RT}---\textit{RT19},
     \item trzy bloki \textit{Revolute Joint},
     \item wejścia \textit{voltage} oraz \textit{disturbance},
     \item wyjścia \textit{ball\_position}, \textit{ball\_velocity}, \textit{beam\_angle} oraz \textit{beam\_angular\_velocity}.
 \end{itemize}
 
-Obiekt \textit{Base} reprezentuje podstawę, na której umieszczono całą mechanikę układu. Poprzez transformacje \textit{RT} oraz \textit{RT1} umieszczono na nim dwie wieże, na których zaczepione są łożyska i wał obrotowy belki (subsystem \textit{Shaft}, \cref{fig:sm_shaft}).
+Obiekt \textit{Base} reprezentuje podstawę, na której umieszczono całą mechanikę układu. Poprzez transformacje \textit{RT} oraz \textit{RT1} umieszczono na nim dwie wieże, na których zaczepione są łożyska i wał obrotowy belki (podsystem \textit{Shaft}, \cref{fig:sm_shaft}).
 
 Wał belki składa się z dwóch równoległych ścieżek, transformowanych z globalnego układu odniesienia poprzez bloki \textit{RT2} oraz \textit{RT3}. Za blokami umieszczono złącza obrotowe \textit{BallBearing1} oraz \textit{BallBearing2}, reprezentujące fizyczne łożyska kulkowe (zob. rozdział \ref{sec:ch2_konstrukcja_mechaniczna}). Złącze \textit{BallBearing2} zostało wykorzystane do pobrania z układu aktualnego kąta oraz prędkości kątowej obrotu belki.
 
@@ -101,20 +101,20 @@ Obiekty \textit{MotorBase} oraz \textit{Motor} reprezentują bryły podstawy, na
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{simmechanics_shaft}
-    \caption{Schemat subsystemu \textit{Shaft} odpowiadającego za umocowanie wału obrotu belki w danym układzie odniesienia.}
+    \caption{Schemat podsystemu \textit{Shaft} odpowiadającego za umocowanie wału obrotu belki w danym układzie odniesienia.}
     \label{fig:sm_shaft}
 \end{figure}
 
-Sposób wykorzystania złącza obrotowego \textit{RJ3} został opisany w rozdziale \ref{sec:ch4_model_silnika}. Za wspomnianym złączem znajduje się subsystem \textit{Crank} (przedstawiony na \cref{fig:sm_shaft}), który składa się głównie z dwóch czarnych pinów (elementów mocujących o zerowej masie --- masa fizycznych przegubów włączona jest do masy korby bądź korbowodu) i korby (\textit{Crank}).
+Sposób wykorzystania złącza obrotowego \textit{RJ3} został opisany w rozdziale \ref{sec:ch4_model_silnika}. Za wspomnianym złączem znajduje się podsystem \textit{Crank} (przedstawiony na \cref{fig:sm_shaft}), który składa się głównie z dwóch czarnych pinów (elementów mocujących o zerowej masie --- masa fizycznych przegubów włączona jest do masy korby bądź korbowodu) i korby (\textit{Crank}).
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{simmechanics_crank}
-    \caption{Schemat subsystemu \textit{Crank} odpowiadającego za umocowanie korby na wale motoreduktora.}
+    \caption{Schemat podsystemu \textit{Crank} odpowiadającego za umocowanie korby na wale motoreduktora.}
     \label{fig:sm_crank}
 \end{figure}
 
-Ostatnim, nieopisanym dotąd subsystemem, jest \textit{Ball mechanics} --- subsystem połączony z belką (\cref{fig:sm_ball_mechanics}), którego zadaniem jest ,,przytwierdzenie'' kulki do belki; osiągnięto to za pomocą nieopisanego dotąd bloku \textit{Rack and pinion} (pol. \textit{listwa (zębatka) współpracująca z kołem zębatym}).
+Ostatnim, nieopisanym dotąd podsystemem, jest \textit{Ball mechanics} --- podsystem połączony z belką (\cref{fig:sm_ball_mechanics}), którego zadaniem jest ,,przytwierdzenie'' kulki do belki; osiągnięto to za pomocą nieopisanego dotąd bloku \textit{Rack and pinion} (pol. \textit{listwa (zębatka) współpracująca z kołem zębatym}).
 
 Blok \textit{Rack and pinion} wymaga dla poprawnej pracy uzupełniania o dodatkowe elementy, na przykład w postaci złącz pryzmatycznego i obrotowego. Reprezentuje on więzy dla ruchu obrotowo-postępowego, z zerowym tarciem i~z~brakiem oderwania pod wpływem przyspieszeń pionowych, co dobrze przybliża zachowanie kulki w~układzie kulki i belki.
 
@@ -123,15 +123,15 @@ Połączenie równoległe bloków \textit{RPC1} i \textit{PJ}, \textit{RJ} przed
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{simmechanics_ball_mechanics}
-    \caption{Schemat subsystemu \textit{Ball mechanics} odpowiadającego za zachowanie kulki na belce.}
+    \caption{Schemat podsystemu \textit{Ball mechanics} odpowiadającego za zachowanie kulki na belce.}
     \label{fig:sm_ball_mechanics}
 \end{figure}
 
 W układzie \cref{fig:uklad_simmechanics2} jedno z wejść, oznaczone jako \textit{disturbance}, przeznaczone jest na symulowanie zewnętrznych zakłóceń wpływających bezpośrednio na kulkę; widoczne jest to w schemacie \textit{Ball mechanics} jako wejście \textit{ball\_pos\_dist}.
 
-Z subsystemu \textit{Ball mechanics} wychodzą również dwa wyjścia: \textit{ball\_position} oraz \textit{ball\_velocity}. Odczytywane są one ze złącza pryzmatycznego kulki \textit{PJ}.
+Z podsystemu \textit{Ball mechanics} wychodzą również dwa wyjścia: \textit{ball\_position} oraz \textit{ball\_velocity}. Odczytywane są one ze złącza pryzmatycznego kulki \textit{PJ}.
 
-Sama kulka została dołączona do schematu poza subsystemem \textit{Ball mechanics}, jako ciało stałe \textit{Ball}. Równolegle dołączony blok \textit{BallFrame} odpowiada za wyświetlenie wersorów układu odniesienia środka kulki, co pomaga zobaczyć na wizualizacji faktyczny ruch obrotowy kulki po belce.
+Sama kulka została dołączona do schematu poza podsystemem \textit{Ball mechanics}, jako ciało stałe \textit{Ball}. Równolegle dołączony blok \textit{BallFrame} odpowiada za wyświetlenie wersorów układu odniesienia środka kulki, co pomaga zobaczyć na wizualizacji faktyczny ruch obrotowy kulki po belce.
 
 \section{Model silnika}
 \label{sec:ch4_model_silnika}
@@ -162,7 +162,7 @@ gdzie:
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{simmechanics_electric_motor}
-    \caption{Schemat subsystemu \textit{Electric Motor} odpowiadającego za model silnika prądu stałego.}
+    \caption{Schemat podsystemu \textit{Electric Motor} odpowiadającego za model silnika prądu stałego.}
     \label{fig:sm_electric_motor}
 \end{figure}
 

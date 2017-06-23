@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{771.49707031bp}%
+    \setlength{\unitlength}{758.97231445bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,80 +48,71 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.43551688)%
+  \begin{picture}(1,0.37840642)%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{model_liniowy_stabilizacja.pdf}}%
-    \put(0.06696309,0.02868885){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.11715123,0.02868885){\makebox(0,0)[lb]{\smash{2}}}%
-    \put(0.16733936,0.02868885){\makebox(0,0)[lb]{\smash{4}}}%
-    \put(0.2175275,0.02868885){\makebox(0,0)[lb]{\smash{6}}}%
-    \put(0.26771563,0.02868885){\makebox(0,0)[lb]{\smash{8}}}%
-    \put(0.31375599,0.02868885){\makebox(0,0)[lb]{\smash{10}}}%
-    \put(0.16599144,0.00864117){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0.06095062,0.02494605){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.12472106,0.02494605){\makebox(0,0)[lb]{\smash{2}}}%
+    \put(0.1884915,0.02494605){\makebox(0,0)[lb]{\smash{4}}}%
+    \put(0.25226195,0.02494605){\makebox(0,0)[lb]{\smash{6}}}%
+    \put(0.31603239,0.02494605){\makebox(0,0)[lb]{\smash{8}}}%
+    \put(0.16161316,0.00456754){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{model_liniowy_stabilizacja.pdf}}%
-    \put(0.03084288,0.04303322){\makebox(0,0)[lb]{\smash{-0.12}}}%
-    \put(0.03913844,0.08749223){\makebox(0,0)[lb]{\smash{-0.1}}}%
-    \put(0.03084288,0.13195125){\makebox(0,0)[lb]{\smash{-0.08}}}%
-    \put(0.03084288,0.17641026){\makebox(0,0)[lb]{\smash{-0.06}}}%
-    \put(0.03084288,0.22086928){\makebox(0,0)[lb]{\smash{-0.04}}}%
-    \put(0.03084288,0.26532829){\makebox(0,0)[lb]{\smash{-0.02}}}%
-    \put(0.0567665,0.30978731){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.0360276,0.35424632){\makebox(0,0)[lb]{\smash{0.02}}}%
-    \put(0.0360276,0.39870534){\makebox(0,0)[lb]{\smash{0.04}}}%
-    \put(0.02254732,0.14206167){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Położenie liniowe [m]}}}}%
+    \put(0.02423434,0.03952713){\makebox(0,0)[lb]{\smash{-0.12}}}%
+    \put(0.0326668,0.0777367){\makebox(0,0)[lb]{\smash{-0.1}}}%
+    \put(0.02423434,0.11594626){\makebox(0,0)[lb]{\smash{-0.08}}}%
+    \put(0.02423434,0.15415582){\makebox(0,0)[lb]{\smash{-0.06}}}%
+    \put(0.02423434,0.19236538){\makebox(0,0)[lb]{\smash{-0.04}}}%
+    \put(0.02423434,0.23057495){\makebox(0,0)[lb]{\smash{-0.02}}}%
+    \put(0.05058576,0.26878451){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.02950463,0.30699407){\makebox(0,0)[lb]{\smash{0.02}}}%
+    \put(0.02950463,0.34520363){\makebox(0,0)[lb]{\smash{0.04}}}%
+    \put(0.01580189,0.11225716){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Położenie liniowe [m]}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{model_liniowy_stabilizacja.pdf}}%
-    \put(0.21161691,0.37537408){\makebox(0,0)[lb]{\smash{Położenie kulki}}}%
+    \put(0.20799156,0.32148735){\makebox(0,0)[lb]{\smash{Położenie kulki}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{model_liniowy_stabilizacja.pdf}}%
-    \put(0.39671159,0.02868885){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.44689972,0.02868885){\makebox(0,0)[lb]{\smash{2}}}%
-    \put(0.49708786,0.02868885){\makebox(0,0)[lb]{\smash{4}}}%
-    \put(0.547276,0.02868885){\makebox(0,0)[lb]{\smash{6}}}%
-    \put(0.59746413,0.02868885){\makebox(0,0)[lb]{\smash{8}}}%
-    \put(0.64350449,0.02868885){\makebox(0,0)[lb]{\smash{10}}}%
-    \put(0.49573994,0.00864117){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0.39614071,0.02494605){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.45991115,0.02494605){\makebox(0,0)[lb]{\smash{2}}}%
+    \put(0.5236816,0.02494605){\makebox(0,0)[lb]{\smash{4}}}%
+    \put(0.58745204,0.02494605){\makebox(0,0)[lb]{\smash{6}}}%
+    \put(0.65122248,0.02494605){\makebox(0,0)[lb]{\smash{8}}}%
+    \put(0.49680325,0.00456754){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=5]{model_liniowy_stabilizacja.pdf}}%
-    \put(0.36888693,0.04303322){\makebox(0,0)[lb]{\smash{-0.3}}}%
-    \put(0.36888693,0.09369534){\makebox(0,0)[lb]{\smash{-0.2}}}%
-    \put(0.36888693,0.14435757){\makebox(0,0)[lb]{\smash{-0.1}}}%
-    \put(0.386515,0.19501969){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.37407166,0.24568192){\makebox(0,0)[lb]{\smash{0.1}}}%
-    \put(0.37407166,0.29634404){\makebox(0,0)[lb]{\smash{0.2}}}%
-    \put(0.37407166,0.34700627){\makebox(0,0)[lb]{\smash{0.3}}}%
-    \put(0.37407166,0.39766839){\makebox(0,0)[lb]{\smash{0.4}}}%
-    \put(0.36059137,0.19287197){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Wartość}}}}%
+    \put(0.36785689,0.03952713){\makebox(0,0)[lb]{\smash{-0.3}}}%
+    \put(0.36785689,0.08319523){\makebox(0,0)[lb]{\smash{-0.2}}}%
+    \put(0.36785689,0.12686323){\makebox(0,0)[lb]{\smash{-0.1}}}%
+    \put(0.38577586,0.17053133){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.37312717,0.21419943){\makebox(0,0)[lb]{\smash{0.1}}}%
+    \put(0.37312717,0.25786754){\makebox(0,0)[lb]{\smash{0.2}}}%
+    \put(0.37312717,0.30153553){\makebox(0,0)[lb]{\smash{0.3}}}%
+    \put(0.37312717,0.34520363){\makebox(0,0)[lb]{\smash{0.4}}}%
+    \put(0.35942443,0.16443298){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Wartość}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=6]{model_liniowy_stabilizacja.pdf}}%
-    \put(0.45011425,0.37433713){\makebox(0,0)[lb]{\smash{Prędkość kulki [m/s]}}}%
+    \put(0.45042464,0.32148735){\makebox(0,0)[lb]{\smash{Prędkość kulki [m/s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=7]{model_liniowy_stabilizacja.pdf}}%
-    \put(0.45011425,0.35826448){\makebox(0,0)[lb]{\smash{Kąt belki [rad]}}}%
+    \put(0.45042464,0.30514947){\makebox(0,0)[lb]{\smash{Kąt belki [rad]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=8]{model_liniowy_stabilizacja.pdf}}%
-    \put(0.45011425,0.34219184){\makebox(0,0)[lb]{\smash{Prędkość kątowa belki [rad/s]}}}%
+    \put(0.45042464,0.28881159){\makebox(0,0)[lb]{\smash{Prędkość kątowa belki [rad/s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=9]{model_liniowy_stabilizacja.pdf}}%
-    \put(0.72749703,0.02868885){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.77768517,0.02868885){\makebox(0,0)[lb]{\smash{2}}}%
-    \put(0.8278733,0.02868885){\makebox(0,0)[lb]{\smash{4}}}%
-    \put(0.87806144,0.02868885){\makebox(0,0)[lb]{\smash{6}}}%
-    \put(0.92824958,0.02868885){\makebox(0,0)[lb]{\smash{8}}}%
-    \put(0.97428993,0.02868885){\makebox(0,0)[lb]{\smash{10}}}%
-    \put(0.82652538,0.00864117){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
+    \put(0.73238486,0.02494605){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.7961553,0.02494605){\makebox(0,0)[lb]{\smash{2}}}%
+    \put(0.85992575,0.02494605){\makebox(0,0)[lb]{\smash{4}}}%
+    \put(0.92369619,0.02494605){\makebox(0,0)[lb]{\smash{6}}}%
+    \put(0.98746663,0.02494605){\makebox(0,0)[lb]{\smash{8}}}%
+    \put(0.8330474,0.00456754){\makebox(0,0)[lb]{\smash{Czas [s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=10]{model_liniowy_stabilizacja.pdf}}%
-    \put(0.69967238,0.04303322){\makebox(0,0)[lb]{\smash{-0.4}}}%
-    \put(0.69967238,0.07860043){\makebox(0,0)[lb]{\smash{-0.2}}}%
-    \put(0.71730044,0.11416764){\makebox(0,0)[lb]{\smash{0}}}%
-    \put(0.7048571,0.14973485){\makebox(0,0)[lb]{\smash{0.2}}}%
-    \put(0.7048571,0.18530206){\makebox(0,0)[lb]{\smash{0.4}}}%
-    \put(0.7048571,0.22086928){\makebox(0,0)[lb]{\smash{0.6}}}%
-    \put(0.7048571,0.25643649){\makebox(0,0)[lb]{\smash{0.8}}}%
-    \put(0.71730044,0.2920037){\makebox(0,0)[lb]{\smash{1}}}%
-    \put(0.7048571,0.32757091){\makebox(0,0)[lb]{\smash{1.2}}}%
-    \put(0.7048571,0.36313813){\makebox(0,0)[lb]{\smash{1.4}}}%
-    \put(0.7048571,0.39870534){\makebox(0,0)[lb]{\smash{1.6}}}%
-    \put(0.69137682,0.19339044){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Wartość}}}}%
+    \put(0.70410104,0.03952713){\makebox(0,0)[lb]{\smash{-0.5}}}%
+    \put(0.72202,0.11594626){\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.70937132,0.19236538){\makebox(0,0)[lb]{\smash{0.5}}}%
+    \put(0.72202,0.26878451){\makebox(0,0)[lb]{\smash{1}}}%
+    \put(0.70937132,0.34520363){\makebox(0,0)[lb]{\smash{1.5}}}%
+    \put(0.69566858,0.16443298){\rotatebox{90}{\makebox(0,0)[lb]{\smash{Wartość}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=11]{model_liniowy_stabilizacja.pdf}}%
-    \put(0.77882581,0.37537408){\makebox(0,0)[lb]{\smash{Zadany kąt belki [rad]}}}%
+    \put(0.78456068,0.32148735){\makebox(0,0)[lb]{\smash{Zadany kąt belki [rad]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=12]{model_liniowy_stabilizacja.pdf}}%
-    \put(0.77882581,0.35930143){\makebox(0,0)[lb]{\smash{Zadana prędkość belki [rad/s]}}}%
+    \put(0.78456068,0.30514947){\makebox(0,0)[lb]{\smash{Zadana prędkość belki [rad/s]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=13]{model_liniowy_stabilizacja.pdf}}%
-    \put(0.77882581,0.34322878){\makebox(0,0)[lb]{\smash{Napięcie sterowania [V]}}}%
+    \put(0.78456068,0.28881159){\makebox(0,0)[lb]{\smash{Napięcie sterowania [V]}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=14]{model_liniowy_stabilizacja.pdf}}%
-    \put(0.39671211,0.41037097){\makebox(0,0)[lb]{\smash{\textbf{Stabilizacja modelu liniowego}}}}%
+    \put(0.41722238,0.35706177){\makebox(0,0)[lb]{\smash{\textbf{Stabilizacja modelu liniowego}}}}%
   \end{picture}%
 \endgroup%

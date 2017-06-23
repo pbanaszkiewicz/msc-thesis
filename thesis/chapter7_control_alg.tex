@@ -153,7 +153,7 @@ Dzięki zastosowaniu mechanizmu obrotowego, algorytm bazowania jest uproszczony,
     \begin{tikzpicture}[auto, node distance=1cm,>=latex']
     \node [roundblock] (S1) {Start};
     \node [conditionblock, below=1of S1] (S2) {Czy enkoder jest wybazowany?};
-    \node [block, below=1of S2] (S3) {Ustaw niską wartość napięcia sterującego silnikiem};
+    \node [block, below=1of S2, text width=7cm] (S3) {Ustaw wartość 15\% współczynnika wypełnienia sygnału PWM sterującego silnikiem};
     \node [conditionblock, below=1of S3] (S4) {Czy nastąpiło zbocze opadające na czujniku bazowania?};
     \node [block, below=1of S4] (S5) {Ustaw zerowe napięcie sterujące silnikiem};
     \node [block, below=1of S5] (S6) {Ustaw bit wybazowania enkodera};
@@ -175,7 +175,7 @@ Dzięki zastosowaniu mechanizmu obrotowego, algorytm bazowania jest uproszczony,
     \label{fig:schemat_bazowania}
 \end{figure}
 
-W momencie wystąpienia zbocza opadającego sygnału z czujnika bazowania następuje ustawienie wartości \num{149} w liczniku enkodera oraz ustawienie stanu wysokiego w rejestrze \textsc{M\_homed}, używanym m.in. przez sekwencję główną.
+W momencie wystąpienia zbocza opadającego sygnału z czujnika bazowania następuje ustawienie wartości \num{149} w liczniku enkodera oraz ustawienie stanu wysokiego w rejestrze \texttt{M\_homed}, używanym m.in. przez sekwencję główną.
 
 %%%%
 \section{Regulatory}

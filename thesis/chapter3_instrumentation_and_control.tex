@@ -1,7 +1,7 @@
 \chapter{Układ sterowania i instrumentacji}
 \label{cha:ch3_uklad_ster_i_instrumentacji}
 
-Do odczytywania danych z obiektu i sterowania nim wykorzystano opisany w tym rozdziale układ sterowania i instrumentacji (\cref{fig:schemat_ukl_sterowania_instrumentacji}). W jego sercu znajduje się przemysłowy sterownik PLC, który odczytuje dane o położeniu kulki z dwóch czujników odległości oraz położenie kątowe wału wyjściowego motoreduktora z~enkodera przyrostowego kwadraturowego. Dodatkowo do sterownika podłączony został czujnik bazowania oraz przyciski: \texttt{START} (NO), \texttt{STOP} (NC). Na wyjścia sterownika podłączony został mostek H kontrolujący silnik oraz dioda świecąca sygnalizacyjna.
+Do odczytywania danych z obiektu i sterowania nim wykorzystano opisany w tym rozdziale układ sterowania i instrumentacji (\cref{fig:schemat_ukl_sterowania_instrumentacji}). W jego sercu znajduje się przemysłowy sterownik PLC, który odczytuje dane o położeniu kulki z dwóch czujników odległości oraz położenie kątowe wału wyjściowego motoreduktora z~enkodera przyrostowego kwadraturowego. Dodatkowo do sterownika podłączony został czujnik bazowania oraz przyciski: \texttt{START} (NO), \texttt{STOP} (NC). Na wyjścia sterownika podłączono mostek~H kontrolujący silnik oraz diodę świecącą sygnalizacyjna.
 
 \begin{figure}[H]
     \centering
@@ -325,7 +325,7 @@ Układ z \cref{fig:uklad_transoptora} przylutowano do płytki uniwersalnej (\cre
     \label{fig:czujnik_bazowania_PCB}
 \end{figure}
 
-Płytka z czujnikiem bazowania została przytwierdzona do układu kulki i belki poniżej silnika. Sztywny, lekki i nieprzezroczysty element (chorągiewka) przyczepiony został na końcu korby tak, aby przechodził przez szczelinę enkodera w momencie skierowania korby pionowo w dół. Doświadczalnie ustalono, że w chwili zasłonięcia szczeliny (przy ruchu zgodnie ze wskazówkami zegara) licznik enkodera powinien otrzymać wartość \num{149}; wówczas pionowemu położeniu korby odpowiada wartość \num{0}.
+Płytka z czujnikiem bazowania została przytwierdzona do układu kulki i belki poniżej silnika. Sztywny, lekki i nieprzezroczysty element (chorągiewka, zob. \cref{fig:naped_bazowanie}) przyczepiony został na końcu korby tak, aby przechodził przez szczelinę enkodera w momencie skierowania korby pionowo w dół. Doświadczalnie ustalono, że w chwili zasłonięcia szczeliny (przy ruchu zgodnie ze wskazówkami zegara) licznik enkodera powinien otrzymać wartość \num{149}; wówczas pionowemu położeniu korby odpowiada wartość \num{0}.
 
 %%%%%%%%
 \section{Systemy napięć}
@@ -372,15 +372,20 @@ Obecność trzech systemów napięcia poskutkowała użyciem trzech oddzielnych 
 
 Połączenia elektryczne pomiędzy komponentami pracy zrealizowano za pomocą przewodów o przekroju \SI{0,75}{\milli\meter\squared}. Za wyjątkiem złącza silnika i enkodera, wszystkie przewody zakończone są zaciskanymi tulejami, co jest konieczne z powodu zastosowania złącz śrubowych.
 
-Zasilanie po stronie \SI{230}{\volt} AC, \SI{50}{\hertz} zostało zabezpieczone instalacyjnym wyłącznikiem nadprądowym klasy B10.
+Zasilanie po stronie \SI{230}{\volt} AC, \SI{50}{\hertz} zostało zabezpieczone instalacyjnym wyłącznikiem nadprądowym klasy B10. Użyte zasilacze posiadają drugą klasę ochronności, dlatego nie zostały dodatkowo podłączone przewodem ochronnym.
 
 Wyłącznik nadprądowy, zasilacz \SI{12}{\volt}, zasilacz \SI{24}{\volt} oraz sterownik PLC zostały przymocowane do wspólnej szyny DIN (TH \num{35}). Zasilacz impulsowy \SI{5}{\volt} nie był przeznaczony do montowania na szynie DIN (posiadał jednofazową wtyczkę elektryczną), dlatego na szynie DIN wspólnie ze sterownikiem i~pozostałymi zasilaczami zamontowano gniazdko elektryczne (połączone szeregowo za wyłącznikiem nadprądowym), do którego zasilacz \SI{5}{\volt} został podłączony.
 
 Na drugiej szynie DIN zostały zamontowane cztery listwy przyłączeniowe przeznaczone dla każdego poziomu napięcia (zob. rozdział \ref{sec:ch3_systemy_napiec}): dwie dla napięcia \SI{0}{\volt} (wspólna masa), po jednej dla napięć \SI{5}{\volt}~oraz \SI{24}{\volt}. Z napięcia \SI{12}{\volt} korzysta tylko silnik, więc to połączenie zostało zrealizowane bezpośrednio, bez użycia listwy przyłączeniowej.
 
-Użyte zasilacze posiadają drugą klasę ochronności, dlatego nie zostały dodatkowo podłączone przewodem ochronnym.
+Na \cref{fig:szyny_DIN} zaprezentowano zdjęcie pokazujące umieszczenie elementów na obu szynach DIN.
 
-% TODO: dodaj zdjęcie szyn
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{szyny_DIN}
+    \caption{Zdjęcie przedstawiające dwie szyny DIN z przymocowanymi zasilaczami, sterownikiem PLC, gniazdkiem elektrycznym (na pierwszej szynie) i listwami przyłączeniowymi (na drugiej szynie). Dodatkowo z lewej strony zdjęcia widoczny jest układ dwóch przycisków i lampki sygnalizacyjnej pomiędzy nimi.}
+    \label{fig:szyny_DIN}
+\end{figure}
 
 %%%%%%%%
 \section{Podsumowanie}

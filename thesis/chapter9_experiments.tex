@@ -7,21 +7,25 @@ Aby sprawdzić poprawność działania modelów nieliniowego i liniowego (rozdzi
 \section{Symulacje modelów}
 \label{sec:ch9_symulacje_modelow}
 
-W celu sprawdzenia działania modelów nieliniowego i liniowego zarejestrowano ich odpowiedzi przy braku wymuszenia. Dla modelu nieliniowego stan początkowy to $\begin{bmatrix}
+%W celu sprawdzenia działania modelów nieliniowego i liniowego zarejestrowano ich odpowiedzi przy braku wymuszenia. Dla modelu nieliniowego stan początkowy to $\begin{bmatrix}
+%0 & 0 & 0 & 0
+%\end{bmatrix}$, natomiast dla liniowego stan początkowy zmieniono odrobinę tak, aby wyprowadzić go z równowagi: $\begin{bmatrix}
+%0,001 & 0 & 0,001 & 0
+%\end{bmatrix}$.
+
+W celu sprawdzenia działania modelów nieliniowego i liniowego zarejestrowano ich odpowiedzi przy braku aktywnej regulacji. W przypadku obu modeli stanem początkowym były wartości $\begin{bmatrix}
 0 & 0 & 0 & 0
-\end{bmatrix}$, natomiast dla liniowego stan początkowy zmieniono odrobinę tak, aby wyprowadzić go z równowagi: $\begin{bmatrix}
-0,001 & 0 & 0,001 & 0
-\end{bmatrix}$.
+\end{bmatrix}$, natomiast model liniowy, z racji tego, że jest oparty o odchyłki od wybranego punktu równowagi, w trakcie symulacji miał podawaną stałą wartość $-u^*=0,51158$ na wejście.
 
 \begin{sidewaysfigure}
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
-        \includesvg[width=1\textwidth,svgpath=./vector_graphics/,pretex=\relscale{0.7}]{model_nieliniowy_odpowiedz}
+        \includesvg[width=1\textwidth,svgpath=./vector_graphics/,pretex=\relscale{0.6}]{model_nieliniowy_odpowiedz}
         \caption{Odpowiedź modelu nieliniowego przy braku sterowania.}
         \label{fig:odpowiedz_modelu_nieliniowego_brak_sterowania}
     \end{subfigure}
     \begin{subfigure}[b]{0.49\textwidth}
-        \includesvg[width=1\textwidth,svgpath=./vector_graphics/,pretex=\relscale{0.7}]{model_liniowy_odpowiedz}
+        \includesvg[width=1\textwidth,svgpath=./vector_graphics/,pretex=\relscale{0.6}]{model_liniowy_odpowiedz}
         \caption{Odpowiedź modelu liniowego przy braku sterowania.}
         \label{fig:odpowiedz_modelu_liniowego_brak_sterowania}
     \end{subfigure}
@@ -29,13 +33,14 @@ W celu sprawdzenia działania modelów nieliniowego i liniowego zarejestrowano i
     \caption{Odpowiedzi modeli obiektu regulacji typu kulka i belka.}\label{fig:odpowiedzi_modeli}
 \end{sidewaysfigure}
 
-Wykresy odpowiedzi modeli dla każdej zmiennej stanu zostały przedstawione na \cref{fig:odpowiedzi_modeli}. Należy zauważyć, że model nieliniowy został zbudowany w taki sposób, że belka tworzy nieograniczoną powierzchnię staczania dla kulki -- w momencie, gdy fizyczna kulka w rzeczywistym obiekcie regulacji uderza o ogranicznik, kulka w modelu nieliniowym stacza się dalej wzdłuż niewidocznego przedłużenia belki. Widoczne jest to po czasie \SI{1}{\second} na wykresie \ref{fig:odpowiedz_modelu_nieliniowego_brak_sterowania}. Dodatkowo w tej chwili widać, że belka osiąga swoje maksymalne położenie kątowe.
+Wykresy odpowiedzi modeli dla każdej zmiennej stanu zostały przedstawione na \cref{fig:odpowiedzi_modeli}. Należy zauważyć, że model nieliniowy został zbudowany w taki sposób, że belka tworzy nieograniczoną powierzchnię staczania dla kulki --- w momencie, gdy fizyczna kulka w rzeczywistym obiekcie regulacji uderza o ogranicznik, kulka w modelu nieliniowym stacza się dalej wzdłuż niewidocznego przedłużenia belki. 
+Z tego powodu zdecydowano się ograniczyć czas symulacji do \SI{1}{\second}, gdyż to wtedy kulka osiąga pozycję bliską końca belki.
 
-Odpowiedź modelu nieliniowego, w przypadku położenia i prędkości liniowej kulki, wiernie odwzorowuje odpowiedź dla analogicznych zmiennych modelu nieliniowego, przy czym przyspieszenie, jakiemu poddana jest kulka, jest mniejsze. Oznacza to dobrą realizację przybliżenia liniowego w otoczeniu punktu równowagi kulki.
+Kąt obrotu belki w modelu nieliniowym nie rośnie stale, tak jak to ma miejsce w przypadku modelu liniowego, ale można zauważyć, że pozycje i prędkości kątowe na obu modelach przechodzą praktycznie przez te same punkty dla czasu \SI{0.2}{\second}.
 
-Mniejsze przyspieszenie kulki w modelu liniowym wynika z małego kąta, który osiąga belka. Zachowanie belki w pobliżu punktu równowagi jest zbliżone do modelu nieliniowego, natomiast poza nim na belkę działa dużo mniejsze przyspieszenie kątowe niż w modelu nieliniowym.
+Odpowiedź modelu liniowego, w przypadku położenia i prędkości liniowej kulki, dobrze zachowuje charakter odpowiedzi dla analogicznych zmiennych modelu nieliniowego. Przyspieszenie liniowe, którego doznaje kulka, jest większe w przypadku modelu liniowego, co wiąże się ze stale rosnącym kątem pochylenia belki, a --- jak wykazano w rozdziale \ref{sec:ch8_identyfikacja_kulki} --- to od niego zależy liniowo przyspieszenie kulki; ostatecznie kulka w modelu liniowym osiąga wyższą prędkość niż w modelu nieliniowym.
 
-Zatem zachowanie modelu zlinearyzowanego w otoczeniu punktu równowagi (zerowe położenie i~prędkość kulki oraz belki) odpowiada oczekiwaniom; ponadto jest ono faktycznym przybliżeniem działania modelu nieliniowego, przez co w trakcie oddalania od punktu równowagi zachowanie obu modeli rozbiega się coraz bardziej.
+Zatem zachowanie modelu zlinearyzowanego w otoczeniu punktu równowagi (zerowe położenie i~prędkość kulki oraz belki) odpowiada oczekiwaniom; ponadto jest ono jedynie przybliżeniem działania modelu nieliniowego, przez co w trakcie oddalania od punktu równowagi zachowanie obu modeli rozbiega się coraz bardziej.
 
 %%%%
 \section{Symulacje działania regulatorów}
@@ -55,7 +60,7 @@ Kolejnym porównaniem, któremu poddane zostały model nieliniowy oraz liniowy o
     \label{fig:stabilizacja_modelu_liniowego}
 \end{figure}
 
-Wykresy przedstawiające położenie liniowe kulki (część lewa), pozostałe zmienne stanu (część środkowa) oraz sterowanie (z obu regulatorów) przedstawiono na \cref{fig:stabilizacja_modelu_nieliniowego} oraz \cref{fig:stabilizacja_modelu_liniowego}. Można zaobserwować, że w przypadku modelu nieliniowego pojawia się uchyb ustalony pozycji (około \SI{3,5}{\centi\meter}), co sugeruje, że w obiekcie rzeczywistym należałoby zastosować regulator z dodatkową akcją całkującą. Na wykresach obu regulatorów widać oscylacje pozycji kulki, których należało się spodziewać, gdyż dwie wartości własne macierzy ,,zwiniętego'' układu zlinearyzowanego wraz z regulatorami \eqref{eq:wartosci_wlasne_A_c} są zespolone.
+Wykresy przedstawiające położenie liniowe kulki (część lewa), pozostałe zmienne stanu (część środkowa) oraz sterowanie (z obu regulatorów) przedstawiono na \cref{fig:stabilizacja_modelu_nieliniowego} oraz \cref{fig:stabilizacja_modelu_liniowego}. Na wykresach obu regulatorów widać oscylacje pozycji kulki, których należało się spodziewać, gdyż dwie wartości własne macierzy ,,zwiniętego'' układu zlinearyzowanego wraz z regulatorami \eqref{eq:wartosci_wlasne_A_c} są zespolone.
 
 %%%%
 \section{Eksperymenty przeprowadzone na obiekcie rzeczywistym}
@@ -117,7 +122,7 @@ W tym eksperymencie porównano jakość regulacji dla takich samych kulek, jak w
 8,434616 & 1,022948
 \end{bmatrix}$\footnote{Nastawy zostały uzyskane w przeprowadzonej drugi raz tej samej procedurze samostrojenia, dlatego ich wartość różni się od wartości $K_I$ umieszczonej w rozdziale \ref{subsec:ch9_odp_regulatora_belki}.}.
 
-W przypadku mniejszej z kulek (wykres na \cref{fig:stabilizacja_kulka1_nastrojona}) czas regulacji uległ skróceniu z \SI{2}{\second} do około \SI{1.8}{\second}, przy czym przeregulowanie jest jedno i widoczny jest uchyb ustalony. Ponownie może być on spowodowany tarciem statycznym pomiędzy kulką i jej podłożem.
+W przypadku mniejszej z kulek (wykres na \cref{fig:stabilizacja_kulka1_nastrojona}) czas regulacji uległ skróceniu z \SI{2}{\second} do około \SI{1.8}{\second}, przy czym przeregulowanie jest jedno i widoczny jest uchyb ustalony. Może być on spowodowany tarciem statycznym pomiędzy kulką i jej podłożem.
 
 Dużej poprawie uległa regulacja drugiej, większej i cięższej kulki, zaprezentowana na \cref{fig:stabilizacja_kulka2_nastrojona}. Widoczne jest tylko jedno przeregulowanie, a czas regulacji skrócił się z \SI{9}{\second} do około \SI{3}{\second}. Pojawiły się natomiast delikatne oscylacje oraz uchyb. Na wykresie po prawej stronie widoczne są zmiany kąta belki, co oznacza, że regulator nadrzędny zbyt mocno reaguje na zmiany jednej ze zmiennych stanu.
 
@@ -137,7 +142,7 @@ Dużej poprawie uległa regulacja drugiej, większej i cięższej kulki, zapreze
 
 W niniejszym rozdziale przedstawiono kilka symulacji i eksperymentów pokazujących zachowanie się modeli oraz regulatorów w różnych sytuacjach.
 
-Na początku zaprezentowano i potwierdzono zgodność modelu liniowego obiektu z modelem nieliniowym, następnie zaprezentowano działanie wyliczonych matematycznie (rozdział \ref{cha:ch6_model_liniowy}) regulatorów z~każdym z~tych modeli. W symulacji układu z modelem nieliniowym ujawniła się wada zaprojektowanego regulatora nadrzędnego: brak akcji całkującej.
+Na początku zaprezentowano i potwierdzono zgodność modelu liniowego obiektu z modelem nieliniowym, następnie zaprezentowano działanie wyliczonych matematycznie (rozdział \ref{cha:ch6_model_liniowy}) regulatorów z~każdym z~tych modeli.
 
 W następnej części rozdziału zaprezentowano wyniki eksperymentów przeprowadzonych na obiekcie rzeczywistym z zaimplementowanymi regulatorami i mechanizmem samostrojenia regulatora podrzędnego. W wynikach znajduje się porównanie jakości regulacji przy użyciu kryteriów czasowych dla następujących eksperymentów:
 \begin{itemize}

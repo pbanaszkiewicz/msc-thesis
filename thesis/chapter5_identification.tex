@@ -13,7 +13,7 @@ W niniejszym rozdziale przeprowadzono identyfikację nieznanych parametrów, a t
 
 W celu pobrania charakterystyk indywidualnych czujników przeprowadzono serię eksperymentów, w których zmierzono odpowiedzi czujników w zależności od pozycji przeszkody. Użytą przeszkodą była kulka (zob. rozdział \ref{sec:ch2_kulka}). Zadbano, by warunki eksperymentu kalibracyjnego jak najlepiej odpowiadały przyszłym warunkom pracy.
 
-Procedura pojedynczego eksperymentu przeprowadzana była następująco: kulkę umieszczano tak, aby jej środek znajdował się na wybranej pozycji; następnie kulka była zabezpieczana taśmą, aby jej położenie nie uległo zmianie w trakcie eksperymentu. Próbki pobierane były z dwóch przetworników ADC co \SI{100}{\milli\second} przez kilkadziesiąt sekund (przynajmniej pół minuty). W efekcie dla każdego wyznaczonego położenia kulki do dalszej analizy dostępnych było kilkaset próbek.
+Procedura pojedynczego eksperymentu przeprowadzana była następująco: kulkę umieszczono tak, aby jej środek znajdował się na wybranej pozycji; następnie kulka była zabezpieczana taśmą, aby jej położenie nie uległo zmianie w trakcie eksperymentu. Próbki pobierane były z dwóch przetworników ADC co \SI{100}{\milli\second} przez kilkadziesiąt sekund (przynajmniej pół minuty). W efekcie dla każdego wyznaczonego położenia kulki do dalszej analizy dostępnych było kilkaset próbek.
 
 Pobieranie próbek odbywało się poprzez narzędzie \texttt{Traces} z programu \textsc{Siemens TIA Portal}, które umożliwia eksport wyników do formatu \texttt{.csv} w celu dalszej obróbki.
 
@@ -323,7 +323,7 @@ Dane wejściowe, wyjściowe i odpowiedź modelu przedstawiono na \cref{fig:silni
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{optymalizacja_exp1}
-    \caption{Zrzut ekranu wykresów danych wejściowych (dół) i wyjściowych dla procesu optymalizacji oraz odpowiedź obiektu po przeprowadzonej optymalizacji parametrów (góra).}
+    \caption{Zrzut ekranu wykresów danych wejściowych (dół, napięcie w woltach) i~wyjściowych dla procesu optymalizacji oraz odpowiedź obiektu po przeprowadzonej optymalizacji parametrów (góra, kąt w radianach).}
     \label{fig:silnik_oszacowanie_parametrow}
 \end{figure}
 
@@ -340,7 +340,7 @@ Pierwszą weryfikację przeprowadzono z wykorzystaniem ,,ujemnych'' skoków je
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{walidacja_exp2}
-    \caption{Zrzut ekranu wykresów danych wejściowych (dół) i wyjściowych dla procesu weryfikacji oraz odpowiedź obiektu ze zoptymalizowanymi parametrami (góra).}
+    \caption{Zrzut ekranu wykresów danych wejściowych (dół, napięcie w woltach) i~wyjściowych dla procesu weryfikacji oraz odpowiedź obiektu ze zoptymalizowanymi parametrami (góra, kąt w radianach).}
     \label{fig:silnik_weryfikacja_parametrow}
 \end{figure}
 
@@ -349,19 +349,13 @@ Druga weryfikacja, w której sterowaniem w danych wejściowych były pojedyncze 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{walidacja_exp3}
-    \caption{Zrzut ekranu wykresów danych wejściowych (dół) i wyjściowych dla procesu weryfikacji przy kolejnym eksperymencie.}
+    \caption{Zrzut ekranu wykresów danych wejściowych (dół, napięcie w woltach) i~wyjściowych dla procesu weryfikacji przy kolejnym eksperymencie (góra, kąt w~radianach).}
     \label{fig:silnik_nieudana_weryfikacja_parametrow}
 \end{figure}
 
 %%%%
-% \section{Identyfikacja momentu bezwładności kulki}
-% \label{sec:ch5_identyfikacja_bezwladnosci_kulki}
-
-% TODO: skonsultować wyniki z drem Tutajem
-
-%%%%
 \section{Podsumowanie}
 
-W niniejszym rozdziale przedstawiono sposób wyznaczenia charakterystyk czujników odległości oraz identyfikację parametrów silnika prądu stałego. Parametry silnika, które zostały podane przez producenta, okazały się niedokładne, dlatego w pierwszej kolejności zweryfikowano je -- o ile było to możliwe. Następnie na podstawie równań elektrycznego i mechanicznego silnika wyznaczono prawie wszystkie nieznane parametry. W ostatnim kroku zidentyfikowano numerycznie pozostałe parametry oraz zoptymalizowano już wyznaczone, co potwierdziła opisana weryfikacja wyników identyfikacji parametrów silnika.
+W niniejszym rozdziale przedstawiono sposób wyznaczenia charakterystyk czujników odległości oraz identyfikację parametrów silnika prądu stałego. Parametry silnika, które zostały podane przez producenta, okazały się niedokładne, dlatego w pierwszej kolejności zweryfikowano je --- o ile było to możliwe. Następnie na podstawie równań elektrycznego i mechanicznego silnika wyznaczono prawie wszystkie nieznane parametry. W ostatnim kroku zidentyfikowano numerycznie pozostałe parametry oraz zoptymalizowano już wyznaczone, co potwierdziła opisana weryfikacja wyników identyfikacji parametrów silnika.
 
 %---------------------------------------------------------------------------

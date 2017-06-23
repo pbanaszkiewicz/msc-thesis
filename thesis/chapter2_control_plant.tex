@@ -26,7 +26,7 @@ Uproszczony schemat systemu kulka i belka przedstawiony został na rysunku \ref{
 
 \begin{figure}[H]
 	\centering
-    \includesvg[width=0.6\textwidth,svgpath=./vector_graphics/]{schemat_uproszczony}
+    \includesvg[width=0.7\textwidth,svgpath=./vector_graphics/]{schemat_uproszczony}
 	\caption{Uproszczony schemat systemu typu kulka i belka.}
 	\label{fig:schemat_uproszczony}
 \end{figure}
@@ -55,7 +55,7 @@ Przed przystąpieniem do budowy obiektu, zaprojektowano wstępny kształt w prog
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.3\textwidth]{cad}
+	\includegraphics[width=0.32\textwidth]{cad}
 	\caption{Render projektu CAD.}
 	\label{fig:cad_render}
 \end{figure}
@@ -66,29 +66,36 @@ Ostateczna konstrukcja różni się od projektu \textsc{CAD} o wysokość słup�
 \section{Konstrukcja mechaniczna}
 \label{sec:ch2_konstrukcja_mechaniczna}
 
-Większość elementów konstrukcji (\cref{fig:perspektywa}) powstał z ocynkowanych segmentów stalowych, tzw. ceowników w przekroju kwadratowym o boku długości \SI{4}{cm}, pozwalających na łatwe łączenie kilku elementów przy pomocy śrub. Rozwiązanie to jest bardzo tanie w porównaniu do przemysłowych profili aluminiowych lub spawanych profili stalowych, ale jednocześnie jest dość ciężkie i poprzez niedomknięcie profilu podatne na pewne momenty gnące.
+Większość elementów konstrukcji (\cref{fig:perspektywa}) powstało z ocynkowanych segmentów stalowych, tzw. ceowników w przekroju kwadratowym o boku długości \SI{4}{cm}, pozwalających na łatwe łączenie kilku elementów przy pomocy śrub. Rozwiązanie to jest bardzo tanie w porównaniu do przemysłowych profili aluminiowych lub spawanych profili stalowych, ale jednocześnie jest dość ciężkie i poprzez niedomknięcie profilu podatne na pewne momenty gnące.
 
 Kąty proste pomiędzy elementami ustawionymi prostopadle zostały zapewnione poprzez zastosowanie kątowych wsporników stalowych.
 
-% TODO: zdjęcie ma mieć inny podpis "WSPORNIK ORAZ CZUJNIK ODLEGŁOŚCI / POŁOŻENIA KULKI"
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{perspektywa}
+	\includegraphics[width=0.9\textwidth]{perspektywa2}
 	\caption{Zdjęcie obiektu regulacji z zaznaczonymi poszczególnymi elementami konstrukcji; w środku obiektu opakowanie zapałek dla porównania rozmiarów.}
 	\label{fig:perspektywa}
 \end{figure}
 
-% TODO: zdjęcie mechanizmu korbowego wraz z czujnikiem bazowania
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=0.5\textwidth]{podpory_belki_lozyska}
+    \caption{Zdjęcie mocowania belki do wału przy użyciu podpór; widoczne łożyskowanie wału.}
+    \label{fig:podpory_belki_lozyska}
+\end{figure}
 
-% TODO: zdjęcie łożyskowania wału i umocowania do niego belki
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=0.3\textwidth]{naped_bazowanie}
+    \caption{Zdjęcie układu przeniesienia napędu z widocznym korbowodem, korbą, silnikiem, chorągiewką używaną do bazowania i układem bazowania.}
+    \label{fig:naped_bazowanie}
+\end{figure}
 
 Na prostokątnej podstawie o wymiarach zewnętrznych \SI{60 x 23}{cm} wykonanej z ceowników ustawiono pionowo na środkach dłuższych boków słupy nośne, również wykonane z ceowników. Słupy zostały usztywnione poprzez połączenie ich przęsłem podniesionym o \SI{11}{cm} względem podstawy.
 
-Na słupach przyczepiono współosiowo łożyska maszynowe samonastawne typu UCFL 201 w obudowach odlewanych. Przez łożyska poprowadzono pręt nierdzewny stalowy o średnicy \SI{12}{mm}; na pręt nałożono podpory wałka w kształcie litery \texttt{T}, a do nich przykręcono belkę.
+Na słupach przyczepiono współosiowo łożyska maszynowe samonastawne typu UCFL 201 w obudowach odlewanych. Przez łożyska poprowadzono pręt nierdzewny stalowy o średnicy \SI{12}{mm}; na pręt nałożono podpory wałka w kształcie litery \texttt{T}, a do nich przykręcono belkę. Mocowanie belki zostało przedstawione na \cref{fig:podpory_belki_lozyska}.
 
 Silnik elektryczny, przymocowany do aluminiowego uchwytu, został umieszczony podłużnie na krótszym boku podstawy, na podwyższeniu wykonanym z dwóch elementów stalowych typu ceownik.
-
-% TODO: podwyższenie zostało wzmocnione przeciwko gięciom poprzecznym i wzdłużnym poprzez zastosowanie …………
 
 %%%%%%%%
 \section{Przeniesienie napędu}
@@ -119,6 +126,8 @@ Parametry fizyczne mechanizmu korbowego:
 \end{itemize}
 
 Alternatywne układy przeniesienia napędu i mechanizmy elektromotoryczne zostały przedyskutowane w dodatku \ref{appA_warianty_zespolu_napedowego}.
+
+Mechanizm przeniesienia napędu wraz z widocznym silnikiem i układem bazowania został zaprezentowany na \cref{fig:naped_bazowanie}.
 
 %%%%%%%%
 
