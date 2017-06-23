@@ -121,7 +121,7 @@ axes;
 h = title('Stabilizacja modelu nieliniowego');
 set(gca, 'Visible', 'off');
 set(h, 'Visible', 'on');
-set(gcf, 'pos', [105         474        1135         420]);
+set(gcf, 'pos', [105         507        1135         359]);
 
 %% linear model response (stabilization)
 figure(4);
@@ -156,4 +156,4 @@ axes;
 h = title('Stabilizacja modelu liniowego');
 set(gca, 'Visible', 'off');
 set(h, 'Visible', 'on');
-set(gcf, 'pos', [105         474        1135         420]);
+set(gcf, 'pos', [105         507        1135         359]);
