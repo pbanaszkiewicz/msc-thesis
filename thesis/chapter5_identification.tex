@@ -19,7 +19,7 @@ Pobieranie próbek odbywało się poprzez narzędzie \texttt{Traces} z programu 
 
 Z każdej serii próbek odpowiadającej jednej pozycji środka kulki wyliczono średnią arytmetyczną wartości z~obu przetworników. Przyjęto, że wartości te odpowiadają odpowiedziom czujników na odległość do bliższej im krawędzi kulki; to założenie jest słuszne dlatego, że do pomiaru środka kulki wykorzystana jest para czujników i~wartość średnia ich odczytów (por. rozdział \ref{sec:ch3_czujniki_odleglosci}, szczególnie wzór~\eqref{eq:pozycja_kulki}).
 
-Wykres uzyskanych danych pomiarowych został przedstawiony na \cref{fig:charakterystyka_czujnikow}, natomiast dane przygotowane do przeprowadzenia aproksymacji umieszczone są w tabeli \ref{tab:pomiary_czujniki}. Dane te zostały skrócone, tzn. wyeliminowano pomiar dla odległości mniejszych od \SI{3}{\centi\meter}, który wprowadzał dwuznaczność do odwzorowania \textit{pomiar$\,\to\,$odległość}.
+Wykres uzyskanych danych pomiarowych został przedstawiony na \cref{fig:charakterystyka_czujnikow}, natomiast dane przygotowane do przeprowadzenia aproksymacji umieszczono w tabeli \ref{tab:pomiary_czujniki}. Dane te zostały skrócone, tzn. wyeliminowano pomiar dla odległości mniejszych od \SI{3}{\centi\meter}, który wprowadzał dwuznaczność do odwzorowania \textit{pomiar$\,\to\,$odległość}.
 
 \begin{table}[H]
     \centering
@@ -102,9 +102,8 @@ W ramach eksperymentów przeprowadzono również test zachowania czujników, gdy
 \label{sec:ch5_identyfikacja_parametrow_silnika}
 
 Jak to zostało zasygnalizowane we wstępie do rozdziału, nie wszystkie parametry silnika są poprawne lub zostały podane przez producenta. Spośród podanych przez producenta (zob. tab. \ref{tab:parametry_silnika}) do zweryfikowania możliwe są:
-
 \begin{itemize}
-    \item napięcie zasilania silnika $u_N$,
+    \item napięcie zasilania silnika $u_N$\footnote{Możliwe jest jedynie określenie dokładnej wartości napięcia zasilającego.},
     \item prędkość biegu jałowego odpowiadającego temu napięciu $\omega_N$,
     \item prąd biegu jałowego $i_N$.
 \end{itemize}
@@ -356,6 +355,6 @@ Druga weryfikacja, w której sterowaniem w danych wejściowych były pojedyncze 
 %%%%
 \section{Podsumowanie}
 
-W niniejszym rozdziale przedstawiono sposób wyznaczenia charakterystyk czujników odległości oraz identyfikację parametrów silnika prądu stałego. Parametry silnika, które zostały podane przez producenta, okazały się niedokładne, dlatego w pierwszej kolejności zweryfikowano je --- o ile było to możliwe. Następnie na podstawie równań elektrycznego i mechanicznego silnika wyznaczono prawie wszystkie nieznane parametry. W ostatnim kroku zidentyfikowano numerycznie pozostałe parametry oraz zoptymalizowano już wyznaczone, co potwierdziła opisana weryfikacja wyników identyfikacji parametrów silnika.
+W niniejszym rozdziale przedstawiono sposób wyznaczenia charakterystyk czujników odległości oraz identyfikację parametrów silnika prądu stałego. Parametry silnika, które zostały podane przez producenta, okazały się niedokładne, dlatego w pierwszej kolejności zweryfikowano je. Następnie na podstawie równań elektrycznego i mechanicznego silnika wyznaczono prawie wszystkie nieznane parametry. W ostatnim kroku zidentyfikowano numerycznie pozostałe parametry oraz zoptymalizowano już wyznaczone, co potwierdziła opisana weryfikacja wyników identyfikacji parametrów silnika.
 
 %---------------------------------------------------------------------------

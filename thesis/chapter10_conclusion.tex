@@ -42,7 +42,7 @@ Wykorzystany w pracy obiekt regulacji typu kulka i belka stanowi interesujący p
 
 W kwestiach mechanicznych obiekt regulacji powinien być wyposażony w czujnik kąta obrotu belki, gdyż nawet pomimo dość prostej zależności między nim a kątem obrotu motoreduktora, dużo wygodniejszym byłoby operowanie na zmiennej stanu, która odczytana jest bezpośrednio z fizycznego układu. Ponadto wskazanym byłoby przebudowanie struktury nośnej obiektu np. na profile aluminiowe, gdyż przy dużych wartościach sterowania silnika zapobiegłoby to odkształcaniu wsporników. I wreszcie sporym ułatwieniem z punktu widzenia modelu obiektu byłaby rezygnacja z nieliniowego mechanizmu przeniesienia napędu i zastąpienia go na przykład układem opartym o przekładnię pasową (zob. dodatek~\ref{appA_warianty_zespolu_napedowego}).
 
-Wymiana czujników odległości na sensory przemysłowe (zob. dodatek \ref{appB_alternatywne_czujniki_pozycji_kulki}) na pewno zredukowałaby szumy przy odczycie pozycji kulki, ale alternatywnym (i być może tańszym) rozwiązaniem byłaby implementacja dodatkowego filtru, np. Kalmana.
+Wymiana czujników odległości na sensory przemysłowe (zob. dodatek \ref{appB_alternatywne_czujniki_pozycji_kulki}) na pewno zredukowałaby szumy przy odczycie pozycji kulki, ale alternatywnym (i być może tańszym) rozwiązaniem byłaby implementacja dodatkowego obserwatora, np. Luenbergera lub w postaci filtru Kalmana.
 
 Wreszcie identyfikacji można poddać tarcia występujące w łożyskach wykorzystywanych przez belkę, czy pomiędzy kulką a belką w trakcie toczenia; ich wpływ na postać modelu matematycznego obecnie jest nieznany, a mógłby być uwzględniony przy projektowaniu regulatora.
 

@@ -189,7 +189,7 @@ Umieszczenie regulatorów w bloku \texttt{OB30} umożliwia zatem przeprowadzenie
 
 Ponadto sygnały, z których korzystają regulatory, takie jak prędkość obrotowa belki czy prędkość liniowa kulki, również są liczone z~okresem \SI{50}{\milli\second}, co oznacza, że nie należy uruchamiać bloku \texttt{OB30} ani rzadziej (co powodowałoby pracę ze znacznie przeterminowanymi wartościami sygnałów), ani częściej (co powodowałoby duże opóźnienie w reakcji regulatora).
 
-Regulatory opisane w rozdziałach \ref{sec:ch6_regulator_belki} oraz \ref{sec:ch6_regulator_kulki} są regulatorami typu proporcjonalnego od stanu, co oznacza, że ich implementacja w sterowniku PLC jest równoznaczna z obliczeniem sumy ważonej sygnałów od stanu wymnożonych przez macierz współczynników. W przypadku obu regulatorów, uzyskano to za pomocą bloku \texttt{Calculate} (\cref{fig:tia_portal_blok_calculate}), umożliwiającego zdefiniowanie prostych wyrażeń algebraicznych.
+Regulatory opisane w rozdziałach \ref{sec:ch6_regulator_belki} oraz \ref{sec:ch6_regulator_kulki} są regulatorami typu proporcjonalnego od stanu, co oznacza, że ich implementacja w sterowniku PLC jest równoznaczna z obliczeniem sumy ważonej syg\-nałów od stanu wymnożonych przez macierz współczynników. W przypadku obu regulatorów, uzyskano to za pomocą bloku \texttt{Calculate} (\cref{fig:tia_portal_blok_calculate}), umożliwiającego zdefiniowanie prostych wyrażeń algebraicznych.
 
 \begin{figure}[h]
     \centering

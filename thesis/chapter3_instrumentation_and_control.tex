@@ -1,7 +1,7 @@
 \chapter{Układ sterowania i instrumentacji}
 \label{cha:ch3_uklad_ster_i_instrumentacji}
 
-Do odczytywania danych z obiektu i sterowania nim wykorzystano opisany w tym rozdziale układ sterowania i instrumentacji (\cref{fig:schemat_ukl_sterowania_instrumentacji}). W jego sercu znajduje się przemysłowy sterownik PLC, który odczytuje dane o położeniu kulki z dwóch czujników odległości oraz położenie kątowe wału wyjściowego motoreduktora z~enkodera przyrostowego kwadraturowego. Dodatkowo do sterownika podłączony został czujnik bazowania oraz przyciski: \texttt{START} (NO), \texttt{STOP} (NC). Na wyjścia sterownika podłączono mostek~H kontrolujący silnik oraz diodę świecącą sygnalizacyjna.
+Do odczytywania danych z obiektu i sterowania nim wykorzystano opisany w tym rozdziale układ sterowania i instrumentacji (\cref{fig:schemat_ukl_sterowania_instrumentacji}). W jego sercu znajduje się przemysłowy sterownik PLC, który odczytuje dane o położeniu kulki z dwóch czujników odległości oraz położenie kątowe wału wyjściowego motoreduktora z~enkodera przyrostowego kwadraturowego. Dodatkowo do sterownika podłączony został czujnik bazowania oraz przyciski: \texttt{START} (NO), \texttt{STOP} (NC). Na wyjścia sterownika podłączono mostek~H kontrolujący silnik oraz świecącą diodę sygnalizacyjną.
 
 \begin{figure}[H]
     \centering
@@ -74,7 +74,7 @@ Podstawowe parametry sterownika oraz płytki sygnałowej zostały zebrane w tabe
 \section{Silnik z reduktorem i enkoderem}
 \label{sec:ch3_uklad_napedowy}
 
-Jak już zasygnalizowano w rozdziale \ref{sec:ch2_przeniesienie_napedu}, w pracy użyto silnik prądu stałego (komutatorowy, z~magnesami trwałymi). Silnik sprzężony jest z~zębatą przekładnią redukcyjną o przełożeniu \num{18,75}:\num{1} (całość nazywana jest motoreduktorem). Na wale silnika zamocowany jest enkoder inkrementalny kwadraturowy o~64 impulsach na obrót wału, co daje 1200 impulsów za przekładnią. Zdjęcie silnika przedstawiono na \cref{fig:silnik}.
+Jak już zasygnalizowano w rozdziale \ref{sec:ch2_przeniesienie_napedu}, w pracy wykorzystano silnik prądu stałego (komutatorowy, z~magnesami trwałymi). Silnik sprzężony jest z~zębatą przekładnią redukcyjną o przełożeniu \num{18,75}:\num{1} (całość nazywana jest motoreduktorem). Na wale silnika zamocowany jest enkoder inkrementalny kwadraturowy o~64 impulsach na obrót wału, co daje 1200 impulsów za przekładnią. Zdjęcie silnika przedstawiono na \cref{fig:silnik}.
 
 Wybrany silnik stanowi dobry kompromis między złożonością, wydajnością i ceną. Dyskusja na temat możliwości zastosowania innych typów napędów została przeprowadzona w dodatku \ref{appA_warianty_zespolu_napedowego}.
 
@@ -200,7 +200,7 @@ W układzie nie zastosowano czujnika położenia wału, do którego przymocowana
 \end{equation}
 gdzie: $d_L$ to odległość końca belki od osi obrotu, a $d_k$ to długość korby. Zależność \eqref{eq:uproszczona_zaleznosc_kata_belki} wynika z~założenia, że punkty zaczepu korbowodu przebędą taką samą drogę łukową, a zatem $\theta d_k = \alpha d_L$.
 
-Niestety, równanie \eqref{eq:uproszczona_zaleznosc_kata_belki} jest poprawne tylko w niewielkich odchyleniach belki od poziomu oraz gdy linia łącząca punkt zaczepu mechanizmu korbowego i oś obrotu belki jest równoległa do korby. Faktyczna zależność $\theta(\alpha)$ została zidentyfikowana za pomocą modelu symulacyjnego (rozdział \ref{sec:ch4_zaleznosc_kata_silnika_i_kata_belki}).
+Niestety, równanie \eqref{eq:uproszczona_zaleznosc_kata_belki} jest poprawne tylko w niewielkich odchyleniach belki od poziomu oraz gdy linia łącząca punkt zaczepu mechanizmu korbowego i oś obrotu belki jest równoległa do korby w~pozycji poziomej. Faktyczna zależność $\theta(\alpha)$ została zidentyfikowana za pomocą modelu symulacyjnego (rozdział \ref{sec:ch4_zaleznosc_kata_silnika_i_kata_belki}).
 
 \begin{figure}[H]
     \centering

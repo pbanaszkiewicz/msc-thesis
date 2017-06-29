@@ -52,9 +52,9 @@ Ponadto przybornik \textsc{SimMechanics} umożliwia symulowanie zachowania ukła
     \label{fig:simmechanics_bloki}
 \end{figure}
 
-Budowanie schematu z wykorzystaniem bloków \textsc{SimMechanics} polega na, w dużym uproszczeniu, przyłączaniu ciał stałych w centrach układów odniesienia, które przemieszczane są w przestrzeni za pomocą bloków \textit{Rigid Transform} (fig. \ref{fig:sm_rigid_transform}). Wspomniane bloki umożliwiają również rotację układów odniesienia, co jest często konieczne do poprawnego działania złącz o pewnej liczbie stopni swobody. Przykładowo, złącze \textit{Revolute Joint} umożliwia obracanie układu odniesienia \texttt{F} (ang. \textit{Follower} --- następujący układ odniesienia) wokół osi Z~układu \texttt{B} (ang. \textit{Base} --- poprzedzający układ odniesienia)\footnote{W ustawieniach bloku \textit{Revolute Joint} możliwa jest zmiana na tryb odwrotny, tj. obrót układu \texttt{B} wokół układu \texttt{F}.}. Jednakże jeśli wał, który ma się obracać wokół swojej naturalnej osi obrotu, nie ma w swoim układzie osi Z~wzdłuż naturalnej osi obrotu, wtedy jego układ odniesienia musi zostać transformowany za pomocą \textit{Rigid Transform}.
+Budowanie schematu z wykorzystaniem bloków \textsc{SimMechanics} polega na, w dużym uproszczeniu, przyłączaniu ciał stałych w centrach układów odniesienia, które przemieszczane są w przestrzeni za pomocą bloków \textit{Rigid Transform} (rys. \ref{fig:sm_rigid_transform}). Wspomniane bloki umożliwiają również rotację układów odniesienia, co jest często konieczne do poprawnego działania złącz o pewnej liczbie stopni swobody. Przykładowo, złącze \textit{Revolute Joint} (\cref{fig:sm_revolute_joint}) umożliwia obracanie układu odniesienia \texttt{F} (ang. \textit{Follower} --- następujący układ odniesienia) wokół osi Z~układu \texttt{B} (ang. \textit{Base} --- poprzedzający układ odniesienia)\footnote{W ustawieniach bloku \textit{Revolute Joint} możliwa jest zmiana na tryb odwrotny, tj. obrót układu \texttt{B} wokół układu \texttt{F}.}. Jednakże jeśli wał, który ma się obracać wokół swojej naturalnej osi obrotu, nie ma w swoim układzie osi Z~wzdłuż naturalnej osi obrotu, wtedy jego układ odniesienia musi zostać transformowany za pomocą \textit{Rigid Transform}.
 
-Bloki złącz umożliwiają pozyskanie informacji o aktualnych wartościach pozycji, prędkości i przyspieszenia (w zależności od typu złącza odpowiednio liniowych lub obrotowych) oraz przyłożonych na złącze momentu obrotowego lub siły. Dodatkowo możliwe jest załączenie wejścia momentu oddziałującego lub siły, co zostało wykorzystane przy implementacji silnika.
+Bloki złącz umożliwiają pozyskanie informacji o aktualnych wartościach pozycji, prędkości i przyspieszenia (w zależności od typu złącza odpowiednio liniowych lub obrotowych) oraz przyłożonego na złącze momentu obrotowego lub siły. Dodatkowo możliwe jest załączenie wejścia momentu oddziałującego lub siły, co zostało wykorzystane przy implementacji silnika.
 
 Ostatnią wartą wspomnienia informacją jest możliwość ustawienia pewnej wartości wstępnej dla danego złącza (warunku początkowego). W przypadku złącza \textit{Revolute Joint} umożliwia to wymuszenie kąta obrotu pomiędzy układami odniesienia \texttt{B} oraz \texttt{F}, a w przypadku złącza \textit{Prismatic Joint} wymusza to odpowiednie przesunięcie.
 
@@ -81,7 +81,7 @@ Schemat użyty do wygenerowania modelu z \cref{fig:uklad_simmechanics} został p
     \item wyjścia \textit{ball\_position}, \textit{ball\_velocity}, \textit{beam\_angle} oraz \textit{beam\_angular\_velocity}.
 \end{itemize}
 
-Obiekt \textit{Base} reprezentuje podstawę, na której umieszczono całą mechanikę układu. Poprzez transformacje \textit{RT} oraz \textit{RT1} umieszczono na nim dwie wieże, na których zaczepione są łożyska i wał obrotowy belki (podsystem \textit{Shaft}, \cref{fig:sm_shaft}).
+Obiekt \textit{Base} reprezentuje podstawę, na której umieszczono całą mechanikę układu. Poprzez transformacje \textit{RT} oraz \textit{RT1} umieszczono na nim dwa słupy, na których zaczepione są łożyska i wał obrotowy belki (podsystem \textit{Shaft}, \cref{fig:sm_shaft}).
 
 Wał belki składa się z dwóch równoległych ścieżek, transformowanych z globalnego układu odniesienia poprzez bloki \textit{RT2} oraz \textit{RT3}. Za blokami umieszczono złącza obrotowe \textit{BallBearing1} oraz \textit{BallBearing2}, reprezentujące fizyczne łożyska kulkowe (zob. rozdział \ref{sec:ch2_konstrukcja_mechaniczna}). Złącze \textit{BallBearing2} zostało wykorzystane do pobrania z układu aktualnego kąta oraz prędkości kątowej obrotu belki.
 
@@ -127,7 +127,7 @@ Połączenie równoległe bloków \textit{RPC1} i \textit{PJ}, \textit{RJ} przed
     \label{fig:sm_ball_mechanics}
 \end{figure}
 
-W układzie \cref{fig:uklad_simmechanics2} jedno z wejść, oznaczone jako \textit{disturbance}, przeznaczone jest na symulowanie zewnętrznych zakłóceń wpływających bezpośrednio na kulkę; widoczne jest to w schemacie \textit{Ball mechanics} jako wejście \textit{ball\_pos\_dist}.
+W układzie na \cref{fig:uklad_simmechanics2} jedno z wejść, oznaczone jako \textit{disturbance}, przeznaczone jest na symulowanie zewnętrznych zakłóceń wpływających bezpośrednio na kulkę; widoczne jest to w schemacie \textit{Ball mechanics} jako wejście \textit{ball\_pos\_dist}.
 
 Z podsystemu \textit{Ball mechanics} wychodzą również dwa wyjścia: \textit{ball\_position} oraz \textit{ball\_velocity}. Odczytywane są one ze złącza pryzmatycznego kulki \textit{PJ}.
 
@@ -149,7 +149,7 @@ gdzie:
     \item $u$ --- napięcie sterujące,
     \item $R$ --- rezystancja silnika,
     \item $i$ --- prąd w obwodzie twornika,
-    \item $K$ --- stała elektryczna bądź mechaniczna silnika (w jednostkach \si[per-mode=symbol]{\volt\second\per\radian} lub \si[per-mode=symbol]{\newton\meter\per\ampere}),
+    \item $K$ --- stała elektryczna bądź mechaniczna silnika (w jednostkach \si{\volt\second\per\radian} lub \si{\newton\meter\per\ampere}),
     \item $L$ --- indukcyjność silnika (w modelu na \cref{fig:sm_electric_motor} przyjęta za zerową),
     \item $T$ --- moment generowany przez silnik,
     \item $J$ --- moment bezwładności sprowadzony na wał motoreduktora,
@@ -166,7 +166,7 @@ gdzie:
     \label{fig:sm_electric_motor}
 \end{figure}
 
-Warto zauważyć, że obliczanie kąta obrotu, prędkości kątowej oraz przyspieszenia kątowego odbywa się poza blokiem \textit{Electric Motor} --- wykonuje to \textsc{SimMechanics}, biorąc pod uwagę dynamikę reszty układu oraz moment, którym silnik działa na cały mechanizm.
+Warto zauważyć, że obliczanie kąta obrotu, prędkości kątowej oraz przyspieszenia kątowego odbywa się poza blokiem \textit{Electric Motor} --- wykonuje to \textsc{SimScape}, biorąc pod uwagę dynamikę reszty układu oraz moment, którym silnik działa na cały mechanizm.
 
 W modelu silnika pominięto indukcyjność, gdyż jej wartość w rzeczywistości jest bardzo niska. Dodatkowo, przeprowadzona identyfikacja tarcia (rozdział \ref{sec:ch5_identyfikacja_parametrow_silnika}) pokazała, że poza tarciem mokrym w~układzie występuje pewne tarcie suche. Z powodu pracy silnika w sposób powtarzalny, tarcie suche może mieć spory wpływ na odpowiedź silnika, dlatego zdecydowano się go nie pomijać.
 
@@ -202,7 +202,7 @@ gdzie:
 %Po przeprowadzeniu aproksymacji numerycznej za pomocą funkcji \texttt{fminsearch} z programu \textsc{Matlab} otrzymano 
 Po przeprowadzeniu aproksymacji numerycznej za pomocą funkcji \texttt{fminsearch} z programu \textsc{Mat\-lab} otrzymano następujące wartości parametrów funkcji \eqref{eq:aproksymacja_kata_walu}: $A = \num{0.2387}$, $\omega = \num{1.0014}$, $\phi = \num{-1.5484}$, $B = \num{-0.05655}$; przybliżenie zostało przedstawione na \cref{fig:zaleznosc_kata_belki_od_enkodera}. Taka funkcja nie jest trudna do implementacji na sterowniku PLC, nie powinna również stanowić zbyt dużego wyzwania obliczeniowego\footnote{Producent deklaruje min. \SI{18}{\micro\second} dla obliczeń zmiennoprzecinkowych.} dla wybranego procesora (zob. tabelę \ref{tab:parametry_PLC_SB}).
 
-Należy zauważyć, że wykres rzeczywistego kąta obrotu belki na \cref{fig:zaleznosc_kata_belki_od_enkodera} ma taki sam okres, jak wykres przybliżenia sinusoidą, a jednak nie odpowiada mu całkowicie. Nie jest to błędem, gdyż w związku z działaniem w punkcie równowagi (zob. rozdział \ref{cha:ch6_model_liniowy}) największa dokładność przybliżenia oczekiwana jest w zakresie od ok. \num{0} do \SI{1}{\radian} kąta obrotu wału, czyli tam, gdzie charakterystyki się nakładają.
+Należy zauważyć, że wykres rzeczywistego kąta obrotu belki na \cref{fig:zaleznosc_kata_belki_od_enkodera} ma taki sam okres, jak wykres przybliżenia sinusoidą, a jednak kształt nie odpowiada mu całkowicie. Nie jest to błędem, gdyż w związku z działaniem w punkcie równowagi (zob. rozdział \ref{cha:ch6_model_liniowy}) największa dokładność przybliżenia oczekiwana jest w otoczeniu \SI[quotient-mode = fraction]{\pi/2}{\radian} kąta obrotu wału, czyli tam, gdzie oba wykresy są zbliżone.
 
 \section{Podsumowanie}
 

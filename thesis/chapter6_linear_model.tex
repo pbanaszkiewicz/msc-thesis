@@ -37,7 +37,7 @@ Linearyzację modelu przeprowadzono z wykorzystaniem narzędzi wbudowanych w pa
 
 Przed linearyzacją konieczne było znalezienie punktu pracy, czyli przeprowadzenie tzw. \textit{trimmingu} modelu. W procesie tym wyznacza się ograniczenia na stany układu lub ich wartości początkowe. Jest to istotne zagadnienie, gdyż układ zbudowany za pomocą przybornika \textsc{Simscape Multibody} zawiera \num{18} stanów, chociaż, tak jak to zdefiniowano na początku rozdziału, wybrano jedynie \num{4} do prezentacji systemu. Większość z tych ,,nadmiarowych'' stanów to położenia i prędkości złącz pryzmatycznych lub obrotowych, które nie są istotne z punktu widzenia reprezentacji liniowej układu.
 
-\textit{Trimming} modelu to tak naprawdę proces optymalizacyjny, mający na celu tak dobrać wartości początkowe stanów systemu, aby ich maksymalny błąd w trakcie symulacji był jak najmniejszy; jest to jednoznaczne z numerycznym znajdowaniem punktu równowagi systemu. Z powodu swojej optymalizacyjnej natury, proces ten nie mógł znaleźć odpowiedniego punktu, dopóki nie został rozpoczęty z odpowiednio bliskiego otoczenia punktu równowagi. Osiągnięto to podając jako wartość startową dla wejścia bloku (\textit{voltage} na \cref{fig:sm_linearization}) napięcie sterowania $u^* = -0,51158$. Wartość ta wynika z faktu delikatnego ciążenia belki w stronę mechanizmu korbowego, co musi rekompensować silnik poprzez wytworzenie niezerowego momentu.
+\textit{Trimming} modelu to tak naprawdę proces optymalizacyjny, mający na celu tak dobrać wartości początkowe stanów systemu, aby ich maksymalny błąd\footnote{Różnica pomiędzy wartością największą i najmniejszą.} w trakcie symulacji był jak najmniejszy; jest to jednoznaczne z numerycznym znajdowaniem punktu równowagi systemu. Z powodu swojej optymalizacyjnej natury, proces ten nie mógł znaleźć odpowiedniego punktu, dopóki nie został rozpoczęty z odpowiednio bliskiego otoczenia punktu równowagi. Osiągnięto to podając jako wartość startową dla wejścia bloku (\textit{voltage} na \cref{fig:sm_linearization}) napięcie sterowania $u^* = -0,51158$. Wartość ta wynika z faktu delikatnego ciążenia belki w stronę mechanizmu korbowego, co musi rekompensować silnik poprzez wytworzenie niezerowego momentu.
 
 Po wyznaczeniu punktu równowagi, nadal wykorzystując narzędzie \texttt{Linear Analysis Tool}, zlinearyzowano układ otrzymując wynikowe macierze:
 
@@ -80,7 +80,7 @@ Transformację podobieństwa zmiennych stanu $\breve{x} = T_1 \tilde{x}$ przepro
     \breve{y} &= \widetilde{C} T_1^{-1} \breve{x} + \widetilde{D} u \label{eq:transformacja_x}
 \end{nalign}
 
-Jako macierz transformacji $T_1$ użyto macierzy wyjścia $\widetilde{C}$ i otrzymano następujące macierze wynikowe:
+Jako macierz transformacji $T_1$ użyto macierzy równej macierzy wyjścia $\widetilde{C}$ i otrzymano następujące macierze wynikowe:
 \begin{nalign}
     \breve{A} &= \begin{bmatrix}
          0 & 1 & 0 & 0 \\
@@ -226,7 +226,7 @@ gdzie $\breve{B}_i$ oznacza \textit{i}-ty element macierzy $\breve{B}$. Współc
     \end{bmatrix}
   = \breve{B}_2 + p \breve{B}_4
 \end{equation*}
-skąd już dzięki prostemu przekształceniu otrzymujemy $p = -\frac{\breve{B}_2}{\breve{B}_4}$.
+skąd już dzięki prostemu przekształceniu otrzymano $p = -\frac{\breve{B}_2}{\breve{B}_4}$.
 
 Współczynnik $p$ pojawia się również w pierwszym wierszu macierzy transformacji $T_2$. Został on umieszczony tam w celu uzyskania zgodności zależności zmiennych stanu  $\hat{x}_1$ od $\hat{x}_2$ tak, jak zależne są $\breve{x}_1$ od $\breve{x}_2$.
 
