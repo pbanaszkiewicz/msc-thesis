@@ -76,6 +76,52 @@ set(gca, 'Visible', 'off');
 set(h, 'Visible', 'on');
 set(gcf, 'pos', [680   311   771   639]);
 
+%% both non-linear and linear model responses (no control)
+figure(1);
+
+subplot(221);
+plot(nonlinear_model_response.time, nonlinear_model_response.signals(1).values,...
+     linear_model_response.time, linear_model_response.signals(1).values);
+legend('Model nieliniowy', 'Model zlinearyzowany', 'Location', 'northwest');
+ylabel('Położenie liniowe [m]');
+xlabel('Czas [s]');
+title('Położenie kulki');
+grid on;
+
+subplot(223);
+plot(nonlinear_model_response.time, nonlinear_model_response.signals(2).values,...
+     linear_model_response.time, linear_model_response.signals(2).values);
+legend('Model nieliniowy', 'Model zlinearyzowany', 'Location', 'northwest');
+ylabel('Prędkość liniowa [m/s]');
+xlabel('Czas [s]');
+title('Prędkość kulki');
+grid on;
+
+subplot(222);
+plot(nonlinear_model_response.time, nonlinear_model_response.signals(3).values,...
+     linear_model_response.time, linear_model_response.signals(3).values);
+legend('Model nieliniowy', 'Model zlinearyzowany', 'Location', 'southeast');
+ylabel('Położenie kątowe [rad]');
+xlabel('Czas [s]');
+title('Kąt belki');
+grid on;
+
+subplot(224);
+plot(nonlinear_model_response.time, nonlinear_model_response.signals(4).values,...
+     linear_model_response.time, linear_model_response.signals(4).values);
+legend('Model nieliniowy', 'Model zlinearyzowany', 'Location', 'northeast');
+ylabel('Prędkość kątowa [m/s]');
+xlabel('Czas [s]');
+title('Prędkość kątowa belki');
+grid on;
+
+set(gcf, 'NextPlot', 'add');
+axes;
+h = title('Odpowiedź modeli nieliniowego i zlinearyzowanego');
+set(gca, 'Visible', 'off');
+set(h, 'Visible', 'on');
+set(gcf, 'pos', [680   311   771   639]);
+
 %% non-linear model response (stabilization)
 figure(3);
 

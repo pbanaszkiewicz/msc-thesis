@@ -99,3 +99,27 @@ h = title('Stabilizacja położenia drugiej kulki');
 set(gca, 'Visible', 'off');
 set(h, 'Visible', 'on');
 set(gcf, 'pos', [457   544   841   420]);
+
+%% ball 1 untuned-tuned stabilization
+figure(5);
+
+dt = ball1_post_time(1)-ball1_pre_time(1)+0.145;
+plot(ball1_pre_time, ball1_pre_pos, ball1_post_time-dt, ball1_post_pos);
+legend('Przed samostrojeniem', 'Po samostrojeniu');
+ylabel('Położenie liniowe [m]');
+xlabel('Czas [s]');
+title('Pozycja liniowa kulki nr 1');
+grid on;
+set(gcf, 'pos', [571   530   678   420]);
+
+%% ball 2 untuned-tuned stabilization
+figure(6);
+
+dt = ball2_post_time(1)-ball2_pre_time(1);
+plot(ball2_pre_time, ball2_pre_pos, ball2_post_time-dt, ball2_post_pos);
+legend('Przed samostrojeniem', 'Po samostrojeniu');
+ylabel('Położenie liniowe [m]');
+xlabel('Czas [s]');
+title('Pozycja liniowa kulki nr 2');
+grid on;
+set(gcf, 'pos', [571   530   678   420]);
